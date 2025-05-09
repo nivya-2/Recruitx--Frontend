@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+$bg-color: #E2E5EC;
+$primary-color: #7B61FF;
+:root {
+  --font-family: 'Montserrat', sans-serif;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: $bg-color;
+}
