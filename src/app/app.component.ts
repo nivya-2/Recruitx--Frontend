@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
-import { HeaderComponent } from './layout/header/header.component';
+import { HeaderComponent } from './layouts/header/header.component';
 import { ButtonComponent } from './ui/button/button.component';
 
 @Component({
