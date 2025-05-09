@@ -1,0 +1,13 @@
+<div class="flex-row">
+    <div class="child1">
+        <app-header-text context="title">
+            Dashboard
+        </app-header-text>
+    </div>
+    <div *ngIf='search' class="child1">
+        <!-- <app-searchbar></app-searchbar> -->
+    </div>
+    <div class="flex-row2 child3">
+    <!-- <app-icons name="notifications" customColor="#636363" size="30"></app-icons> -->
+    <app-profile-box [fullName]="name" [role]="role"></app-profile-box></div>
+</div>
