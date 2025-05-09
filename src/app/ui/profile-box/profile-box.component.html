@@ -1,7 +1,10 @@
-<div class="flex-row">
+<div class="flex-row responsive-profile">
     <app-profile [fullName]="fullName"></app-profile>
     <div class="flex-column">
-    <app-header-text context="profile-text">{{fullName}}</app-header-text>
-    <app-header-text context="subtitle" style="text-align: left;">{{role}}</app-header-text>
-</div>
-</div>
+      <app-header-text context="profile-text">{{ fullName }}</app-header-text>
+      <app-header-text context="subtitle" style="text-align: left;">
+        {{ role }}
+      </app-header-text>
+    </div>
+  </div>
+  
