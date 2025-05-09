@@ -1,8 +1,10 @@
 import { Component,Input } from '@angular/core';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 @Component({
   selector: 'app-profile',
-  imports: [],
+  imports: [AvatarModule,AvatarGroupModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
