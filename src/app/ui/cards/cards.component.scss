@@ -1,0 +1,17 @@
+// p-card{
+//     padding: 1rem;
+//     background-color: white;
+//     box-shadow: none;
+//     border: 1px solid red;
+// }
+
+:host {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+:host ::ng-deep .p-card {
+  width: 100%;
+  height: auto;
+}
