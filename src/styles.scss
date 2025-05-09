@@ -8,4 +8,18 @@ body {
   margin:0;
   font-family: 'Montserrat', sans-serif;
   background-color: $bg-color;
+
+}
+
+table{
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  margin: 10px !important;
+  
+  th{
+      background-color: #DBD4FF !important;
+     }
+  .text-center{
+  text-align: center !important;   
+ }
 }

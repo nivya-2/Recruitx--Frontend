@@ -1,0 +1,50 @@
+<p-table #table [value]="dataSource" [paginator]="true" [rows]="rows"
+          [globalFilterFields]="globalFilterFields"
+         [responsiveLayout]="'scroll'" [resizableColumns]="true" [scrollable]="true" scrollHeight="540px"
+         [sortMode]="'multiple'" [rowHover]="hover" [showCurrentPageReport]="true"
+         currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+         >
+
+  <ng-template pTemplate="caption" *ngIf="showFilter">
+    <div class="lol">
+     <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear" (onClick)="clear(table)"></p-button>
+     <p-iconField iconPosition="left">
+        <p-inputIcon>
+            <i class="pi pi-search"></i>
+        </p-inputIcon>
+         <input pInputText type="text" (input)="table.filterGlobal($any($event.target).value, 'contains')" placeholder="Search all fields" />
+     </p-iconField>
+    </div>
+  </ng-template>
+
+  <!-- Column Headers -->
+  <ng-template pTemplate="header" class="hstyle">
+    <tr>
+      <th *ngFor="let column of columns" 
+          [pSortableColumn]="column.key" 
+          [ngClass]="{'text-center': column.key === 'openPositions'}">
+          <div class="flex justify-between items-center">
+           {{ column.label }}
+          <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key"></p-sortIcon>
+            <p-columnFilter *ngIf="column.filterable" [field]="column.key" display="menu" class="ml-auto"/>
+          </div>
+      </th>
+    </tr>
+  </ng-template>
+
+  <!-- Table Body -->
+  <ng-template pTemplate="body" let-rowData>
+    <tr>
+      <td *ngFor="let column of columns" [ngClass]="{'text-center': column.key === 'openPositions'}">
+        <ng-container *ngIf="column.key !== 'actions'; else actionTpl">
+          {{ rowData[column.key] }}
+        </ng-container>
+        <ng-template #actionTpl>
+          <!-- <button class="stylegenerate">{{rowData[column.key]}}</button> -->
+           <app-button color="#7B61FF">{{rowData[column.key]}}</app-button>
+        </ng-template>
+      </td>
+    </tr>
+  </ng-template>
+
+</p-table>
