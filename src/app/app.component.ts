@@ -6,10 +6,12 @@ import { ButtonComponent } from './ui/button/button.component';
 import { CardsComponent } from './ui/cards/cards.component';
 import { SharedComponentsModule } from './shared-components/shared-components.module';
 import { TableComponent } from './shared-components/table/table.component';
+import { IconComponent } from './ui/icon/icon.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ButtonDemoComponent, HeaderComponent, ButtonComponent,CardsComponent,SharedComponentsModule,TableComponent],
+  imports: [RouterOutlet, ButtonDemoComponent,IconComponent
+,    HeaderComponent, ButtonComponent,CardsComponent,SharedComponentsModule,TableComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
