@@ -7,10 +7,12 @@ import { CardsComponent } from './ui/cards/cards.component';
 import { SharedComponentsModule } from './shared-components/shared-components.module';
 import { TableComponent } from './shared-components/table/table.component';
 import { IconComponent } from './ui/icon/icon.component';
+import { IconGroupComponent } from './layouts/icon-group/icon-group.component';
+import { SidenavbarComponent } from './layouts/sidenavbar/sidenavbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ButtonDemoComponent,IconComponent
+  imports: [RouterOutlet,SidenavbarComponent,IconGroupComponent, ButtonDemoComponent,IconComponent
 ,    HeaderComponent, ButtonComponent,CardsComponent,SharedComponentsModule,TableComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -100,6 +102,11 @@ export class AppComponent {
           }
 
     ];
+    recruitersIcons=[
+      {iconName:'dashboard',size:"32px",iconColour:"red"},
+      {iconName:'home',size:"32px",iconColour:"blue"},
+      {iconName:'delete',size:"32px",iconColour:"green"}
+    ]
 
     columns: Array<{key: string, label: string, filterable: boolean}> = [
       { key: 'id', label: 'ID',filterable: false },
