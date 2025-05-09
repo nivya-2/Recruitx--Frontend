@@ -1,5 +1,11 @@
 <!-- use fullName="Jins K Varghese" or something depending on use case-->
-<div class="profile-circle">
-    {{ initials }}
-  </div>
-  
+<p-avatar 
+  label="{{ initials }}" 
+  styleClass="responsive-avatar mr-2" 
+  shape="circle" 
+  [style]="{ 
+    'font-weight': 'bold',
+    'color': '#7b61ff',
+    'border': '4px solid #D9D9D9' 
+  }">
+</p-avatar>
