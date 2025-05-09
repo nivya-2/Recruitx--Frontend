@@ -6,10 +6,11 @@ import { ButtonModule } from 'primeng/button';
 import { PaginatorModule } from 'primeng/paginator';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
+import { ButtonComponent } from '../../ui/button/button.component';
 
 @Component({
   selector: 'app-table',
-  imports: [CommonModule,TableModule,InputTextModule,ButtonModule,PaginatorModule,IconField,InputIcon],
+  imports: [CommonModule,TableModule,InputTextModule,ButtonModule,PaginatorModule,IconField,InputIcon,ButtonComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
@@ -21,6 +22,8 @@ export class TableComponent {
   @Input() globalFilterFields: string[]=[];
   @Input() hover:boolean= true;
   @Input() rows:number =5;
+  @Input() showFilter: boolean = true;
+
 
   clear(table: Table): void {
     table.clear();

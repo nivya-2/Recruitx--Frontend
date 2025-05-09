@@ -5,7 +5,7 @@
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
          >
 
-  <ng-template pTemplate="caption">
+  <ng-template pTemplate="caption" *ngIf="showFilter">
     <div class="lol">
      <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear" (onClick)="clear(table)"></p-button>
      <p-iconField iconPosition="left">
@@ -40,8 +40,8 @@
           {{ rowData[column.key] }}
         </ng-container>
         <ng-template #actionTpl>
-          <button class="stylegenerate">{{rowData[column.key]}}</button>
-          <!-- <app-buttons [data]="rowData" class="stylegenerate"></app-buttons> -->
+          <!-- <button class="stylegenerate">{{rowData[column.key]}}</button> -->
+           <app-button color="#7B61FF">{{rowData[column.key]}}</app-button>
         </ng-template>
       </td>
     </tr>
