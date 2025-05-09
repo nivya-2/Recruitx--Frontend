@@ -1,0 +1,12 @@
+<p-drawer [(visible)]="visible" header="RecruitX" styleClass="!w-full md:!w-80 lg:!w-[30rem]"
+[closable]="false" [style]="{'background-color':'#7B61FF','max-width':'30vh','border': 'none','display':'flex','flex-direction':'column','align-items':'center'}">
+       <div class="flex-col"> 
+
+<span *ngFor="let icon of icons" (click)="visible = false" class="pi {{icon[0]}} tile">  {{icon[1]}}</span>
+
+   </div>
+   </p-drawer>
+   <div class="leftside"> 
+       <span *ngFor="let icon of icons" (click)="visible = true" class="pi {{icon[0]}}"> </span>
+
+   </div>

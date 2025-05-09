@@ -1,0 +1,48 @@
+.leftside {
+    background-color: #7B61FF;
+    width: 5rem;
+    justify-content: center;
+    display: flex;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    flex-direction: column;
+    gap: 1rem;
+    height: 46rem;
+    align-items: center;
+  
+    .p-button {
+      background-color: transparent;
+    }
+  
+    .pi {
+      color: #B8AAFF;
+    }
+  }
+  
+  p-drawer {
+    background-color: yellow;
+  }
+  
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 75vh;
+  }
+  
+  .tile {
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+  
+    &.pi {
+      color: #B8AAFF;
+    }
+  }
+  
+  span.pi.pi-arrow-left {
+    color: #B8AAFF;
+  }
+  
