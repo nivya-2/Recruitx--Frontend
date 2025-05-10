@@ -10,10 +10,11 @@ import { IconComponent } from './ui/icon/icon.component';
 import { IconGroupComponent } from './layouts/icon-group/icon-group.component';
 import { SidenavbarComponent } from './layouts/sidenavbar/sidenavbar.component';
 import { CommonLayoutComponent } from './layouts/common-layout/common-layout.component';
+import { RecruiterDashboardComponent } from './pages/recruiter-dashboard/recruiter-dashboard.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,SidenavbarComponent,IconGroupComponent, ButtonDemoComponent,IconComponent
+  imports: [RecruiterDashboardComponent,RouterOutlet,SidenavbarComponent,IconGroupComponent, ButtonDemoComponent,IconComponent
 ,    HeaderComponent, ButtonComponent,CardsComponent,SharedComponentsModule,TableComponent, CommonLayoutComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
