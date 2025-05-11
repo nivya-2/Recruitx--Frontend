@@ -4,11 +4,20 @@
 
         <div class="interview-section">
             <div class="left-column">
-                <app-cards class="scheduled-interviews-card"></app-cards>
-                <app-cards class="completed-interviews-card"></app-cards>
+                <app-cards class="scheduled-interviews-card">
+                    <app-header-text>Scheduled Interviews</app-header-text>
+                    <app-table [dataSource]="scheduledInterviewsDataSource" [columns]="scheduledColumns" [globalFilterFields]="scheduledGlobalFilterFields" [hover]="false" [rows]="3" [showFilter]="false"></app-table>
+                </app-cards>
+                <app-cards class="completed-interviews-card">
+                    <app-header-text>Completed Interviews</app-header-text>
+                    <app-table [dataSource]="completedInterviewsDataSource" [columns]="completedColumns" [globalFilterFields]="completedGlobalFilterFields" [hover]="false" [rows]="3" [showFilter]="false"></app-table>
+                </app-cards>
             </div>
             <div class="right-column">
-                <app-cards class="awaiting-shortlisting-card"></app-cards>
+                <app-cards class="awaiting-shortlisting-card">
+                    <app-header-text>Awaiting Shortlisting</app-header-text>
+                    <app-table [dataSource]="awaitingShortlistingDataSource" [columns]="awaitingColumns" [globalFilterFields]="awaitingGlobalFilterFields" [hover]="false" [rows]="9" [showFilter]="false"></app-table>
+                </app-cards>
             </div>
         </div>
     </div>
