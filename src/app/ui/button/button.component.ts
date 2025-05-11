@@ -10,6 +10,7 @@ import { ButtonModule } from 'primeng/button';
 })
 export class ButtonComponent {
 
-  @Input() color: string = 'primary';
+  @Input() color: string = 'black';
+  @Input() buttonbgcolor: string = '#ccc';
 
 }

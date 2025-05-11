@@ -1,5 +1,5 @@
-<button class="button" [ngStyle]="{ 'background-color': color, color: 'white'}">
-    <span class="p-button-label">
+<button class="button" [ngStyle]="{ 'background-color': buttonbgcolor}">
+    <span class="p-button-label" [ngStyle]="{'color': color}">
         <ng-content></ng-content>
     </span>
 </button>
