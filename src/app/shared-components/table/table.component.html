@@ -47,14 +47,15 @@
   <ng-template pTemplate="header">
     <tr>
       <th *ngFor="let column of columns" 
-          [pSortableColumn]="column.key">
-          <div class="header-content">
-            <div class="header-text" [ngClass]="{'multi-word': column.label.includes(' ')}">{{ column.label }}</div>
-            <div class="header-icons">
-              <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key"></p-sortIcon>
-              <p-columnFilter *ngIf="column.filterable" [field]="column.key" display="menu" class="column-filter"/>
-            </div>
+          [pSortableColumn]="column.key"
+          [ngClass]="'col-' + column.key">
+        <div class="header-content">
+          <div class="header-text" [ngClass]="{'multi-word': column.label.includes(' ')}">{{ column.label }}</div>
+          <div class="header-icons">
+            <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key"></p-sortIcon>
+            <p-columnFilter *ngIf="column.filterable" [field]="column.key" display="menu" class="column-filter"/>
           </div>
+        </div>
       </th>
     </tr>
   </ng-template>
