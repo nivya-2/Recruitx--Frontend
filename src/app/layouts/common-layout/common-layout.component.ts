@@ -9,5 +9,11 @@ import { SidenavbarComponent } from '../sidenavbar/sidenavbar.component';
   styleUrl: './common-layout.component.scss'
 })
 export class CommonLayoutComponent {
+  recruitersIcons=[
+    {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
+    {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
+    {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
+    {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
+  ]
 
 }
