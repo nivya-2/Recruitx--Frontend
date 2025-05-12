@@ -110,9 +110,30 @@ export class AppComponent {
 
     ];
     recruitersIcons=[
-      {iconName:'dashboard',size:"32px",iconColour:"red"},
-      {iconName:'home',size:"32px",iconColour:"blue"},
-      {iconName:'delete',size:"32px",iconColour:"green"}
+      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
+      {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
+      {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
+      {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
+    ]
+
+
+    recruiterLeadIcons=[
+      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
+      {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
+      {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
+      {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
+    ]
+
+    recruiterHeadIcons=[
+      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
+      {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
+      {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
+      {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
+    ]
+    adminIcons=[
+      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
+      {iconName:' account_circle',size:"32px",iconColour:"#B8AAFF",label:"Add User"},
+      {iconName:'mail_outline',size:"32px",iconColour:"#B8AAFF",label:"Mail"},
     ]
 
     columns: Array<{key: string, label: string, filterable: boolean}> = [

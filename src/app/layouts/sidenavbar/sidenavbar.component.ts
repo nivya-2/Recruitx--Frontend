@@ -1,21 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
 
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { CardModule } from 'primeng/card';
+import { IconGroupComponent } from '../icon-group/icon-group.component';
+import { IconComponent } from '../../ui/icon/icon.component';
 @Component({
   selector: 'app-sidenavbar',
-  imports: [ButtonModule,NgFor ,DrawerModule,CardModule],
+  imports: [ButtonModule,IconGroupComponent,IconComponent
+,    NgFor,NgClass ,DrawerModule,CardModule],
   templateUrl: './sidenavbar.component.html',
   styleUrl: './sidenavbar.component.scss'
 })
 export class SidenavbarComponent {
   visible: boolean = false;
-  icons = [
-    ['pi pi-arrow-right','Dashboard'],
-    ['pi pi-arrow-left','Analytics'],
-    ['pi pi-plus','Track'],
-    ['pi pi-minus','Schedule'],
-];
+  @Input() iconList: any[] = [];
 }
