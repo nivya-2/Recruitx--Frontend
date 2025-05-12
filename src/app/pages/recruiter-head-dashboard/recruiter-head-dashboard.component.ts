@@ -7,6 +7,7 @@ import { HeaderTextComponent } from '../../ui/header-text/header-text.component'
 import { KnobModule } from 'primeng/knob';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { ListViewComponent } from '../../shared-components/list-view/list-view.component';
+import { StatCardComponent } from '../../shared-components/stat-card/stat-card.component';
 interface MetricCard {
   title: string;
   value: string | number;
@@ -15,7 +16,7 @@ interface MetricCard {
 }
 @Component({
   selector: 'app-recruiter-head-dashboard',
-  imports: [ListViewComponent,ButtonComponent,ChartModule,NgStyle,CommonLayoutComponent,CardModule,NgFor,HeaderTextComponent,KnobModule,NgIf],
+  imports: [StatCardComponent,ListViewComponent,ChartModule,CommonLayoutComponent,CardModule,NgFor,HeaderTextComponent,KnobModule],
   templateUrl: './recruiter-head-dashboard.component.html',
   styleUrl: './recruiter-head-dashboard.component.scss'
 })
