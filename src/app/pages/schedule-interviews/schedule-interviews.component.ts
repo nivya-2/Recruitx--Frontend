@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { TableComponent } from '../../shared-components/table/table.component';
 import { CommonLayoutComponent } from '../../layouts/common-layout/common-layout.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
+import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 
 @Component({
   selector: 'app-schedule-interviews',
-  imports: [TableComponent, CommonLayoutComponent, CardsComponent],
+  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent],
   templateUrl: './schedule-interviews.component.html',
   styleUrl: './schedule-interviews.component.scss'
 })
