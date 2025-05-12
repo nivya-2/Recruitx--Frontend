@@ -23,7 +23,8 @@ export class TableComponent {
   @Input() hover:boolean= true;
   @Input() rows:number = 5;
   @Input() showFilter: boolean = true;
-  @Input() scale:number = 1;
+  @Input() fontSize: any ='14px';
+  // @Input() scale:number = 1;
 
   
   clear(table: Table): void {
