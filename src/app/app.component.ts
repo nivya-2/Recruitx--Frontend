@@ -22,11 +22,12 @@ interface MetricCard {
   value: string | number;
   percentage?: number;
   color?: string;
-}
+}import { RecruiterLeadDashboardComponent } from "./pages/recruiter-lead-dashboard/recruiter-lead-dashboard.component";
+
 @Component({
   selector: 'app-root',
-  imports: [RecruiterHeadDashboardComponent,RouterOutlet,SidenavbarComponent,IconGroupComponent, ButtonDemoComponent,IconComponent
-,    HeaderComponent, ButtonComponent,CardsComponent,SharedComponentsModule,TableComponent, CommonLayoutComponent],
+  imports: [RecruiterHeadDashboardComponent,RouterOutlet, SidenavbarComponent, IconGroupComponent, ButtonDemoComponent, IconComponent,
+    HeaderComponent, ButtonComponent, CardsComponent, SharedComponentsModule, TableComponent, CommonLayoutComponent, RecruiterLeadDashboardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
