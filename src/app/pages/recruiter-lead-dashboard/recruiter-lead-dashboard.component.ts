@@ -3,14 +3,25 @@ import { CommonLayoutComponent } from "../../layouts/common-layout/common-layout
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { TableComponent } from '../../shared-components/table/table.component';
 import { HeaderTextComponent } from "../../ui/header-text/header-text.component";
+import { ListViewComponent } from '../../shared-components/list-view/list-view.component';
 
 @Component({
   selector: 'app-recruiter-lead-dashboard',
-  imports: [CommonLayoutComponent, CardsComponent, TableComponent, HeaderTextComponent],
+  imports: [CommonLayoutComponent, CardsComponent, TableComponent, HeaderTextComponent,ListViewComponent],
   templateUrl: './recruiter-lead-dashboard.component.html',
   styleUrl: './recruiter-lead-dashboard.component.scss'
 })
 export class RecruiterLeadDashboardComponent {
+
+  jobs = [
+    { title: 'Sr. Data Engineer - Python', date: 'April 25, 2025', location: 'Kochi', positions: 16 },
+    { title: 'Devops Architect', date: 'April 12, 2025', location: 'Trivandrum', positions: 8 },
+    { title: 'Automation Test Engineer', date: 'April 9, 2025', location: 'Trivandrum', positions: 4 },
+    { title: 'Data Scientist - Computer Vision', date: 'April 2, 2025', location: 'Kochi', positions: 9 },
+    { title: 'Technology Lead - .Net', date: 'April 19, 2025', location: 'Trivandrum', positions: 6 }
+  ];
+
+  
   scheduledInterviewsDataSource: any[] = [
     { id: 'CAN-009', name: 'Arjun Menon', interviewDate: '15/04/2025' },
     { id: 'CAN-005', name: 'Alia V', interviewDate: '15/04/2025' },

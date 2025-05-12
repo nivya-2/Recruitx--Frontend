@@ -1,2 +1,2 @@
 <!-- use context={"title","profile-text","subtitle","table-header"} depending on use case-->
-<span [ngClass]="className"><ng-content></ng-content></span>
+<span [ngClass]="className" [ngStyle]="nopad ? { 'padding': '0' } : {}"><ng-content></ng-content></span>
