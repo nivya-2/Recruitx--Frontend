@@ -9,24 +9,35 @@ import { TableComponent } from './shared-components/table/table.component';
 import { IconComponent } from './ui/icon/icon.component';
 import { IconGroupComponent } from './layouts/icon-group/icon-group.component';
 import { SidenavbarComponent } from './layouts/sidenavbar/sidenavbar.component';
+import { CommonLayoutComponent } from './layouts/common-layout/common-layout.component';
+import { CardModule } from 'primeng/card';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { HeaderTextComponent } from './ui/header-text/header-text.component';
+import { KnobModule } from 'primeng/knob';
+import { ChartModule } from 'primeng/chart';
+import { RecruiterHeadDashboardComponent } from './pages/recruiter-head-dashboard/recruiter-head-dashboard.component';
 
+interface MetricCard {
+  title: string;
+  value: string | number;
+  percentage?: number;
+  color?: string;
+}
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,SidenavbarComponent,IconGroupComponent, ButtonDemoComponent,IconComponent
-,    HeaderComponent, ButtonComponent,CardsComponent,SharedComponentsModule,TableComponent],
+  imports: [RecruiterHeadDashboardComponent,RouterOutlet,SidenavbarComponent,IconGroupComponent, ButtonDemoComponent,IconComponent
+,    HeaderComponent, ButtonComponent,CardsComponent,SharedComponentsModule,TableComponent, CommonLayoutComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
+
 export class AppComponent {
   title = 'rec';
-  icons: [string, string][] = [
-    ['pi-arrow-right', 'Dashboard'],
-    ['pi-arrow-left', 'Analytics'],
-    ['pi-plus', 'Track'],
-    ['pi-minus', 'Schedule']
-  ];
   
 
+  // Metrics cards data
+  
+  
   dataSource: any[] = [ 
     { id: 'JR2025-112', 
       roleTitle: 'Software Engineer',
@@ -148,5 +159,7 @@ export class AppComponent {
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');  
-
+    
+    
+    
 }
