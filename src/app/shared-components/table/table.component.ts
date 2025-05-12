@@ -21,10 +21,11 @@ export class TableComponent {
   @Input() columns:any=[];
   @Input() globalFilterFields: string[]=[];
   @Input() hover:boolean= true;
-  @Input() rows:number =5;
+  @Input() rows:number = 5;
   @Input() showFilter: boolean = true;
+  @Input() scale:number = 1;
 
-
+  
   clear(table: Table): void {
     table.clear();
   }

@@ -1,3 +1,8 @@
+<div class="scale-wrapper" [ngStyle]="{ 
+  'transform': 'scale(' + scale + ')', 
+  'transform-origin': 'top left',
+  
+}">
 <p-table #table [value]="dataSource" [paginator]="true" [rows]="rows"
           [globalFilterFields]="globalFilterFields"
          [responsiveLayout]="'scroll'" [resizableColumns]="true" [scrollable]="true" scrollHeight="540px"
@@ -22,7 +27,7 @@
     <tr>
       <th *ngFor="let column of columns" 
           [pSortableColumn]="column.key" 
-          [ngClass]="{'text-center': column.key === 'openPositions'}">
+          >
           <div class="flex justify-between items-center">
            {{ column.label }}
           <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key"></p-sortIcon>
@@ -48,3 +53,4 @@
   </ng-template>
 
 </p-table>
+</div>
