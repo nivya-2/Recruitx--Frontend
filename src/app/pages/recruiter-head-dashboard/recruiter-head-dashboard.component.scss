@@ -1,0 +1,210 @@
+.dashboard-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+  
+  .left-section,
+  .right-section {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  
+  .left-section {
+    flex: 3;
+    gap: 24px;
+  }
+  
+  .right-section {
+    flex: 1;
+    max-width: 300px;
+    margin: 0 auto;
+    gap: 20px;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .job-requisition {
+    padding: 30px;
+  }
+  
+  .job-requisition-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    padding-bottom: 8px;
+  }
+  
+  .sort-dropdown {
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .sort-dropdown .arrow {
+    margin-left: 6px;
+    width: 7px;
+    height: 7px;
+    border-left: 2px solid #7B61FF;
+    border-bottom: 2px solid #7B61FF;
+    transform: rotate(-45deg);
+    transition: transform 0.3s ease;
+  }
+  
+  .job-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  
+  .job-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 12px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .job-info {
+    flex: 2;
+  }
+  
+  .job-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .job-meta {
+    font-size: 13px;
+    color: #777;
+    margin-top: 2px;
+  }
+  
+  .job-positions {
+    flex: 3;
+    font-size: 14px;
+    color: #444;
+    text-align: left;
+    white-space: nowrap;
+  }
+  
+  .assign-button-wrapper {
+    flex: 1;
+    text-align: right;
+  }
+  
+  .bottom-metrics {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .metric-card {
+    flex: 1;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+  }
+  
+  .stat-card {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  .stat-card h1 {
+    font-size: 28px;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .stat-card p {
+    margin-top: 8px;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .stat {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .label {
+    font-size: 14px;
+    color: black;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .progress-circle {
+    position: relative;
+    width: 0px;
+    height: 40px;
+    margin: 10px auto 0;
+  }
+  
+  .progress-circle svg {
+    transform: rotate(-90deg);
+  }
+  
+  .progress-circle circle {
+    fill: none;
+    stroke-width: 6;
+  }
+  
+  .progress-bg {
+    stroke: #eee;
+  }
+  
+  .progress-bar {
+    stroke-linecap: round;
+  }
+  
+  .progress-text {
+    position: absolute;
+    top: 59%;
+    right: 10%;
+    transform: translate(148%, -50%);
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .increase-text{
+    font-size: small;
+    text-align: center;
+  }
+  .increase {
+    font-size: 32px;
+    font-weight: bold;
+    color: #5c4dff;
+    text-align: center;
+    padding-bottom: 5vh;
+  }
+  
+  .increase-icon {
+    margin-left: 5px;
+  }
+  
