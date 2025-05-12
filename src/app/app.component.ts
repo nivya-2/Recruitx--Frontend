@@ -10,6 +10,14 @@ import { IconComponent } from './ui/icon/icon.component';
 import { IconGroupComponent } from './layouts/icon-group/icon-group.component';
 import { SidenavbarComponent } from './layouts/sidenavbar/sidenavbar.component';
 import { CommonLayoutComponent } from './layouts/common-layout/common-layout.component';
+<<<<<<< HEAD
+import { AnalyticsComponent } from "./pages/analytics/analytics.component";
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet, SidenavbarComponent, IconGroupComponent, ButtonDemoComponent, IconComponent,
+    HeaderComponent, ButtonComponent, CardsComponent, SharedComponentsModule, TableComponent, CommonLayoutComponent, AnalyticsComponent],
+=======
 import { CardModule } from 'primeng/card';
 import { NgFor, NgIf, NgStyle } from '@angular/common';
 import { HeaderTextComponent } from './ui/header-text/header-text.component';
@@ -28,6 +36,7 @@ interface MetricCard {
   selector: 'app-root',
   imports: [RecruiterHeadDashboardComponent,RouterOutlet, SidenavbarComponent, IconGroupComponent, ButtonDemoComponent, IconComponent,
     HeaderComponent, ButtonComponent, CardsComponent, SharedComponentsModule, TableComponent, CommonLayoutComponent, RecruiterLeadDashboardComponent],
+>>>>>>> dev
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
