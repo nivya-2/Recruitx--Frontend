@@ -13,10 +13,12 @@ import { CommonLayoutComponent } from './layouts/common-layout/common-layout.com
 import { RecruiterHeadDashboardComponent } from './pages/recruiter-head-dashboard/recruiter-head-dashboard.component';
 
 import { RecruiterLeadDashboardComponent } from "./pages/recruiter-lead-dashboard/recruiter-lead-dashboard.component";
+import { RecruiterDashboardComponent } from './pages/recruiter-dashboard/recruiter-dashboard.component';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RecruiterHeadDashboardComponent,RouterOutlet, SidenavbarComponent, IconGroupComponent, ButtonDemoComponent, IconComponent,
+  imports: [RecruiterHeadDashboardComponent,RecruiterDashboardComponent,RouterOutlet, SidenavbarComponent, IconGroupComponent, ButtonDemoComponent, IconComponent,
     HeaderComponent, ButtonComponent, CardsComponent, SharedComponentsModule, TableComponent, CommonLayoutComponent, RecruiterLeadDashboardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
