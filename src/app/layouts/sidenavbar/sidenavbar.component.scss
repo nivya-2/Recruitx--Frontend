@@ -1,0 +1,86 @@
+.leftside,
+.drawer-container {
+  background-color: #7B61FF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.leftside {
+  width: 5rem;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+
+  .logo-container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .logo {
+      width: 3rem;
+      height: auto;
+    }
+  }
+
+  .icon-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .icon-tile {
+    cursor: pointer; 
+  }
+
+  .p-button {
+    background-color: transparent;
+  }
+
+  .pi {
+    color: #B8AAFF;
+  }
+}
+
+// Drawer styling
+::ng-deep .p-drawer {
+  .p-drawer-content {
+    background-color: #7B61FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    border: none;
+    max-width: 30vh;
+  }
+}
+
+.drawer-container {
+  width: 100%;
+
+  .logo-container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .logo {
+      width: 3rem;
+      height: auto;
+    }
+  }
+
+  .icon-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}

@@ -6,16 +6,27 @@ import { ButtonComponent } from './ui/button/button.component';
 import { CardsComponent } from './ui/cards/cards.component';
 import { SharedComponentsModule } from './shared-components/shared-components.module';
 import { TableComponent } from './shared-components/table/table.component';
+import { IconComponent } from './ui/icon/icon.component';
+import { IconGroupComponent } from './layouts/icon-group/icon-group.component';
+import { SidenavbarComponent } from './layouts/sidenavbar/sidenavbar.component';
+import { CommonLayoutComponent } from './layouts/common-layout/common-layout.component';
+import { RecruiterHeadDashboardComponent } from './pages/recruiter-head-dashboard/recruiter-head-dashboard.component';
+
+import { RecruiterLeadDashboardComponent } from "./pages/recruiter-lead-dashboard/recruiter-lead-dashboard.component";
+import { RecruiterDashboardComponent } from './pages/recruiter-dashboard/recruiter-dashboard.component';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ButtonDemoComponent, HeaderComponent, ButtonComponent,CardsComponent,SharedComponentsModule,TableComponent],
+  imports: [RecruiterHeadDashboardComponent,RecruiterDashboardComponent,RouterOutlet, SidenavbarComponent, IconGroupComponent, ButtonDemoComponent, IconComponent,
+    HeaderComponent, ButtonComponent, CardsComponent, SharedComponentsModule, TableComponent, CommonLayoutComponent, RecruiterLeadDashboardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
+
 export class AppComponent {
   title = 'rec';
-
+  
   dataSource: any[] = [ 
     { id: 'JR2025-112', 
       roleTitle: 'Software Engineer',
@@ -98,6 +109,32 @@ export class AppComponent {
           }
 
     ];
+    recruitersIcons=[
+      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
+      {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
+      {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
+      {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
+    ]
+
+
+    recruiterLeadIcons=[
+      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
+      {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
+      {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
+      {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
+    ]
+
+    recruiterHeadIcons=[
+      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
+      {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
+      {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
+      {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
+    ]
+    adminIcons=[
+      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
+      {iconName:' account_circle',size:"32px",iconColour:"#B8AAFF",label:"Add User"},
+      {iconName:'mail_outline',size:"32px",iconColour:"#B8AAFF",label:"Mail"},
+    ]
 
     columns: Array<{key: string, label: string, filterable: boolean}> = [
       { key: 'id', label: 'ID',filterable: false },
@@ -111,5 +148,7 @@ export class AppComponent {
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');  
-
+    
+    
+    
 }
