@@ -1,9 +1,15 @@
 :host ::ng-deep .p-breadcrumb { 
-    background: #0da35000 !important; 
+    background: #ffffff00 !important; 
     padding-top: 0;
-    padding-left: 2.2%;
+    padding-left: 2px;
     color: #7B61FF;
 } 
-:host ::ng-deep .p-breadcrumb-list  { 
+:host ::ng-deep .p-breadcrumb-separator,
+:host ::ng-deep .p-breadcrumb-item-link,
+:host ::ng-deep .p-breadcrumb-item-icon{ 
     color: #7B61FF !important; 
+    font-weight: bold;
 } 
+:host ::ng-deep .p-breadcrumb-item-link :hover{
+    color: #7B61FF !important;
+}
