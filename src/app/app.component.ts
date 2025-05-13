@@ -109,31 +109,26 @@ export class AppComponent {
           }
 
     ];
-    recruitersIcons=[
-      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
-      {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
-      {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
-      {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
-    ]
 
 
     recruiterLeadIcons=[
-      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
-      {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
-      {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
-      {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
+      {iconName:'dashboard',size:"28px",iconColour:"#B8AAFF",label:"Dasboard",route:"/recruiter-lead/dashboard"},
+      {iconName:' bar_chart',size:"28px",iconColour:"#B8AAFF",label:"Anaytics",route:"/recruiter-lead/anaytics"},
+      {iconName:'timeline',size:"28px",iconColour:"#B8AAFF",label:"Track JD",route:"/recruiter-lead/Track-jd"},
+      {iconName:'group',size:"28px",iconColour:"#B8AAFF",label:"Teams",route:"/recruiter-lead/teams"},
+      {iconName:'date_range',size:"28px",iconColour:"#B8AAFF",label:"Schedule",route:"/recruiter-lead/dashboard"}
     ]
 
     recruiterHeadIcons=[
-      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
-      {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
-      {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
-      {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
+      {iconName:'dashboard',size:"28px",iconColour:"#B8AAFF",label:"Dasboard",route:"/recruiter-head/dashboard"},
+      {iconName:' bar_chart',size:"28px",iconColour:"#B8AAFF",label:"Anaytics",route:"/recruiter-head/anaytics"},
+      {iconName:'timeline',size:"28px",iconColour:"#B8AAFF",label:"Track JD",route:"/recruiter-head/Track-jd"},
+      {iconName:'date_range',size:"28px",iconColour:"#B8AAFF",label:"Schedule",route:"/recruiter-head/dashboard"}
     ]
     adminIcons=[
-      {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
-      {iconName:' account_circle',size:"32px",iconColour:"#B8AAFF",label:"Add User"},
-      {iconName:'mail_outline',size:"32px",iconColour:"#B8AAFF",label:"Mail"},
+      {iconName:'dashboard',size:"28px",iconColour:"#B8AAFF",label:"Dasboard",route:"/admin/dashboard"},
+      {iconName:'account_circle',size:"28px",iconColour:"#B8AAFF",label:"Add Users",route:"/admin/add-user"},
+      {iconName:'mail_outline ',size:"28px",iconColour:"#B8AAFF",label:"Mail",route:"/admin/mail"},
     ]
 
     columns: Array<{key: string, label: string, filterable: boolean}> = [

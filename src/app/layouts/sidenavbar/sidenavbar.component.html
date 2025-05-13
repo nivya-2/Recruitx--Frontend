@@ -1,19 +1,23 @@
-<p-drawer
+<p-drawer 
   [(visible)]="visible"
-  styleClass="!w-full md:!w-80 lg:!w-[30rem]"
+  [styleClass]="drawerFadeOut ? 'fade-out-drawer' : ''"
+  (mouseleave)="onMouseLeave()"
+  (onHide)="onDrawerHidden()"
   [closable]="false"
+  appendTo="self"
+  [header]="''"
   [style]="{
     'background-color': '#7B61FF',
     'max-width': '30vh',
     'border': 'none',
     'display': 'flex',
     'flex-direction': 'column',
-    'align-items': 'center'
-  }"
->
+    'align-items': 'center',
+    'padding-top':'5px',
+    'z-index':'1000'}">
   <div class="drawer-container">
     <div class="container">
-      <img src="assets/expanded-logo.png" alt="RecruitX logo" />
+      <img src="assets/expanded-logo.png" width="90%" alt="RecruitX logo" />
     </div>
 
     <!-- Centered icons -->
@@ -22,16 +26,16 @@
         [iconList]="iconList"
         [showLabel]="true"
         [visible]="visible"
-        (toggleSidebar)="visible = $event"
-      ></app-icon-group>
+        (toggleSidebar)="visible = $event">
+      </app-icon-group>
     </div>
   </div>
 </p-drawer>
 
 <!-- Collapsed Sidebar -->
-<div class="leftside">
+<div class="leftside" (mouseenter)="onMouseEnter()" >
   <div class="logo-container">
-    <img src="assets/logo.png" alt="RecruitX logo" />
+    <img src="assets/logo.png " alt="RecruitX logo" />
   </div>
 
   <div class="icon-wrapper">
@@ -39,7 +43,7 @@
       [iconList]="iconList"
       [showLabel]="false"
       [visible]="visible"
-      (toggleSidebar)="visible = $event"
-    ></app-icon-group>
+      (toggleSidebar)="visible = $event">
+    </app-icon-group>
   </div>
 </div>

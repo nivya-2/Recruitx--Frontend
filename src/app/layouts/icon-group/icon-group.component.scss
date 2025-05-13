@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     gap: 3vh;
+    margin-top: -50px;
+
 }
 .icon-tile {
     display: flex;
@@ -11,14 +13,16 @@
     &:hover {
         .icon-label {
           color: #ffffff;
+          transform: scale(105%);
         }
     
         app-icon ::ng-deep svg {
           fill: #ffffff !important;
+
         }
       }
     .icon-label {
-      font-size: 1.25rem;
+      font-size: 1rem;
       color: #B8AAFF;
       padding-top: .15rem;
     }

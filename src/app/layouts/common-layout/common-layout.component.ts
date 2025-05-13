@@ -10,10 +10,10 @@ import { SidenavbarComponent } from '../sidenavbar/sidenavbar.component';
 })
 export class CommonLayoutComponent {
   recruitersIcons=[
-    {iconName:'dashboard',size:"32px",iconColour:"#B8AAFF",label:"Dasboard"},
-    {iconName:' bar_chart',size:"32px",iconColour:"#B8AAFF",label:"Anaytics"},
-    {iconName:'timeline',size:"32px",iconColour:"#B8AAFF",label:"Track JD"},
-    {iconName:'date_range',size:"32px",iconColour:"#B8AAFF",label:"Schedule"}
+    {iconName:'dashboard',size:"28px",iconColour:"#B8AAFF",label:"Dasboard",route:"/recruiter/dashboard"},
+    {iconName:' bar_chart',size:"28px",iconColour:"#B8AAFF",label:"Anaytics",route:"/recruiter/analytics"},
+    {iconName:'timeline',size:"28px",iconColour:"#B8AAFF",label:"Track JD",route:"/recruiter/track-jd"},
+    {iconName:'date_range',size:"28px",iconColour:"#B8AAFF",label:"Schedule",route:"/recruiter/schedule-interviews"}
   ]
 
 }
