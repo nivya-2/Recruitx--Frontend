@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { SidenavbarComponent } from '../sidenavbar/sidenavbar.component';
+import { BreadcrumbsComponent } from '../../ui/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-common-layout',
-  imports: [HeaderComponent,SidenavbarComponent],
+  imports: [HeaderComponent,SidenavbarComponent,BreadcrumbsComponent],
   templateUrl: './common-layout.component.html',
   styleUrl: './common-layout.component.scss'
 })

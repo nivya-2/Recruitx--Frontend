@@ -1,0 +1,16 @@
+<p-breadcrumb class="max-w-full" [model]="items" [home]="home">
+  <!-- Custom Home Template using your icon component -->
+  <ng-template pTemplate="home" let-homeItem>
+    <a [routerLink]="homeItem.route" class="breadcrumb-link">
+      <app-icon name="home" color="#7B61FF"></app-icon>
+    </a>
+  </ng-template>
+
+  <!-- Template for all other breadcrumb items -->
+  <ng-template pTemplate="item" let-item>
+    <a [routerLink]="item.route" class="p-breadcrumb-item-link">
+      
+      <span class="text-primary font-semibold">{{ item.label }}</span>
+    </a>
+  </ng-template>
+</p-breadcrumb>
