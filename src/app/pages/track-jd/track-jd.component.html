@@ -1,5 +1,47 @@
 <app-common-layout>
-  <app-cards width="96%" height="120vh"> 
-    
-</app-cards>
+<div style="height: 100%;
+  position: relative;">
+<!-- <app-breadcrumbs></app-breadcrumbs> -->
+<div class="base">
+ 
+<div class="mat-elevation-z16 ">
+<div class="ui container">
+  
+    <div class="ui secondary pointing menu">
+      <nav mat-tab-nav-bar>
+       <a mat-tab-link
+   routerLink="pendingjdgeneration"
+   routerLinkActive="active"
+   class="item"
+   [routerLinkActiveOptions]="{ exact: true }">
+   Pending JD Generation
+</a>
+
+<a mat-tab-link
+   routerLink="openjd"
+   routerLinkActive="active"
+   class="item"
+   [routerLinkActiveOptions]="{ exact: true }">
+   Open JD
+</a>
+
+<a mat-tab-link
+   routerLink="closedjd"
+   routerLinkActive="active"
+   class="item"
+   [routerLinkActiveOptions]="{ exact: true }">
+   Closed JD
+</a>
+
+      </nav>
+
+    </div>
+    <!-- <mat-tab-nav-panel #tabPanel class="tab-panel"> -->
+      <router-outlet></router-outlet>
+    <!-- </mat-tab-nav-panel> -->
+  </div>
+   
+</div>
+</div>
+</div>
 </app-common-layout>

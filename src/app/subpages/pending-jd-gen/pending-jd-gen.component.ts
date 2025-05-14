@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 
 @Component({
   selector: 'app-pending-jd-gen',
-  imports: [],
+  imports: [HeaderTextComponent],
   templateUrl: './pending-jd-gen.component.html',
   styleUrl: './pending-jd-gen.component.scss'
 })
