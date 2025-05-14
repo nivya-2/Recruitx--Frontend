@@ -1,1 +1,6 @@
-<p>admin-users works!</p>
+<app-common-layout>
+  <app-cards width="96%" height="120vh"> 
+    <app-header-text context="table-header" [nopad]="true">Users</app-header-text>
+    <app-table [dataSource]="dataSource" [columns]="columns" [globalFilterFields]="globalFilterFields" [hover]="false" [rows]="7" [showFilter]="true"></app-table>
+</app-cards>
+</app-common-layout>
