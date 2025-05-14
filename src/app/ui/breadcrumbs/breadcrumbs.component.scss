@@ -8,7 +8,8 @@
 :host ::ng-deep .p-breadcrumb-item-link,
 :host ::ng-deep .p-breadcrumb-item-icon{ 
     color: #7B61FF !important; 
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.9rem;
 } 
 :host ::ng-deep .p-breadcrumb-item-link :hover{
     color: #7B61FF !important;
