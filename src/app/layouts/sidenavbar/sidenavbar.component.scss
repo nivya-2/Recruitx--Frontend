@@ -13,13 +13,14 @@
   position: fixed;
   top: 0;
   z-index: 100;
+  transition: all 0.3s ease-in-out;
 
   .logo-container {
     padding-top: 1rem;
-    padding-bottom: 2rem;
     width: 100%;
     display: flex;
     justify-content: center;
+    transition: all 0.3s ease-in-out;
 
     .logo {
       width: 3rem;
@@ -32,10 +33,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    transition: all 0.3s ease-in-out;
   }
+
   .icon-tile {
-    cursor: pointer; 
+    cursor: pointer;
   }
 
   .p-button {
@@ -47,7 +49,7 @@
   }
 }
 
-// Drawer styling
+// === Drawer Styling ===
 ::ng-deep .p-drawer {
   .p-drawer-content {
     background-color: #7B61FF;
@@ -57,15 +59,24 @@
     overflow-x: hidden;
     border: none;
     max-width: 30vh;
+
+    // ✅ Add base transition for all state changes
+    transition: opacity 0.5s ease, transform 0.5s ease;
   }
 }
 
+// ✅ Fade-out animation when closing
+::ng-deep .fade-out-drawer .p-drawer-content {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+// === Drawer container ===
 .drawer-container {
   width: 100%;
 
   .logo-container {
     padding-top: 1rem;
-    padding-bottom: 2rem;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -81,6 +92,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    padding-top: 28px;
   }
 }

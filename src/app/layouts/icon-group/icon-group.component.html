@@ -1,29 +1,18 @@
-<!-- <app-icon
-  *ngFor="let icon of iconList"
-  [name]="icon.iconName"
-  [size]="icon.size"
-  [customColor]="icon.iconColour">
-</app-icon> -->
-
-
-
 <div class="icon-group">
-    <div
-      class="icon-tile"
-      *ngFor="let icon of iconList; let i=index"
-      (mouseenter)="hoveredIconIndex = i"
-      (mouseleave)="hoveredIconIndex = null"
-      (click)="onClick(icon.iconName)"
-    >
-      <app-icon
-        [name]="icon.iconName"
-        [size]="icon.size"
-        [customColor]="hoveredIconIndex === i ? '#FFFFFF' : icon.iconColour"
-        ></app-icon>
-  
-      <span *ngIf="showLabel" class="icon-label">
-    {{ icon.label }}
-      </span>
-    </div>
+  <div class="icon-tile"
+    *ngFor="let icon of iconList; let i = index"
+    (mouseenter)="hoveredIconIndex = i"
+    (mouseleave)="hoveredIconIndex = null"
+    (click)="onClick(icon)"
+    [ngClass]="{ 'active': i === activeIconIndex || i === hoveredIconIndex }">
+
+    <app-icon [name]="icon.iconName" [size]="icon.size"
+      [customColor]=" i === hoveredIconIndex || 
+      i === activeIconIndex ? '#FFFFFF': icon.iconColour"></app-icon>
+
+    <span *ngIf="showLabel" class="icon-label" 
+     [ngStyle]="{color: i === hoveredIconIndex || i === activeIconIndex ? '#FFFFFF' : '#B8AAFF'}">
+     {{ icon.label }}
+    </span>
   </div>
-  
+</div>

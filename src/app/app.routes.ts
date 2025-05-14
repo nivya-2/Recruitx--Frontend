@@ -24,12 +24,37 @@ export const routes: Routes = [
     },
     {
         path: 'recruiter/analytics',
-        loadComponent: () => import('./pages/analytics/analytics.component').then(m => m.AnalyticsComponent)
+        loadComponent: () => import('./pages/recruiter-analytics/recruiter-analytics.component').then(m => m.RecruiterAnalyticsComponent)
     },
     {
-        path: 'recruiter/track-jd',
-        loadComponent: () => import('./pages/track-jd/track-jd.component').then(m => m.TrackJdComponent)
+  path: 'recruiter/track-jd',
+  loadComponent: () =>
+    import('./pages/track-jd/track-jd.component').then(m => m.TrackJdComponent),
+  children: [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'pendingjdgeneration'
     },
+    {
+      path: 'pendingjdgeneration',
+      loadComponent: () =>
+        import('./subpages/pending-jd-gen/pending-jd-gen.component').then(m => m.PendingJdGenComponent)
+    },
+    {
+      path: 'openjd',
+      loadComponent: () =>
+        import('./subpages/open-jd/open-jd.component').then(m => m.OpenJdComponent)
+    },
+    {
+      path: 'closedjd',
+      loadComponent: () =>
+        import('./subpages/closed-jd/closed-jd.component').then(m => m.ClosedJdComponent)
+    }
+  ]
+}
+
+,
     {
         path: 'recruiter/schedule-interviews',
         loadComponent: () => import('./pages/schedule-interviews/schedule-interviews.component').then(m => m.ScheduleInterviewsComponent)
@@ -40,12 +65,36 @@ export const routes: Routes = [
     },
     {
         path: 'recruiter-lead/analytics',
-        loadComponent: () => import('./pages/analytics/analytics.component').then(m => m.AnalyticsComponent)
+        loadComponent: () => import('./pages/recruiter-lead-analytics/recruiter-lead-analytics.component').then(m => m.RecruiterLeadAnalyticsComponent)
+    },
+  {
+  path: 'recruiter-lead/track-jd',
+  loadComponent: () =>
+    import('./pages/track-jd/track-jd.component').then(m => m.TrackJdComponent),
+  children: [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'pendingjdgeneration'
     },
     {
-        path: 'recruiter-lead/track-jd',
-        loadComponent: () => import('./pages/track-jd/track-jd.component').then(m => m.TrackJdComponent)
+      path: 'pendingjdgeneration',
+      loadComponent: () =>
+        import('./subpages/pending-jd-gen/pending-jd-gen.component').then(m => m.PendingJdGenComponent)
     },
+    {
+      path: 'openjd',
+      loadComponent: () =>
+        import('./subpages/open-jd/open-jd.component').then(m => m.OpenJdComponent)
+    },
+    {
+      path: 'closedjd',
+      loadComponent: () =>
+        import('./subpages/closed-jd/closed-jd.component').then(m => m.ClosedJdComponent)
+    }
+  ]
+}
+,
     {
         path: 'recruiter-lead/schedule-interviews',
         loadComponent: () => import('./pages/schedule-interviews/schedule-interviews.component').then(m => m.ScheduleInterviewsComponent)
@@ -60,7 +109,7 @@ export const routes: Routes = [
     },
     {
         path: 'recruiter-head/analytics',
-        loadComponent: () => import('./pages/analytics/analytics.component').then(m => m.AnalyticsComponent)
+        loadComponent: () => import('./pages/recruiter-head-analytics/recruiter-head-analytics.component').then(m => m.RecruiterHeadAnalyticsComponent)
     },
     {
         path: 'recruiter-head/team',
