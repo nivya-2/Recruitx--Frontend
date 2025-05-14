@@ -11,16 +11,15 @@ import { IconComponent } from '../icon/icon.component';
   standalone: true,
   imports: [CommonModule, Breadcrumb, RouterModule, IconComponent],
   templateUrl: './breadcrumbs.component.html',
-  styleUrl: './breadcrumbs.component.scss'
+  styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent implements OnInit {
-  @Input() items?: MenuItem[]; // Optional manual breadcrumb input
-  @Input() home?: MenuItem = { label: '', route: '' };
+  @Input() items?: MenuItem[];
+  @Input() home?: MenuItem = { label: '', routerLink: '' };
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // Only auto-generate if not provided
     if (!this.items || this.items.length === 0) {
       this.generateBreadcrumbs();
       this.router.events
@@ -31,24 +30,30 @@ export class BreadcrumbsComponent implements OnInit {
 
   private generateBreadcrumbs(): void {
     const breadcrumbs: MenuItem[] = [];
-    let currentRoute = this.route.root;
     let url = '';
 
-    while (currentRoute.firstChild) {
-      currentRoute = currentRoute.firstChild;
-      const routeSnapshot = currentRoute.snapshot;
+    const addBreadcrumbs = (route: ActivatedRoute) => {
+      const children = route.children;
 
-      const routeURL = routeSnapshot.url.map(segment => segment.path).join('/');
-      if (routeURL) {
-        url += `/${routeURL}`;
+      for (const child of children) {
+        const routeSnapshot = child.snapshot;
+        const routeURL = routeSnapshot.url.map(segment => segment.path).join('/');
+
+        if (routeURL) {
+          url += `/${routeURL}`;
+        }
+
+        const label = routeSnapshot.data['breadcrumb'];
+        if (label) {
+          breadcrumbs.push({ label, routerLink: url });  // Changed from 'route' to 'routerLink'
+        }
+
+        addBreadcrumbs(child);
       }
+    };
 
-      const label = routeSnapshot.data['breadcrumb'];
-      if (label) {
-        breadcrumbs.push({ label, route: url });
-      }
-    }
-
+    addBreadcrumbs(this.route.root);
     this.items = breadcrumbs;
   }
 }
+

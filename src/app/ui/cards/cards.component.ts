@@ -1,8 +1,9 @@
+import { NgStyle } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { CardModule } from 'primeng/card';
 @Component({
   selector: 'app-cards',
-  imports: [CardModule],
+  imports: [CardModule,NgStyle],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss'
 })
