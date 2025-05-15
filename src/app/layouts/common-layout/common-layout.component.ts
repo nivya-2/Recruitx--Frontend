@@ -68,7 +68,7 @@ role: string = '';
   } else if (currentUrl.startsWith('/admin')) {
     this.iconList = this.adminIcons;
     this.name = 'Anjali Krishna';
-    this.role = 'admin';
+    this.role = 'Admin';
   } else {
     this.iconList = this.recruiterIcons;
     this.name = 'Kevin Joby';
