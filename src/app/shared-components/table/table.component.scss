@@ -21,6 +21,9 @@
     display: flex;
     gap: 1vw;
   }
+   .text-center{
+    text-align: center !important;   
+   }
   
   ::ng-deep {
     /* Header Content Styling */
@@ -92,5 +95,6 @@
     .p-datatable .p-datatable-tbody > tr:not(:last-child) {
       margin-bottom: 4px;
     }
+
     
   }

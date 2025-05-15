@@ -10,10 +10,11 @@ interface IconItem {
   label: string;
   route: string;
 }
+import { BreadcrumbsComponent } from '../../ui/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-common-layout',
-  imports: [HeaderComponent, SidenavbarComponent],
+  imports: [HeaderComponent, SidenavbarComponent,BreadcrumbsComponent],
   templateUrl: './common-layout.component.html',
   styleUrls: ['./common-layout.component.scss']
 })
@@ -42,8 +43,8 @@ export class CommonLayoutComponent {
 
   adminIcons: IconItem[] = [
     { iconName: 'dashboard', size: '28px', iconColour: '#B8AAFF', label: 'Dashboard', route: '/admin/dashboard' },
-    { iconName: 'account_circle', size: '28px', iconColour: '#B8AAFF', label: 'Add Users', route: '/admin/add-user' },
-    { iconName: 'mail_outline', size: '28px', iconColour: '#B8AAFF', label: 'Mail', route: '/admin/mail' }
+    { iconName: 'account_circle', size: '28px', iconColour: '#B8AAFF', label: 'Add Users', route: '/admin/users' },
+    { iconName: 'mail_outline', size: '28px', iconColour: '#B8AAFF', label: 'Mail', route: '/admin/email' }
   ];
 
   iconList: IconItem[] = [];
