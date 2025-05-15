@@ -43,8 +43,8 @@ export class CommonLayoutComponent {
 
   adminIcons: IconItem[] = [
     { iconName: 'dashboard', size: '28px', iconColour: '#B8AAFF', label: 'Dashboard', route: '/admin/dashboard' },
-    { iconName: 'account_circle', size: '28px', iconColour: '#B8AAFF', label: 'Add Users', route: '/admin/add-user' },
-    { iconName: 'mail_outline', size: '28px', iconColour: '#B8AAFF', label: 'Mail', route: '/admin/mail' }
+    { iconName: 'account_circle', size: '28px', iconColour: '#B8AAFF', label: 'Add Users', route: '/admin/users' },
+    { iconName: 'mail_outline', size: '28px', iconColour: '#B8AAFF', label: 'Mail', route: '/admin/email' }
   ];
 
   iconList: IconItem[] = [];
