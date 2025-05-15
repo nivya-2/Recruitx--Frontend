@@ -10,10 +10,11 @@ interface IconItem {
   label: string;
   route: string;
 }
+import { BreadcrumbsComponent } from '../../ui/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-common-layout',
-  imports: [HeaderComponent, SidenavbarComponent],
+  imports: [HeaderComponent, SidenavbarComponent,BreadcrumbsComponent],
   templateUrl: './common-layout.component.html',
   styleUrls: ['./common-layout.component.scss']
 })
