@@ -7,10 +7,11 @@ import { PaginatorModule } from 'primeng/paginator';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { ButtonComponent } from '../../ui/button/button.component';
+import { IconComponent } from "../../ui/icon/icon.component";
 
 @Component({
   selector: 'app-table',
-  imports: [CommonModule,TableModule,InputTextModule,ButtonModule,PaginatorModule,IconField,InputIcon,ButtonComponent],
+  imports: [CommonModule, TableModule, InputTextModule, ButtonModule, PaginatorModule, IconField, InputIcon, ButtonComponent, IconComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })

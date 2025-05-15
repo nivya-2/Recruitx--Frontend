@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'primeicons/primeicons.css';
+
 $bg-color: #E2E5EC;
 $primary-color: #7B61FF;
 :root {
@@ -19,7 +21,7 @@ table{
   th{
       background-color: #DBD4FF !important;
      }
-  .text-center{
+.text-center{
   text-align: center !important;   
  }
 }

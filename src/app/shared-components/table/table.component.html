@@ -1,33 +1,48 @@
-<p-table #table [value]="dataSource" [paginator]="true" [rows]="rows"
+<!-- <div class="scale-wrapper" [ngStyle]="{ 
+  'transform': 'scale(' + scale + ')', 
+  'transform-origin': 'top left',
+  'width': (100 / scale) + '%',
+  'height': (100 / scale) + '%',
+  'max-width': '100%',
+  'max-height': '100%',
+  'overflow': 'auto'
+}"> -->
+<p-table #table [value]="dataSource" [paginator]="true" [rows]="rows" 
           [globalFilterFields]="globalFilterFields"
-         [responsiveLayout]="'scroll'" [resizableColumns]="true" [scrollable]="true" scrollHeight="540px"
+         [responsiveLayout]="'scroll'" [resizableColumns]="true" scrollHeight="'auto'"
          [sortMode]="'multiple'" [rowHover]="hover" [showCurrentPageReport]="true"
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+         [ngStyle]="{ 'font-size': fontSize }">
+        
          >
 
   <ng-template pTemplate="caption" *ngIf="showFilter">
-    <div class="lol">
+    <div class="filter-container">
+    <!-- <app-button class="p-button-outlined" (onClick)="clear(table)"><app-icon name="clear" customColor="white" size="20px"></app-icon>Clear</app-button> -->
      <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear" (onClick)="clear(table)"></p-button>
      <p-iconField iconPosition="left">
         <p-inputIcon>
             <i class="pi pi-search"></i>
+             <!-- <app-icon name="search" customColor="#334155"></app-icon> -->
         </p-inputIcon>
          <input pInputText type="text" (input)="table.filterGlobal($any($event.target).value, 'contains')" placeholder="Search all fields" />
      </p-iconField>
     </div>
   </ng-template>
 
-  <!-- Column Headers -->
-  <ng-template pTemplate="header" class="hstyle">
+
+  <ng-template pTemplate="header">
     <tr>
       <th *ngFor="let column of columns" 
-          [pSortableColumn]="column.key" 
-          [ngClass]="{'text-center': column.key === 'openPositions'}">
-          <div class="flex justify-between items-center">
-           {{ column.label }}
-          <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key"></p-sortIcon>
-            <p-columnFilter *ngIf="column.filterable" [field]="column.key" display="menu" class="ml-auto"/>
+          [pSortableColumn]="column.key"
+          [ngClass]="'col-' + column.key">
+        <div class="header-content">
+          <div class="header-text" [ngClass]="{'multi-word': column.label.includes(' ')}">{{ column.label }}</div>
+          <div class="header-icons">
+            <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key"></p-sortIcon>
+            <p-columnFilter *ngIf="column.filterable" [field]="column.key" display="menu" class="column-filter"/>
           </div>
+        </div>
       </th>
     </tr>
   </ng-template>
@@ -35,12 +50,13 @@
   <!-- Table Body -->
   <ng-template pTemplate="body" let-rowData>
     <tr>
-      <td *ngFor="let column of columns" [ngClass]="{'text-center': rowData[column.key]?.length <= 2}">
+      <td *ngFor="let column of columns" [ngClass]="{'text-center':
+        (typeof rowData[column.key] === 'string' && rowData[column.key].length <= 2) ||
+        (typeof rowData[column.key] === 'number' && rowData[column.key].toString().length <= 2)}">
         <ng-container *ngIf="column.key !== 'actions'; else actionTpl">
           {{ rowData[column.key] }}
         </ng-container>
         <ng-template #actionTpl>
-          <!-- <button class="stylegenerate">{{rowData[column.key]}}</button> -->
            <app-button color="#7B61FF">{{rowData[column.key]}}</app-button>
         </ng-template>
       </td>
@@ -48,3 +64,4 @@
   </ng-template>
 
 </p-table>
+<!-- </div> -->
