@@ -5,7 +5,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TabsModule } from 'primeng/tabs';
 @Component({
   selector: 'app-track-jd',
-  imports: [CommonLayoutComponent, CardsComponent,RouterOutlet,RouterLink,RouterLinkActive,TabsModule],
+  imports: [CommonLayoutComponent,RouterOutlet,RouterLink,RouterLinkActive,TabsModule],
   templateUrl: './track-jd.component.html',
   styleUrl: './track-jd.component.scss'
 })

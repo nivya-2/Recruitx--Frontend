@@ -6,7 +6,7 @@ import { TableComponent } from '../../shared-components/table/table.component';
 
 @Component({
   selector: 'app-admin-email',
-  imports: [CommonLayoutComponent,CardsComponent,HeaderTextComponent,TableComponent],
+  imports: [CommonLayoutComponent,CardsComponent,HeaderTextComponent],
   templateUrl: './admin-email.component.html',
   styleUrl: './admin-email.component.scss'
 })
