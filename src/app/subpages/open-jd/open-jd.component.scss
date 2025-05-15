@@ -1,0 +1,9 @@
+::ng-deep .button{
+    min-width: 140px;
+}
+::ng-deep th, td{
+    max-width: 130px;
+}
+::ng-deep .p-datatable-table-container{
+    overflow:visible !important;
+}

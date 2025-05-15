@@ -1,8 +1,14 @@
 <div>
-    <app-header-text context="table-header">Pending JD Generation</app-header-text>
+  <app-header-text context="table-header">Pending JD Generation</app-header-text>
 </div>
 
 <div class="base">
-    <!-- <app-tablefilter></app-tablefilter>
-    <app-table [content]="content" [columns]="columns"></app-table> -->
+  <app-table
+    [dataSource]="dataSource"
+    [columns]="columns"
+    [globalFilterFields]="globalFilterFields"
+    [hover]="false"
+    [rows]="7"
+    [showFilter]="true">
+  </app-table>
 </div>

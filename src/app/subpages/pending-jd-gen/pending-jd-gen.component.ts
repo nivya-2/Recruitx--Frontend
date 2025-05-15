@@ -1,108 +1,108 @@
 import { Component } from '@angular/core';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
+import { TableComponent } from '../../shared-components/table/table.component';
 
 @Component({
   selector: 'app-pending-jd-gen',
-  imports: [HeaderTextComponent],
+  imports: [HeaderTextComponent, TableComponent],
   templateUrl: './pending-jd-gen.component.html',
   styleUrl: './pending-jd-gen.component.scss'
 })
 export class PendingJdGenComponent {
 
-  dataSource: any[] = [ 
-    { id: 'JR2025-112', 
+  dataSource: any[] = [
+    {
+      id: 'JR2025-112',
       roleTitle: 'Software Engineer',
       deliveryUnit: 'DU1',
-      location: 'Bangalore', 
-      openPositions: 5, 
-      createdDate: '05-05-2025', 
+      location: 'Bangalore',
+      openPositions: 6,
+      createdDate: '04/04/2025',
+      hiringManager: 'Dave John',
+      actions: 'Generate JD'
+    },
+    {
+      id: 'JR2025-112',
+      roleTitle: 'UX Designer',
+      deliveryUnit: 'DU3',
+      location: 'Trivandrum',
+      openPositions: 4,
+      createdDate: '12/02/2025',
       hiringManager: 'John Doe',
-      actions:'Generate JD',
-      },
-      {  id: 'JR2025-113', 
-        roleTitle: 'UX Designer',
-        deliveryUnit: 'DU2',
-        location: 'Bangalore', 
-        openPositions: 7, 
-        createdDate: '05-05-2025', 
-        hiringManager: 'John James',
-        actions:'Generate JD',
+      actions: 'Draft'
+    },
+    {
+      id: 'JR2025-112',
+      roleTitle: 'Data Analyst',
+      deliveryUnit: 'DU2',
+      location: 'Kochi',
+      openPositions: 2,
+      createdDate: '20/03/2025',
+      hiringManager: 'Alice Smith',
+      actions: 'Generate JD'
+    },
+    {
+      id: 'JR2025-112',
+      roleTitle: 'Sales Manager',
+      deliveryUnit: 'DU4',
+      location: 'Kochi',
+      openPositions: 4,
+      createdDate: '17/01/2025',
+      hiringManager: 'Arjun Menon',
+      actions: 'Draft'
+    },
+    {
+      id: 'JR2025-112',
+      roleTitle: 'Junior HR',
+      deliveryUnit: 'DU6',
+      location: 'Trivandrum',
+      openPositions: 2,
+      createdDate: '10/04/2025',
+      hiringManager: 'Rajat Kumar',
+      actions: 'Generate JD'
+    },
+    {
+      id: 'JR2025-112',
+      roleTitle: 'Junior HR',
+      deliveryUnit: 'DU6',
+      location: 'Trivandrum',
+      openPositions: 2,
+      createdDate: '10/04/2025',
+      hiringManager: 'Rajat Kumar',
+      actions: 'Generate JD'
+    },
+    {
+      id: 'JR2025-112',
+      roleTitle: 'Junior HR',
+      deliveryUnit: 'DU6',
+      location: 'Trivandrum',
+      openPositions: 2,
+      createdDate: '10/04/2025',
+      hiringManager: 'Rajat Kumar',
+      actions: 'Generate JD'
+    },
+    {
+      id: 'JR2025-112',
+      roleTitle: 'Junior HR',
+      deliveryUnit: 'DU6',
+      location: 'Trivandrum',
+      openPositions: 2,
+      createdDate: '10/04/2025',
+      hiringManager: 'Rajat Kumar',
+      actions: 'Generate JD'
+    }
+  ];
 
-      },
-      {  id: 'JR2025-114', 
-          roleTitle: 'Sales Manager',
-          deliveryUnit: 'DU4',
-          location: 'Trivandrum', 
-          openPositions: 9, 
-          createdDate: '09-05-2025', 
-          hiringManager: 'Alan Smith',
-          actions:'Generate JD',
+  columns: Array<{ key: string, label: string, filterable: boolean }> = [
+    { key: 'id', label: 'ID', filterable: false },
+    { key: 'roleTitle', label: 'Role Title', filterable: true },
+    { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
+    { key: 'location', label: 'Location', filterable: true },
+    { key: 'openPositions', label: 'No. of Open Positions', filterable: false },
+    { key: 'createdDate', label: 'Created Date', filterable: false },
+    { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
+    { key: 'actions', label: 'Actions', filterable: false }
+  ];
 
-      },
-      {  id: 'JR2025-115', 
-            roleTitle: 'Junior HR',
-            deliveryUnit: 'DU7',
-            location: 'Bangalore', 
-            openPositions: 9, 
-            createdDate: '09-05-2025', 
-            hiringManager: 'James Roy',
-            actions:'Draft',
-
-      },
-      { id: 'JR2025-116', 
-              roleTitle: 'AI Engineer',
-              deliveryUnit: 'DU2',
-              location: 'Bangalore', 
-              openPositions: 7, 
-              createdDate: '05-07-2025', 
-              hiringManager: 'James Jacob',
-              actions:'Generate JD',
-
-            },
-            {  id: 'JR2025-117', 
-                roleTitle: 'UX Designer',
-                deliveryUnit: 'DU2',
-                location: 'Bangalore', 
-                openPositions: 7, 
-                createdDate: '05-08-2025', 
-                hiringManager: 'John James',
-                actions:'Draft',
-
-            },
-            {  id: 'JR2025-119', 
-              roleTitle: 'UI Designer',
-              deliveryUnit: 'DU2',
-              location: 'Bangalore', 
-              openPositions: 7, 
-              createdDate: '15-05-2025', 
-              hiringManager: 'John James',
-              actions:'Draft',
-
-              },
-        {  id: 'JR2025-119', 
-          roleTitle: 'Data Analyst',
-          deliveryUnit: 'DU6',
-          location: 'Kochi', 
-          openPositions: 11, 
-          createdDate: '25-06-2025', 
-          hiringManager: 'John James',
-          actions:'Generate JD',
-
-          }
-
-    ];
-
-    columns: Array<{key: string, label: string, filterable: boolean}> = [
-      { key: 'id', label: 'ID',filterable: false },
-      { key: 'roleTitle', label: 'Role Title',filterable: true},
-      { key: 'deliveryUnit', label: 'Delivery Unit',filterable: true },
-      { key: 'location', label: 'Location',filterable: true },
-      { key: 'openPositions', label: 'No. Of Open Positions',filterable: false },
-      { key: 'createdDate', label: 'Created Date',filterable: false },
-      { key: 'hiringManager', label: 'Hiring Manager',filterable: false },
-      { key: 'actions', label: 'Actions',filterable: false }
-    ];
-
-    globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');  
-
+  globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');
 }
