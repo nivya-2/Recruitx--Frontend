@@ -1,54 +1,29 @@
-.filter-container{
-    display: flex;
+.job-description-wrapper {
+  background-color: white;
+  margin-right: 30px;
+  border-radius: 11px;
 }
-.base{
-    /* background-color: #E2E5EC; */
-    min-height: 100%;
-    /* padding-top: 2rem; */
-}
-/* .routing-heading-table-filter-container{
-    background-color: white;
-    border-radius: 7px;
-    margin-left: 70px;
-} */
 
-.ui {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    width: 100%;
+.custom-tab-nav {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+  margin-right: 15px;
+  padding-bottom: 8px;
+  .item {
+    padding: 8px 1rem;
+    color: #555;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.3s, color 0.3s;
+
+    &.active {
+      color: #7B61FF;
+      border-bottom: 2px solid #7B61FF; // Only active tab gets underline
+    }
+
+    &:hover {
+      color: #7B61FF;
+    }
   }
-.ui nav{
-    width: 50%;
-    margin-bottom: 1vw;
-    margin-left: 0.5vw;
 }
-
-.mdc-tab{
-    padding: 0px;
-}
-  
-.mat-mdc-tab-header.mat-mdc-tab-nav-bar-stretch-tabs .mat-mdc-tab-link{
-    flex-grow: 0.1;
-}
-  /* .tab-panel {
-    margin-top: 16px;
-    padding: 24px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  } */
-
-  .mat-elevation-z16{
- 
-    max-width: 1220px;
-    max-height: 840px;
-    border-radius: 10px; 
-    overflow: hidden;    
-    min-width: 0% !important;
-    box-shadow: none !important;
-    background-color: white !important;
-    margin:2rem;
-    padding-bottom: 1rem;
-    margin-left: 6rem;
-  }
