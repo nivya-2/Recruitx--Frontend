@@ -19,13 +19,13 @@
                     <app-header-text [nopad]="true">Scheduled Interviews</app-header-text>
                     <app-table [dataSource]="scheduledInterviewsDataSource" [columns]="scheduledColumns"
                         [globalFilterFields]="scheduledGlobalFilterFields" [hover]="false" [rows]="3"
-                        [showFilter]="false"></app-table>
+                        [showFilter]="false" [fontSize]="'10px'"></app-table>
                 </app-cards>
                 <app-cards class="completed-interviews-card">
                     <app-header-text [nopad]="true">Completed Interviews</app-header-text>
                     <app-table [dataSource]="completedInterviewsDataSource" [columns]="completedColumns"
                         [globalFilterFields]="completedGlobalFilterFields" [hover]="false" [rows]="3"
-                        [showFilter]="false"></app-table>
+                        [showFilter]="false" [fontSize]="'10px'"></app-table>
                 </app-cards>
             </div>
             <div class="right-column">
@@ -33,7 +33,7 @@
                     <app-header-text [nopad]="true">Awaiting Shortlisting</app-header-text>
                     <app-table [dataSource]="awaitingShortlistingDataSource" [columns]="awaitingColumns"
                         [globalFilterFields]="awaitingGlobalFilterFields" [hover]="false" [rows]="9"
-                        [showFilter]="false"></app-table>
+                        [showFilter]="false" [fontSize]="'10px'"></app-table>
                 </app-cards>
             </div>
         </div>

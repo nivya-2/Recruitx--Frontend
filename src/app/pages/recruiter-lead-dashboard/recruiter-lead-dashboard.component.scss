@@ -1,13 +1,14 @@
 .page-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 1rem;
+  width: 96%;
+  // padding: 2rem;
 }
 
 .interview-section {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
 
   .left-column {
     display: flex;
