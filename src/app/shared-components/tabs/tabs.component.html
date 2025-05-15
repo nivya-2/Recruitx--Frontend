@@ -1,0 +1,8 @@
+
+    <p-tabs [value]="selectedTabIndex" (onChange)="onTabChange($event)">
+  <p-tablist>
+    @for (tab of tabs; track tab.value) {
+      <p-tab [value]="tab.value" [routerLink]="tab.route">{{ tab.title }}</p-tab>
+    }
+  </p-tablist>
+</p-tabs>

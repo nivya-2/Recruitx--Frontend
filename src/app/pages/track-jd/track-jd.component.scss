@@ -33,44 +33,6 @@
   border-radius: 11px;
   padding: 1rem;
 }
-
-::ng-deep .custom-tabs.p-tabs {
-  margin-bottom: 1rem;
-  margin-right: 15px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #ccc;
-
-  .p-tablist {
-    display: flex;
-    position: relative;
-
-    .p-tab {
-      background: transparent;
-      border: none;
-      outline: none;
-      padding: 8px 1rem;
-      color: #555;
-      font-weight: 600;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      transition: color 0.3s, border-color 0.3s;
-    }
-
-    .p-tab:hover {
-      color: #7B61FF;
-    }
-
-    .p-tab-active {
-      color: #7B61FF;
-      border-bottom: 2px solid #7B61FF;
-    }
-
-    .p-tablist-active-bar {
-      display: none; // Optional: hide built-in inkbar
-    }
-  }
-
-  .p-tabpanels {
-    display: none; // Hide since router-outlet is used
-  }
+::ng-deep .p-tablist-tab-list{
+  margin-bottom: 2vh !important;
 }
