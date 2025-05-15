@@ -1,0 +1,60 @@
+<div class="invitation-mail-container p-4">
+  <h4 class="mb-4">{{ template ? template.name : 'Email Template' }}</h4>
+
+  <form [formGroup]="invitationForm">
+    <!-- Email Subject -->
+    <div class="mb-4">
+      <label for="emailSubject" class="block font-medium text-sm mb-1">Email Subject</label>
+      <input
+        id="emailSubject"
+        type="text"
+        pInputText
+        formControlName="emailSubject"
+        class="w-full p-inputtext"
+      />
+    </div>
+
+    <!-- Available Variables -->
+    <div class="mb-4">
+      <label class="block font-semibold mb-2">Available Variables</label>
+      <div class="placeholders">
+        <p-chip
+          *ngFor="let variable of availableVariables"
+          [label]="variable.key"
+          (click)="insertVariable(variable.key)"
+          [style]="{cursor: 'pointer'}"
+        />
+      </div>
+    </div>
+
+    <!-- Email Content Editor -->
+    <div class="mb-4">
+      <label for="emailContent" class="block font-semibold mb-2">Email Content</label>
+      <p-editor
+        formControlName="emailContent"
+        styleClass="w-full"
+        [style]="{ height: '320px' }"
+      ></p-editor>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-content-end gap-2 mt-4">
+      <button
+        pButton
+        type="button"
+        label="Preview"
+        icon="pi pi-eye"
+        class="p-button-outlined"
+        (click)="preview()"
+      ></button>
+      <button
+        pButton
+        type="submit"
+        label="Save Template"
+        icon="pi pi-save"
+        class="p-button-primary"
+        (click)="saveTemplate()"
+      ></button>
+    </div>
+  </form>
+</div>

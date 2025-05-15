@@ -1,0 +1,105 @@
+ @import 'primeicons/primeicons.css';
+
+ 
+ :host ::ng-deep {
+
+      .p-accordionheader{
+
+        border-style: none;
+        min-height: 48px;
+        color: #636363;
+        gap:10px !important;
+        padding: 5px;
+
+      }
+      
+      .p-accordionpanel{
+        border: solid 1px grey;
+      }
+
+      .p-accordioncontent-content{
+        border: solid 1px grey;
+      }
+    }
+    
+    .email-templates-container {
+      max-width: 260px;
+      margin: 20px;
+      margin-left: 0;
+      font-family: Arial, sans-serif;
+      border-radius: 6px;
+      border: solid 1px grey;
+
+    }
+    
+    .email-header {
+      padding: 20px;
+      background-color: #D3CAFF;
+      margin: 0;
+      font-size: 24px;
+      border-radius: 6px 6px 0 0;
+      color: #636363;
+      font-weight: 600;
+      text-align: center;
+      border-bottom: 1px solid #D3CAFF;
+    }
+    
+    .accordion-container {
+      border-radius: 0 0 6px 6px;
+      overflow: hidden;
+    }
+    
+    .template-item {
+      padding: 14px 10px;
+      border-bottom: 1px solid #e6f2ff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .template-item:last-child {
+      border-bottom: none;
+    }
+    
+    .template-item:hover {
+      background-color: #d7cdfc;
+      transform: translateX(3px);
+    }
+    
+    .template-subtitle {
+      font-size: 12px;
+      color: #7B61FF;
+      font-weight: 500;
+      background-color: #f5f3ff;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    
+    .field {
+      margin-bottom: 1.25rem;
+    }
+    
+    .block {
+      display: block;
+    }
+    
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+    
+    .w-full {
+      width: 100%;
+    }
+    
+ 
+    :host ::ng-deep {
+      .template-dialog .p-dialog-content {
+        background-color: #f8faff;
+      }
+    }
