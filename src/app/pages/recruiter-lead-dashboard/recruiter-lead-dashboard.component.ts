@@ -7,7 +7,7 @@ import { ListViewComponent } from '../../shared-components/list-view/list-view.c
 
 @Component({
   selector: 'app-recruiter-lead-dashboard',
-  imports: [CommonLayoutComponent, CardsComponent, TableComponent, HeaderTextComponent,ListViewComponent],
+  imports: [CommonLayoutComponent, CardsComponent, TableComponent, HeaderTextComponent, ListViewComponent],
   templateUrl: './recruiter-lead-dashboard.component.html',
   styleUrl: './recruiter-lead-dashboard.component.scss'
 })
