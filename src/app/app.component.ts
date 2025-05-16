@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { ButtonComponent } from './ui/button/button.component';
 import { CardsComponent } from './ui/cards/cards.component';
@@ -20,7 +19,7 @@ import { ProgressbarComponent } from "./ui/progressbar/progressbar.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RecruiterHeadDashboardComponent, RecruiterDashboardComponent, RouterOutlet, SidenavbarComponent, IconGroupComponent, ButtonDemoComponent, IconComponent,
+  imports: [RecruiterHeadDashboardComponent, RecruiterDashboardComponent, RouterOutlet, SidenavbarComponent, IconGroupComponent, IconComponent,
     HeaderComponent, ButtonComponent, CardsComponent, SharedComponentsModule, TableComponent, CommonLayoutComponent, RecruiterLeadDashboardComponent, BreadcrumbsComponent, ProgressbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
