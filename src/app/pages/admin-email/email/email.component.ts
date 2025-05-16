@@ -79,15 +79,56 @@ RecruitX Team`;
   emailContent: [this.defaultEmailContent, Validators.required]
 });
   }
+
+
  private updateFormWithTemplate(template: EmailTemplate): void {
     // Update the form with the selected template values
   const content = template.content || this.defaultEmailContent;
   const contentWithBreaks = content.replace(/\n/g, '<br>');
     this.invitationForm.patchValue({
       emailSubject: template.subject || 'Email Subject',
-      emailContent: template.content || this.defaultEmailContent
+      emailContent: contentWithBreaks || this.defaultEmailContent
     });
   }
+
+   private stripHtml(html: string): string {
+    // Create a temporary div element
+    const tempDiv = document.createElement('div');
+    // Set the HTML content
+    tempDiv.innerHTML = html;
+    
+    // Replace <br> tags with newlines before getting text content
+    const brElements = tempDiv.getElementsByTagName('br');
+    for (let i = brElements.length - 1; i >= 0; i--) {
+      brElements[i].parentNode?.replaceChild(document.createTextNode('\n'), brElements[i]);
+    }
+    
+    // Replace <p> tags with double newlines (for paragraph breaks)
+    const pElements = tempDiv.getElementsByTagName('p');
+    for (let i = 0; i < pElements.length; i++) {
+      const p = pElements[i];
+      if (p.nextSibling) {
+        p.appendChild(document.createTextNode('\n\n'));
+      }
+    }
+    
+    // Get the text content (this strips all HTML tags)
+    let plainText = tempDiv.textContent || tempDiv.innerText || '';
+    
+    // Clean up extra whitespace
+    plainText = plainText.replace(/\s+/g, ' ').trim();
+    
+    // Replace common HTML entities
+    plainText = plainText.replace(/&nbsp;/g, ' ')
+                         .replace(/&amp;/g, '&')
+                         .replace(/&lt;/g, '<')
+                         .replace(/&gt;/g, '>')
+                         .replace(/&quot;/g, '"')
+                         .replace(/&#39;/g, "'");
+    
+    return plainText;
+  }
+
 
   insertVariable(variable: string): void {
   const current = this.invitationForm.get('emailContent')?.value || '';
@@ -95,10 +136,16 @@ RecruitX Team`;
 }
 
   preview(): void {
-   this.previewData = {
-  subject: this.invitationForm.get('emailSubject')?.value,
-  content: this.invitationForm.get('emailContent')?.value
-};
+  const rawContent = this.invitationForm.get('emailContent')?.value || '';
+  const plainTextContent = this.stripHtml(rawContent);
+    
+    this.previewData = {
+      subject: this.invitationForm.get('emailSubject')?.value,
+      content: plainTextContent
+
+      // content: this.invitationForm.get('emailContent')?.value
+    };
+    
     this.showPreview = true;
     console.log('Preview email:', this.previewData);
   }
