@@ -141,6 +141,27 @@ export const routes: Routes = [
       data: { breadcrumb: 'Applicants' }
     }
   ]
+},{
+  path: 'recruiter/job-description',
+  loadComponent: () => import('./pages/job-description/job-description.component').then(m => m.JobDescriptionComponent),
+  data: { breadcrumb: 'Job-Description' },
+  children: [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'details'
+    },
+    {
+      path: 'details',
+      loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
+      data: { breadcrumb: 'Details' }
+    },
+    {
+      path: 'applicants',
+      loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
+      data: { breadcrumb: 'Applicants' }
+    }
+  ]
 },
 
   {
