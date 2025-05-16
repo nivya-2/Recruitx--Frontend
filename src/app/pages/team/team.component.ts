@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-team',
-  imports: [RouterOutlet, CommonLayoutComponent, CardsComponent, TabsComponent],
+  imports: [CommonLayoutComponent, CardsComponent, TabsComponent , RouterOutlet],
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss',
 })
