@@ -1,9 +1,10 @@
 <app-common-layout>
   <div class="job-description-wrapper" style="height: 100%; position: relative; padding: 1rem">
-<app-tabs [tabs]="tabs"></app-tabs>
+    <app-cards>
+      <app-tabs [tabs]="tabs"></app-tabs>
 
-    <!-- Top Navigation -->
-    <!-- <div class="ui secondary pointing menu custom-tab-nav">
+      <!-- Top Navigation -->
+      <!-- <div class="ui secondary pointing menu custom-tab-nav">
       <a
         class="item"
         [routerLink]="'pendingjdgeneration'"
@@ -30,7 +31,8 @@
       </a>
     </div> -->
 
-    <!-- Content loaded by router -->
-    <router-outlet></router-outlet>
+      <!-- Content loaded by router -->
+      <router-outlet></router-outlet>
+    </app-cards>
   </div>
 </app-common-layout>
