@@ -24,7 +24,13 @@
    .text-center{
     text-align: center !important;   
    }
+
+    :host ::ng-deep .p-datatable-tbody > tr:hover {
+      background-color: #e5deff !important;
+      cursor: pointer;
+    }
   
+
   ::ng-deep {
     /* Header Content Styling */
     .header-content {
@@ -55,6 +61,7 @@
       display: inline-flex;
       align-items: center;
       flex-shrink: 0;
+      margin-left: 2px;
     }
   
     /* Styling for PrimeNG sort icons and filters */

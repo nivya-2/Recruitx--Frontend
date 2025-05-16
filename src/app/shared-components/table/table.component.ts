@@ -26,10 +26,33 @@ export class TableComponent {
   @Input() showFilter: boolean = true;
   @Input() fontSize: any ='14px';
   // @Input() scale:number = 1;
+  @Input() buttonAction: (row: any) => void = () => {};
+  @Input() rowClickFn: (rowData: any) => void = () => {};
 
   
   clear(table: Table): void {
     table.clear();
   }
+
+  handleRowClick(rowData: any): void {
+    if (this.hover && this.rowClickFn) {
+      this.rowClickFn(rowData);
+    }
+  }
+
+  isDate(value: any): boolean {
+  // Check if value is a Date object
+  if (value instanceof Date) {
+    return true;
+  }
+  
+  // Check if it's a valid date string
+  if (typeof value === 'string') {
+    const timestamp = Date.parse(value);
+    return !isNaN(timestamp);
+  }
+  
+  return false;
+}
 
 }

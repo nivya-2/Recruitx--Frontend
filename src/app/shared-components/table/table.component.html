@@ -49,15 +49,20 @@
 
   <!-- Table Body -->
   <ng-template pTemplate="body" let-rowData>
-    <tr>
+    <tr [ngClass]="{'clickable-row': hover}" (click)="handleRowClick(rowData)">
       <td *ngFor="let column of columns" [ngClass]="{'text-center':
         (typeof rowData[column.key] === 'string' && rowData[column.key].length <= 2) ||
         (typeof rowData[column.key] === 'number' && rowData[column.key].toString().length <= 2)}">
         <ng-container *ngIf="column.key !== 'actions'; else actionTpl">
+          <ng-container *ngIf="isDate(rowData[column.key]); else regularValue">
+          {{ rowData[column.key] | date: 'dd/MM/yyyy' }}
+          </ng-container>
+         <ng-template #regularValue>
           {{ rowData[column.key] }}
-        </ng-container>
+         </ng-template>
+      </ng-container>
         <ng-template #actionTpl>
-           <app-button color="#7B61FF">{{rowData[column.key]}}</app-button>
+           <app-button color="#7B61FF" >{{rowData[column.key]}}</app-button>
         </ng-template>
       </td>
     </tr>
