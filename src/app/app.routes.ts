@@ -207,5 +207,28 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/team/team.component').then((m) => m.TeamComponent),
     data: { breadcrumb: 'Team' },
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'my-team',
+      },
+      {
+        path: 'my-team',
+        loadComponent: () =>
+          import('./subpages/my-team/my-team.component').then(
+            (m) => m.MyTeamComponent
+          ),
+        data: { breadcrumb: 'My Team' },
+      },
+      {
+        path: 'track-jr',
+        loadComponent: () =>
+          import('./subpages/track-jr/track-jr.component').then(
+            (m) => m.TrackJrComponent
+          ),
+        data: { breadcrumb: 'Track JR' },
+      },
+    ],
   },
 ];
