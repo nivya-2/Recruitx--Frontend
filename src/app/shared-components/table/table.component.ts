@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -22,7 +22,7 @@ export class TableComponent {
   @Input() dataSource:string[]=[];
   @Input() columns:any=[];
   @Input() globalFilterFields: string[]=[];
-  @Input() hover:boolean= true;
+  @Input() hover:boolean= false;
   @Input() rows:number = 5;
   @Input() showFilter: boolean = true;
   @Input() fontSize: any ='12px';
@@ -30,6 +30,9 @@ export class TableComponent {
   @Input() buttonAction: (row: any) => void = () => {};
   @Input() rowClickFn: (rowData: any) => void = () => {};
 
+  @HostBinding('class.hover-enabled') get isHoverEnabled() {
+    return this.hover;
+  }
   
   clear(table: Table): void {
     table.clear();

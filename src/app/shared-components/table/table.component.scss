@@ -8,14 +8,6 @@
     box-sizing: border-box;
   }
 
-  
-  // ::ng-deep th {
-  //   // width: 90px;              /* or any fixed width */
-  //   // max-width: 200px;
-  //   white-space: normal !important;
-  //   word-break: break-word;
-  //   overflow-wrap: break-word ;
-  // }
 
   .filter-container {
     display: flex;
@@ -25,10 +17,10 @@
     text-align: center !important;   
    }
 
-    :host ::ng-deep .p-datatable-tbody > tr:hover {
-      background-color: #e5deff !important;
-      cursor: pointer;
-    }
+   :host.hover-enabled ::ng-deep .p-datatable-tbody > tr:hover {
+  background-color: #e5deff !important;
+  cursor: pointer;
+}
   
 
   ::ng-deep {
