@@ -8,7 +8,7 @@ import { ProgressBar } from 'primeng/progressbar';
   styleUrl: './progressbar.component.scss'
 })
 export class ProgressbarComponent {
-@Input() current: number = 0;
+  @Input() current: number = 0;
   @Input() total: number = 0;
 
   get percentage(): number {
