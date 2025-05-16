@@ -1,1 +1,12 @@
-<p>my-team works!</p>
+<app-cards width="95%">
+    <app-table
+        [dataSource]="teamsDataSource"
+        [columns]="teamsColumns"
+        [globalFilterFields]="teamsGlobalFilterFields"
+        [hover]="false"
+        [rows]="8"
+        [showFilter]="true"
+        (remove)="handleRemove($event)"
+      ></app-table>
+
+</app-cards>
