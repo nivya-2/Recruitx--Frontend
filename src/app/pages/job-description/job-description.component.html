@@ -1,0 +1,36 @@
+<app-common-layout>
+  <div class="job-description-wrapper" style="height: 100%; position: relative; padding: 1rem">
+<app-tabs [tabs]="tabs"></app-tabs>
+
+    <!-- Top Navigation -->
+    <!-- <div class="ui secondary pointing menu custom-tab-nav">
+      <a
+        class="item"
+        [routerLink]="'pendingjdgeneration'"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Pending JD Generation
+      </a>
+      <a
+        class="item"
+        [routerLink]="'openjd'"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Open JD
+      </a>
+      <a
+        class="item"
+        [routerLink]="'closedjd'"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Closed JD
+      </a>
+    </div> -->
+
+    <!-- Content loaded by router -->
+    <router-outlet></router-outlet>
+  </div>
+</app-common-layout>
