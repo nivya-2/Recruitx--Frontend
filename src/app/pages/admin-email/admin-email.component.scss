@@ -1,0 +1,12 @@
+@import 'quill/dist/quill.snow.css';
+
+
+.structure{
+    display: flex;
+    gap:10px;
+
+    .email{
+        max-width: 910px;
+    }
+}
+
