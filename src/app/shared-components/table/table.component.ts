@@ -24,7 +24,7 @@ export class TableComponent {
   @Input() hover:boolean= true;
   @Input() rows:number = 5;
   @Input() showFilter: boolean = true;
-  @Input() fontSize: any ='14px';
+  @Input() fontSize: any ='12px';
   // @Input() scale:number = 1;
   @Input() buttonAction: (row: any) => void = () => {};
   @Input() rowClickFn: (rowData: any) => void = () => {};
