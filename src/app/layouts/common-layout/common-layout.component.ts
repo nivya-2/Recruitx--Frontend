@@ -30,7 +30,7 @@ export class CommonLayoutComponent {
     { iconName: 'dashboard', size: '28px', iconColour: '#B8AAFF', label: 'Dashboard', route: '/recruiter-lead/dashboard' },
     { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-lead/analytics' },
     { iconName: 'timeline', size: '28px', iconColour: '#B8AAFF', label: 'Track JD', route: '/recruiter-lead/track-jd' },
-    { iconName: 'group', size: '28px', iconColour: '#B8AAFF', label: 'Teams', route: '/recruiter-lead/teams' },
+    { iconName: 'group', size: '28px', iconColour: '#B8AAFF', label: 'Teams', route: '/recruiter-lead/team' },
     { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Schedule', route: '/recruiter-lead/schedule-interviews' }
   ];
 
@@ -38,7 +38,7 @@ export class CommonLayoutComponent {
     { iconName: 'dashboard', size: '28px', iconColour: '#B8AAFF', label: 'Dashboard', route: '/recruiter-head/dashboard' },
     { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-head/analytics' },
     { iconName: 'timeline', size: '28px', iconColour: '#B8AAFF', label: 'Track JD', route: '/recruiter-head/track-jd' },
-    { iconName: 'group', size: '28px', iconColour: '#B8AAFF', label: 'Teams', route: '/recruiter-head/teams' },
+    { iconName: 'group', size: '28px', iconColour: '#B8AAFF', label: 'Teams', route: '/recruiter-head/team' },
   ];
 
   adminIcons: IconItem[] = [

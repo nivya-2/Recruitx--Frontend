@@ -8,10 +8,11 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { IconComponent } from "../../ui/icon/icon.component";
+import { ProgressbarComponent } from '../../ui/progressbar/progressbar.component';
 
 @Component({
   selector: 'app-table',
-  imports: [CommonModule, TableModule, InputTextModule, ButtonModule, PaginatorModule, IconField, InputIcon, ButtonComponent, IconComponent],
+  imports: [ProgressbarComponent, CommonModule, TableModule, InputTextModule, ButtonModule, PaginatorModule, IconField, InputIcon, ButtonComponent, IconComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })

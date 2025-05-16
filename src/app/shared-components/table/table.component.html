@@ -7,40 +7,72 @@
   'max-height': '100%',
   'overflow': 'auto'
 }"> -->
-<p-table #table [value]="dataSource" [paginator]="true" [rows]="rows" 
-          [globalFilterFields]="globalFilterFields"
-         [responsiveLayout]="'scroll'" [resizableColumns]="true" scrollHeight="'auto'"
-         [sortMode]="'multiple'" [rowHover]="hover" [showCurrentPageReport]="true"
-         currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-         [ngStyle]="{ 'font-size': fontSize }">
-        
-         >
+<p-table
+  #table
+  [value]="dataSource"
+  [paginator]="true"
+  [rows]="rows"
+  [globalFilterFields]="globalFilterFields"
+  [responsiveLayout]="'scroll'"
+  [resizableColumns]="true"
+  scrollHeight="'auto'"
+  [sortMode]="'multiple'"
+  [rowHover]="hover"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+  [ngStyle]="{ 'font-size': fontSize }"
+>
+  >
 
   <ng-template pTemplate="caption" *ngIf="showFilter">
     <div class="filter-container">
-    <!-- <app-button class="p-button-outlined" (onClick)="clear(table)"><app-icon name="clear" customColor="white" size="20px"></app-icon>Clear</app-button> -->
-     <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear" (onClick)="clear(table)"></p-button>
-     <p-iconField iconPosition="left">
+      <!-- <app-button class="p-button-outlined" (onClick)="clear(table)"><app-icon name="clear" customColor="white" size="20px"></app-icon>Clear</app-button> -->
+      <p-button
+        [outlined]="true"
+        icon="pi pi-filter-slash"
+        label="Clear"
+        (onClick)="clear(table)"
+      ></p-button>
+      <p-iconField iconPosition="left">
         <p-inputIcon>
-            <i class="pi pi-search"></i>
-             <!-- <app-icon name="search" customColor="#334155"></app-icon> -->
+          <i class="pi pi-search"></i>
+          <!-- <app-icon name="search" customColor="#334155"></app-icon> -->
         </p-inputIcon>
-         <input pInputText type="text" (input)="table.filterGlobal($any($event.target).value, 'contains')" placeholder="Search all fields" />
-     </p-iconField>
+        <input
+          pInputText
+          type="text"
+          (input)="table.filterGlobal($any($event.target).value, 'contains')"
+          placeholder="Search all fields"
+        />
+      </p-iconField>
     </div>
   </ng-template>
 
-
   <ng-template pTemplate="header">
     <tr>
-      <th *ngFor="let column of columns" 
-          [pSortableColumn]="column.key"
-          [ngClass]="'col-' + column.key">
+      <th
+        *ngFor="let column of columns"
+        [pSortableColumn]="column.key"
+        [ngClass]="'col-' + column.key"
+      >
         <div class="header-content">
-          <div class="header-text" [ngClass]="{'multi-word': column.label.includes(' ')}">{{ column.label }}</div>
+          <div
+            class="header-text"
+            [ngClass]="{ 'multi-word': column.label.includes(' ') }"
+          >
+            {{ column.label }}
+          </div>
           <div class="header-icons">
-            <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key"></p-sortIcon>
-            <p-columnFilter *ngIf="column.filterable" [field]="column.key" display="menu" class="column-filter"/>
+            <p-sortIcon
+              *ngIf="column.key !== 'actions'"
+              [field]="column.key"
+            ></p-sortIcon>
+            <p-columnFilter
+              *ngIf="column.filterable"
+              [field]="column.key"
+              display="menu"
+              class="column-filter"
+            />
           </div>
         </div>
       </th>
@@ -57,6 +89,9 @@
           <ng-container *ngIf="isDate(rowData[column.key]); else regularValue">
           {{ rowData[column.key] | date: 'dd/MM/yyyy' }}
           </ng-container>
+          <ng-container *ngIf="column.key === 'status'; else regularValue">
+            <app-progressbar [current]="rowData.status.current" [total]="rowData.status.total"></app-progressbar>
+          </ng-container>
          <ng-template #regularValue>
           {{ rowData[column.key] }}
          </ng-template>
@@ -64,9 +99,33 @@
         <ng-template #actionTpl>
            <app-button color="#7B61FF" >{{rowData[column.key]}}</app-button>
         </ng-template>
+      </td> 
+
+      <td
+        *ngFor="let column of columns"
+        [ngClass]="{'text-center':
+  (typeof rowData[column.key] === 'string' && rowData[column.key].length <= 2) ||
+  (typeof rowData[column.key] === 'number' && rowData[column.key].toString().length <= 2)}"
+      >
+        <!-- For non-actions column -->
+        <ng-container *ngIf="column.key !== 'actions'; else actionTpl">
+          <!-- Check if it's the 'progress' column -->
+          <ng-container *ngIf="column.key === 'status'; else defaultTpl">
+            <app-progressbar [current]="rowData.status.current" [total]="rowData.status.total"></app-progressbar>
+          </ng-container>
+
+          <!-- Default text rendering -->
+          <ng-template #defaultTpl>
+            {{ rowData[column.key] }}
+          </ng-template>
+        </ng-container>
+
+        <!-- For 'actions' column -->
+        <ng-template #actionTpl>
+          <app-button color="#7B61FF">{{ rowData[column.key] }}</app-button>
+        </ng-template>
       </td>
     </tr>
   </ng-template>
-
 </p-table>
 <!-- </div> -->
