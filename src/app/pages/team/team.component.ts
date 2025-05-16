@@ -4,10 +4,9 @@ import { CardsComponent } from '../../ui/cards/cards.component';
 import { TabsComponent } from '../../shared-components/tabs/tabs.component';
 import { RouterOutlet } from '@angular/router';
 
-
 @Component({
   selector: 'app-team',
-  imports: [CommonLayoutComponent, RouterOutlet,CardsComponent, TabsComponent],
+  imports: [CommonLayoutComponent, CardsComponent, TabsComponent , RouterOutlet],
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss',
 })
