@@ -103,8 +103,8 @@ dataSource: any[] = [
     { key: 'associatedJr', label: 'Associated JR', filterable: false }
   ];
 
-  hello(){
-    console.log("hello");
+  hello=(rowData:any)=>{
+    console.log(rowData);
   }
 
   globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'associatedJr');

@@ -105,4 +105,9 @@ export class PendingJdGenComponent {
   ];
 
   globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');
+
+   hello=(rowData:any)=>{
+    console.log(rowData);
+  }
+
 }
