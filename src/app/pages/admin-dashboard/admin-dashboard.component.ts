@@ -3,10 +3,11 @@ import { CommonLayoutComponent } from '../../layouts/common-layout/common-layout
 import { TableComponent } from '../../shared-components/table/table.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
+import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent],
+  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })
@@ -121,7 +122,7 @@ export class AdminDashboardComponent {
     ]
 
     columns: Array<{key: string, label: string, filterable: boolean}> = [
-       { key: 'jobReqId', label: 'Job Req.ID', filterable: true },
+       { key: 'jobReqId', label: 'Requisition ID', filterable: true },
   { key: 'jobTitle', label: 'Job Title', filterable: true },
   { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
   { key: 'location', label: 'Location', filterable: true },
