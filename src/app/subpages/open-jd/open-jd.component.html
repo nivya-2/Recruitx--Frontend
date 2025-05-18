@@ -1,15 +1,11 @@
-<div>
-  <app-header-text context="table-header">Open JD Generation</app-header-text>
-</div>
-
 <div class="base">
   <app-table
     [dataSource]="dataSource"
     [columns]="columns"
     [globalFilterFields]="globalFilterFields"
-    [hover]="false"
-    [rows]="7"
     [hover]="true"
-    [showFilter]="true">
-  </app-table>
+    [rows]="7"
+    [showFilter]="true"
+    [rowClickFn]="hello">
+      </app-table>
 </div>

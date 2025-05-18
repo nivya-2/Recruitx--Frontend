@@ -16,12 +16,15 @@ import { RecruiterDashboardComponent } from './pages/recruiter-dashboard/recruit
 import { BreadcrumbsComponent } from './ui/breadcrumbs/breadcrumbs.component';
 import { ProgressbarComponent } from "./ui/progressbar/progressbar.component";
 import { TrackJdComponent } from "./pages/track-jd/track-jd.component";
+import { TrackJrComponent } from "./subpages/track-jr/track-jr.component";
+import { TeamComponent } from "./pages/team/team.component";
+import { MyTeamComponent } from "./subpages/my-team/my-team.component";
 
 
 @Component({
   selector: 'app-root',
   imports: [RecruiterHeadDashboardComponent, RecruiterDashboardComponent, RouterOutlet, SidenavbarComponent, IconGroupComponent, IconComponent,
-    HeaderComponent, ButtonComponent, CardsComponent, SharedComponentsModule, TableComponent, CommonLayoutComponent, RecruiterLeadDashboardComponent, BreadcrumbsComponent, ProgressbarComponent, TrackJdComponent],
+    HeaderComponent, ButtonComponent, CardsComponent, SharedComponentsModule, TableComponent, CommonLayoutComponent, RecruiterLeadDashboardComponent, BreadcrumbsComponent, ProgressbarComponent, TrackJdComponent, TeamComponent, MyTeamComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
