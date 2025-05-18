@@ -3,6 +3,7 @@ import { HeaderTextComponent } from '../../ui/header-text/header-text.component'
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { TableComponent } from '../../shared-components/table/table.component';
 import { ButtonComponent } from '../../ui/button/button.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-applicants',
@@ -11,6 +12,19 @@ import { ButtonComponent } from '../../ui/button/button.component';
   styleUrl: './applicants.component.scss'
 })
 export class ApplicantsComponent {
+constructor(private router: Router, private route: ActivatedRoute) {}
+routes!: (row: any) => void;
+ngOnInit(): void {
+  this.routes = (row: any): void => {
+    const segments = this.route.snapshot.pathFromRoot
+      .flatMap(r => r.url.map(u => u.path));
+
+    const rolePrefix = segments.includes('recruiter-lead') ? 'recruiter-lead' : 'recruiter';
+
+    this.router.navigate([`/${rolePrefix}/job-description/applicant-details`]);
+  };
+}
+
 dataSource: any[] = [
     {
       candidateId: 'CAN-006',
@@ -123,6 +137,7 @@ dataSource: any[] = [
     { key: 'actions', label: 'View Details', filterable: false }
   ];
 
+  
   globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');
 }
 

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { SidenavbarComponent } from '../sidenavbar/sidenavbar.component';
 import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api'; 
 
 interface IconItem {
   iconName: string;
@@ -19,6 +20,7 @@ import { BreadcrumbsComponent } from '../../ui/breadcrumbs/breadcrumbs.component
   styleUrls: ['./common-layout.component.scss']
 })
 export class CommonLayoutComponent {
+    @Input() breadcrumbItems?: MenuItem[]; // ✅ Optional breadcrumbs input
   recruiterIcons: IconItem[] = [
     { iconName: 'dashboard', size: '28px', iconColour: '#B8AAFF', label: 'Dashboard', route: '/recruiter/dashboard' },
     { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter/analytics' },

@@ -242,9 +242,27 @@ export const routes: Routes = [
       path: 'applicants',
       loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
       data: { breadcrumb: 'Applicants' }
-    }
+    },
+    
   ]
 },
+{
+      path: 'recruiter-lead/job-description/applicant-details',
+    loadComponent: () =>
+      import(
+        './pages/applicant-details/applicant-details.component'
+      ).then((m) => m.ApplicantDetailsComponent),
+    data: { breadcrumb: 'Applicant Details' },
+    },
+  
+  {
+    path: 'recruiter/job-description/applicant-details',
+    loadComponent: () =>
+      import(
+        './pages/applicant-details/applicant-details.component'
+      ).then((m) => m.ApplicantDetailsComponent),
+    data: { breadcrumb: 'Analytics' },
+  },
 
   {
     path: 'recruiter-head/team',
