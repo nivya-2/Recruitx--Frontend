@@ -27,11 +27,19 @@ export class TableComponent {
   @Input() showFilter: boolean = true;
   @Input() fontSize: any ='12px';
   // @Input() scale:number = 1;
-  @Input() buttonAction: (row: any) => void = () => {};
+  @Input() buttonActionFn: (rowData: any) => void = () => {};
   @Input() rowClickFn: (rowData: any) => void = () => {};
 
   @HostBinding('class.hover-enabled') get isHoverEnabled() {
     return this.hover;
+  }
+
+  buttonActionWrapper(rowData: any): Function {
+    return () => {
+      if (this.buttonActionFn) {
+        this.buttonActionFn(rowData);
+      }
+    };
   }
   
   clear(table: Table): void {
