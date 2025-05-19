@@ -1,8 +1,19 @@
 
-
-<div>
-  <app-header-text context="table-header" [nopad]="true">Pending JD Generation</app-header-text>
-</div>
 <div class="base">
-Applicants
+  <div class="right-align">
+        <app-button>Add New Applicants</app-button>
+
+    </div>
+  <app-table
+    [dataSource]="dataSource"
+    [columns]="columns"
+    [globalFilterFields]="globalFilterFields"
+    [hover]="true"
+    [rows]="7"
+    [showFilter]="true"
+    [rowClickFn]="routes">
+    
+    
+  </app-table>
 </div>
+

@@ -1,0 +1,11 @@
+::ng-deep .p-datatable-table {
+    border-spacing: 0;
+    border-collapse: separate;
+    width: 98%;
+}
+.right-align{
+    position: absolute;
+    top:110px;
+    right:45px;
+    z-index: 100;
+}

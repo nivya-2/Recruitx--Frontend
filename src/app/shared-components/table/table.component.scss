@@ -8,14 +8,6 @@
     box-sizing: border-box;
   }
 
-  
-  // ::ng-deep th {
-  //   // width: 90px;              /* or any fixed width */
-  //   // max-width: 200px;
-  //   white-space: normal !important;
-  //   word-break: break-word;
-  //   overflow-wrap: break-word ;
-  // }
 
   .filter-container {
     display: flex;
@@ -24,7 +16,13 @@
    .text-center{
     text-align: center !important;   
    }
+
+   :host.hover-enabled ::ng-deep .p-datatable-tbody > tr:hover {
+  background-color: #e5deff !important;
+  cursor: pointer;
+}
   
+
   ::ng-deep {
     /* Header Content Styling */
     .header-content {
@@ -55,6 +53,7 @@
       display: inline-flex;
       align-items: center;
       flex-shrink: 0;
+      margin-left: 2px;
     }
   
     /* Styling for PrimeNG sort icons and filters */

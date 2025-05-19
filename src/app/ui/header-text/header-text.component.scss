@@ -24,7 +24,12 @@
     text-align: left;
     padding-left: 2.5vw;
   }
-  
+  .big-header{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 2.5vw;
+  }
   /* 📱 Responsive adjustments for smaller screens */
   @media (max-width: 768px) {
     .title {
