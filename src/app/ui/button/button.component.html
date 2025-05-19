@@ -1,4 +1,4 @@
-<button class="button" [ngStyle]="{ 'background-color': color, color: 'white'}">
+<button pButton (click)="handleClick()" class="button" [ngStyle]="{ 'background-color': color, color: 'white'}">
     <span class="p-button-label">
         <ng-content></ng-content>
     </span>
