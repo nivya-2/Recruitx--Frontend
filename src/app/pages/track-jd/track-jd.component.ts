@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { TabsComponent } from '../../shared-components/tabs/tabs.component';
 @Component({
   selector: 'app-track-jd',
-  imports: [CommonLayoutComponent,RouterOutlet,RouterLink,RouterLinkActive,TabsModule,TabsComponent],
+  imports: [CommonLayoutComponent,RouterOutlet,RouterLink,RouterLinkActive,TabsModule,TabsComponent, CardsComponent],
   templateUrl: './track-jd.component.html',
   styleUrl: './track-jd.component.scss'
 })

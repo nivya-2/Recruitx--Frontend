@@ -1,5 +1,5 @@
 <app-common-layout>
-  <div class="job-description-wrapper" style="height: 100%; position: relative; padding: 1rem">
+  <app-cards class="custom-padding" >
 <app-tabs [tabs]="tabs"></app-tabs>
 
     <!-- Top Navigation -->
@@ -11,6 +11,7 @@
         [routerLinkActiveOptions]="{ exact: true }"
       >
         Pending JD Generation
+        
       </a>
       <a
         class="item"
@@ -32,5 +33,5 @@
 
     <!-- Content loaded by router -->
     <router-outlet></router-outlet>
-  </div>
+  </app-cards>
 </app-common-layout>
