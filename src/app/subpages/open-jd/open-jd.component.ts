@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { TableComponent } from '../../shared-components/table/table.component';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-open-jd',
@@ -9,6 +11,8 @@ import { TableComponent } from '../../shared-components/table/table.component';
   styleUrl: './open-jd.component.scss'
 })
 export class OpenJdComponent {
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
 dataSource: any[] = [
     {
       id: 'JD001',
@@ -103,9 +107,16 @@ dataSource: any[] = [
     { key: 'associatedJr', label: 'Associated JR', filterable: false }
   ];
 
-  hello=(rowData:any)=>{
-    console.log(rowData);
-  }
+   routes = (row: any): void => {
+    // Infer role from URL — either 'recruiter' or 'recruiter-lead'
+    const segments = this.route.snapshot.pathFromRoot
+      .flatMap(r => r.url.map(u => u.path));
+    
+    const rolePrefix = segments.includes('recruiter-lead') ? 'recruiter-lead' : 'recruiter';
+
+    // Navigate to the correct route
+    this.router.navigate([`/${rolePrefix}/job-description/`]);
+  };
 
   globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'associatedJr');
 }
