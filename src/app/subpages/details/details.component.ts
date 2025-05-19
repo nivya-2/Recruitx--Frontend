@@ -4,10 +4,11 @@ import { CardsComponent } from '../../ui/cards/cards.component';
 import { InputTextComponent } from "../../ui/input-text/input-text.component";
 import { ButtonComponent } from "../../ui/button/button.component";
 import { TextAreaComponent } from "../../ui/text-area/text-area.component";
+import { ModalComponent } from "../../ui/modal/modal.component";
 
 @Component({
   selector: 'app-details',
-  imports: [HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent],
+  imports: [HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
@@ -16,6 +17,7 @@ export class DetailsComponent {
   label: string = 'Edit';
 
   isEditMode: boolean = false;
+  visible: boolean = false;
 
   jobData = {
     mandatorySkills: 'Python, RESTful APIs, PostgreSQL, Git',
