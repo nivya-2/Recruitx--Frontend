@@ -17,7 +17,7 @@
     text-align: center !important;   
    }
 
-   :host.hover-enabled ::ng-deep .p-datatable-tbody > tr:hover {
+    :host.hover-enabled ::ng-deep .p-datatable-tbody > tr:hover {
   background-color: #e5deff !important;
   cursor: pointer;
 }
@@ -65,6 +65,7 @@
       padding: 0;
     }
   
+
     .p-datatable .p-datatable-tbody > tr > td {
       padding: 0.75rem 1rem;
       border-bottom: 1px solid #f0f0f0;
