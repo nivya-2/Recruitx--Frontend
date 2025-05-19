@@ -6,7 +6,7 @@ import { Dialog } from 'primeng/dialog';
   selector: 'app-modal',
   imports: [Dialog],
   templateUrl: './modal.component.html',
-  styleUrl: './modal.component.css'
+  styleUrl: './modal.component.scss'
 })
 export class ModalComponent {
    @Input() header: string = '';

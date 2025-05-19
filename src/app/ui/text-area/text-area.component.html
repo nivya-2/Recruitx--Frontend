@@ -1,0 +1,11 @@
+<div class="field">
+  <label><b>{{ label }}</b></label>
+  <textarea
+    pInputTextarea
+    rows="4"
+    class="w-full"
+    [(ngModel)]="value"
+    [disabled]="disabled"
+    (input)="onValueChange($event)">
+  </textarea>
+</div>
