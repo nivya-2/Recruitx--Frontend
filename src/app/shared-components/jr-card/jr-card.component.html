@@ -1,63 +1,80 @@
-<div class="nbody">
-    <div class="left">
-      <div class="sec">
-        <div class="heading">
-          Priority
-        </div>
-        <div class="content">
-          Urgent
-        </div>
-      </div>
-      <hr />
-      <div class="sec">
-        <div class="heading">
-          Raised By
-        </div>
-        <div class="content">
-          Abhinand K
-        </div>
-      </div>
-      <hr />
-      <div class="sec">
-        <div class="heading">
-          Assign Recruiter
-        </div>
-        <div class="content">
-          <input
-            type="text"
-            pInputText
-            class="assign"
-            placeholder="Search Recruiter"
-          />
-        </div>
+<div class="job-details-container">
+  <div class="job-sidebar">
+    <div class="sidebar-section">
+      <div class="section-title">Priority</div>
+      <div class="section-content">
+        {{ jobDetails.jobTag }}
       </div>
     </div>
-    <div class="right">
-      <div class="blhead">Data Scientist – Computer Vision</div>
-      <div class="bl2">DU6 | 6 Open Positions</div>
-      <div class="grhead">Raised on April 2, 2025 | Kochi</div>
-      <div class="cont"><b>Requisition ID:</b> REQ–2025–DSCV–006</div>
-      <div class="cont"><b> Job Title:</b> Data Scientist – Computer Vision</div>
-      <div class="cont">
-        <b> Delivery Unit (DU): </b>DU6 – Advanced AI & ML Solutions
+    <hr />
+    <div class="sidebar-section">
+      <div class="section-title">Raised By</div>
+      <div class="section-content">
+        <app-profile-box [fullName]="name" [role]="role"></app-profile-box>
       </div>
-      <div class="cont"><b> Location:</b> Kochi</div>
-      <div class="cont"><b> Open Positions:</b> 6</div>
-      <div class="cont"><b> Requisition Raised On:</b> April 2, 2025</div>
-      <div class="cont"><b> Hiring Manager:</b> Arjun Menon</div>
-      <div class="cont"><b> Recruiter Assigned:</b> Not Assigned</div>
-      <div class="cont">
-        <b>Qualifications:</b>
-        <ul>
-          <li>
-            Bachelor’s/Master’s degree in Computer Science, Data Science, or
-            related field.
-          </li>
-          <li>2+ years of hands-on experience in computer vision or a similar role.</li>
-          <li>Strong portfolio or GitHub with previous CV projects preferred.</li>
-        </ul>
+    </div>
+    <hr />
+    <div class="sidebar-section">
+      <div class="section-title">Assign Recruiter</div>
+      <div class="section-content">
+        <input
+          type="text"
+          pInputText
+          class="recruiter-search-input"
+          placeholder="Search Recruiter"
+        />
       </div>
-<app-button>Assign</app-button>
     </div>
   </div>
-  
+
+  <div class="job-main-content">
+    <div class="job-title">{{ jobDetails.jobTitle }}</div>
+    <div class="job-summary">{{ jobDetails.deliveryUnit }} | {{ jobDetails.openPositions }} Open Positions</div>
+    <div class="job-meta">Raised on {{ jobDetails.raisedOn }} | {{ jobDetails.location }}</div>
+
+    <div class="job-info">
+      <span class="job-info-label">Requisition ID:</span>
+      <span class="job-info-value">{{ jobDetails.requisitionId }}</span>
+    </div>
+    <div class="job-info">
+      <span class="job-info-label">Job Title:</span>
+      <span class="job-info-value">{{ jobDetails.jobTitle }}</span>
+    </div>
+    <div class="job-info">
+      <span class="job-info-label">Delivery Unit (DU):</span>
+      <span class="job-info-value">{{ jobDetails.deliveryUnit }} - {{ jobDetails.team }}</span>
+    </div>
+    <div class="job-info">
+      <span class="job-info-label">Location:</span>
+      <span class="job-info-value">{{ jobDetails.location }}</span>
+    </div>
+    <div class="job-info">
+      <span class="job-info-label">Open Positions:</span>
+      <span class="job-info-value">{{ jobDetails.openPositions }}</span>
+    </div>
+    <div class="job-info">
+      <span class="job-info-label">Requisition Raised On:</span>
+      <span class="job-info-value">{{ jobDetails.raisedOn }}</span>
+    </div>
+    <div class="job-info">
+      <span class="job-info-label">Hiring Manager:</span>
+      <span class="job-info-value">{{ jobDetails.hiringManager }}</span>
+    </div>
+    <div class="job-info">
+      <span class="job-info-label">Recruiter Assigned:</span>
+      <span class="job-info-value">{{ jobDetails.recruiter }}</span>
+    </div>
+    
+    <div class="job-info">
+      <span class="job-info-label">Qualifications:</span>
+      <ul class="qualifications-list">
+        <li *ngFor="let q of jobDetails.qualifications">{{ q }}</li>
+      </ul>
+    </div>
+    
+
+    <div class="assign-button-container">
+      <app-button>Assign</app-button>
+    </div>
+  </div>
+</div>

@@ -1,69 +1,87 @@
-.nbody {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .left {
-    background-color: #e2e5ec;
-    width: 270px;
-    padding: 3%;
-    gap: 10px;
-  }
-  
-  .sec {
-    padding: 10px;
-  }
-  
-  .right {
-    padding: 3%;
-  }
-  
-  .blhead {
-    color: #7B61FF;
-    font-size: 25px;
-    font-weight: 600;
-  }
-  .bl2 {
-    color: #7B61FF;
-    font-size: 25px;
-    font-weight: 500;
+.job-details-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: -20px;
+}
 
-  }
-  
-  .grhead {
-    color: gray;
-    font-size: 25px;
-    padding-bottom: 20px;
-    font-weight: 500;
+.job-sidebar {
+  background-color: #e2e5ec;
+  width: 300px;
+  padding: 3% 2%;
+  gap: 10px;
+  margin-bottom: -80px;
+}
 
-  }
-  
-  .cont {
-    padding-top: 10px;
-  }
-  
-  .submit {
-    align-items: center;
-    margin-left: 40%;
-    margin-top: 15px;
-    background-color: blue;
-    padding: 8px;
-    border-radius: 10px;
-    color: #e2e5ec;
-    border: none;
-  }
-  
- 
-  
-  .content {
+.sidebar-section {
+  padding: 10px;
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.section-content {
+  font-weight: 600;
+  padding-top: 10px;
+}
+
+.recruiter-search-input {
+  border-radius: 10px;
+  border: 1px solid navy;
+  padding: 5px;
+  width: 200px;
+}
+
+.job-main-content {
+  padding: 3%;
+}
+
+.job-title {
+  color: #7b61ff;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.job-summary {
+  color: #7b61ff;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.job-meta {
+  color: gray;
+  font-size: 25px;
+  padding-bottom: 20px;
+  font-weight: 500;
+}
+
+.job-info {
+  padding-top: 10px;
+
+  .job-info-label {
     font-weight: 600;
-    padding-top: 10px;
+    margin-right: 5px;
+    display: inline-block;
   }
-  
-  input {
-    border-radius: 10px;
-    border-color: navy;
-    padding: 5px;
-    width: 200px;
+
+  .job-info-value {
+    font-weight: 400;
   }
-  
+}
+
+
+.qualifications-list {
+  margin: 0;
+  padding-left: 20px;
+
+  li {
+    padding: 4px 0;
+  }
+}
+
+.assign-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
