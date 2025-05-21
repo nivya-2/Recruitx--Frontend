@@ -6,3 +6,7 @@
     font-family: 'Montserrat', sans-serif;
     font-size: inherit; 
   }
+
+  :host ::ng-deep .button {
+  font-size: inherit;
+}
