@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 
@@ -12,5 +12,7 @@ export class ButtonIconComponent {
   @Input() label: string = '';
   @Input() icon: string = '';
   @Input() color: string = '#7b5cfa'; // optional default
-
+  @Input() actionfn: () => void = () => { };
+  @Output() functionemit = new EventEmitter();
+  
 }

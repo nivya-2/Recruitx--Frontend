@@ -4,10 +4,12 @@ import { TableComponent } from '../../shared-components/table/table.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
+import { ModalComponent } from "../../ui/modal/modal.component";
+import { UploadComponent } from "../../shared-components/upload/upload.component";
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent],
+  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ModalComponent, UploadComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })
@@ -133,6 +135,15 @@ export class AdminDashboardComponent {
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions'); 
+    
+    visible:boolean = false;
+    
+    uploadModal(){
+        
+       console.log("hello");
+       this.visible=!this.visible;
+
+    }
 
 
 }

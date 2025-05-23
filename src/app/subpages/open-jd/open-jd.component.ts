@@ -118,5 +118,5 @@ dataSource: any[] = [
     this.router.navigate([`/${rolePrefix}/job-description/`]);
   };
 
-  globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'associatedJr');
+  globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions'); // Exclude 'actions' from global filter
 }
