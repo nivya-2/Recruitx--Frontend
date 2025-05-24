@@ -41,7 +41,15 @@ export class TableComponent {
       }
     };
   }
+hasMultipleActionsInColumn(): boolean {
+  // Find the actions column
+  const actionsColumn = this.columns.find((col: { key: string; }) => col.key === 'actions');
+  if (!actionsColumn) return false;
   
+  return this.dataSource.some(row => 
+    row[actionsColumn.key] && Array.isArray(row[actionsColumn.key]) && row[actionsColumn.key].length > 1
+  );
+}
   clear(table: Table): void {
     table.clear();
   }

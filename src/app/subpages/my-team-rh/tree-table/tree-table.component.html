@@ -1,0 +1,51 @@
+    <p-treeTable 
+        #tt
+        [value]="teamsDataSource" 
+        [columns]="columns"
+        [scrollable]="true" 
+        [tableStyle]="{'min-width':'50rem'}"
+                 [ngStyle]="{ 'font-size': fontSize }">
+
+     <ng-template pTemplate="caption">
+            <div class="filter-container">
+                <app-button-icon label="Upload" icon="upload"></app-button-icon>
+            </div>
+        </ng-template>
+        
+        <!-- Header Template -->
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{ col.label }}
+                </th>
+            </tr>
+        </ng-template>
+        
+        <!-- Body Template -->
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+            <tr [ttRow]="rowNode">
+                <td *ngFor="let col of columns">
+                    <!-- First column with toggler and member name -->
+                    <ng-container *ngIf="col.key === 'memberName'">
+                        <p-treetable-toggler [rowNode]="rowNode" *ngIf="!rowNode.leaf"></p-treetable-toggler>
+                        {{ rowData[col.key] }}
+                    </ng-container>
+                    
+                    <!-- Other columns -->
+                    <ng-container *ngIf="col.key !== 'memberName' && col.key !== 'actions'">
+                        {{ rowData[col.key] }}
+                    </ng-container>
+                    
+                    <!-- Actions column -->
+                    <ng-container *ngIf="col.key === 'actions'">
+                        <div class="action-buttons">
+                            <app-button *ngFor="let action of rowData[col.key]" 
+                                       color="#7B61FF">
+                                {{ action }}
+                            </app-button>
+                        </div>
+                    </ng-container>
+                </td>
+            </tr>
+        </ng-template>
+    </p-treeTable>
