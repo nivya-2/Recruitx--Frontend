@@ -31,7 +31,7 @@
     <div class="job-title">{{ jobDetails.jobTitle }}</div>
     <div class="job-summary">{{ jobDetails.deliveryUnit }} | {{ jobDetails.openPositions }} Open Positions</div>
     <div class="job-meta">Raised on {{ jobDetails.raisedOn }} | {{ jobDetails.location }}</div>
-
+<div class="scroll-part">
     <div class="job-info">
       <span class="job-info-label">Requisition ID:</span>
       <span class="job-info-value">{{ jobDetails.requisitionId }}</span>
@@ -71,6 +71,7 @@
         <li *ngFor="let q of jobDetails.qualifications">{{ q }}</li>
       </ul>
     </div>
+  </div>
     
 
     <div class="assign-button-container">
