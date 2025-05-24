@@ -22,23 +22,23 @@ import { BreadcrumbsComponent } from '../../ui/breadcrumbs/breadcrumbs.component
 export class CommonLayoutComponent {
     @Input() breadcrumbItems?: MenuItem[]; // ✅ Optional breadcrumbs input
   recruiterIcons: IconItem[] = [
-    { iconName: 'dashboard', size: '28px', iconColour: '#B8AAFF', label: 'Dashboard', route: '/recruiter/dashboard' },
     { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter/analytics' },
+    { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'Track JR', route: '/recruiter/dashboard' },
     { iconName: 'timeline', size: '28px', iconColour: '#B8AAFF', label: 'Track JD', route: '/recruiter/track-jd' },
-    { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Schedule', route: '/recruiter/schedule-interviews' }
+    { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Interview Details', route: '/recruiter/schedule-interviews' }
   ];
 
   recruiterLeadIcons: IconItem[] = [
-    { iconName: 'dashboard', size: '28px', iconColour: '#B8AAFF', label: 'Dashboard', route: '/recruiter-lead/dashboard' },
     { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-lead/analytics' },
+    { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'Track JR', route: '/recruiter-lead/dashboard' },
     { iconName: 'timeline', size: '28px', iconColour: '#B8AAFF', label: 'Track JD', route: '/recruiter-lead/track-jd' },
+    { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Interview Details', route: '/recruiter-lead/schedule-interviews' },
     { iconName: 'group', size: '28px', iconColour: '#B8AAFF', label: 'Teams', route: '/recruiter-lead/team' },
-    { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Schedule', route: '/recruiter-lead/schedule-interviews' }
   ];
 
   recruiterHeadIcons: IconItem[] = [
-    { iconName: 'dashboard', size: '28px', iconColour: '#B8AAFF', label: 'Dashboard', route: '/recruiter-head/dashboard' },
     { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-head/analytics' },
+    { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'Track JR', route: '/recruiter-head/dashboard' },
     { iconName: 'group', size: '28px', iconColour: '#B8AAFF', label: 'Teams', route: '/recruiter-head/team' },
   ];
 
