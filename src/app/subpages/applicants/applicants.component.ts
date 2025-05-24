@@ -27,7 +27,7 @@ ngOnInit(): void {
 
 dataSource: any[] = [
     {
-      candidateId: 'CAN-006',
+      candidateId: 'CAN006',
       name: 'Arjun Menon',
       email: 'arjunmenon@gmail.com',
       phone: '987654892',
@@ -39,7 +39,7 @@ dataSource: any[] = [
       actions: 'Details'
     },
     {
-      candidateId: 'CAN-006',
+      candidateId: 'CAN006',
       name: 'Arjun Menon',
       email: 'arjunmenon@gmail.com',
       phone: '987654892',
@@ -51,7 +51,7 @@ dataSource: any[] = [
       actions: 'Details'
     },
     {
-      candidateId: 'CAN-006',
+      candidateId: 'CAN006',
       name: 'Arjun Menon',
       email: 'arjunmenon@gmail.com',
       phone: '987654892',
@@ -63,7 +63,7 @@ dataSource: any[] = [
       actions: 'Details'
     },
     {
-      candidateId: 'CAN-006',
+      candidateId: 'CAN006',
       name: 'Arjun Menon',
       email: 'arjunmenon@gmail.com',
       phone: '987654892',
@@ -75,7 +75,7 @@ dataSource: any[] = [
       actions: 'Details'
     },
     {
-      candidateId: 'CAN-006',
+      candidateId: 'CAN006',
       name: 'Arjun Menon',
       email: 'arjunmenon@gmail.com',
       phone: '987654892',
@@ -87,7 +87,7 @@ dataSource: any[] = [
       actions: 'Details'
     },
     {
-      candidateId: 'CAN-006',
+      candidateId: 'CAN006',
       name: 'Arjun Menon',
       email: 'arjunmenon@gmail.com',
       phone: '987654892',
@@ -99,7 +99,7 @@ dataSource: any[] = [
       actions: 'Details'
     },
     {
-      candidateId: 'CAN-006',
+      candidateId: 'CAN006',
       name: 'Arjun Menon',
       email: 'arjunmenon@gmail.com',
       phone: '987654892',
@@ -111,7 +111,7 @@ dataSource: any[] = [
       actions: 'Details'
     },
     {
-      candidateId: 'CAN-006',
+      candidateId: 'CAN006',
       name: 'Arjun Menon',
       email: 'arjunmenon@gmail.com',
       phone: '987654892',
