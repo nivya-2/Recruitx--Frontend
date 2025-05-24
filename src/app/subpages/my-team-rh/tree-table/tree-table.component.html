@@ -3,26 +3,26 @@
         [value]="teamsDataSource" 
         [columns]="columns"
         [scrollable]="true" 
-        [tableStyle]="{'min-width':'50rem'}"
-                 [ngStyle]="{ 'font-size': fontSize }">
-
-     <ng-template pTemplate="caption">
-            <div class="filter-container">
-                <app-button-icon label="Upload" icon="upload"></app-button-icon>
-            </div>
-        </ng-template>
+        [ngStyle]="{ 'font-size': fontSize }">
         
+
         <!-- Header Template -->
-        <ng-template pTemplate="header">
+        <ng-template #header pTemplate="header">
             <tr>
                 <th *ngFor="let col of columns">
-                    {{ col.label }}
+                    <div class="header-content">
+                     <div class="header-text" [ngClass]="{ 'center-actions-header': col.key === 'actions' && hasMultipleActionsInColumn()}">
+                       
+                        {{ col.label }}
+
+                    </div>
+                    </div>
                 </th>
             </tr>
         </ng-template>
         
         <!-- Body Template -->
-        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <ng-template #body pTemplate="body" let-rowNode let-rowData="rowData">
             <tr [ttRow]="rowNode">
                 <td *ngFor="let col of columns">
                     <!-- First column with toggler and member name -->
@@ -40,6 +40,7 @@
                     <ng-container *ngIf="col.key === 'actions'">
                         <div class="action-buttons">
                             <app-button *ngFor="let action of rowData[col.key]" 
+                            (click)="handleTreeTableAction(action, rowData)"
                                        color="#7B61FF">
                                 {{ action }}
                             </app-button>

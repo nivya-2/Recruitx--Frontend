@@ -16,7 +16,21 @@ import { InputIcon } from 'primeng/inputicon';
 })
 export class TreeTableComponent {
 
+handleTreeTableAction(action: string, row: any): void {
+  const methodName = 'on' + this.capitalize(action);
+  const method = (this as any)[methodName];
 
+  if (typeof method === 'function') {
+    method.call(this, row);
+  } else {
+    console.warn(`No method defined for action: ${methodName}`);
+  }
+}
+
+capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+ 
 
   @Input() teamsDataSource: TreeNode[] = [];
   @Input() columns: any[] = [];
@@ -31,7 +45,32 @@ export class TreeTableComponent {
     return value instanceof Date;
   }
 
- 
+hasMultipleActionsInColumn(): boolean {
+  // Find the actions column
+  const actionsColumn = this.columns.find(col => col.key === 'actions');
+  if (!actionsColumn) return false;
+
+  // Check if any node (including children) has multiple actions
+  return this.checkNodesForMultipleActions(this.teamsDataSource, actionsColumn.key);
+}
+
+private checkNodesForMultipleActions(nodes: TreeNode[], actionsKey: string): boolean {
+  for (const node of nodes) {
+    // Check current node
+    if (node.data && 
+        node.data[actionsKey] && 
+        Array.isArray(node.data[actionsKey]) && 
+        node.data[actionsKey].length > 1) {
+      return true;
+    }
+
+    // Recursively check children
+    if (node.children && this.checkNodesForMultipleActions(node.children, actionsKey)) {
+      return true;
+    }
+  }
+  return false;
+}
 
   handleRemove(rowData: any) {
     console.log('Remove clicked:', rowData);

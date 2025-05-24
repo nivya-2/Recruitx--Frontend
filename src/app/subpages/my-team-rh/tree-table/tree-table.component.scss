@@ -14,9 +14,7 @@
     justify-content: flex-end;
     gap: 1vw;
   }
-   .text-center{
-    text-align: center !important;   
-   }
+
 
 :host ::ng-deep .p-treetable-toggler {
     color: #7B61FF;
@@ -43,11 +41,7 @@
       white-space: nowrap; /* Keep single words on one line */
       font-weight: 600;
     }
-  
-    /* Only multi-word headers break to new line */
-    .header-text.multi-word {
-      white-space: normal !important;
-    }
+
 
      .header-text.center-actions-header {
     text-align: center !important;
@@ -61,19 +55,11 @@
       margin-left: 2px;
     }
   
-    /* Styling for PrimeNG sort icons and filters */
-    .p-sorticon, 
-    .p-columnfilter {
-      display: inline-flex;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-    }
+    
       
  .action-buttons {
    display: flex;
   gap: 8px;
-  flex-wrap: wrap;
   justify-content: flex-start;
 
   &.center-label {
