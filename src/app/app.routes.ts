@@ -278,8 +278,8 @@ export const routes: Routes = [
       {
         path: 'my-team',
         loadComponent: () =>
-          import('./subpages/my-team/my-team.component').then(
-            (m) => m.MyTeamComponent
+          import('./subpages/my-team-rh/my-team-rh.component').then(
+            (m) => m.MyTeamRhComponent
           ),
         data: { breadcrumb: 'My Team' },
       },
