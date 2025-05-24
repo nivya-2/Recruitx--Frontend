@@ -1,4 +1,12 @@
-<app-cards width="95%">
+
+
+<app-assign #assignBox [teamList]="teamList"></app-assign>
+ <div (click)="onHostClick($event)">
+    <app-button (functionemit)="openAssignPopover()" class="right-align">
+      Add member
+    </app-button>
+  </div>
+
   <app-table
     [dataSource]="teamsDataSource"
     [columns]="teamsColumns"
@@ -8,4 +16,3 @@
     [showFilter]="true"
     (remove)="handleRemove($event)"
   ></app-table>
-</app-cards>

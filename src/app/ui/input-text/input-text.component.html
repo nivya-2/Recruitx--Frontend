@@ -1,9 +1,10 @@
 <div class="field">
-    <label><b>{{ label }}</b></label>
-    <input 
-        pInputText 
-        class="input" 
-        [disabled]="disabled" 
-        [(ngModel)]="value" 
-        (input)="onValueChange($event)">
+  <label [ngStyle]="{ 'font-weight': fontWeight }">{{ label }}</label>
+  <input
+    pInputText
+    class="input"
+    [placeholder]="placeHolder"
+    [disabled]="disabled"
+    [(ngModel)]="value"
+    (input)="onValueChange($event)">
 </div>
