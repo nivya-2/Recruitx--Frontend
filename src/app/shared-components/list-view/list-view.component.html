@@ -9,11 +9,11 @@
         <app-button (functionemit)="assignClick()">Assign</app-button>
         <app-modal
         [(visible)]="visible"
+        [showHeader]="false"
         header=""
         [maximizable]="false"
-        [headerBgColor]="'#7B61FF'"
-        
-        [style]="{ width: '60rem', height: '50rem' }"
+        [headerBgColor]="'#ffff'"
+        [style]="{ width: '60rem', height: '40rem' }"
        >
       <app-jr-card></app-jr-card>
 

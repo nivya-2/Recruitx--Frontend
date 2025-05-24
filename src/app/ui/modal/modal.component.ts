@@ -17,6 +17,7 @@ export class ModalComponent {
    @Input() style: { [key: string]: any } = {};
    @Input() visible: boolean = false;
    @Output() visibleChange = new EventEmitter<boolean>();
+   @Input() showHeader: boolean = true;
  
    onHide() {
      this.visibleChange.emit(false);

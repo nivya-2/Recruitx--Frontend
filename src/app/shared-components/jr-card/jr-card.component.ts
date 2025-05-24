@@ -14,7 +14,7 @@ import { ButtonIconComponent } from "../../ui/button-icon/button-icon.component"
 
 @Component({
   selector: 'app-jr-card',
-  imports: [CardModule, AvatarModule, DropdownModule, ButtonModule, NgFor, NgClass, ButtonComponent, ProfileBoxComponent, ButtonIconComponent],
+  imports: [CardModule, AvatarModule, DropdownModule, ButtonModule, NgFor, NgClass, ButtonComponent, ProfileBoxComponent, ButtonIconComponent, IconComponent],
   templateUrl: './jr-card.component.html',
   styleUrl: './jr-card.component.scss'
 })
