@@ -3,6 +3,7 @@ import { CardsComponent } from "../../ui/cards/cards.component";
 import { TableComponent } from '../../shared-components/table/table.component';
 import { NgIf } from '@angular/common';
 import { ButtonComponent } from '../../ui/button/button.component';
+import { AssignComponent } from '../../ui/assign/assign.component';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { ViewassignedjrCardComponent } from "../../shared-components/viewassignedjr-card/viewassignedjr-card.component";
 
@@ -10,7 +11,7 @@ import { ViewassignedjrCardComponent } from "../../shared-components/viewassigne
 
 @Component({
   selector: 'app-my-team',
-  imports: [CardsComponent, TableComponent, ButtonComponent, NgIf, ModalComponent, ViewassignedjrCardComponent],
+  imports: [CardsComponent, TableComponent, ButtonComponent, NgIf,AssignComponent, ModalComponent, ViewassignedjrCardComponent],
   templateUrl: './my-team.component.html',
   styleUrl: './my-team.component.scss'
 })
@@ -63,5 +64,47 @@ handleRemove = (row: any) => {
   ];
 
   teamsGlobalFilterFields = this.teamsColumns.map(c => c.key).filter(key => key !== 'actions');
+teamList = [
+  { fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
+  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' },
+  { fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
+  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' },{ fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
+  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' }
+];
+
+selectedMember: any;
+
+onRecruiterSelected(member: any) {
+  this.selectedMember = member;
+  console.log('Selected:', member);
+}
+lastClickEvent: MouseEvent | null = null;
+
+@ViewChild('assignBox') assignBox!: AssignComponent;
+
+ngAfterViewInit() {
+  // Optional: safeguard to ensure the ViewChild is ready
+}
+
+onHostClick(event: MouseEvent) {
+  this.lastClickEvent = event;
+}
+
+openAssignPopover() {
+  if (this.lastClickEvent) {
+    this.assignBox.open(this.lastClickEvent);
+  } else {
+    console.warn('No click event captured to open popover');
+  }
+}
 
 }
