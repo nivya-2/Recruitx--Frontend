@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CardsComponent } from "../../ui/cards/cards.component";
-import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { TableComponent } from '../../shared-components/table/table.component';
+import { AssignComponent } from "../../ui/assign/assign.component";
+import { NgIf } from '@angular/common';
+import { ButtonComponent } from '../../ui/button/button.component';
 
 
 
 @Component({
   selector: 'app-my-team',
-  imports: [CardsComponent,TableComponent,HeaderTextComponent],
+  imports: [CardsComponent, TableComponent, AssignComponent , ButtonComponent, NgIf],
   templateUrl: './my-team.component.html',
   styleUrl: './my-team.component.scss'
 })
@@ -55,6 +57,37 @@ export class MyTeamComponent {
   teamsGlobalFilterFields = this.teamsColumns.map(c => c.key).filter(key => key !== 'actions');
 
 
+ teamList = [
+  { fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
+  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' }
+];
 
+selectedMember: any;
 
+onRecruiterSelected(member: any) {
+  this.selectedMember = member;
+  console.log('Selected:', member);
+}
+lastClickEvent: MouseEvent | null = null;
+
+@ViewChild('assignBox') assignBox!: AssignComponent;
+
+ngAfterViewInit() {
+  // Optional: safeguard to ensure the ViewChild is ready
+}
+
+onHostClick(event: MouseEvent) {
+  this.lastClickEvent = event;
+}
+
+openAssignPopover() {
+  if (this.lastClickEvent) {
+    this.assignBox.open(this.lastClickEvent);
+  } else {
+    console.warn('No click event captured to open popover');
+  }
+}
 }
