@@ -6,13 +6,15 @@ import { ButtonModule } from 'primeng/button';
 import { NgClass, NgFor } from '@angular/common';
 import { ButtonComponent } from "../../ui/button/button.component";
 import { ProfileBoxComponent } from "../../ui/profile-box/profile-box.component";
+import { IconComponent } from '../../ui/icon/icon.component';
+import { ButtonIconComponent } from "../../ui/button-icon/button-icon.component";
 
 
 
 
 @Component({
   selector: 'app-jr-card',
-  imports: [CardModule, AvatarModule,DropdownModule, ButtonModule,NgFor, NgClass, ButtonComponent, ProfileBoxComponent],
+  imports: [CardModule, AvatarModule, DropdownModule, ButtonModule, NgFor, NgClass, ButtonComponent, ProfileBoxComponent, ButtonIconComponent],
   templateUrl: './jr-card.component.html',
   styleUrl: './jr-card.component.scss'
 })
