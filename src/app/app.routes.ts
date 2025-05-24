@@ -32,12 +32,12 @@ export const routes: Routes = [
     data: { breadcrumb: 'Email' },
   },
   {
-    path: 'recruiter/dashboard',
+    path: 'recruiter/track-jr',
     loadComponent: () =>
-      import('./pages/recruiter-dashboard/recruiter-dashboard.component').then(
+      import('./pages/recruiter-track-jr/recruiter-dashboard.component').then(
         (m) => m.RecruiterDashboardComponent
       ),
-    data: { breadcrumb: 'Dashboard' },
+    data: { breadcrumb: 'Track JR' },
   },
   {
     path: 'recruiter/analytics',
@@ -95,12 +95,12 @@ export const routes: Routes = [
     data: { breadcrumb: 'Schedule Interviews' },
   },
   {
-    path: 'recruiter-lead/dashboard',
+    path: 'recruiter-lead/track-jr',
     loadComponent: () =>
       import(
         './pages/recruiter-lead-dashboard/recruiter-lead-dashboard.component'
       ).then((m) => m.RecruiterLeadDashboardComponent),
-    data: { breadcrumb: 'Dashboard' },
+    data: { breadcrumb: 'Track JR' },
   },
   {
     path: 'recruiter-lead/analytics',
@@ -187,13 +187,28 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'recruiter-head/dashboard',
-    loadComponent: () =>
-      import(
-        './pages/recruiter-head-dashboard/recruiter-head-dashboard.component'
-      ).then((m) => m.RecruiterHeadDashboardComponent),
-    data: { breadcrumb: 'Dashboard' },
-  },
+  path: 'recruiter-head/jrs/',
+  loadComponent: () =>
+    import('./pages/recruiter-head-track-jr/recruiter-head-track-jr.component')
+      .then(m => m.RecruiterHeadTrackJrComponent),
+  data: { breadcrumb: 'JRs' },
+  children: [
+    {
+      path: 'assign-jr',
+      loadComponent: () =>
+        import('./subpages/assign-jr/assign-jr.component')
+          .then(m => m.AssignJrComponent),
+      data: { breadcrumb: 'Assign JR' }
+    },
+    {
+      path: 'track-jr',
+      loadComponent: () =>
+        import('./subpages/track-jr/track-jr.component')
+          .then(m => m.TrackJrComponent),
+      data: { breadcrumb: 'Track JRs' }
+    }
+  ]
+},
   {
     path: 'recruiter-head/analytics',
     loadComponent: () =>

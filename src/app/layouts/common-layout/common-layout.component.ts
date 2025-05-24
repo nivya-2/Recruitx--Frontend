@@ -38,7 +38,7 @@ export class CommonLayoutComponent {
 
   recruiterHeadIcons: IconItem[] = [
     { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-head/analytics' },
-    { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'Track JR', route: '/recruiter-head/dashboard' },
+    { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'Track JR', route: '/recruiter-head/jrs' },
     { iconName: 'group', size: '28px', iconColour: '#B8AAFF', label: 'Teams', route: '/recruiter-head/team' },
   ];
 

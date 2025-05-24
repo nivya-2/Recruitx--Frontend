@@ -4,6 +4,15 @@ border-bottom: 2px solid transparent;
 .p-tab-active{
 border-bottom: 2px solid #7B61FF !important;
 }
-::ng-deep .p-tablist-tab-list{
-  margin-bottom: 2vh !important;
-}
+::ng-deep .p-tab{
+    padding-top: 0.5rem;
+    padding-right: 0.125rem;
+    margin-right: 1.2rem;
+    padding-bottom: 0.3rem;
+    padding-left: 0.125rem;}
+.p-tab{
+padding-top: 0.5rem;
+padding-right: 0.125rem;
+margin-right: 1.2rem;
+padding-bottom: 0.3rem;
+padding-left: 0.125rem;}

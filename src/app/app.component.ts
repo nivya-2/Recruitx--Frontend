@@ -9,10 +9,10 @@ import { IconComponent } from './ui/icon/icon.component';
 import { IconGroupComponent } from './layouts/icon-group/icon-group.component';
 import { SidenavbarComponent } from './layouts/sidenavbar/sidenavbar.component';
 import { CommonLayoutComponent } from './layouts/common-layout/common-layout.component';
-import { RecruiterHeadDashboardComponent } from './pages/recruiter-head-dashboard/recruiter-head-dashboard.component';
+import { RecruiterHeadTrackJrComponent } from './pages/recruiter-head-track-jr/recruiter-head-track-jr.component';
 
 import { RecruiterLeadDashboardComponent } from "./pages/recruiter-lead-dashboard/recruiter-lead-dashboard.component";
-import { RecruiterDashboardComponent } from './pages/recruiter-dashboard/recruiter-dashboard.component';
+import { RecruiterDashboardComponent } from './pages/recruiter-track-jr/recruiter-dashboard.component';
 import { BreadcrumbsComponent } from './ui/breadcrumbs/breadcrumbs.component';
 import { ProgressbarComponent } from "./ui/progressbar/progressbar.component";
 import { TrackJdComponent } from "./pages/track-jd/track-jd.component";
@@ -25,7 +25,7 @@ import { ViewassignedjrCardComponent } from "./shared-components/viewassignedjr-
 
 @Component({
   selector: 'app-root',
-  imports: [RecruiterHeadDashboardComponent, RecruiterDashboardComponent, RouterOutlet, SidenavbarComponent, IconGroupComponent, IconComponent,
+  imports: [RecruiterHeadTrackJrComponent, RecruiterDashboardComponent, RouterOutlet, SidenavbarComponent, IconGroupComponent, IconComponent,
     HeaderComponent, ButtonComponent, CardsComponent, SharedComponentsModule, TableComponent, CommonLayoutComponent, RecruiterLeadDashboardComponent, BreadcrumbsComponent, ProgressbarComponent, TrackJdComponent, TeamComponent, MyTeamComponent, ViewassignedjrCardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
