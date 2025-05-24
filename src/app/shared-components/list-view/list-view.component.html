@@ -6,7 +6,19 @@
       </div>
       <div class="job-positions"><span style="color: black;"> |&nbsp;&nbsp; </span>{{ job.positions }} Open Positions</div>
       <div class="assign-button-wrapper">
-        <app-button>Assign</app-button>
-      </div>
+        <app-button (functionemit)="assignClick()">Assign</app-button>
+              </div>
     </div>
   </div>
+
+  <app-modal
+        [(visible)]="visible"
+        [showHeader]="false"
+        header=""
+        [maximizable]="false"
+        [headerBgColor]="'#ffffff'"
+        [style]="{ width: '60rem', height: '40rem' }"
+       >
+      <app-jr-card></app-jr-card>
+
+       </app-modal>

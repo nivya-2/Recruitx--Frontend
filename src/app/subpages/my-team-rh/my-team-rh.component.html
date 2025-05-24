@@ -1,23 +1,21 @@
 
-
-<app-assign #assignBox [teamList]="teamList"></app-assign>
+    <app-assign #assignBox [teamList]="teamList"></app-assign>
  <div (click)="onHostClick($event)">
     <app-button (functionemit)="openAssignPopover()" class="right-align">
       Add member
     </app-button>
   </div>
+  
+<app-cards width="95%">
 
-  <app-table
-    [dataSource]="teamsDataSource"
-    [columns]="teamsColumns"
-    [globalFilterFields]="teamsGlobalFilterFields"
-    [hover]="false"
-    [rows]="8"
-    [showFilter]="true"
-    [actionMethods]="actionMethods"
-  ></app-table>
+    <app-tree-table
+        [teamsDataSource]="teamsDataSource"
+        [columns]="teamsColumns"
+        [globalFilterFields]="teamsGlobalFilterFields"
+        (openModal)="visible = $event">
+    </app-tree-table>
 
-  <app-modal
+<app-modal
  [(visible)]="visible"
  header="Assigned Job Requisitions"
  [maximizable]="true"
@@ -25,3 +23,7 @@
 >
 <app-viewassignedjr-card></app-viewassignedjr-card>
 </app-modal>
+</app-cards>
+
+
+

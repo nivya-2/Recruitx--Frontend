@@ -11,17 +11,59 @@
 
   .filter-container {
     display: flex;
+    justify-content: flex-end;
     gap: 1vw;
   }
-   .text-center{
-    text-align: center !important;   
-   }
 
-   :host.hover-enabled ::ng-deep .p-datatable-tbody > tr:hover {
-  background-color: #e5deff !important;
-  cursor: pointer;
+
+:host ::ng-deep .p-treetable-toggler {
+    color: #7B61FF !important;
+    margin-right: 0.5rem;
+    &:hover {
+      background-color: #D3CAFF !important; /* Darker shade on hover */
+    }
 }
 
+.search-container {
+  max-width: 300px;
+  padding: none !important; 
+}
+
+.search-iconfield {
+  background: #F4F4F5;
+  border-radius: 8px;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #d1d5db;
+  transition: border-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center !important;
+  gap: 0.5rem;
+
+  input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.95rem;
+    width: 180px;
+    padding: 0.5rem 0;
+    color: #111827;
+  }
+
+  &:hover {
+    border-color: #7B61FF;
+  }
+
+  &:focus-within {
+    border-color: #7B61FF;
+    box-shadow: 0 0 0 2px rgba(123, 97, 255, 0.1);
+  }
+}
+
+.search-input-icon {
+  color: #9ca3af; // Tailwind gray-400
+  font-size: 1rem;
+}
 
 
   ::ng-deep {
@@ -34,6 +76,10 @@
       gap: 3px;
       padding: 0;
     }
+
+    .center-actions-header {
+    text-align: center !important;
+  }
   
     /* Base styling for header text */
     .header-text {
@@ -43,11 +89,7 @@
       white-space: nowrap; /* Keep single words on one line */
       font-weight: 600;
     }
-  
-    /* Only multi-word headers break to new line */
-    .header-text.multi-word {
-      white-space: normal !important;
-    }
+
 
      .header-text.center-actions-header {
     text-align: center !important;
@@ -61,9 +103,7 @@
       margin-left: 2px;
     }
   
-    /* Styling for PrimeNG sort icons and filters */
-    .p-sorticon, 
-    .p-columnfilter {
+p-treetable-sort-icon  {
       display: inline-flex;
       align-items: center;
       margin: 0;
@@ -73,41 +113,40 @@
  .action-buttons {
    display: flex;
   gap: 8px;
-  // flex-wrap: wrap;
   justify-content: flex-start;
 
   &.center-label {
     justify-content: center !important;
   }
 }
-    .p-datatable .p-datatable-tbody > tr > td {
+    .p-datatable .p-treetable-tbody > tr > td {
       padding: 0.75rem 1rem;
       border-bottom: 1px solid #f0f0f0;
       vertical-align: middle;
     }
 
   
-    .p-datatable .p-datatable-tbody > tr:last-child > td {
+    .p-treetable .p-treetable-tbody > tr:last-child > td {
       border-bottom: none;
     }
   
     /* Fixed column widths */
-    .p-datatable-scrollable .p-datatable-wrapper {
+    .p-treetable-scrollable .p-treetable-wrapper {
       overflow-x: auto;
     }
     
     /* Ensure consistent row height */
-    .p-datatable .p-datatable-tbody > tr {
+    .p-treetable .p-treetable-tbody > tr {
       height: 60px; /* Adjust as needed */
     }
     
     /* Align button in action column */
-    .p-datatable .p-datatable-tbody > tr > td:last-child {
+    .p-treetable .p-treetable-tbody > tr > td:last-child {
       text-align: center;
     }
     
     /* Add some spacing between rows */
-    .p-datatable .p-datatable-tbody > tr:not(:last-child) {
+    .p-treetable .p-treetable-tbody > tr:not(:last-child) {
       margin-bottom: 4px;
     }
     
