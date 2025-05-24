@@ -1,15 +1,38 @@
     <p-treeTable 
+        #tt
         [value]="teamsDataSource" 
         [columns]="columns"
         [scrollable]="true" 
-        [ngStyle]="{ 'font-size': fontSize }">
+        [ngStyle]="{ 'font-size': fontSize }"
+        [sortMode]="'multiple'"
+        [filterMode]="'lenient'">
 
-        
+        <ng-template pTemplate="caption">
+         <div class="search-container">
+           <p-iconfield class="search-iconfield">
+                <p-inputicon class="pi pi-search" styleClass="search-input-icon" />
+                <input type="text" pInputText placeholder="Search all fields" (input)="tt.filterGlobal($any($event.target).value, 'contains')" />
+          </p-iconfield>
+         </div>
+
+  </ng-template>
         <!-- Header Template -->
         <ng-template pTemplate="header">
             <tr>
-                <th *ngFor="let col of columns" [ngClass]="{ 'center-actions-header': col.key === 'actions' }">
+                <th *ngFor="let col of columns"
+                    [ngClass]="{ 'center-actions-header': col.key === 'actions' }"
+                    [ttSortableColumn]="col.key !== 'actions' ? col.key : null">
+                  <div class="header-content">
+                    <div class="header-text" >
                     {{ col.label }}
+                    </div>
+                    <div class="header-icons">
+                    <ng-container *ngIf="col.key !== 'actions'">
+                       <p-treetable-sort-icon [field]="col.key">
+                       </p-treetable-sort-icon>
+                    </ng-container>
+                    </div>
+                 </div>
                 </th>
             </tr>
         </ng-template>

@@ -24,6 +24,47 @@
     }
 }
 
+.search-container {
+  max-width: 300px;
+  padding: none !important; 
+}
+
+.search-iconfield {
+  background: #F4F4F5;
+  border-radius: 8px;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #d1d5db;
+  transition: border-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center !important;
+  gap: 0.5rem;
+
+  input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.95rem;
+    width: 180px;
+    padding: 0.5rem 0;
+    color: #111827;
+  }
+
+  &:hover {
+    border-color: #7B61FF;
+  }
+
+  &:focus-within {
+    border-color: #7B61FF;
+    box-shadow: 0 0 0 2px rgba(123, 97, 255, 0.1);
+  }
+}
+
+.search-input-icon {
+  color: #9ca3af; // Tailwind gray-400
+  font-size: 1rem;
+}
+
 
   ::ng-deep {
     /* Header Content Styling */
@@ -62,7 +103,12 @@
       margin-left: 2px;
     }
   
-    
+p-treetable-sort-icon  {
+      display: inline-flex;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
       
  .action-buttons {
    display: flex;

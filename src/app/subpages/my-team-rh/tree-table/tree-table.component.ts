@@ -15,7 +15,13 @@ import { InputIcon } from 'primeng/inputicon';
   styleUrl: './tree-table.component.scss'
 })
 export class TreeTableComponent {
+  globalFilter: string = '';
 
+  getGlobalFields(): string[] {
+    return this.columns
+      .map(col => col.key)
+      .filter(key => key !== 'actions');
+  }
 
 handleTreeTableAction(action: string, row: any): void {
   const methodName = 'on' + this.capitalize(action);

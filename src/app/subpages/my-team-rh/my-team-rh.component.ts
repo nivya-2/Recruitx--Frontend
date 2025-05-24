@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CardsComponent } from "../../ui/cards/cards.component";
 import { TreeTableComponent } from "./tree-table/tree-table.component";
 import { TreeNode } from 'primeng/api';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { ViewassignedjrCardComponent } from "../../shared-components/viewassignedjr-card/viewassignedjr-card.component";
+import { AssignComponent } from "../../ui/assign/assign.component";
+import { ButtonComponent } from "../../ui/button/button.component";
 
 @Component({
   selector: 'app-my-team-rh',
-  imports: [CardsComponent, TreeTableComponent, ModalComponent, ViewassignedjrCardComponent],
+  imports: [CardsComponent, TreeTableComponent, ModalComponent, ViewassignedjrCardComponent, AssignComponent, ButtonComponent],
   templateUrl: './my-team-rh.component.html',
   styleUrl: './my-team-rh.component.scss'
 })
@@ -73,6 +75,51 @@ buildTreeData(data: any[]): TreeNode[] {
   });
 }
 
+teamList = [
+  { fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
+  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' },
+  { fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
+  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' },{ fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
+  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' }
+];
 
+selectedMember: any;
+
+onRecruiterSelected(member: any) {
+  this.selectedMember = member;
+  console.log('Selected:', member);
+}
+lastClickEvent: MouseEvent | null = null;
+
+@ViewChild('assignBox') assignBox!: AssignComponent;
+
+ngAfterViewInit() {
+  // Optional: safeguard to ensure the ViewChild is ready
+}
+
+onHostClick(event: MouseEvent) {
+  this.lastClickEvent = event;
+}
+
+openAssignPopover() {
+  if (this.lastClickEvent) {
+    this.assignBox.open(this.lastClickEvent);
+  } else {
+    console.warn('No click event captured to open popover');
+  }
+}
 
 }
+
+
+
+

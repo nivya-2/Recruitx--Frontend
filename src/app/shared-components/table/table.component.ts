@@ -83,16 +83,5 @@ hasMultipleActionsInColumn(): boolean {
     }
   }
 
-  // private getMethodKey(action: string): string {
-  //   // Convert "Send Email" to "sendEmail", "Edit" to "edit", etc.
-  //   return action.split(' ')
-  //     .map((word, index) => 
-  //       index === 0 
-  //         ? word.toLowerCase() 
-  //         : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-  //     )
-  //     .join('');
-  // }
-
 
 }
