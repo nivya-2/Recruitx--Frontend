@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RecruiterHeadTrackJrComponent } from './recruiter-head-track-jr.component';
+import { RecruiterHeadTrackJrComponent } from './track-jr.component';
 
 
 describe('RecruiterHeadDashboardComponent', () => {

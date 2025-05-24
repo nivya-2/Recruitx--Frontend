@@ -6,11 +6,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-open-jd',
-  imports: [HeaderTextComponent,TableComponent],
-  templateUrl: './open-jd.component.html',
-  styleUrl: './open-jd.component.scss'
+  imports: [TableComponent],
+  templateUrl: './track-jd.component.html',
+  styleUrl: './track-jd.component.scss'
 })
-export class OpenJdComponent {
+export class TrackJdComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
 dataSource: any[] = [

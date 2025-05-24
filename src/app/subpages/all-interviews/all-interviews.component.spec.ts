@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrackJdComponent } from './track-jd.component';
+import { AllInterviewsComponent } from './all-interviews.component';
 
-describe('TrackJdComponent', () => {
-  let component: TrackJdComponent;
-  let fixture: ComponentFixture<TrackJdComponent>;
+describe('AllInterviewsComponent', () => {
+  let component: AllInterviewsComponent;
+  let fixture: ComponentFixture<AllInterviewsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrackJdComponent]
+      imports: [AllInterviewsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TrackJdComponent);
+    fixture = TestBed.createComponent(AllInterviewsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

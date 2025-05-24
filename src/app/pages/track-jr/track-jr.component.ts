@@ -14,9 +14,9 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-recruiter-head-dashboard',
-  imports: [RouterOutlet,CardsComponent,TabsComponent,StatCardComponent,ListViewComponent,ChartModule,CommonLayoutComponent,CardModule,NgFor,HeaderTextComponent,KnobModule],
-  templateUrl: './recruiter-head-track-jr.component.html',
-  styleUrl: './recruiter-head-track-jr.component.scss'
+  imports: [RouterOutlet,CardsComponent,TabsComponent,ChartModule,CommonLayoutComponent,CardModule,KnobModule],
+  templateUrl: './track-jr.component.html',
+  styleUrl: './track-jr.component.scss'
 })
 export class RecruiterHeadTrackJrComponent {
   

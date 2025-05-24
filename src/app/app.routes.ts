@@ -8,12 +8,12 @@ export const routes: Routes = [
     data: { breadcrumb: 'Login' },
   },
   {
-    path: 'admin/dashboard',
+    path: 'admin/add-jr',
     loadComponent: () =>
-      import('./pages/admin-dashboard/admin-dashboard.component').then(
-        (m) => m.AdminDashboardComponent
+      import('./pages/admin-jr-upload/admin-jr-upload.component').then(
+        (m) => m.AdminJrUploadComponent
       ),
-    data: { breadcrumb: 'Dashboard' },
+    data: { breadcrumb: 'JRs' },
   },
   {
     path: 'admin/users',
@@ -48,12 +48,12 @@ export const routes: Routes = [
     data: { breadcrumb: 'Analytics' },
   },
   {
-    path: 'recruiter/track-jd',
+    path: 'recruiter/my-jd',
     loadComponent: () =>
-      import('./pages/track-jd/track-jd.component').then(
-        (m) => m.TrackJdComponent
+      import('./pages/my-jd/my-jd.component').then(
+        (m) => m.MyJdComponent
       ),
-    data: { breadcrumb: 'Track JD' },
+    data: { breadcrumb: 'My JDs' },
     children: [
       {
         path: '',
@@ -69,12 +69,12 @@ export const routes: Routes = [
         data: { breadcrumb: 'Pending JD Generation' },
       },
       {
-        path: 'openjd',
+        path: 'trackjd',
         loadComponent: () =>
-          import('./subpages/open-jd/open-jd.component').then(
-            (m) => m.OpenJdComponent
+          import('./subpages/track-jd/track-jd.component').then(
+            (m) => m.TrackJdComponent
           ),
-        data: { breadcrumb: 'Open JD' },
+        data: { breadcrumb: 'Track JD' },
       },
       {
         path: 'closedjd',
@@ -86,21 +86,70 @@ export const routes: Routes = [
       },
     ],
   },
+ {
+  path: 'recruiter/interviews',
+  loadComponent: () =>
+    import('./pages/interviews/interviews.component')
+      .then(m => m.InterviewsComponent),
+  data: { breadcrumb: 'Interviews' },
+  children: [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'schedule'
+    },
+    {
+      path: 'schedule',
+      loadComponent: () =>
+        import('./subpages/schedule/schedule.component')
+          .then(m => m.ScheduleComponent),
+      data: { breadcrumb: 'Schedule' }
+    },
+    {
+      path: 'shortlist',
+      loadComponent: () =>
+        import('./subpages/shortlist/shortlist.component')
+          .then(m => m.ShortlistComponent),
+      data: { breadcrumb: 'Shortlist' }
+    },
+    {
+      path: 'all-interviews',
+      loadComponent: () =>
+        import('./subpages/all-interviews/all-interviews.component')
+          .then(m => m.AllInterviewsComponent),
+      data: { breadcrumb: 'All Interviews' }
+    }
+  ]
+},
+
   {
-    path: 'recruiter/schedule-interviews',
-    loadComponent: () =>
-      import('./pages/schedule-interviews/schedule-interviews.component').then(
-        (m) => m.ScheduleInterviewsComponent
-      ),
-    data: { breadcrumb: 'Schedule Interviews' },
-  },
-  {
-    path: 'recruiter-lead/track-jr',
+    path: 'recruiter-lead/jrs',
     loadComponent: () =>
       import(
-        './pages/recruiter-lead-dashboard/recruiter-lead-dashboard.component'
-      ).then((m) => m.RecruiterLeadDashboardComponent),
-    data: { breadcrumb: 'Track JR' },
+        './pages/track-jr/track-jr.component'
+      ).then((m) => m.RecruiterHeadTrackJrComponent),
+    data: { breadcrumb: 'JRs' },
+    children: [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'assign-jr'
+    },
+    {
+      path: 'assign-jr',
+      loadComponent: () =>
+        import('./subpages/assign-jr/assign-jr.component')
+          .then(m => m.AssignJrComponent),
+      data: { breadcrumb: 'Assign JR' }
+    },
+    {
+      path: 'track-jr',
+      loadComponent: () =>
+        import('./subpages/track-jr/track-jr.component')
+          .then(m => m.TrackJrComponent),
+      data: { breadcrumb: 'Track JRs' }
+    }
+  ]
   },
   {
     path: 'recruiter-lead/analytics',
@@ -111,12 +160,12 @@ export const routes: Routes = [
     data: { breadcrumb: 'Analytics' },
   },
   {
-    path: 'recruiter-lead/track-jd',
+    path: 'recruiter-lead/my-jd',
     loadComponent: () =>
-      import('./pages/track-jd/track-jd.component').then(
-        (m) => m.TrackJdComponent
+      import('./pages/my-jd/my-jd.component').then(
+        (m) => m.MyJdComponent
       ),
-    data: { breadcrumb: 'Track JD' },
+    data: { breadcrumb: 'My JDs' },
     children: [
       {
         path: '',
@@ -132,35 +181,55 @@ export const routes: Routes = [
         data: { breadcrumb: 'Pending JD Generation' },
       },
       {
-        path: 'openjd',
+        path: 'trackjd',
         loadComponent: () =>
-          import('./subpages/open-jd/open-jd.component').then(
-            (m) => m.OpenJdComponent
+          import('./subpages/track-jd/track-jd.component').then(
+            (m) => m.TrackJdComponent
           ),
-        data: { breadcrumb: 'Open JD' },
-      },
-      {
-        path: 'closedjd',
-        loadComponent: () =>
-          import('./subpages/closed-jd/closed-jd.component').then(
-            (m) => m.ClosedJdComponent
-          ),
-        data: { breadcrumb: 'Closed JD' },
+        data: { breadcrumb: 'Track JD' },
       },
     ],
   },
-  {
-    path: 'recruiter-lead/schedule-interviews',
-    loadComponent: () =>
-      import('./pages/schedule-interviews/schedule-interviews.component').then(
-        (m) => m.ScheduleInterviewsComponent
-      ),
-    data: { breadcrumb: 'Schedule Interviews' },
-  },
+ {
+  path: 'recruiter-lead/interviews',
+  loadComponent: () =>
+    import('./pages/interviews/interviews.component')
+      .then(m => m.InterviewsComponent),
+  data: { breadcrumb: 'Interviews' },
+  children: [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'schedule'
+    },
+    {
+      path: 'schedule',
+      loadComponent: () =>
+        import('./subpages/schedule/schedule.component')
+          .then(m => m.ScheduleComponent),
+      data: { breadcrumb: 'Schedule' }
+    },
+    {
+      path: 'shortlist',
+      loadComponent: () =>
+        import('./subpages/shortlist/shortlist.component')
+          .then(m => m.ShortlistComponent),
+      data: { breadcrumb: 'Shortlist' }
+    },
+    {
+      path: 'all-interviews',
+      loadComponent: () =>
+        import('./subpages/all-interviews/all-interviews.component')
+          .then(m => m.AllInterviewsComponent),
+      data: { breadcrumb: 'All Interviews' }
+    }
+  ]
+},
+
   {
     path: 'recruiter-lead/team',
     loadComponent: () =>
-      import('./pages/team/team.component').then((m) => m.TeamComponent),
+      import('./pages/recruiter-head-team/team.component').then((m) => m.TeamComponent),
     data: { breadcrumb: 'Team' },
     children: [
       {
@@ -186,13 +255,18 @@ export const routes: Routes = [
       },
     ],
   },
-  {
-  path: 'recruiter-head/jrs/',
+ {
+  path: 'recruiter-head/jrs',
   loadComponent: () =>
-    import('./pages/recruiter-head-track-jr/recruiter-head-track-jr.component')
+    import('./pages/track-jr/track-jr.component')
       .then(m => m.RecruiterHeadTrackJrComponent),
   data: { breadcrumb: 'JRs' },
   children: [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'assign-jr'
+    },
     {
       path: 'assign-jr',
       loadComponent: () =>
@@ -282,8 +356,8 @@ export const routes: Routes = [
   {
     path: 'recruiter-head/team',
     loadComponent: () =>
-      import('./pages/team/team.component').then((m) => m.TeamComponent),
-    data: { breadcrumb: 'Team' },
+      import('./pages/recruiter-head-team/team.component').then((m) => m.TeamComponent),
+    data: { breadcrumb: 'My Team' },
     children: [
       {
         path: '',
@@ -296,15 +370,6 @@ export const routes: Routes = [
           import('./subpages/my-team-rh/my-team-rh.component').then(
             (m) => m.MyTeamRhComponent
           ),
-        data: { breadcrumb: 'My Team' },
-      },
-      {
-        path: 'track-jr',
-        loadComponent: () =>
-          import('./subpages/track-jr/track-jr.component').then(
-            (m) => m.TrackJrComponent
-          ),
-        data: { breadcrumb: 'Track JR' },
       },
     ],
   },
