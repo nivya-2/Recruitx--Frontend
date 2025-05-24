@@ -1,0 +1,25 @@
+
+.custom-tab-nav {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+  margin-right: 15px;
+  padding-bottom: 8px;
+  .item {
+    padding: 8px 1rem;
+    color: #555;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.3s, color 0.3s;
+
+    &.active {
+      color: #7B61FF;
+      border-bottom: 2px solid #7B61FF; // Only active tab gets underline
+    }
+
+    &:hover {
+      color: #7B61FF;
+    }
+  }
+}
+

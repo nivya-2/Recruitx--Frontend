@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'primeicons/primeicons.css';
+
 $bg-color: #E2E5EC;
 $primary-color: #7B61FF;
 :root {
@@ -8,4 +10,23 @@ body {
   margin:0;
   font-family: 'Montserrat', sans-serif;
   background-color: $bg-color;
+
+}
+
+table{
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  margin: 10px !important;
+  
+  th{
+      background-color: #DBD4FF !important;
+     }
+.text-center{
+  text-align: center !important;   
+ }
+}
+
+.custom-padding{
+  padding-right: 2.5rem;
+  padding-bottom: 2.5rem;
 }

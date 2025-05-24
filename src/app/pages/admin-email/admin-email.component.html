@@ -1,0 +1,13 @@
+<app-common-layout>
+  <app-cards width="96%" height="120vh"> 
+    <app-header-text context="table-header" [nopad]="true">E-mail Templates</app-header-text>
+    <div class="structure">
+    <div class="accordion">
+   <app-accordion (templateSelected)="onTemplateSelected($event)"></app-accordion>
+   </div>
+   <div class="email">
+   <app-email [template]="selectedTemplate"></app-email>
+ </div>
+</div>
+</app-cards>
+</app-common-layout>

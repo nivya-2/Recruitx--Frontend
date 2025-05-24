@@ -1,15 +1,33 @@
-.flex-row{
+.flex-row {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
     gap: 8px;
     padding: 6px;
-}
-.flex-column{
+  }
+  
+  .flex-column {
     display: flex;
     flex-direction: column;
-    align-items:flex-start;
+    align-items: flex-start;
     justify-content: center;
     padding: 6px;
-}
+  }
+  
+  /* Responsive: Stack vertically on small screens */
+  @media (max-width: 600px) {
+    .flex-row {
+      flex-direction: column;
+      align-items: flex-start; /* aligns items to the left when stacked */
+      gap: 4px;
+    }
+  
+    .flex-column {
+        display: none;
+      align-items: flex-start;
+      text-align: left;
+      padding-left: 0;
+    }
+  }
+  

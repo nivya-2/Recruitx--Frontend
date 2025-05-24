@@ -1,0 +1,90 @@
+<div class="job-details-container">
+  <div class="job-sidebar">
+    <div class="sidebar-section">
+      <div class="section-title">Priority</div>
+      <div class="section-content">
+        <app-icon name="error_outline" customColor="red"></app-icon>
+        {{ jobDetails.jobTag }}
+      </div>
+    </div>
+    <hr />
+    <div class="sidebar-section">
+      <div class="section-title">Raised By</div>
+      <div class="section-content">
+        <app-profile-box [fullName]="name" [role]="role"></app-profile-box>
+      </div>
+    </div>
+    <hr />
+    <div class="sidebar-section">
+      <div class="section-title">Assign Recruiter</div>
+      <div class="section-content">
+        <input
+          type="text"
+          pInputText
+          class="recruiter-search-input"
+          placeholder="Search Recruiter"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="job-main-content">
+    <div class="job-title">{{ jobDetails.jobTitle }}</div>
+    <div class="job-summary">
+      {{ jobDetails.deliveryUnit }} | {{ jobDetails.openPositions }} Open Positions
+    </div>
+    <div class="job-meta">
+      Raised on {{ jobDetails.raisedOn }} | {{ jobDetails.location }}
+    </div>
+
+    <!-- ⏩ SCROLLABLE SECTION START -->
+    <section class="scroll-section">
+      <div class="job-info">
+        <span class="job-info-label">Requisition ID:</span>
+        <span class="job-info-value">{{ jobDetails.requisitionId }}</span>
+      </div>
+      <div class="job-info">
+        <span class="job-info-label">Job Title:</span>
+        <span class="job-info-value">{{ jobDetails.jobTitle }}</span>
+      </div>
+      <div class="job-info">
+        <span class="job-info-label">Delivery Unit (DU):</span>
+        <span class="job-info-value">
+          {{ jobDetails.deliveryUnit }} - {{ jobDetails.team }}
+        </span>
+      </div>
+      <div class="job-info">
+        <span class="job-info-label">Location:</span>
+        <span class="job-info-value">{{ jobDetails.location }}</span>
+      </div>
+      <div class="job-info">
+        <span class="job-info-label">Open Positions:</span>
+        <span class="job-info-value">{{ jobDetails.openPositions }}</span>
+      </div>
+      <div class="job-info">
+        <span class="job-info-label">Requisition Raised On:</span>
+        <span class="job-info-value">{{ jobDetails.raisedOn }}</span>
+      </div>
+      <div class="job-info">
+        <span class="job-info-label">Hiring Manager:</span>
+        <span class="job-info-value">{{ jobDetails.hiringManager }}</span>
+      </div>
+      <div class="job-info">
+        <span class="job-info-label">Recruiter Assigned:</span>
+        <span class="job-info-value">{{ jobDetails.recruiter }}</span>
+      </div>
+
+      <div class="job-info">
+        <span class="job-info-label">Qualifications:</span>
+        <ul class="qualifications-list">
+          <li *ngFor="let q of jobDetails.qualifications">{{ q }}</li>
+        </ul>
+      </div>
+    </section>
+    <!-- ⏪ SCROLLABLE SECTION END -->
+
+    <div class="assign-button-container">
+      <app-button>Assign</app-button>
+    </div>
+  </div>
+</div>

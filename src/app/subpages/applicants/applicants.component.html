@@ -1,0 +1,19 @@
+
+<div class="base">
+  <div class="right-align">
+        <app-button>Add New Applicants</app-button>
+
+    </div>
+  <app-table
+    [dataSource]="dataSource"
+    [columns]="columns"
+    [globalFilterFields]="globalFilterFields"
+    [hover]="true"
+    [rows]="7"
+    [showFilter]="true"
+    [rowClickFn]="routes">
+    
+    
+  </app-table>
+</div>
+

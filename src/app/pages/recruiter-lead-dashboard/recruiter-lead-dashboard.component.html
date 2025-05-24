@@ -1,0 +1,41 @@
+<app-common-layout>
+    <div class="page-container">
+        <app-cards class="job-requisition-card">
+            <div class="card full-width job-requisition job">
+                <div class="job-requisition-header">
+                    <app-header-text context="table-header" [nopad]="true">Job Requisition Forms</app-header-text>
+                    <div class="sort-dropdown">
+                        Sort by date <span class="arrow"></span>
+                    </div>
+                </div>
+                <hr />
+                <app-list-view [jobs]="jobs"></app-list-view>
+            </div>
+        </app-cards>
+
+        <div class="interview-section">
+            <div class="left-column">
+                <app-cards class="scheduled-interviews-card">
+                    <app-header-text [nopad]="true">Scheduled Interviews</app-header-text>
+                    <app-table [dataSource]="scheduledInterviewsDataSource" [columns]="scheduledColumns"
+                        [globalFilterFields]="scheduledGlobalFilterFields" [hover]="false" [rows]="3"
+                        [showFilter]="false" [fontSize]="'11px'"></app-table>
+                </app-cards>
+                <app-cards class="completed-interviews-card">
+                    <app-header-text [nopad]="true">Completed Interviews</app-header-text>
+                    <app-table [dataSource]="completedInterviewsDataSource" [columns]="completedColumns"
+                        [globalFilterFields]="completedGlobalFilterFields" [hover]="false" [rows]="3"
+                        [showFilter]="false" [fontSize]="'11px'"></app-table>
+                </app-cards>
+            </div>
+            <div class="right-column">
+                <app-cards class="awaiting-shortlisting-card">
+                    <app-header-text [nopad]="true">Awaiting Shortlisting</app-header-text>
+                    <app-table [dataSource]="awaitingShortlistingDataSource" [columns]="awaitingColumns"
+                        [globalFilterFields]="awaitingGlobalFilterFields" [hover]="false" [rows]="9"
+                        [showFilter]="false" [fontSize]="'11px'"></app-table>
+                </app-cards>
+            </div>
+        </div>
+    </div>
+</app-common-layout>

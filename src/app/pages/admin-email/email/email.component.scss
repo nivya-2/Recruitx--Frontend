@@ -1,0 +1,99 @@
+@import 'quill/dist/quill.snow.css';
+
+.invitation-mail-container {
+  max-width: 900px;
+  margin: 0 auto;
+
+  .head{
+
+    font-size: 1.2 rem;
+
+  }  
+  
+  .p-inputtext {
+    width: 100%;
+    border: solid 1px grey;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .placeholders{
+
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+
+
+  .p-chip {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    color: #666;
+    transition: background-color 0.3s;
+    padding: 3px;
+    border-radius: 4px;
+    font-size: 12px;
+    
+    &:hover {
+      background-color: #d7cdfc;
+      border-color: #d7cdfc;
+      cursor: pointer;
+    }
+  }
+  }
+  label{
+    margin-bottom: 5px !important;
+  }
+  
+  ::ng-deep {
+    .mb-4{     
+           margin: 10px;
+    }
+    .p-editor-container {
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+
+      .p-editor-toolbar.ql-snow{
+        border: 1px solid #ccc;
+      }
+      
+    }
+    
+    .text-format-dropdown {
+      height: 24px;
+      font-size: 12px;
+      
+      .p-dropdown-label {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+    
+    .p-button {
+        border-radius: 5px;
+        padding: 10px;
+        margin: 5px;
+        max-height: 30px;
+        gap:5px;
+        font-size: 13px;
+
+      &.p-button-outlined {
+        border: solid 1px grey;
+        color:black;
+        &:hover{       
+            background-color: #d7cdfc;
+        }
+
+      }
+      
+      &.p-button-primary {
+        background-color: #8a5fd3;
+        color: white;
+       
+      }
+    }
+    
+  }
+}

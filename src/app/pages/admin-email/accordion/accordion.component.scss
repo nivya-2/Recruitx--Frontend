@@ -1,0 +1,159 @@
+
+ @import 'primeicons/primeicons.css';
+
+:host ::ng-deep {
+  .p-accordion {
+    width: 100%; // Ensure the accordion takes full width of container
+    
+    .p-element {
+      // Prevent unexpected width changes
+      width: 100%;
+    }
+
+    .p-accordionheader {
+      border-style: none;
+      min-height: 48px;
+      color: #636363;
+      gap: 10px !important;
+      padding: 5px 10px; // Added horizontal padding
+      
+      // Ensure proper text styling in headers
+      font-size: 1rem; // Base font size for tabs
+      font-weight: 500;
+      
+      // Prevent content shifting
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        background-color: #f9f9f9;
+      }
+    }
+    
+    .p-accordionpanel {
+      border: solid 1px grey;
+      // Ensure smooth transitions
+      transition: all 0.3s ease;
+    }
+    
+    .p-accordiontab {
+      // Fixed width to prevent resizing
+      width: 100%;
+    }
+
+    .p-accordion-content {
+      // Add overflow handling
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .p-accordioncontent-content {
+      border: solid 1px grey;
+      // Add padding consistency
+      padding: 0;
+      
+      // Option 2: Flexible height with min/max constraints
+      min-height: 50px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+  }
+}
+
+.email-templates-container {
+  width: 260px; // Set a fixed width
+  margin: 20px;
+  margin-left: 0;
+  border-radius: 6px;
+  border: solid 1px grey;
+  overflow: hidden; // Prevent content overflow
+}
+
+.email-header {
+  padding: 20px;
+  background-color: #D3CAFF;
+  margin: 0;
+  font-size: 16px;
+  border-radius: 6px 6px 0 0;
+  color: #636363;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #D3CAFF;
+}
+
+.accordion-container {
+  border-radius: 0 0 6px 6px;
+  overflow: hidden;
+  // Set a fixed width to match container
+  width: 100%;
+}
+
+.template-item {
+  padding: 14px 10px;
+  border-bottom: 1px solid #e6f2ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  // Create proper layout structure
+  gap: 8px;
+}
+
+// Template title (the div)
+.template-item div:first-child {
+  flex: 1;
+  min-width: 0; // Important for text overflow to work in flex children
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 0.9rem; // Smaller font for inner content
+}
+
+.template-item:last-child {
+  border-bottom: none;
+}
+
+.template-item:hover {
+  background-color: #d7cdfc;
+  // Removed transform to prevent layout shifts
+  // transform: translateX(3px);
+}
+
+.template-subtitle {
+  font-size: 0.85rem; // Smaller font for subtitle
+  color: #7B61FF;
+  font-weight: 500;
+  background-color: #f5f3ff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  // Make subtitle fixed size and prevent shrinking
+  flex: 0 0 auto;
+  min-width: 70px;
+  max-width: 100px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.field {
+  margin-bottom: 1.25rem;
+}
+
+.block {
+  display: block;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.w-full {
+  width: 100%;
+}
