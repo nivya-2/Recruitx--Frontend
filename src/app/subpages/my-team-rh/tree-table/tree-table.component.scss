@@ -17,8 +17,11 @@
 
 
 :host ::ng-deep .p-treetable-toggler {
-    color: #7B61FF;
+    color: #7B61FF !important;
     margin-right: 0.5rem;
+    &:hover {
+      background-color: #D3CAFF !important; /* Darker shade on hover */
+    }
 }
 
 
@@ -32,6 +35,10 @@
       gap: 3px;
       padding: 0;
     }
+
+    .center-actions-header {
+    text-align: center !important;
+  }
   
     /* Base styling for header text */
     .header-text {

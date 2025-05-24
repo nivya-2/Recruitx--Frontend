@@ -3,19 +3,31 @@ import { CardsComponent } from "../../ui/cards/cards.component";
 import { TableComponent } from '../../shared-components/table/table.component';
 import { NgIf } from '@angular/common';
 import { ButtonComponent } from '../../ui/button/button.component';
+import { ModalComponent } from "../../ui/modal/modal.component";
+import { ViewassignedjrCardComponent } from "../../shared-components/viewassignedjr-card/viewassignedjr-card.component";
 
 
 
 @Component({
   selector: 'app-my-team',
-  imports: [CardsComponent, TableComponent, ButtonComponent, NgIf],
+  imports: [CardsComponent, TableComponent, ButtonComponent, NgIf, ModalComponent, ViewassignedjrCardComponent],
   templateUrl: './my-team.component.html',
   styleUrl: './my-team.component.scss'
 })
 export class MyTeamComponent {
-  handleRemove(row:any){
+visible: boolean = false;
 
-  }
+ onViewAssignedJR = (row: any) => {
+  this.visible = !this.visible;
+  console.log('View assigned JR for:', row);
+};
+
+handleRemove = (row: any) => {
+  console.log('Remove action for:', row);
+};
+
+  actionMethods={'View assigned JR': this.onViewAssignedJR,    'Remove': this.handleRemove  };
+
   teamsDataSource: any[] = [
     { memberName: 'Mohith Gopal', jobTitle: 'Lead',  jrAssigned: 1, actions: ['View assigned JR','Remove'] },
     { memberName: "Priya Sharma", jobTitle: "Analyst",  jrAssigned: 2,  actions: ['View assigned JR','Remove'] },

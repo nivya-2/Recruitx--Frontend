@@ -1,30 +1,23 @@
     <p-treeTable 
-        #tt
         [value]="teamsDataSource" 
         [columns]="columns"
         [scrollable]="true" 
         [ngStyle]="{ 'font-size': fontSize }">
+
         
-
         <!-- Header Template -->
-        <ng-template #header pTemplate="header">
+        <ng-template pTemplate="header">
             <tr>
-                <th *ngFor="let col of columns">
-                    <div class="header-content">
-                     <div class="header-text" [ngClass]="{ 'center-actions-header': col.key === 'actions' && hasMultipleActionsInColumn()}">
-                       
-                        {{ col.label }}
-
-                    </div>
-                    </div>
+                <th *ngFor="let col of columns" [ngClass]="{ 'center-actions-header': col.key === 'actions' }">
+                    {{ col.label }}
                 </th>
             </tr>
         </ng-template>
         
         <!-- Body Template -->
-        <ng-template #body pTemplate="body" let-rowNode let-rowData="rowData">
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
             <tr [ttRow]="rowNode">
-                <td *ngFor="let col of columns">
+                <td *ngFor="let col of columns" >
                     <!-- First column with toggler and member name -->
                     <ng-container *ngIf="col.key === 'memberName'">
                         <p-treetable-toggler [rowNode]="rowNode" *ngIf="!rowNode.leaf"></p-treetable-toggler>
@@ -40,7 +33,7 @@
                     <ng-container *ngIf="col.key === 'actions'">
                         <div class="action-buttons">
                             <app-button *ngFor="let action of rowData[col.key]" 
-                            (click)="handleTreeTableAction(action, rowData)"
+                                         (functionemit)="handleTreeTableAction(action, rowData)"
                                        color="#7B61FF">
                                 {{ action }}
                             </app-button>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { ButtonComponent } from "../../../ui/button/button.component";
 import { HeaderTextComponent } from "../../../ui/header-text/header-text.component";
@@ -16,6 +16,7 @@ import { InputIcon } from 'primeng/inputicon';
 })
 export class TreeTableComponent {
 
+
 handleTreeTableAction(action: string, row: any): void {
   const methodName = 'on' + this.capitalize(action);
   const method = (this as any)[methodName];
@@ -28,13 +29,25 @@ handleTreeTableAction(action: string, row: any): void {
 }
 
 capitalize(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
 }
  
 
   @Input() teamsDataSource: TreeNode[] = [];
   @Input() columns: any[] = [];
   @Input() globalFilterFields: string[] = [];
+  @Output() openModal = new EventEmitter<boolean>();
+  
+  onViewAssignedJR(row: any) {
+    this.openModal.emit(true);
+    console.log('test');
+  
+ }
+
+ onRemove(row:any){
+    console.log('Remove action for:', row);
+    // Implement your remove logic here
+ }
 
    @Input() showFilter = true;
    fontSize: any = '12px';
@@ -72,9 +85,7 @@ private checkNodesForMultipleActions(nodes: TreeNode[], actionsKey: string): boo
   return false;
 }
 
-  handleRemove(rowData: any) {
-    console.log('Remove clicked:', rowData);
-  }
+ 
 
 
 

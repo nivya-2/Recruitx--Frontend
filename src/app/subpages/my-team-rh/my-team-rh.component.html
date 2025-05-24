@@ -3,9 +3,18 @@
     <app-tree-table
         [teamsDataSource]="teamsDataSource"
         [columns]="teamsColumns"
-        [globalFilterFields]="teamsGlobalFilterFields">
+        [globalFilterFields]="teamsGlobalFilterFields"
+        (openModal)="visible = $event">
     </app-tree-table>
 
+<app-modal
+ [(visible)]="visible"
+ header="Assigned Job Requisitions"
+ [maximizable]="true"
+ [style]="{ width: '72rem', height: '30rem' }"
+>
+<app-viewassignedjr-card></app-viewassignedjr-card>
+</app-modal>
 </app-cards>
 
 

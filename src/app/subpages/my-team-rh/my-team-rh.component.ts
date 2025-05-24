@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { CardsComponent } from "../../ui/cards/cards.component";
 import { TreeTableComponent } from "./tree-table/tree-table.component";
 import { TreeNode } from 'primeng/api';
+import { ModalComponent } from "../../ui/modal/modal.component";
+import { ViewassignedjrCardComponent } from "../../shared-components/viewassignedjr-card/viewassignedjr-card.component";
 
 @Component({
   selector: 'app-my-team-rh',
-  imports: [CardsComponent, TreeTableComponent],
+  imports: [CardsComponent, TreeTableComponent, ModalComponent, ViewassignedjrCardComponent],
   templateUrl: './my-team-rh.component.html',
   styleUrl: './my-team-rh.component.scss'
 })
@@ -38,6 +40,9 @@ export class MyTeamRhComponent {
   ];
 
   teamsGlobalFilterFields = this.teamsColumns.map(c => c.key).filter(key => key !== 'actions');
+  
+  visible: boolean = false;  
+  
 
   ngOnInit() {
   this.teamsDataSource = this.buildTreeData(this.rawTeamData);

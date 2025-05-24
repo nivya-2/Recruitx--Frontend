@@ -69,8 +69,8 @@
       </ng-container>
         <ng-template #actionTpl>
             <div class="action-buttons" [ngClass]="{ 'center-label': rowData[column.key].length > 1 }">
-              <ng-container *ngFor="let action of rowData[column.key]">
-                <app-button color="#7B61FF" >{{ action.trim() }}</app-button>
+              <ng-container *ngFor="let action of rowData[column.key] ">
+                <app-button color="#7B61FF"  (functionemit)="handleActionClick(action, rowData)">{{ action.trim() }}</app-button>
               </ng-container>
               </div>
         </ng-template>
