@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CardsComponent } from "../../ui/cards/cards.component";
-import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { TableComponent } from '../../shared-components/table/table.component';
+import { NgIf } from '@angular/common';
+import { ButtonComponent } from '../../ui/button/button.component';
 
 
 
 @Component({
   selector: 'app-my-team',
-  imports: [CardsComponent,TableComponent,HeaderTextComponent],
+  imports: [CardsComponent, TableComponent, ButtonComponent, NgIf],
   templateUrl: './my-team.component.html',
   styleUrl: './my-team.component.scss'
 })
@@ -50,8 +51,5 @@ export class MyTeamComponent {
   ];
 
   teamsGlobalFilterFields = this.teamsColumns.map(c => c.key).filter(key => key !== 'actions');
-
-
-
 
 }
