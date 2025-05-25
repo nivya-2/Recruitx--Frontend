@@ -19,7 +19,7 @@ export class ScheduleInterviewsComponent {
       experience: 5, 
       createdDate: '05-05-2025', 
       assoJr: 'JR2025-112',
-      actions:'Schedule',
+      actions:['Schedule'],
       },
       {  id: 'JD002', 
         roleTitle: 'UX Designer',
@@ -28,8 +28,7 @@ export class ScheduleInterviewsComponent {
         experience: 7, 
         createdDate: '05-05-2025', 
         assoJr: 'JR2025-113',
-        actions:'Schedule',
-
+actions:['Schedule'],
       },
       {  id: 'JD003', 
           roleTitle: 'Sales Manager',
@@ -38,7 +37,7 @@ export class ScheduleInterviewsComponent {
           experience: 9, 
           createdDate: '09-05-2025', 
           assoJr: 'JR2025-114',
-          actions:'Schedule',
+      actions:['Schedule'],
 
       },
       {  id: 'JD004', 
@@ -48,7 +47,7 @@ export class ScheduleInterviewsComponent {
             experience: 9, 
             createdDate: '09-05-2025', 
             assoJr: 'JR2025-115',
-            actions:'Schedule',
+      actions:['Schedule'],
 
       },
       { id: 'JD005', 
@@ -58,7 +57,7 @@ export class ScheduleInterviewsComponent {
               experience: 7, 
               createdDate: '05-07-2025', 
               assoJr: 'JR2025-116',
-              actions:'Schedule',
+      actions:['Schedule'],
 
             },
             {  id: 'JD006', 
@@ -68,7 +67,7 @@ export class ScheduleInterviewsComponent {
                 experience: 7, 
                 createdDate: '05-08-2025', 
                 assoJr: 'JR2025-117',
-                actions:'Schedule',
+      actions:['Schedule'],
 
             },
             {  id: 'JD007', 
@@ -78,7 +77,7 @@ export class ScheduleInterviewsComponent {
               experience: 7, 
               createdDate: '15-05-2025', 
               assoJr: 'JR2025-118',
-              actions:'Schedule',
+      actions:['Schedule'],
 
               },
         {  id: 'JD008', 
@@ -88,7 +87,7 @@ export class ScheduleInterviewsComponent {
           experience: 11, 
           createdDate: '25-06-2025', 
           assoJr: 'JR2025-119',
-          actions:'Schedule',
+      actions:['Schedule'],
 
           }
 
