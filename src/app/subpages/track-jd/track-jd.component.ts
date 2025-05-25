@@ -14,10 +14,12 @@ export class TrackJdComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
 onViewJD = (row: any) => {
+  this.router.navigate(['/recruiter/job-description/details']);
   console.log('View JD for:', row);
 };
 
 onViewApplicants = (row: any) => {
+  this.router.navigate(['/recruiter/job-description/applicants']);
   console.log('View Applicants for:', row);
 };
 
