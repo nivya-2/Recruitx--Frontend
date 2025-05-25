@@ -9,15 +9,15 @@ import { IconComponent } from './ui/icon/icon.component';
 import { IconGroupComponent } from './layouts/icon-group/icon-group.component';
 import { SidenavbarComponent } from './layouts/sidenavbar/sidenavbar.component';
 import { CommonLayoutComponent } from './layouts/common-layout/common-layout.component';
-import { RecruiterHeadDashboardComponent } from './pages/recruiter-head-dashboard/recruiter-head-dashboard.component';
+import { RecruiterHeadTrackJrComponent } from './pages/track-jr/track-jr.component';
 
 import { RecruiterLeadDashboardComponent } from "./pages/recruiter-lead-dashboard/recruiter-lead-dashboard.component";
-import { RecruiterDashboardComponent } from './pages/recruiter-dashboard/recruiter-dashboard.component';
+import { RecruiterDashboardComponent } from './pages/recruiter-track-jr/recruiter-dashboard.component';
 import { BreadcrumbsComponent } from './ui/breadcrumbs/breadcrumbs.component';
 import { ProgressbarComponent } from "./ui/progressbar/progressbar.component";
-import { TrackJdComponent } from "./pages/track-jd/track-jd.component";
+import { MyJdComponent } from "./pages/my-jd/my-jd.component";
 import { TrackJrComponent } from "./subpages/track-jr/track-jr.component";
-import { TeamComponent } from "./pages/team/team.component";
+import { TeamComponent } from "./pages/recruiter-head-team/team.component";
 import { MyTeamComponent } from "./subpages/my-team/my-team.component";
 import { ViewassignedjrCardComponent } from "./shared-components/viewassignedjr-card/viewassignedjr-card.component";
 
@@ -25,8 +25,7 @@ import { ViewassignedjrCardComponent } from "./shared-components/viewassignedjr-
 
 @Component({
   selector: 'app-root',
-  imports: [RecruiterHeadDashboardComponent, RecruiterDashboardComponent, RouterOutlet, SidenavbarComponent, IconGroupComponent, IconComponent,
-    HeaderComponent, ButtonComponent, CardsComponent, SharedComponentsModule, TableComponent, CommonLayoutComponent, RecruiterLeadDashboardComponent, BreadcrumbsComponent, ProgressbarComponent, TrackJdComponent, TeamComponent, MyTeamComponent, ViewassignedjrCardComponent],
+  imports: [ RouterOutlet, SharedComponentsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

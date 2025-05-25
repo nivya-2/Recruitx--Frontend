@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -27,21 +27,25 @@ export class TableComponent {
   @Input() showFilter: boolean = true;
   @Input() fontSize: any ='12px';
   // @Input() scale:number = 1;
-  @Input() buttonActionFn: (rowData: any) => void = () => {};
   @Input() rowClickFn: (rowData: any) => void = () => {};
+  @Output() openModal = new EventEmitter<boolean>();
+  @Input() actionMethods: { [key: string]: (rowData: any) => any } = {};
+
+
 
   @HostBinding('class.hover-enabled') get isHoverEnabled() {
     return this.hover;
   }
 
-  buttonActionWrapper(rowData: any): Function {
-    return () => {
-      if (this.buttonActionFn) {
-        this.buttonActionFn(rowData);
-      }
-    };
-  }
+hasMultipleActionsInColumn(): boolean {
+  // Find the actions column
+  const actionsColumn = this.columns.find((col: { key: string; }) => col.key === 'actions');
+  if (!actionsColumn) return false;
   
+  return this.dataSource.some(row => 
+    row[actionsColumn.key] && Array.isArray(row[actionsColumn.key]) && row[actionsColumn.key].length > 1
+  );
+}
   clear(table: Table): void {
     table.clear();
   }
@@ -66,5 +70,18 @@ export class TableComponent {
   
   return false;
 }
+
+  handleActionClick(action: string, rowData: any): void {
+    // Convert action string to method key (e.g., "Send Email" -> "sendEmail")
+    // const methodKey = 'on' + this.getMethodKey(action);
+    const method = this.actionMethods[action];
+    
+    if (method && typeof method === 'function') {
+      method(rowData);
+    } else {
+      console.warn(`No method found for action: ${action} (looking for key: ${action})`);
+    }
+  }
+
 
 }

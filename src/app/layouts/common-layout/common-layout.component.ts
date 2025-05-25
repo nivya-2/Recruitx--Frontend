@@ -23,9 +23,8 @@ export class CommonLayoutComponent {
     @Input() breadcrumbItems?: MenuItem[]; // ✅ Optional breadcrumbs input
   recruiterIcons: IconItem[] = [
     { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter/analytics' },
-    { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'Track JR', route: '/recruiter/dashboard' },
-    { iconName: 'timeline', size: '28px', iconColour: '#B8AAFF', label: 'Track JD', route: '/recruiter/track-jd' },
-    { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Interview Details', route: '/recruiter/schedule-interviews' }
+    { iconName: 'timeline', size: '28px', iconColour: '#B8AAFF', label: 'My JDs', route: '/recruiter/my-jd' },
+    { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Interview', route: '/recruiter/interviews' }
   ];
 
   recruiterLeadIcons: IconItem[] = [
@@ -38,12 +37,12 @@ export class CommonLayoutComponent {
 
   recruiterHeadIcons: IconItem[] = [
     { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-head/analytics' },
-    { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'Track JR', route: '/recruiter-head/dashboard' },
+    { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'JRs', route: '/recruiter-head/jrs' },
     { iconName: 'group', size: '28px', iconColour: '#B8AAFF', label: 'Teams', route: '/recruiter-head/team' },
   ];
 
   adminIcons: IconItem[] = [
-    { iconName: 'dashboard', size: '28px', iconColour: '#B8AAFF', label: 'Dashboard', route: '/admin/dashboard' },
+    { iconName: 'dashboard', size: '28px', iconColour: '#B8AAFF', label: 'Add JRs', route: '/admin/add-jr' },
     { iconName: 'account_circle', size: '28px', iconColour: '#B8AAFF', label: 'Add Users', route: '/admin/users' },
     { iconName: 'mail_outline', size: '28px', iconColour: '#B8AAFF', label: 'Mail', route: '/admin/email' }
   ];
