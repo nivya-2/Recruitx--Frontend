@@ -9,7 +9,7 @@ import { ViewassignedjrCardComponent } from "../../shared-components/viewassigne
 
 @Component({
   selector: 'app-team',
-  imports: [CommonLayoutComponent, CardsComponent, TabsComponent, RouterOutlet, ButtonIconComponent, ModalComponent, ViewassignedjrCardComponent],
+  imports: [CommonLayoutComponent, RouterOutlet],
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss',
 })

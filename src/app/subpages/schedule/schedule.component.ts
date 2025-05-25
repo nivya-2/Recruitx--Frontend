@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 import { TableComponent } from '../../shared-components/table/table.component';
-import { CommonLayoutComponent } from '../../layouts/common-layout/common-layout.component';
-import { CardsComponent } from '../../ui/cards/cards.component';
-import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 
 @Component({
-  selector: 'app-schedule-interviews',
-  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent],
-  templateUrl: './schedule-interviews.component.html',
-  styleUrl: './schedule-interviews.component.scss'
+  selector: 'app-schedule',
+  imports: [TableComponent],
+  templateUrl: './schedule.component.html',
+  styleUrl: './schedule.component.scss'
 })
-export class ScheduleInterviewsComponent {
-  dataSource: any[] = [ 
+export class ScheduleComponent {
+dataSource: any[] = [ 
     { id: 'JD001', 
       roleTitle: 'Software Engineer',
       deliveryUnit: 'DU1',
@@ -111,6 +108,5 @@ export class ScheduleInterviewsComponent {
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');  
-
 
 }

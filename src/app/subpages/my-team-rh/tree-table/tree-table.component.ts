@@ -10,7 +10,7 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 @Component({
   selector: 'app-tree-table',
-  imports: [ButtonComponent, HeaderTextComponent, ButtonIconComponent,TreeTableModule, CommonModule,ButtonModule,IconField, InputIcon],
+  imports: [ButtonComponent,TreeTableModule, CommonModule,ButtonModule,IconField, InputIcon],
   templateUrl: './tree-table.component.html',
   styleUrl: './tree-table.component.scss'
 })

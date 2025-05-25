@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RecruiterHeadTrackJrComponent } from './track-jr.component';
 
-import { RecruiterHeadDashboardComponent } from './recruiter-head-dashboard.component';
 
 describe('RecruiterHeadDashboardComponent', () => {
-  let component: RecruiterHeadDashboardComponent;
-  let fixture: ComponentFixture<RecruiterHeadDashboardComponent>;
+  let component: RecruiterHeadTrackJrComponent;
+  let fixture: ComponentFixture<RecruiterHeadTrackJrComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RecruiterHeadDashboardComponent]
+      imports: [RecruiterHeadTrackJrComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RecruiterHeadDashboardComponent);
+    fixture = TestBed.createComponent(RecruiterHeadTrackJrComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,10 +8,10 @@ import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component'
 @Component({
   selector: 'app-admin-dashboard',
   imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent],
-  templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.scss'
+  templateUrl: './admin-jr-upload.component.html',
+  styleUrl: './admin-jr-upload.component.scss'
 })
-export class AdminDashboardComponent {
+export class AdminJrUploadComponent {
   dataSource: any[] = [
   {
     jobReqId: 'REQ-2025-DS-006',

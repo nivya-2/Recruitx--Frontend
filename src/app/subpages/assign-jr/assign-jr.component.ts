@@ -1,13 +1,9 @@
-import { NgFor, NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
-import { ChartModule } from 'primeng/chart';
-import { CommonLayoutComponent } from '../../layouts/common-layout/common-layout.component';
-import { CardModule } from 'primeng/card';
-import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
-import { KnobModule } from 'primeng/knob';
-import { ButtonComponent } from '../../ui/button/button.component';
-import { ListViewComponent } from '../../shared-components/list-view/list-view.component';
 import { StatCardComponent } from '../../shared-components/stat-card/stat-card.component';
+import { ListViewComponent } from '../../shared-components/list-view/list-view.component';
+import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
+import { ChartModule } from 'primeng/chart';
+
 interface MetricCard {
   title: string;
   value: string | number;
@@ -15,13 +11,14 @@ interface MetricCard {
   color?: string;
 }
 @Component({
-  selector: 'app-recruiter-head-dashboard',
-  imports: [StatCardComponent,ListViewComponent,ChartModule,CommonLayoutComponent,CardModule,NgFor,HeaderTextComponent,KnobModule],
-  templateUrl: './recruiter-head-dashboard.component.html',
-  styleUrl: './recruiter-head-dashboard.component.scss'
+  selector: 'app-assign-jr',
+  imports: [StatCardComponent,ListViewComponent,HeaderTextComponent,ChartModule],
+  templateUrl: './assign-jr.component.html',
+  styleUrl: './assign-jr.component.scss'
 })
-export class RecruiterHeadDashboardComponent {
-  metricsData: MetricCard[] = [
+
+export class AssignJrComponent {
+metricsData: MetricCard[] = [
     {
       title: 'Total Applications',
       value: 1531

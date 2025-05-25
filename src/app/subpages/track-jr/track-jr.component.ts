@@ -4,7 +4,7 @@ import { TableComponent } from '../../shared-components/table/table.component';
 
 @Component({
   selector: 'app-track-jr',
-  imports: [HeaderTextComponent, TableComponent],
+  imports: [ TableComponent],
   templateUrl: './track-jr.component.html',
   styleUrl: './track-jr.component.scss'
 })
