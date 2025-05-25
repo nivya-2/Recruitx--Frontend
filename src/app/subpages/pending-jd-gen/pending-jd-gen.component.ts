@@ -4,7 +4,7 @@ import { TableComponent } from '../../shared-components/table/table.component';
 
 @Component({
   selector: 'app-pending-jd-gen',
-  imports: [HeaderTextComponent, TableComponent],
+  imports: [ TableComponent],
   templateUrl: './pending-jd-gen.component.html',
   styleUrl: './pending-jd-gen.component.scss'
 })

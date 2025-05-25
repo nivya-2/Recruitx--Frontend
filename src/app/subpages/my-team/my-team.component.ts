@@ -11,7 +11,7 @@ import { ViewassignedjrCardComponent } from "../../shared-components/viewassigne
 
 @Component({
   selector: 'app-my-team',
-  imports: [CardsComponent, TableComponent, ButtonComponent, NgIf,AssignComponent, ModalComponent, ViewassignedjrCardComponent],
+  imports: [CardsComponent, TableComponent, ButtonComponent,AssignComponent, ModalComponent, ViewassignedjrCardComponent],
   templateUrl: './my-team.component.html',
   styleUrl: './my-team.component.scss'
 })

@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
 import { TabsComponent } from '../../shared-components/tabs/tabs.component';
 @Component({
   selector: 'app-track-jd',
-  imports: [CommonLayoutComponent,RouterOutlet,RouterLink,RouterLinkActive,TabsModule,TabsComponent, CardsComponent],
-  templateUrl: './track-jd.component.html',
-  styleUrl: './track-jd.component.scss'
+  imports: [CommonLayoutComponent,RouterOutlet,TabsModule,TabsComponent, CardsComponent],
+  templateUrl: './my-jd.component.html',
+  styleUrl: './my-jd.component.scss'
 })
-export class TrackJdComponent {
+export class MyJdComponent {
 rla3: any;
 tabPanel: any;
 rla1: any;
@@ -22,8 +22,7 @@ rla2: any;
     ngOnInit() {
         this.tabs = [
   { title: 'Pending JD Generation', value: 0, route: 'pendingjdgeneration' },
-  { title: 'Open JD', value: 1, route: 'openjd' },
-  { title: 'Closed JD', value: 2, route: 'closedjd' }
+  { title: 'Tracks JDs', value: 1, route: 'trackjd' },
 ];
 
     }
