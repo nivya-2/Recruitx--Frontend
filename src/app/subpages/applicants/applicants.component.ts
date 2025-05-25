@@ -36,7 +36,7 @@ dataSource: any[] = [
       currentLocation: 'Kochi',
       noticePeriod: 90,
       source: 'LinkedIn',
-      actions: 'Details'
+      actions: ['Details']
     },
     {
       candidateId: 'CAN006',
@@ -48,7 +48,7 @@ dataSource: any[] = [
       currentLocation: 'Kochi',
       noticePeriod: 90,
       source: 'LinkedIn',
-      actions: 'Details'
+      actions: ['Details']
     },
     {
       candidateId: 'CAN006',
@@ -60,7 +60,7 @@ dataSource: any[] = [
       currentLocation: 'Kochi',
       noticePeriod: 90,
       source: 'LinkedIn',
-      actions: 'Details'
+      actions: ['Details']
     },
     {
       candidateId: 'CAN006',
@@ -72,7 +72,7 @@ dataSource: any[] = [
       currentLocation: 'Kochi',
       noticePeriod: 90,
       source: 'LinkedIn',
-      actions: 'Details'
+      actions: ['Details']
     },
     {
       candidateId: 'CAN006',
@@ -84,7 +84,7 @@ dataSource: any[] = [
       currentLocation: 'Kochi',
       noticePeriod: 90,
       source: 'LinkedIn',
-      actions: 'Details'
+      actions: ['Details']
     },
     {
       candidateId: 'CAN006',
@@ -96,7 +96,7 @@ dataSource: any[] = [
       currentLocation: 'Kochi',
       noticePeriod: 90,
       source: 'LinkedIn',
-      actions: 'Details'
+      actions: ['Details']
     },
     {
       candidateId: 'CAN006',
@@ -108,7 +108,7 @@ dataSource: any[] = [
       currentLocation: 'Kochi',
       noticePeriod: 90,
       source: 'LinkedIn',
-      actions: 'Details'
+      actions: ['Details']
     },
     {
       candidateId: 'CAN006',
@@ -120,7 +120,7 @@ dataSource: any[] = [
       currentLocation: 'Kochi',
       noticePeriod: 90,
       source: 'LinkedIn',
-      actions: 'Details'
+      actions: ['Details']
     }
   ];
 

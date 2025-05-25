@@ -1,16 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { ButtonComponent } from "../../../ui/button/button.component";
-import { HeaderTextComponent } from "../../../ui/header-text/header-text.component";
-import { ButtonIconComponent } from "../../../ui/button-icon/button-icon.component";
-import { TreeTable, TreeTableModule } from 'primeng/treetable';
+import { TreeTableModule } from 'primeng/treetable';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
+
 @Component({
   selector: 'app-tree-table',
-  imports: [ButtonComponent,TreeTableModule, CommonModule,ButtonModule,IconField, InputIcon],
+  imports: [ButtonComponent, TreeTableModule, CommonModule, ButtonModule, IconField, InputIcon],
   templateUrl: './tree-table.component.html',
   styleUrl: './tree-table.component.scss'
 })

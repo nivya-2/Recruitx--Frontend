@@ -16,7 +16,7 @@ dataSource: any[] = [
       experience: 5, 
       createdDate: '05-05-2025', 
       assoJr: 'JR2025-112',
-      actions:'Schedule',
+      actions:['Schedule'],
       },
       {  id: 'JD002', 
         roleTitle: 'UX Designer',
@@ -25,8 +25,7 @@ dataSource: any[] = [
         experience: 7, 
         createdDate: '05-05-2025', 
         assoJr: 'JR2025-113',
-        actions:'Schedule',
-
+actions:['Schedule'],
       },
       {  id: 'JD003', 
           roleTitle: 'Sales Manager',
@@ -35,7 +34,7 @@ dataSource: any[] = [
           experience: 9, 
           createdDate: '09-05-2025', 
           assoJr: 'JR2025-114',
-          actions:'Schedule',
+      actions:['Schedule'],
 
       },
       {  id: 'JD004', 
@@ -45,7 +44,7 @@ dataSource: any[] = [
             experience: 9, 
             createdDate: '09-05-2025', 
             assoJr: 'JR2025-115',
-            actions:'Schedule',
+      actions:['Schedule'],
 
       },
       { id: 'JD005', 
@@ -55,7 +54,7 @@ dataSource: any[] = [
               experience: 7, 
               createdDate: '05-07-2025', 
               assoJr: 'JR2025-116',
-              actions:'Schedule',
+      actions:['Schedule'],
 
             },
             {  id: 'JD006', 
@@ -65,7 +64,7 @@ dataSource: any[] = [
                 experience: 7, 
                 createdDate: '05-08-2025', 
                 assoJr: 'JR2025-117',
-                actions:'Schedule',
+      actions:['Schedule'],
 
             },
             {  id: 'JD007', 
@@ -75,7 +74,7 @@ dataSource: any[] = [
               experience: 7, 
               createdDate: '15-05-2025', 
               assoJr: 'JR2025-118',
-              actions:'Schedule',
+      actions:['Schedule'],
 
               },
         {  id: 'JD008', 
@@ -85,7 +84,7 @@ dataSource: any[] = [
           experience: 11, 
           createdDate: '25-06-2025', 
           assoJr: 'JR2025-119',
-          actions:'Schedule',
+      actions:['Schedule'],
 
           }
 
