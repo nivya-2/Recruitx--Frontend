@@ -10,6 +10,7 @@
               </div>
     </div>
   </div>
+  <app-toast #toastComp></app-toast>
 
   <app-modal
         [(visible)]="visible"
@@ -17,8 +18,8 @@
         header=""
         [maximizable]="false"
         [headerBgColor]="'#ffffff'"
-        [style]="{ width: '60rem', height: '40rem' }"
+        [style]="{ width: '50rem', height: '40rem' }"
        >
-      <app-jr-card></app-jr-card>
+       <app-jr-card (assignCompleted)="handleAssignCompleted($event)"></app-jr-card>
 
        </app-modal>
