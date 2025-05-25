@@ -23,9 +23,9 @@ export class RecruiterLeadDashboardComponent {
 
   
   scheduledInterviewsDataSource: any[] = [
-    { id: 'CAN-009', name: 'Arjun Menon', interviewDate: '15/04/2025' },
-    { id: 'CAN-005', name: 'Alia V', interviewDate: '15/04/2025' },
-    { id: 'CAN-012', name: 'Kavya Nair', interviewDate: '16/04/2025' }
+    { id: 'CAN009', name: 'Arjun Menon', interviewDate: '15/04/2025' },
+    { id: 'CAN005', name: 'Alia V', interviewDate: '15/04/2025' },
+    { id: 'CAN012', name: 'Kavya Nair', interviewDate: '16/04/2025' }
   ];
 
   scheduledColumns: Array<{ key: string, label: string, filterable: boolean }> = [
@@ -38,9 +38,9 @@ export class RecruiterLeadDashboardComponent {
 
 
   completedInterviewsDataSource: any[] = [
-    { id: 'CAN-014', name: 'Tanvi Rao', interviewDate: '12/04/2025' },
-    { id: 'CAN-011', name: 'Rajat Verma', interviewDate: '11/04/2025' },
-    { id: 'CAN-015', name: 'Aditya Pillai', interviewDate: '16/04/2025' }
+    { id: 'CAN014', name: 'Tanvi Rao', interviewDate: '12/04/2025' },
+    { id: 'CAN011', name: 'Rajat Verma', interviewDate: '11/04/2025' },
+    { id: 'CAN015', name: 'Aditya Pillai', interviewDate: '16/04/2025' }
   ];
 
   completedColumns: Array<{ key: string, label: string, filterable: boolean }> = [
@@ -53,15 +53,15 @@ completedGlobalFilterFields = this.completedColumns.map(c => c.key);
 
 
   awaitingShortlistingDataSource: any[] = [
-    { id: 'CAN-006', name: 'Aswin A', interviewDate: '17/04/2025', interviewType: 'Technical L1' , actions: 'Shortlist'},
-    { id: 'CAN-002', name: 'Priya Sharma', interviewDate: '10/04/2025', interviewType: 'Technical L1' , actions: 'Shortlist'},
-    { id: 'CAN-004', name: 'Aarav Mehta', interviewDate: '09/04/2025', interviewType: 'Technical L1' , actions: 'Shortlist' },
-    { id: 'CAN-010', name: 'Rohan Kapoor', interviewDate: '17/04/2025', interviewType: 'Technical L2' , actions: 'Shortlist' },
-    { id: 'CAN-005', name: 'Ananya Iyer', interviewDate: '08/04/2025', interviewType: 'Technical L2' , actions: 'Shortlist' },
-    { id: 'CAN-003', name: 'Karan Malhotra', interviewDate: '07/04/2025', interviewType: 'Technical L2' , actions: 'Shortlist' },
-    { id: 'CAN-001', name: 'Vivek Reddy', interviewDate: '06/04/2025', interviewType: 'Management' , actions: 'Shortlist' },
-    { id: 'CAN-007', name: 'Nisha Patel', interviewDate: '13/04/2025', interviewType: 'Management' , actions: 'Shortlist' },
-    { id: 'CAN-008', name: 'Arjun Bansal', interviewDate: '04/04/2025', interviewType: 'Management' , actions: 'Shortlist' }
+    { id: 'CAN006', name: 'Aswin A', interviewDate: '17/04/2025', interviewType: 'Technical L1' , actions: ['Shortlist']},
+    { id: 'CAN002', name: 'Priya Sharma', interviewDate: '10/04/2025', interviewType: 'Technical L1' , actions: ['Shortlist']},
+    { id: 'CAN004', name: 'Aarav Mehta', interviewDate: '09/04/2025', interviewType: 'Technical L1' , actions: ['Shortlist'] },
+    { id: 'CAN010', name: 'Rohan Kapoor', interviewDate: '17/04/2025', interviewType: 'Technical L2' , actions:['Shortlist'] },
+    { id: 'CAN005', name: 'Ananya Iyer', interviewDate: '08/04/2025', interviewType: 'Technical L2' , actions: ['Shortlist'] },
+    { id: 'CAN003', name: 'Karan Malhotra', interviewDate: '07/04/2025', interviewType: 'Technical L2' , actions: ['Shortlist'] },
+    { id: 'CAN001', name: 'Vivek Reddy', interviewDate: '06/04/2025', interviewType: 'Management' , actions: ['Shortlist'] },
+    { id: 'CAN007', name: 'Nisha Patel', interviewDate: '13/04/2025', interviewType: 'Management' , actions: ['Shortlist'] },
+    { id: 'CAN008', name: 'Arjun Bansal', interviewDate: '04/04/2025', interviewType: 'Management' , actions: ['Shortlist'] }
   ];
 
   awaitingColumns: Array<{ key: string, label: string, filterable: boolean }> = [

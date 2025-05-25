@@ -16,6 +16,9 @@ import { IconComponent } from '../icon/icon.component';
 export class BreadcrumbsComponent implements OnInit {
   @Input() items?: MenuItem[];
   @Input() home?: MenuItem = { label: '', routerLink: '' };
+  //on setting home route link. It will naivgate to landing page, but we need navigation to respective user pages
+  //So it would be better to redirect from landing page(login page in future hopefully) to respecrtive pages based on user role. 
+  //needs to be implemented when authentication is added.
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 

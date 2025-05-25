@@ -6,20 +6,19 @@ import { ButtonModule } from 'primeng/button';
   selector: 'app-button',
   imports: [ButtonModule, NgStyle],
   templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+  styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
-
   @Output() functionemit = new EventEmitter();
 
   @Input() color: string = '#7B61FF';
-  @Input() action: () => void = () => { };
+  @Input() action: () => void = () => {};
 
   handleClick() {
-    // if (this.action) {
-    //   const result = this.action();
-      this.functionemit.emit();
-    // }
+    if (this.action) {
+      const result = this.action();
+    
+    this.functionemit.emit();
+    }
   }
-
 }

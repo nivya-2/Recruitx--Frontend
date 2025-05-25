@@ -1,0 +1,123 @@
+.job-details-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: -20px;
+  height: 100%; /* Ensure it fills available space */
+ 
+
+}
+
+.job-sidebar {
+  background-color: #e2e5ec;
+  width: 300px;
+  padding: 3% 2%;
+  gap: 10px;
+  // z-index: -1;
+  height: 103.9%;
+  border-radius: 10px 0px 0px 10px;
+
+}
+
+.sidebar-section {
+  padding: 10px;
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.section-content {
+  font-weight: 600;
+  padding-top: 10px;
+  display: flex;
+  justify-content: left;
+  gap: 10px;
+}
+
+.recruiter-search-input {
+  border-radius: 10px;
+  border: 1px solid navy;
+  padding: 5px;
+  width: 200px;
+}
+
+.job-main-content {
+
+  display: flex;
+  flex-direction: column;
+  padding: 3%;
+  flex: 1; /* Let it take up remaining space */
+  height: 100%; /* Ensure it respects viewport */
+}
+
+.job-title {
+  color: #7b61ff;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.job-summary {
+  color: #7b61ff;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.job-meta {
+  color: gray;
+  font-size: 25px;
+  padding-bottom: 20px;
+  font-weight: 500;
+}
+
+.scroll-section {
+  flex: 1 1 auto; /* Take up all available space */
+  overflow-y: auto;
+  padding-right: 10px; /* Space for scrollbar */
+  border-bottom: 1px solid #ccc;      // light gray border
+  padding: 1rem;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+.job-info {
+  padding-top: 10px;
+}
+
+.job-info-label {
+  font-weight: 600;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.job-info-value {
+  font-weight: 400;
+}
+
+.qualifications-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.qualifications-list li {
+  padding: 4px 0;
+}
+
+// .assign-button-container {
+//   display: flex;
+//   justify-content: center;
+//   padding: 1rem 0;
+//   border-top: 1px solid #ccc; /* Optional separator line */
+//   background-color: white;    /* Optional background to make it stand out */
+//   position: sticky;
+//   bottom: 0; /* Stick to bottom inside the column */
+  
+// }
+.assign-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem; // or increase as you like, this margin stays BELOW the scroll section
+}
+

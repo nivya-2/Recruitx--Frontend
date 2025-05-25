@@ -4,7 +4,7 @@ import { TableComponent } from '../../shared-components/table/table.component';
 
 @Component({
   selector: 'app-pending-jd-gen',
-  imports: [HeaderTextComponent, TableComponent],
+  imports: [ TableComponent],
   templateUrl: './pending-jd-gen.component.html',
   styleUrl: './pending-jd-gen.component.scss'
 })
@@ -19,7 +19,7 @@ export class PendingJdGenComponent {
       openPositions: 6,
       createdDate: '04/04/2025',
       hiringManager: 'Dave John',
-      actions: 'Generate JD'
+      actions: ['Generate JD']
     },
     {
       id: 'JR2025-112',
@@ -29,7 +29,7 @@ export class PendingJdGenComponent {
       openPositions: 4,
       createdDate: '12/02/2025',
       hiringManager: 'John Doe',
-      actions: 'Draft'
+      actions:[ 'Draft']
     },
     {
       id: 'JR2025-112',
@@ -39,7 +39,7 @@ export class PendingJdGenComponent {
       openPositions: 2,
       createdDate: '20/03/2025',
       hiringManager: 'Alice Smith',
-      actions: 'Generate JD'
+      actions: ['Generate JD']
     },
     {
       id: 'JR2025-112',
@@ -49,7 +49,7 @@ export class PendingJdGenComponent {
       openPositions: 4,
       createdDate: '17/01/2025',
       hiringManager: 'Arjun Menon',
-      actions: 'Draft'
+      actions:[ 'Draft']
     },
     {
       id: 'JR2025-112',
@@ -59,7 +59,7 @@ export class PendingJdGenComponent {
       openPositions: 2,
       createdDate: '10/04/2025',
       hiringManager: 'Rajat Kumar',
-      actions: 'Generate JD'
+      actions: ['Generate JD']
     },
     {
       id: 'JR2025-112',
@@ -69,7 +69,7 @@ export class PendingJdGenComponent {
       openPositions: 2,
       createdDate: '10/04/2025',
       hiringManager: 'Rajat Kumar',
-      actions: 'Generate JD'
+      actions: ['Generate JD']
     },
     {
       id: 'JR2025-112',
@@ -79,7 +79,7 @@ export class PendingJdGenComponent {
       openPositions: 2,
       createdDate: '10/04/2025',
       hiringManager: 'Rajat Kumar',
-      actions: 'Generate JD'
+      actions: ['Generate JD']
     },
     {
       id: 'JR2025-112',
@@ -89,7 +89,7 @@ export class PendingJdGenComponent {
       openPositions: 2,
       createdDate: '10/04/2025',
       hiringManager: 'Rajat Kumar',
-      actions: 'Generate JD'
+      actions: ['Generate JD']
     }
   ];
 

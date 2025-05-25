@@ -21,7 +21,8 @@
   background-color: #e5deff !important;
   cursor: pointer;
 }
-  
+
+
 
   ::ng-deep {
     /* Header Content Styling */
@@ -47,6 +48,10 @@
     .header-text.multi-word {
       white-space: normal !important;
     }
+
+     .header-text.center-actions-header {
+    text-align: center !important;
+  }
   
     /* Icon container */
     .header-icons {
@@ -64,12 +69,23 @@
       margin: 0;
       padding: 0;
     }
-  
+      
+ .action-buttons {
+   display: flex;
+  gap: 8px;
+  // flex-wrap: wrap;
+  justify-content: flex-start;
+
+  &.center-label {
+    justify-content: center !important;
+  }
+}
     .p-datatable .p-datatable-tbody > tr > td {
       padding: 0.75rem 1rem;
       border-bottom: 1px solid #f0f0f0;
       vertical-align: middle;
     }
+
   
     .p-datatable .p-datatable-tbody > tr:last-child > td {
       border-bottom: none;
@@ -94,6 +110,7 @@
     .p-datatable .p-datatable-tbody > tr:not(:last-child) {
       margin-bottom: 4px;
     }
-
+    
+   
     
   }

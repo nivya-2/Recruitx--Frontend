@@ -1,0 +1,19 @@
+.assign-box {
+  max-width: 100%;
+
+  .scroll-container {
+    max-height: 28vh;
+    overflow-y: auto;
+    margin-top: 0.5rem;
+  }
+}
+
+.hover-item {
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #DBD4FF; /* Light gray or any theme color */
+  }
+}
