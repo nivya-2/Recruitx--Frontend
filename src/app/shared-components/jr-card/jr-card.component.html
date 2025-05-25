@@ -18,11 +18,15 @@
     <div class="sidebar-section">
       <div class="section-title">Assign Recruiter</div>
       <div class="section-content">
+        <app-assign #assignBox [teamList]="teamList"></app-assign>
+
+        <!-- Input box directly passing the click event -->
         <input
           type="text"
           pInputText
           class="recruiter-search-input"
           placeholder="Search Recruiter"
+          (click)="openAssignPopover($event)"
         />
       </div>
     </div>
@@ -31,7 +35,8 @@
   <div class="job-main-content">
     <div class="job-title">{{ jobDetails.jobTitle }}</div>
     <div class="job-summary">
-      {{ jobDetails.deliveryUnit }} | {{ jobDetails.openPositions }} Open Positions
+      {{ jobDetails.deliveryUnit }} | {{ jobDetails.openPositions }} Open
+      Positions
     </div>
     <div class="job-meta">
       Raised on {{ jobDetails.raisedOn }} | {{ jobDetails.location }}
