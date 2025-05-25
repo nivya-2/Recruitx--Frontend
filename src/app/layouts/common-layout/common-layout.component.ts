@@ -32,7 +32,7 @@ export class CommonLayoutComponent {
     { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-lead/analytics' },
     { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'Track JR', route: '/recruiter-lead/dashboard' },
     { iconName: 'timeline', size: '28px', iconColour: '#B8AAFF', label: 'Track JD', route: '/recruiter-lead/track-jd' },
-    { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Interview Details', route: '/recruiter-lead/schedule-interviews' },
+    { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Interviews', route: '/recruiter-lead/schedule-interviews' },
     { iconName: 'group', size: '28px', iconColour: '#B8AAFF', label: 'Teams', route: '/recruiter-lead/team' },
   ];
 
@@ -76,5 +76,6 @@ role: string = '';
     this.role = 'Recruiter';
   }
 }
+
 
 }
