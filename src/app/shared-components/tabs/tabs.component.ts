@@ -10,7 +10,7 @@ import { TabsModule } from 'primeng/tabs';
 })
 export class TabsComponent {
  @Input()  tabs: { title: string; value: number; route: string }[] = [];
-  selectedTabIndex = 0;
+  @Input() selectedTabIndex = 0;
 
   constructor(private router: Router) {}
 

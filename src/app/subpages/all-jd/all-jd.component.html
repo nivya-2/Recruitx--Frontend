@@ -1,11 +1,12 @@
 <div class="base">
   <app-table
-    [dataSource]="jobDataSource"
-    [columns]="jobColumns"
+    [dataSource]="dataSource"
+    [columns]="columns"
     [globalFilterFields]="globalFilterFields"
-    [hover]="false"
+    [hover]="true"
     [rows]="7"
-    [actionMethods]="actionMethods"
     [showFilter]="true">
       </app-table>
 </div>
+
+    <!-- [rowClickFn]="routes" -->

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AlertsComponent } from './alerts.component';
+import { AllJdComponent } from './all-jd.component';
 
-describe('AlertsComponent', () => {
-  let component: AlertsComponent;
-  let fixture: ComponentFixture<AlertsComponent>;
+describe('AllJdComponent', () => {
+  let component: AllJdComponent;
+  let fixture: ComponentFixture<AllJdComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AlertsComponent]
+      imports: [AllJdComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AlertsComponent);
+    fixture = TestBed.createComponent(AllJdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

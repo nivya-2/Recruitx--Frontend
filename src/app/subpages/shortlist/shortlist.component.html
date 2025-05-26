@@ -1,3 +1,19 @@
-                    <app-table [dataSource]="awaitingShortlistingDataSource" [columns]="awaitingColumns"
-                        [globalFilterFields]="awaitingGlobalFilterFields" [hover]="false" [rows]="9"
-                     [fontSize]="'11px'"></app-table>
+<app-table
+  [dataSource]="awaitingShortlistingDataSource"
+  [columns]="awaitingColumns"
+  [globalFilterFields]="awaitingGlobalFilterFields"
+  [hover]="false"
+  [rows]="9"
+  [fontSize]="'11px'"
+  [actionMethods]="actionMethods"
+></app-table>
+
+<app-modal
+  [(visible)]="visible"
+  
+  header="Please shortlist based on the evaluation form"
+  [maximizable]="false"
+  [style]="{ width: '72rem', height: '30rem' }"
+>
+  <app-shortlist-info></app-shortlist-info>
+</app-modal>

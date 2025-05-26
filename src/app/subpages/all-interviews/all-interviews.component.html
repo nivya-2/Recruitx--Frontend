@@ -1,3 +1,23 @@
-                    <app-table [dataSource]="completedInterviewsDataSource" [columns]="completedColumns"
-                        [globalFilterFields]="completedGlobalFilterFields" [hover]="false" [rows]="3"
-                         [fontSize]="'11px'"></app-table>
+<!-- Container for top-right aligned select -->
+<div class="header-container">
+  <p-select 
+    [options]="viewOptions" 
+    [(ngModel)]="selectedView" 
+    optionLabel="name" 
+    optionValue="code"
+    placeholder="Select View"
+    class="select-dropdown"
+  >
+  </p-select>
+</div>
+
+<!-- Table Component -->
+<app-table
+  [dataSource]="interviewsData"
+  [columns]="columnData"
+  [globalFilterFields]="globalFilterFields"
+  [hover]="false"
+  [rows]="9"
+  
+  [fontSize]="'11px'">
+</app-table>

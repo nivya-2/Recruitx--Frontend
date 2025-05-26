@@ -1,4 +1,4 @@
-<p-progressbar [value]="percentage">
+<p-progressbar [value]="percentage"  pTooltip="{{ percentage | number: '1.0-0' }}%">
   <ng-template #content let-value>
     <span>{{ current }}/{{ total }}</span>
   </ng-template>

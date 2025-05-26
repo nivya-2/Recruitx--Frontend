@@ -13,6 +13,7 @@ export class ButtonComponent {
 
   @Input() color: string = '#7B61FF';
   @Input() action: () => void = () => {};
+  @Input() disabled: boolean = false;
 
   handleClick() {
     if (this.action) {

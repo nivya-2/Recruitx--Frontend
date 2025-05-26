@@ -6,13 +6,12 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { AssignComponent } from '../../ui/assign/assign.component';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { ViewassignedjrCardComponent } from "../../shared-components/viewassignedjr-card/viewassignedjr-card.component";
-import { AlertsComponent } from '../../ui/alerts/alerts.component';
 
 
 
 @Component({
   selector: 'app-my-team',
-  imports: [CardsComponent, AlertsComponent,TableComponent, ButtonComponent,AssignComponent, ModalComponent, ViewassignedjrCardComponent],
+  imports: [CardsComponent, TableComponent, ButtonComponent,AssignComponent, ModalComponent, ViewassignedjrCardComponent],
   templateUrl: './my-team.component.html',
   styleUrl: './my-team.component.scss'
 })

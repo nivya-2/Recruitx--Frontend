@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToastComponent } from './toast.component';
+import { ShortlistInfoComponent } from './shortlist-info.component';
 
-describe('ToastComponent', () => {
-  let component: ToastComponent;
-  let fixture: ComponentFixture<ToastComponent>;
+describe('ShortlistInfoComponent', () => {
+  let component: ShortlistInfoComponent;
+  let fixture: ComponentFixture<ShortlistInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ToastComponent]
+      imports: [ShortlistInfoComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ToastComponent);
+    fixture = TestBed.createComponent(ShortlistInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

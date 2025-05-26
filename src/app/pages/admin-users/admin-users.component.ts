@@ -1,10 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonLayoutComponent } from '../../layouts/common-layout/common-layout.component';
 import { TableComponent } from '../../shared-components/table/table.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
-import { ButtonComponent } from "../../ui/button/button.component";
 import { AssignComponent } from "../../ui/assign/assign.component";
 import { NgIf } from '@angular/common';
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
@@ -13,12 +12,11 @@ import { AlertsComponent } from '../../ui/alerts/alerts.component';
 
 @Component({
   selector: 'app-admin-users',
-  imports: [TableComponent,CommonLayoutComponent,AlertsComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent],
+  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss'
 })
 export class AdminUsersComponent {
-  recruiterHeadName = "Nivya Vineeth";
   dataSource: any[] = [
   { id: 'EMP877653', name: 'Alia K', jobTitle: 'Senior Executive', role: 'Recruiter', location: 'Kochi', deliveryUnit: 'DU6', email: 'test@mail.com', status1: 'Active', uploadedDate: '25-06-2025', actions: ['Edit'] },
   { id: 'EMP877654', name: 'Ravi M', jobTitle: 'HR Associate', role: 'Recruiter Lead', location: 'Bangalore', deliveryUnit: 'DU3', email: 'ravi.m@mail.com', status1: 'Active', uploadedDate: '24-06-2025', actions: ['Edit'] },
