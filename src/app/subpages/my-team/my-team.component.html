@@ -1,28 +1,30 @@
 
 <app-cards width="95%">
-<app-assign #assignBox [teamList]="teamList"></app-assign>
- <div (click)="onHostClick($event)">
-    <app-button (functionemit)="openAssignPopover()" class="right-align">
-      Add member
-    </app-button>
-  </div>
-
-  <app-table
-    [dataSource]="teamsDataSource"
-    [columns]="teamsColumns"
-    [globalFilterFields]="teamsGlobalFilterFields"
-    [hover]="false"
-    [rows]="8"
-    [showFilter]="true"
-    [actionMethods]="actionMethods"
-  ></app-table>
-
-  <app-modal
- [(visible)]="visible"
- header="Assigned Job Requisitions"
- [maximizable]="true"
- [style]="{ width: '72rem', height: '30rem' }"
->
-<app-viewassignedjr-card></app-viewassignedjr-card>
-</app-modal>
-</app-cards>
+  <app-assign #assignBox [teamList]="teamList"   (memberSelected)="handleSelectedMember($event)"></app-assign>
+   <div (click)="onHostClick($event)">
+      <app-button (functionemit)="openAssignPopover()" class="right-align">
+        Add member
+      </app-button>
+    </div>
+    <app-alerts #alerts></app-alerts>
+  
+  
+    <app-table
+      [dataSource]="teamsDataSource"
+      [columns]="teamsColumns"
+      [globalFilterFields]="teamsGlobalFilterFields"
+      [hover]="false"
+      [rows]="8"
+      [showFilter]="true"
+      [actionMethods]="actionMethods"
+    ></app-table>
+  
+    <app-modal
+   [(visible)]="visible"
+   header="Assigned Job Requisitions"
+   [maximizable]="true"
+   [style]="{ width: '72rem', height: '30rem' }"
+  >
+  <app-viewassignedjr-card></app-viewassignedjr-card>
+  </app-modal>
+  </app-cards>

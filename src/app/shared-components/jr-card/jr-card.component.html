@@ -18,16 +18,25 @@
     <div class="sidebar-section">
       <div class="section-title">Assign Recruiter</div>
       <div class="section-content">
-        <app-assign #assignBox [teamList]="teamList"></app-assign>
+        
+        <app-assign
+  [teamList]="teamList"
+  (memberSelected)="handleSelectedMember($event)"
+ #assignBox >
+
+        </app-assign>
 
         <!-- Input box directly passing the click event -->
         <input
-          type="text"
-          pInputText
-          class="recruiter-search-input"
-          placeholder="Search Recruiter"
-          (click)="openAssignPopover($event)"
-        />
+        type="text"
+        pInputText
+        class="recruiter-search-input"
+        [placeholder]="selectedMemberFromChild ? '' : 'Search Recruiter'"
+        [value]="selectedMemberFromChild ? selectedMemberFromChild.fullName : ''"
+        (click)="openAssignPopover($event)"
+        readonly
+      />
+      
       </div>
     </div>
   </div>
@@ -89,7 +98,18 @@
     <!-- ⏪ SCROLLABLE SECTION END -->
 
     <div class="assign-button-container">
-      <app-button>Assign</app-button>
+      <div class="name-sec">
+       Recruiter selected :
+      <div class="name-tag" *ngIf="selectedMemberFromChild">
+        {{ selectedMemberFromChild.fullName }}
+      </div>
+    </div>
+    <app-toast #toast></app-toast>
+
+      <app-button 
+      [disabled]="!selectedMemberFromChild"
+       (click)="triggerToast(toast)
+       ">Assign</app-button>
     </div>
   </div>
 </div>
