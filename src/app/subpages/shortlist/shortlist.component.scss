@@ -1,0 +1,594 @@
+// Variables
+$primary-color: #6366f1;
+$primary-hover: #5048e5;
+$background-light: #f8f9fa;
+$border-color: #e9ecef;
+$text-primary: #212529;
+$text-secondary: #495057;
+$text-muted: #6c757d;
+$separator-color: #dee2e6;
+
+$border-radius: 8px;
+$border-radius-sm: 6px;
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 20px;
+$spacing-xl: 24px;
+$spacing-xxl: 32px;
+
+$font-size-sm: 14px;
+$font-size-lg: 20px;
+
+.candidate-info-container {
+  width: 100%;
+  background: white;
+  border-radius: $border-radius;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.header-section {
+  background: $background-light;
+  padding: $spacing-xl;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $border-color;
+
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  .profile-avatar {
+    width: 48px;
+    height: 48px;
+    background: $text-muted;
+    border-radius: $border-radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    .candidate-name {
+      font-size: $font-size-lg;
+      font-weight: 600;
+      margin: 0;
+      color: $text-primary;
+    }
+
+    .contact-info {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      color: $text-muted;
+      font-size: $font-size-sm;
+
+      .separator {
+        color: $separator-color;
+      }
+    }
+  }
+
+  .download-btn {
+    background: $primary-color;
+    color: white;
+    border: none;
+    border-radius: $border-radius-sm;
+    padding: 10px $spacing-md;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: $primary-hover;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+  }
+}
+
+// Split Layout Styles
+.content-section {
+  padding: 0;
+  height: calc(100vh - 200px); // Adjust based on your header height (increased to account for header section)
+}
+
+.split-container {
+  display: flex;
+  height: 100%;
+  gap: 1px; // Small gap for visual separation
+  background: $border-color; // Background color for the gap
+}
+
+.left-panel {
+  flex: 0 0 40%;
+  background: white;
+  overflow-y: auto;
+}
+
+.right-panel {
+  flex: 1;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+// Enhanced evaluation-container styling for comprehensive evaluation form
+.evaluation-container {
+  height: 100%;
+  overflow-y: auto;
+  padding: $spacing-md $spacing-lg;
+  font-size: 13px;
+  line-height: 1.4;
+
+  // Main title styling
+  h2 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 $spacing-lg 0;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid #e9ecef;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: $spacing-sm;
+    border-radius: $border-radius-sm;
+  }
+
+  // Section headers
+  h4 {
+    color: #2c3e50;
+    font-size: 14px;
+    font-weight: 600;
+    margin: $spacing-lg 0 $spacing-sm 0;
+    padding: $spacing-xs $spacing-sm;
+    border-left: 4px solid $primary-color;
+    background: #f8f9fa;
+    border-radius: 0 $border-radius-sm $border-radius-sm 0;
+  }
+
+  // Candidate Basics Section - Compact Grid Layout
+  .candidate-basics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-xs $spacing-md;
+    margin-bottom: $spacing-lg;
+    background: #f8f9fa;
+    padding: $spacing-md;
+    border-radius: $border-radius;
+    border: 1px solid #e9ecef;
+
+    p {
+      margin: $spacing-xs 0;
+      font-size: 12px;
+      
+      strong {
+        color: $text-secondary;
+        font-weight: 600;
+        display: inline-block;
+        min-width: 80px;
+      }
+    }
+  }
+
+  // Technical Skills Section
+  .technical-skills {
+    .skills-category {
+      margin-bottom: $spacing-lg;
+
+      > p {
+        background: #e3f2fd;
+        padding: $spacing-xs $spacing-sm;
+        margin: $spacing-sm 0;
+        border-radius: $border-radius-sm;
+        border-left: 3px solid #2196f3;
+        font-weight: 600;
+      }
+
+      ul {
+        margin: $spacing-sm 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+          background: white;
+          padding: $spacing-sm;
+          margin: $spacing-xs 0;
+          border: 1px solid #e9ecef;
+          border-radius: $border-radius-sm;
+          font-size: 12px;
+          line-height: 1.3;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+
+          strong {
+            color: $primary-color;
+            font-weight: 600;
+          }
+
+          // Highlight the average score
+          &:has(strong:contains("Avg")) {
+            border-left: 3px solid #28a745;
+          }
+        }
+      }
+    }
+
+    // Comments styling
+    .skills-comments {
+      p {
+        background: #fff3cd;
+        padding: $spacing-sm;
+        border-left: 3px solid #ffc107;
+        border-radius: $border-radius-sm;
+        font-size: 12px;
+        margin: $spacing-sm 0;
+
+        strong {
+          color: #856404;
+        }
+      }
+    }
+  }
+
+  // CAR (Behavioral) Ratings Section
+  .car-ratings {
+    ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: $spacing-sm;
+      padding: 0;
+      margin: $spacing-sm 0;
+      list-style: none;
+
+      li {
+        background: #e8f5e8;
+        padding: $spacing-sm;
+        border-radius: $border-radius-sm;
+        border-left: 3px solid #28a745;
+        font-size: 12px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+
+        strong {
+          color: #155724;
+          font-weight: 600;
+        }
+
+        // Special styling for behavior comments
+        &:last-child {
+          grid-column: 1 / -1;
+          background: #f0f8ff;
+          border-left-color: #007bff;
+        }
+      }
+    }
+  }
+
+  // Overall Assessment Section
+  .overall-assessment {
+    background: #f8f9fa;
+    padding: $spacing-md;
+    border-radius: $border-radius;
+    margin-top: $spacing-lg;
+    border: 1px solid #dee2e6;
+
+    p {
+      margin: $spacing-sm 0;
+      font-size: 12px;
+      line-height: 1.4;
+
+      strong {
+        color: $text-secondary;
+        font-weight: 600;
+        display: inline-block;
+        min-width: 120px;
+      }
+
+      // Special styling for specific assessment items
+      &:has(strong:contains("Capability")) {
+        background: #d4edda;
+        padding: $spacing-xs $spacing-sm;
+        border-left: 3px solid #28a745;
+        border-radius: $border-radius-sm;
+      }
+
+      &:has(strong:contains("Strengths")) {
+        background: #cce5ff;
+        padding: $spacing-xs $spacing-sm;
+        border-left: 3px solid #007bff;
+        border-radius: $border-radius-sm;
+      }
+
+      &:has(strong:contains("Areas for Improvement")) {
+        background: #fff3cd;
+        padding: $spacing-xs $spacing-sm;
+        border-left: 3px solid #ffc107;
+        border-radius: $border-radius-sm;
+      }
+    }
+  }
+
+  // Section dividers
+  hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, $separator-color, transparent);
+    margin: $spacing-lg 0;
+    border-radius: 1px;
+  }
+
+  // General paragraph styling
+  p {
+    margin: $spacing-xs 0;
+    color: $text-primary;
+    font-size: 13px;
+
+    strong {
+      color: $text-secondary;
+      font-weight: 600;
+    }
+  }
+
+  // Mobile responsiveness
+  @media (max-width: 768px) {
+    padding: $spacing-sm;
+    font-size: 12px;
+
+    h2 {
+      font-size: 15px;
+      padding: $spacing-xs;
+    }
+
+    h4 {
+      font-size: 13px;
+      margin: $spacing-md 0 $spacing-xs 0;
+      padding: $spacing-xs;
+    }
+
+    .candidate-basics {
+      grid-template-columns: 1fr;
+      padding: $spacing-sm;
+      gap: $spacing-xs;
+    }
+
+    .car-ratings ul {
+      grid-template-columns: 1fr;
+    }
+
+    .overall-assessment {
+      padding: $spacing-sm;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: $spacing-xs;
+    font-size: 11px;
+
+    h2 {
+      font-size: 14px;
+      margin-bottom: $spacing-sm;
+    }
+
+    h4 {
+      font-size: 12px;
+      margin: $spacing-sm 0 $spacing-xs 0;
+    }
+
+    p, li {
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .candidate-basics {
+      p strong {
+        min-width: 60px;
+        font-size: 10px;
+      }
+    }
+
+    .technical-skills ul li,
+    .car-ratings ul li {
+      padding: $spacing-xs;
+    }
+
+    .overall-assessment {
+      padding: $spacing-xs;
+      
+      p strong {
+        min-width: 90px;
+      }
+    }
+  }
+
+  // Very small screens
+  @media (max-width: 360px) {
+    .candidate-basics {
+      p {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        
+        strong {
+          min-width: auto;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+
+// Placeholder content styling (remove when you add the actual evaluation form)
+.placeholder-content {
+  text-align: center;
+  color: $text-muted;
+  padding: $spacing-xxl;
+  
+  h3 {
+    margin-bottom: $spacing-md;
+  }
+}
+
+.info-section {
+  margin-bottom: $spacing-xxl;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $text-secondary;
+    margin: 0 0 $spacing-lg 0;
+    letter-spacing: 0.5px;
+  }
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-xxl;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  &.interview-end-time {
+    grid-column: 1;
+  }
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $text-secondary;
+  }
+
+  span {
+    font-size: $font-size-sm;
+    color: $text-primary;
+  }
+}
+
+.panel-members {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  .panel-member {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    color: $text-muted;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    span {
+      color: inherit;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .split-container {
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .left-panel {
+    flex: none;
+    max-height: 40vh;
+  }
+
+  .right-panel {
+    flex: 1;
+    min-height: 60vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-section {
+    flex-direction: column;
+    gap: $spacing-md;
+    align-items: flex-start;
+
+    .download-btn {
+      align-self: stretch;
+      justify-content: center;
+    }
+  }
+
+  .info-row {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+
+  .left-panel,
+  .evaluation-container {
+    padding: $spacing-md;
+  }
+
+  .info-section {
+    margin-bottom: $spacing-xl;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-section {
+    padding: $spacing-md;
+
+    .profile-section {
+      gap: 12px;
+    }
+
+    .profile-avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    .candidate-name {
+      font-size: 18px;
+    }
+  }
+
+  .left-panel,
+  .evaluation-container {
+    padding: $spacing-md;
+  }
+}
+::ng-deep .p-dialog-content{
+    overflow-y: hidden;
+}
+.evaluation-actions{
+    display: flex;
+    gap: 2vw;
+    justify-content: flex-end;
+}
