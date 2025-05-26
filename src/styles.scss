@@ -12,7 +12,9 @@ body {
   background-color: $bg-color;
 
 }
-
+body::-webkit-scrollbar{
+  display: none;
+}
 table{
   border-radius: 10px !important;
   overflow: hidden !important;
