@@ -85,7 +85,7 @@ openAssignPopover(event: MouseEvent) {
   }
 }
 triggerToast(toastComponent: any) {
-
+console.log(this.selectedMemberFromChild)
   const selectedName = this.selectedMemberFromChild?.fullName || 'No recruiter selected';
   toastComponent.toastData = {
       severity: 'success',
