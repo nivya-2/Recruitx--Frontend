@@ -1,24 +1,25 @@
 <div class="job-list">
-    <div class="job-item" *ngFor="let job of jobs">
-      <div class="job-info">
-        <div class="job-title">{{ job.title }}</div>
-        <div class="job-meta">{{ job.date }} | {{ job.location }}</div>
-      </div>
-      <div class="job-positions"><span style="color: black;"> |&nbsp;&nbsp; </span>{{ job.positions }} Open Positions</div>
-      <div class="assign-button-wrapper">
-        <app-button (functionemit)="assignClick()">Assign</app-button>
-              </div>
+  <div class="job-item" *ngFor="let job of jobs">
+    <div class="job-info">
+      <div class="job-title">{{ job.title }}</div>
+      <div class="job-meta">{{ job.date }} | {{ job.location }}</div>
     </div>
+    <div class="job-positions"><span style="color: black;"> |&nbsp;&nbsp; </span>{{ job.positions }} Open Positions</div>
+    <div class="assign-button-wrapper">
+      <app-button (functionemit)="assignClick()">Assign</app-button>
+            </div>
   </div>
+</div>
+<app-toast #toastComp></app-toast>
 
-  <app-modal
-        [(visible)]="visible"
-        [showHeader]="false"
-        header=""
-        [maximizable]="false"
-        [headerBgColor]="'#ffffff'"
-        [style]="{ width: '60rem', height: '40rem' }"
-       >
-      <app-jr-card></app-jr-card>
+<app-modal
+      [(visible)]="visible"
+      [showHeader]="false"
+      header=""
+      [maximizable]="false"
+      [headerBgColor]="'#ffffff'"
+      [style]="{ width: '50rem', height: '40rem' }"
+     >
+     <app-jr-card (assignCompleted)="handleAssignCompleted($event)"></app-jr-card>
 
-       </app-modal>
+     </app-modal>
