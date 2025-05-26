@@ -9,6 +9,7 @@ import { InputIcon } from 'primeng/inputicon';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { IconComponent } from "../../ui/icon/icon.component";
 import { ProgressbarComponent } from '../../ui/progressbar/progressbar.component';
+import { SortEvent } from 'primeng/api';
 
 @Component({
   selector: 'app-table',
