@@ -1,0 +1,262 @@
+[33mcommit 38c414f831765155ec6890b4963815774ee52f4c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mservice[m[33m, [m[1;31morigin/service[m[33m)[m
+Merge: bdb8e55 f71cd57
+Author: Jjeff2002 <jeffinjitto2002@gmail.com>
+Date:   Mon May 26 10:35:55 2025 +0530
+
+    Merge branch 'dev' into service
+
+[33mcommit f71cd5792b4c4467edce218436e6784bde10904b[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m
+Merge: 80ff588 6910e2f
+Author: Abhinand K <115875756+Abhinandkalluvalappil@users.noreply.github.com>
+Date:   Mon May 26 10:10:58 2025 +0530
+
+    Merge pull request #66 from nivya-2/headassign
+    
+    Headassign
+
+[33mcommit 6910e2fe64506d54a881969a19d6a54d2e0f74af[m[33m ([m[1;31morigin/headassign[m[33m)[m
+Merge: cfee95e 3856f75
+Author: Abhinand K <abhinandksasi@gmail.com>
+Date:   Mon May 26 10:08:14 2025 +0530
+
+    Merge branch 'headassign' of https://github.com/nivya-2/Recruitx--Frontend into headassign
+
+[33mcommit cfee95e451fd92b3b7c76693258627321a63b49e[m
+Merge: 79f5bd2 80ff588
+Author: Abhinand K <abhinandksasi@gmail.com>
+Date:   Mon May 26 09:56:13 2025 +0530
+
+    Merge branch 'dev' into headassign
+
+[33mcommit 79f5bd223dc18309103e6b8a367b5acb3f2348e5[m
+Author: Abhinand K <abhinandksasi@gmail.com>
+Date:   Mon May 26 09:44:45 2025 +0530
+
+    added confirmation box,toast,rec head change block and fixed sidebar bug
+
+[33mcommit 80ff58805e7d1951c01bbb2d63bf642093fb03c1[m
+Merge: c563411 ac4f559
+Author: Jjef2002 <95353100+Jjef2002@users.noreply.github.com>
+Date:   Mon May 26 09:38:31 2025 +0530
+
+    Merge pull request #65 from nivya-2/treeTable
+    
+    global search
+
+[33mcommit ac4f55908f8ba8d6505ec9d77fccb8d991bf23a1[m[33m ([m[1;31morigin/treeTable[m[33m, [m[1;32mtreeTable[m[33m)[m
+Merge: cf699f5 c563411
+Author: Jjeff2002 <jeffinjitto2002@gmail.com>
+Date:   Mon May 26 09:37:10 2025 +0530
+
+    Merge branch 'dev' into treeTable
+
+[33mcommit cf699f585d29bbb8c40f44c1a8682ba0753ccba0[m
+Author: Jjeff2002 <jeffinjitto2002@gmail.com>
+Date:   Mon May 26 09:35:52 2025 +0530
+
+    globalSearch
+
+[33mcommit c56341168dd454fb947045be7facb68913d5a240[m
+Merge: 7b83e8a ef5c3f5
+Author: Anjalik712 <anjali2sheeja@gmail.com>
+Date:   Mon May 26 09:33:41 2025 +0530
+
+    Merge branch 'dev' of https://github.com/nivya-2/Recruitx--Frontend into dev
+
+[33mcommit 7b83e8a182df7836f48e14e37ce8763bb2cf21b6[m
+Author: Anjalik712 <anjali2sheeja@gmail.com>
+Date:   Mon May 26 09:33:10 2025 +0530
+
+    fix: change width of track-jr app card
+
+[33mcommit ef5c3f54a3404e96085724bd7a06643601fe439c[m
+Merge: dc80afd 80308a0
+Author: Anjalik712 <95455636+Anjalik712@users.noreply.github.com>
+Date:   Mon May 26 09:21:57 2025 +0530
+
+    Merge pull request #64 from nivya-2/trackjd
+    
+    Trackjd
+
+[33mcommit dc80afd4d900713f055b4a20f73c76987f7f57fe[m
+Merge: f9bd169 853623a
+Author: Dhunan99 <77274505+Dhunan99@users.noreply.github.com>
+Date:   Mon May 26 02:58:11 2025 +0530
+
+    Merge pull request #63 from nivya-2/interviews
+    
+    Interviews
+
+[33mcommit 853623a6a39942b324396633be3b31c00518e6e3[m[33m ([m[1;31morigin/interviews[m[33m)[m
+Merge: a96764e f9bd169
+Author: Dhunan <midhun2017.com>
+Date:   Mon May 26 02:56:52 2025 +0530
+
+    Merge branch 'dev' into interviews
+
+[33mcommit a96764ea29eb0aa62b7a10a334f41f0c1f5f10dd[m
+Author: Dhunan <midhun2017.com>
+Date:   Mon May 26 02:56:20 2025 +0530
+
+    Interviews modified
+
+[33mcommit f9bd169e3a36fee12f12d83d449be6094dbad75e[m
+Merge: 0e0835a c7056af
+Author: Dhunan99 <77274505+Dhunan99@users.noreply.github.com>
+Date:   Mon May 26 01:47:42 2025 +0530
+
+    Merge pull request #62 from nivya-2/interviews
+    
+    shortlist modal
+
+[33mcommit bdb8e55db78375850dd59a72d9cef0ef9191f706[m
+Author: Jjeff2002 <jeffinjitto2002@gmail.com>
+Date:   Mon May 26 00:49:12 2025 +0530
+
+    'service'
+
+[33mcommit 0138871990df0fcdd1586ff901f2655ef190a8b8[m
+Author: Jjeff2002 <jeffinjitto2002@gmail.com>
+Date:   Mon May 26 00:41:38 2025 +0530
+
+    nothing
+
+[33mcommit c7056af5277505dd269d9d5242084da4b47da270[m
+Author: Dhunan <midhun2017.com>
+Date:   Mon May 26 00:28:34 2025 +0530
+
+    shortlist modal
+
+[33mcommit 80308a05b0f0b981e5a5dc5ab7597927299e4033[m
+Author: K_vinj <kevinjoby1234@gmail.com>
+Date:   Sun May 25 23:17:25 2025 +0530
+
+    feat: Routed to the details and applicants pages and some styling in both pages
+
+[33mcommit 80a8a90ed3b9e29098c38b665b958ba0fcbb9814[m
+Merge: 8cd1d63 0e0835a
+Author: Abhinand K <abhinandksasi@gmail.com>
+Date:   Sun May 25 21:08:40 2025 +0530
+
+    Merge branch 'dev' into headassign
+
+[33mcommit 8cd1d63521f0d3996b41641a1da5b56c36d29459[m
+Author: Abhinand K <abhinandksasi@gmail.com>
+Date:   Sun May 25 21:06:42 2025 +0530
+
+    disable pending
+
+[33mcommit 9cdbf7a1f2a2806a12da8949ed8cbbc557883671[m
+Author: K_vinj <kevinjoby1234@gmail.com>
+Date:   Sun May 25 21:04:42 2025 +0530
+
+    feat: Button Disabling and Track JD Table
+
+[33mcommit a656c52b6ddada6fe1f70aebfd990ff043c80dfd[m
+Merge: 94eafae 0e0835a
+Author: K_vinj <kevinjoby1234@gmail.com>
+Date:   Sun May 25 20:07:52 2025 +0530
+
+    Merge branch 'dev' into trackjd
+
+[33mcommit 0e0835ad7e915b18f8426498024a1fa724632c21[m
+Author: Dhunan <midhun2017.com>
+Date:   Sun May 25 19:30:22 2025 +0530
+
+    login-> admin link corrected
+
+[33mcommit c383ada735b551e34a870d79f2b067a86e3d0a1e[m
+Merge: c5c4291 2affe44
+Author: Abhinand K <115875756+Abhinandkalluvalappil@users.noreply.github.com>
+Date:   Sun May 25 17:24:53 2025 +0530
+
+    Merge pull request #60 from nivya-2/addassigninmodal
+    
+    fix: Modified z index value of sidebar in jr-card component
+
+[33mcommit 3856f752682ff934e0758e4ba8e775f44206884a[m
+Merge: c7616fc c5c4291
+Author: Abhinand K <abhinandksasi@gmail.com>
+Date:   Sun May 25 17:17:54 2025 +0530
+
+    commiting again
+
+[33mcommit c7616fc347b0f3fd2833226fa1cae7ca468a775c[m
+Author: Abhinand K <abhinandksasi@gmail.com>
+Date:   Sun May 25 17:02:03 2025 +0530
+
+    admin head add done active icon bugg fixed
+
+[33mcommit 2affe442457a963ea8692a0aca6675fae6266ef8[m[33m ([m[1;31morigin/addassigninmodal[m[33m)[m
+Author: Anjalik712 <anjali2sheeja@gmail.com>
+Date:   Sun May 25 16:36:00 2025 +0530
+
+    fix: Modified z index value of sidebar in jr-card component
+
+[33mcommit c5c42911e6fc2ba4e5625e3a5721c16d2ecd1b48[m
+Merge: 1698240 66358ce
+Author: Jjef2002 <95353100+Jjef2002@users.noreply.github.com>
+Date:   Sun May 25 09:26:01 2025 +0530
+
+    Merge pull request #59 from nivya-2/treeTable
+    
+    Tree table
+
+[33mcommit 66358ce099a1a1b8c53b99bf2a0829b9b713578b[m
+Merge: 9047917 1698240
+Author: Jjeff2002 <jeffinjitto2002@gmail.com>
+Date:   Sun May 25 09:24:29 2025 +0530
+
+    merge
+
+[33mcommit 1698240156e632aaee5ea3e7dbec70697b05abe2[m
+Merge: eb00b70 35c5e77
+Author: Jjef2002 <95353100+Jjef2002@users.noreply.github.com>
+Date:   Sun May 25 09:22:46 2025 +0530
+
+    Merge pull request #58 from nivya-2/routing-overhaul
+    
+    Routing overhaul - job desc and applicants page cannot be fixed until the table component is fixed
+
+[33mcommit 9047917853bff0b06954002e848ac48df08eff81[m
+Author: Jjeff2002 <jeffinjitto2002@gmail.com>
+Date:   Sun May 25 09:21:26 2025 +0530
+
+    Table fix
+
+[33mcommit 35c5e77e8c7c78919813638cfb92a5906a61482c[m[33m ([m[1;31morigin/routing-overhaul[m[33m)[m
+Author: Dhunan <midhun2017.com>
+Date:   Sun May 25 05:21:29 2025 +0530
+
+    Routing fixed maybe
+
+[33mcommit 6fb44034a727dc46d619c8cb2f0d26eaf70fca36[m
+Merge: 53f312b eb00b70
+Author: Dhunan <midhun2017.com>
+Date:   Sat May 24 23:33:42 2025 +0530
+
+    Merge branch 'dev' of https://github.com/nivya-2/Recruitx--Frontend into dev
+
+[33mcommit 53f312bc807984bb924ca772dd8d36568a4e3d80[m
+Author: Dhunan <midhun2017.com>
+Date:   Sat May 24 23:33:36 2025 +0530
+
+    routing changes
+
+[33mcommit eb00b70bbdca595adc8fb80711662a2c243faa76[m
+Merge: d2078ba 78c049b
+Author: Jjef2002 <95353100+Jjef2002@users.noreply.github.com>
+Date:   Sat May 24 23:09:10 2025 +0530
+
+    Merge pull request #57 from nivya-2/treeTable
+    
+    Tree table
+
+[33mcommit 78c049bf9be181c484330dd3545011135ef1ae64[m
+Author: Jjeff2002 <jeffinjitto2002@gmail.com>
+Date:   Sat May 24 23:07:09 2025 +0530
+
+    Searchand Sort
+
+[33mcommit acb325f67575e5a0833aabcf86738745ae3530d1[m
+Merge: c6b5939 d2078b
