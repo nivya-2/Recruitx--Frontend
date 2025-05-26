@@ -10,9 +10,10 @@ import { NgIf } from '@angular/common';
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
 
 
+
 @Component({
   selector: 'app-admin-users',
-  imports: [TableComponent, AlertsComponent,CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent],
+  imports: [TableComponent,CommonLayoutComponent,AlertsComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss'
 })
