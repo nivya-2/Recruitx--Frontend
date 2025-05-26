@@ -15,7 +15,7 @@ export interface JobDescription {
   providedIn: 'root'
 })
 export class JobDescriptionService {
-  private apiUrl = '  https://localhost:7144/api/JD'; // <-- Update this
+  private apiUrl = 'https://localhost:7144/api/JD'; // <-- Update this
 
 
   constructor(private http: HttpClient) {}

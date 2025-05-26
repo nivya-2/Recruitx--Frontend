@@ -178,3 +178,6 @@ export class AllJdComponent {
   globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'associatedJr');
 
 }
+
+
+

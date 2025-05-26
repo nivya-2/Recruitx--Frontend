@@ -29,6 +29,8 @@ export class TableComponent {
   // @Input() scale:number = 1;
   @Input() rowClickFn: (rowData: any) => void = () => {};
   @Output() openModal = new EventEmitter<boolean>();
+  @Input() loading: boolean = false;
+
   @Input() actionMethods: { [key: string]: (rowData: any) => any } = {};
 
 

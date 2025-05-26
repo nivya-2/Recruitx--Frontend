@@ -4,9 +4,10 @@
          [responsiveLayout]="'scroll'" [resizableColumns]="true" scrollHeight="'auto'"
          [sortMode]="'multiple'" [rowHover]="hover" [showCurrentPageReport]="true"
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-         [ngStyle]="{ 'font-size': fontSize }">
+         [ngStyle]="{ 'font-size': fontSize }"
+         [loading]="loading">
         
-         >
+         
 
   <ng-template pTemplate="caption" *ngIf="showFilter">
     <div class="filter-container">
