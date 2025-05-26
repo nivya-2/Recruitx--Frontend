@@ -40,6 +40,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   width: fit-content;
+  
 
   .header {
     display: flex;
@@ -51,18 +52,7 @@
       font-weight: 800;
     }
 
-     .status-dropdown {
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); // 🔍 Added box shadow
-      transition: box-shadow 0.2s ease-in-out;
-
-      &:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(143, 75, 243, 0.3); // Optional focus effect
-      }
-    }
+     
   }
 
   .timeline {
@@ -98,6 +88,10 @@
 
         &.completed {
           background: #8f4bf3;
+          border: 3px solid #d1b9f9;
+        }
+        &.rejected {
+          background: red;
           border: 3px solid #d1b9f9;
         }
       }
@@ -143,5 +137,14 @@
   }
   .right-align{
     text-align: right;
+    display: flex;
+    gap: 1vw;
+    text-align: right;
+    justify-content: flex-end;
+    .scaled{
+      scale: 0.8;
+    }
   }
+
 }
+
