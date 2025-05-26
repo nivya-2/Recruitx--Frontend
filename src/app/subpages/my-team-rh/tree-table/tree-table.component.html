@@ -5,7 +5,9 @@
         [scrollable]="true" 
         [ngStyle]="{ 'font-size': fontSize }"
         [sortMode]="'multiple'"
-        [filterMode]="'lenient'">
+        [filterMode]="'lenient'"
+        [globalFilterFields]="getGlobalFields()"
+>
 
         <ng-template pTemplate="caption">
          <div class="search-container">

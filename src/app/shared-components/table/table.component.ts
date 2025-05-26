@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, OnInit, OnChanges } from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -16,7 +16,7 @@ import { ProgressbarComponent } from '../../ui/progressbar/progressbar.component
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
-export class TableComponent {
+export class TableComponent implements OnInit, OnChanges {
 
   
   @Input() dataSource:any[]=[];
@@ -25,27 +25,24 @@ export class TableComponent {
   @Input() hover:boolean= false;
   @Input() rows:number = 5;
   @Input() showFilter: boolean = true;
-  @Input() fontSize: any ='12px';
-  // @Input() scale:number = 1;
+  @Input() fontSize: any = '12px';
   @Input() rowClickFn: (rowData: any) => void = () => {};
   @Output() openModal = new EventEmitter<boolean>();
   @Input() actionMethods: { [key: string]: (rowData: any) => any } = {};
-
-
 
   @HostBinding('class.hover-enabled') get isHoverEnabled() {
     return this.hover;
   }
 
-hasMultipleActionsInColumn(): boolean {
-  // Find the actions column
-  const actionsColumn = this.columns.find((col: { key: string; }) => col.key === 'actions');
-  if (!actionsColumn) return false;
-  
-  return this.dataSource.some(row => 
-    row[actionsColumn.key] && Array.isArray(row[actionsColumn.key]) && row[actionsColumn.key].length > 1
-  );
-}
+  hasMultipleActionsInColumn(): boolean {
+    const actionsColumn = this.columns.find((col: { key: string; }) => col.key === 'actions');
+    if (!actionsColumn) return false;
+    
+    return this.dataSource.some(row => 
+      row[actionsColumn.key] && Array.isArray(row[actionsColumn.key]) && row[actionsColumn.key].length > 1
+    );
+  }
+
   clear(table: Table): void {
     table.clear();
   }
@@ -57,23 +54,19 @@ hasMultipleActionsInColumn(): boolean {
   }
 
   isDate(value: any): boolean {
-  // Check if value is a Date object
-  if (value instanceof Date) {
-    return true;
+    if (value instanceof Date) {
+      return true;
+    }
+    
+    if (typeof value === 'string') {
+      const timestamp = Date.parse(value);
+      return !isNaN(timestamp);
+    }
+    
+    return false;
   }
-  
-  // Check if it's a valid date string
-  if (typeof value === 'string') {
-    const timestamp = Date.parse(value);
-    return !isNaN(timestamp);
-  }
-  
-  return false;
-}
 
   handleActionClick(action: string, rowData: any): void {
-    // Convert action string to method key (e.g., "Send Email" -> "sendEmail")
-    // const methodKey = 'on' + this.getMethodKey(action);
     const method = this.actionMethods[action];
     
     if (method && typeof method === 'function') {
@@ -107,5 +100,21 @@ getStatusClass(fstatus: string): string {
   }
 }
 
+  // Add computed percentage property to data
+  ngOnInit(): void {
+    this.processDataForSorting();
+  }
 
+  ngOnChanges(): void {
+    this.processDataForSorting();
+  }
+
+  private processDataForSorting(): void {
+    this.dataSource = this.dataSource.map(item => ({
+      ...item,
+      statusPercentage: item.status && item.status.total > 0 
+        ? (item.status.current / item.status.total) * 100 
+        : 0
+    }));
+  }
 }

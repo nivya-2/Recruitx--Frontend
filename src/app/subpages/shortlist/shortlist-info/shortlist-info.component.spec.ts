@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrackJdComponent } from './track-jd.component';
+import { ShortlistInfoComponent } from './shortlist-info.component';
 
-describe('OpenJdComponent', () => {
-  let component: TrackJdComponent;
-  let fixture: ComponentFixture<TrackJdComponent>;
+describe('ShortlistInfoComponent', () => {
+  let component: ShortlistInfoComponent;
+  let fixture: ComponentFixture<ShortlistInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrackJdComponent]
+      imports: [ShortlistInfoComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TrackJdComponent);
+    fixture = TestBed.createComponent(ShortlistInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

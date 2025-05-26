@@ -3,6 +3,7 @@ import { StatCardComponent } from '../../shared-components/stat-card/stat-card.c
 import { ListViewComponent } from '../../shared-components/list-view/list-view.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { ChartModule } from 'primeng/chart';
+import { SelectModule } from 'primeng/select';
 
 interface MetricCard {
   title: string;
@@ -12,7 +13,7 @@ interface MetricCard {
 }
 @Component({
   selector: 'app-assign-jr',
-  imports: [StatCardComponent,ListViewComponent,HeaderTextComponent,ChartModule],
+  imports: [SelectModule,StatCardComponent,ListViewComponent,HeaderTextComponent,ChartModule],
   templateUrl: './assign-jr.component.html',
   styleUrl: './assign-jr.component.scss'
 })
