@@ -13,7 +13,7 @@ import { InputIcon } from 'primeng/inputicon';
   templateUrl: 'assign.component.html',
   styleUrl: 'assign.component.scss',
   standalone: true,
-  imports: [InputIcon,IconField, InputTextComponent, PopoverModule, NgFor, ProfileBoxComponent, FormsModule, IconComponent]
+  imports: [InputTextComponent, PopoverModule, NgFor, ProfileBoxComponent, FormsModule, IconComponent]
 })
 export class AssignComponent {
   @Input() teamList: any[] = [];
