@@ -22,7 +22,7 @@ export class IconGroupComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUrl = this.router.url;
-    const index = this.iconList.findIndex(icon => icon.route === currentUrl);
+    const index = this.iconList.findIndex(icon => currentUrl.startsWith(icon.route));
     if (index !== -1) {
       this.activeIconIndex = index;
     }

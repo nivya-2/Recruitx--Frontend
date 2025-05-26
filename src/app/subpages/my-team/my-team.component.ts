@@ -6,12 +6,13 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { AssignComponent } from '../../ui/assign/assign.component';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { ViewassignedjrCardComponent } from "../../shared-components/viewassignedjr-card/viewassignedjr-card.component";
+import { AlertsComponent } from '../../ui/alerts/alerts.component';
 
 
 
 @Component({
   selector: 'app-my-team',
-  imports: [CardsComponent, TableComponent, ButtonComponent,AssignComponent, ModalComponent, ViewassignedjrCardComponent],
+  imports: [CardsComponent, AlertsComponent,TableComponent, ButtonComponent,AssignComponent, ModalComponent, ViewassignedjrCardComponent],
   templateUrl: './my-team.component.html',
   styleUrl: './my-team.component.scss'
 })
@@ -105,6 +106,32 @@ openAssignPopover() {
   } else {
     console.warn('No click event captured to open popover');
   }
+}
+selectedMemberFromChild: any = null;
+@ViewChild('alerts') alertsComponent!: AlertsComponent;
+
+handleSelectedMember(member: any) {
+  const message = `Are you sure you want to add ${member.fullName} to your team?`;
+  
+  this.alertsComponent.showConfirmDialog({
+    message: message,
+    header: 'Add Team Member',
+    icon: 'pi pi-user-plus',
+    acceptLabel: 'Add',
+    rejectLabel: 'Cancel',
+    acceptSeverity: 'success',
+    rejectSeverity: 'info',
+    acceptSummary: 'Added',
+    rejectSummary: 'Cancelled',
+    acceptDetail: `Added ${member.fullName} to your team successfully!`,
+    rejectDetail: 'No changes were made.',
+    onAccept: () => {
+      console.log(`${member.fullName} added as team lead.`);
+    },
+    onReject: () => {
+      console.log('Addition cancelled.');
+    }
+  });
 }
 
 }
