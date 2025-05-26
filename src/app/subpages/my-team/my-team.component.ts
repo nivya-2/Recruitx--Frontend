@@ -24,25 +24,8 @@ visible: boolean = false;
 };
 
 handleRemove = (row: any) => {
-  const message = `Are you sure you want to remove ${row.memberName}?`;
-  
-  this.alertsComponent.showConfirmDialog({
-    message: message,
-    header: 'Remove Recruiter Lead',
-    icon: 'pi pi-user-minus',
-    acceptLabel: 'Remove',
-    rejectLabel: 'Cancel',
-    acceptSeverity: 'error',
-    rejectSeverity: 'warn',
-    acceptSummary: 'Removed',
-    rejectSummary: 'Cancelled',
-    acceptDetail: `Removed ${row.memberName}!`,
-    rejectDetail: 'No changes were made.',
-    onAccept: () => {
-    },
-    onReject: () => {
-    }
-  });};
+  console.log('Remove action for:', row);
+};
 
   actionMethods={'View assigned JR': this.onViewAssignedJR,    'Remove': this.handleRemove  };
 
@@ -122,32 +105,6 @@ openAssignPopover() {
   } else {
     console.warn('No click event captured to open popover');
   }
-}
-selectedMemberFromChild: any = null;
-@ViewChild('alerts') alertsComponent!: AlertsComponent;
-
-handleSelectedMember(member: any) {
-  const message = `Are you sure you want to add ${member.fullName} to your team?`;
-  
-  this.alertsComponent.showConfirmDialog({
-    message: message,
-    header: 'Add Team Member',
-    icon: 'pi pi-user-plus',
-    acceptLabel: 'Add',
-    rejectLabel: 'Cancel',
-    acceptSeverity: 'success',
-    rejectSeverity: 'warn',
-    acceptSummary: 'Added',
-    rejectSummary: 'Cancelled',
-    acceptDetail: `Added ${member.fullName} to your team successfully!`,
-    rejectDetail: 'No changes were made.',
-    onAccept: () => {
-      console.log(`${member.fullName} added as team lead.`);
-    },
-    onReject: () => {
-      console.log('Addition cancelled.');
-    }
-  });
 }
 
 }

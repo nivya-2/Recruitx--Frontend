@@ -118,49 +118,6 @@ openAssignPopover() {
   }
 }
 
-handleSelectedMember(member: any) {
-  const message = `Are you sure you want to add ${member.fullName} as a Recruiter lead?`;
-  
-  this.alertsComponent.showConfirmDialog({
-    message: message,
-    header: 'Add Team Lead',
-    icon: 'pi pi-user-plus',
-    acceptLabel: 'Add',
-    rejectLabel: 'Cancel',
-    acceptSeverity: 'success',
-    rejectSeverity: 'warn',
-    acceptSummary: 'Added',
-    rejectSummary: 'Cancelled',
-    acceptDetail: `Added ${member.fullName} as a team lead!`,
-    rejectDetail: 'No changes were made.',
-    onAccept: () => {
-      console.log(`${member.fullName} added as team lead.`);
-    },
-    onReject: () => {
-      console.log('Addition cancelled.');
-    }
-  });
-}
-removeSelectedMember(member: any) {
-  const message = `Are you sure you want to remove ${member.memberName}?`;
-  
-  this.alertsComponent.showConfirmDialog({
-    message: message,
-    header: 'Remove Recruiter Lead',
-    icon: 'pi pi-user-minus',
-    acceptLabel: 'Remove',
-    rejectLabel: 'Cancel',
-    acceptSeverity: 'error',
-    rejectSeverity: 'info',
-    acceptSummary: 'Removed',
-    rejectSummary: 'Cancelled',
-    acceptDetail: `Removed ${member.memberName}!`,
-    rejectDetail: 'No changes were made.',
-    onAccept: () => {
-    },
-    onReject: () => {
-    }
-  });
 }
 
 
