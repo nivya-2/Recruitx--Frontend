@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Input,Component } from '@angular/core';
 import { ProgressBar } from 'primeng/progressbar';
-
+import { Tooltip } from 'primeng/tooltip';
 @Component({
   selector: 'app-progressbar',
-  imports: [ProgressBar],
+  imports: [ProgressBar, Tooltip , CommonModule],
   templateUrl: './progressbar.component.html',
   styleUrl: './progressbar.component.scss'
 })
