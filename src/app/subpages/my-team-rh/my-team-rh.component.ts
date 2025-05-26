@@ -6,11 +6,10 @@ import { ModalComponent } from "../../ui/modal/modal.component";
 import { ViewassignedjrCardComponent } from "../../shared-components/viewassignedjr-card/viewassignedjr-card.component";
 import { AssignComponent } from "../../ui/assign/assign.component";
 import { ButtonComponent } from "../../ui/button/button.component";
-import { AlertsComponent } from '../../ui/alerts/alerts.component';
 
 @Component({
   selector: 'app-my-team-rh',
-  imports: [CardsComponent, TreeTableComponent, ModalComponent, ViewassignedjrCardComponent, AssignComponent, ButtonComponent, AlertsComponent],
+  imports: [CardsComponent, TreeTableComponent, ModalComponent, ViewassignedjrCardComponent, AssignComponent, ButtonComponent],
   templateUrl: './my-team-rh.component.html',
   styleUrl: './my-team-rh.component.scss'
 })
@@ -81,17 +80,16 @@ teamList = [
   { fullName: 'John V', role: 'Senior Lead' },
   { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
   { fullName: 'Lakshmi S', role: 'Lead' },
-  { fullName: 'Abhiram Prasad', role: 'Associate' },
-  { fullName: 'Vinayak Sasi', role: 'Recruiter Head' },
-  { fullName: 'Amal K', role: 'Senior Lead' },
+  { fullName: 'George Philip', role: 'Associate' },
+  { fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
   { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
-  { fullName: 'Sona Nair S', role: 'Lead' },
-  { fullName: 'Sresh Krishna ', role: 'Associate' },
-  { fullName: 'Shaju Vidhya', role: 'Recruiter Head' },
-  { fullName: 'Dennis Vakkachan', role: 'Senior Lead' },
-  { fullName: 'Varghese Kuryan', role: 'Associate Manager' },
-  { fullName: 'Ali Akbar S', role: 'Lead' },
-  { fullName: ' Philip Cheriyan', role: 'Associate' }
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' },{ fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
+  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' }
 ];
 
 selectedMember: any;
@@ -119,52 +117,9 @@ openAssignPopover() {
     console.warn('No click event captured to open popover');
   }
 }
-selectedMemberFromChild: any = null;
-@ViewChild('alerts') alertsComponent!: AlertsComponent;
-
-handleSelectedMember(member: any) {
-  const message = `Are you sure you want to add ${member.fullName} as a Recruiter lead?`;
-  
-  this.alertsComponent.showConfirmDialog({
-    message: message,
-    header: 'Add Team Lead',
-    icon: 'pi pi-user-plus',
-    acceptLabel: 'Add',
-    rejectLabel: 'Cancel',
-    acceptSeverity: 'success',
-    rejectSeverity: 'info',
-    acceptSummary: 'Added',
-    rejectSummary: 'Cancelled',
-    acceptDetail: `Added ${member.fullName} as a team lead!`,
-    rejectDetail: 'No changes were made.',
-    onAccept: () => {
-      console.log(`${member.fullName} added as team lead.`);
-    },
-    onReject: () => {
-      console.log('Addition cancelled.');
-    }
-  });
-}
-removeSelectedMember(member: any) {
-  const message = `Are you sure you want to remove ${member.fullName}?`;
-  
-  this.alertsComponent.showConfirmDialog({
-    message: message,
-    header: 'Remove Recruiter Lead',
-    icon: 'pi pi-user-minus',
-    acceptLabel: 'Remove',
-    rejectLabel: 'Cancel',
-    acceptSeverity: 'error',
-    rejectSeverity: 'info',
-    acceptSummary: 'Removed',
-    rejectSummary: 'Cancelled',
-    acceptDetail: `Removed ${member.fullName}!`,
-    rejectDetail: 'No changes were made.',
-    onAccept: () => {
-    },
-    onReject: () => {
-    }
-  });
-}
 
 }
+
+
+
+

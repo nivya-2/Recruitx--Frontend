@@ -24,22 +24,10 @@ export class AssignComponent {
     this.op.toggle(event);
   }
   searchText: string = '';
-  selectedMember: any = null;
-
 
 filteredTeamList() {
   return this.teamList.filter(member =>
     member.fullName.toLowerCase().includes(this.searchText.toLowerCase())
   );
 }
-
-@Output() memberSelected = new EventEmitter<any>();
-
-selectMember(member: any) {
-  this.selectedMember = member;
-  this.memberSelected.emit(member);
-  this.op.hide();
-}
-
-
 }

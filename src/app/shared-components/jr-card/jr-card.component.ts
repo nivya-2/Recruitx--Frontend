@@ -1,4 +1,4 @@
-import { Component,Output, EventEmitter , Input,ViewChild } from '@angular/core';
+import { Component, Input,ViewChild } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { AvatarModule } from 'primeng/avatar';
 import { DropdownModule } from 'primeng/dropdown';
@@ -10,15 +10,13 @@ import { IconComponent } from '../../ui/icon/icon.component';
 import { ButtonIconComponent } from "../../ui/button-icon/button-icon.component";
 import { AssignJrComponent } from '../../subpages/assign-jr/assign-jr.component';
 import { AssignComponent } from '../../ui/assign/assign.component';
-import { ToastComponent } from "../../ui/toast/toast.component";
-
 
 
 
 
 @Component({
   selector: 'app-jr-card',
-  imports: [AssignComponent, CardModule, AvatarModule, DropdownModule, ButtonModule, NgFor, NgClass, ButtonComponent, ProfileBoxComponent, ButtonIconComponent, IconComponent, CommonModule, ToastComponent],
+  imports: [AssignComponent,CardModule, AvatarModule, DropdownModule, ButtonModule, NgFor, NgClass, ButtonComponent, ProfileBoxComponent, ButtonIconComponent, IconComponent, CommonModule],
   templateUrl: './jr-card.component.html',
   styleUrl: './jr-card.component.scss'
 })
@@ -43,28 +41,22 @@ export class JrCardComponent {
     ]
   };
 
-  selectedMemberFromChild: any = null;
 
-  handleSelectedMember(member: any) {
-    this.selectedMemberFromChild = member;
-  }
-  
   teamList = [
   { fullName: 'Shankar Menon', role: 'Recruiter Head' },
   { fullName: 'John V', role: 'Senior Lead' },
   { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
   { fullName: 'Lakshmi S', role: 'Lead' },
-  { fullName: 'Abhiram Prasad', role: 'Associate' },
-  { fullName: 'Vinayak Sasi', role: 'Recruiter Head' },
-  { fullName: 'Amal K', role: 'Senior Lead' },
+  { fullName: 'George Philip', role: 'Associate' },
+  { fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
   { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
-  { fullName: 'Sona Nair S', role: 'Lead' },
-  { fullName: 'Sresh Krishna ', role: 'Associate' },
-  { fullName: 'Shaju Vidhya', role: 'Recruiter Head' },
-  { fullName: 'Dennis Vakkachan', role: 'Senior Lead' },
-  { fullName: 'Varghese Kuryan', role: 'Associate Manager' },
-  { fullName: 'Ali Akbar S', role: 'Lead' },
-  { fullName: ' Philip Cheriyan', role: 'Associate' }
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' },{ fullName: 'Shankar Menon', role: 'Recruiter Head' },
+  { fullName: 'John V', role: 'Senior Lead' },
+  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Lakshmi S', role: 'Lead' },
+  { fullName: 'George Philip', role: 'Associate' }
 ];
 
 selectedMember: any;
@@ -73,9 +65,14 @@ onRecruiterSelected(member: any) {
   this.selectedMember = member;
   console.log('Selected:', member);
 }
+lastClickEvent: MouseEvent | null = null;
 
 @ViewChild('assignBox') assignBox!: AssignComponent;
-@Output() assignCompleted = new EventEmitter<void>();
+
+ngAfterViewInit() {
+  // Optional: safeguard to ensure the ViewChild is ready
+}
+
 
 openAssignPopover(event: MouseEvent) {
   if (event) {
@@ -83,18 +80,6 @@ openAssignPopover(event: MouseEvent) {
   } else {
     console.warn('No event passed to open popover');
   }
-}
-triggerToast(toastComponent: any) {
-
-  const selectedName = this.selectedMemberFromChild?.fullName || 'No recruiter selected';
-  toastComponent.toastData = {
-      severity: 'success',
-      summary: 'Assigned',
-      detail: `${selectedName} has been assigned successfully!`
-    };
-  toastComponent.showToast();
-  const assignedMember = this.selectedMemberFromChild;  
-  this.assignCompleted.emit(assignedMember);
 }
 
 }
