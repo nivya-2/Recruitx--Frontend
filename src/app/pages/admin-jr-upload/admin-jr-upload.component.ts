@@ -6,12 +6,11 @@ import { HeaderTextComponent } from '../../ui/header-text/header-text.component'
 import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { UploadComponent } from "../../shared-components/upload/upload.component";
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ModalComponent, UploadComponent,HttpClientModule],
+  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ModalComponent, UploadComponent],
   templateUrl: './admin-jr-upload.component.html',
   styleUrl: './admin-jr-upload.component.scss'
 })

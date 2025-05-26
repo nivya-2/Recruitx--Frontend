@@ -2,9 +2,18 @@
   <app-cards class="custom-padding"> 
     <div class="admin-users-header">
       <app-header-text context="table-header" [nopad]="true">Users</app-header-text>
-      <app-button-icon label="Upload" icon="upload"></app-button-icon>
+      <app-button-icon label="Upload" icon="upload" (click)="openModal()"></app-button-icon>
     </div>
     <app-table [dataSource]="dataSource" [columns]="columns" [globalFilterFields]="globalFilterFields" [hover]="false" [rows]="7" [showFilter]="true"
     [fontSize]="'12px'"></app-table>
 </app-cards>
+
+<app-modal 
+[(visible)]="visible" 
+header="Add User"
+[maximizable]="true" 
+[style]="{ width: '50rem', height: '35rem' }">
+<app-upload></app-upload>
+</app-modal>
+
 </app-common-layout>

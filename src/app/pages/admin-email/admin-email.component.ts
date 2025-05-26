@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonLayoutComponent } from '../../layouts/common-layout/common-layout.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
-import { TableComponent } from '../../shared-components/table/table.component';
 import { EmailComponent } from "./email/email.component";
 import { AccordionComponent } from "./accordion/accordion.component";
 import { EmailTemplate } from './email-templates.model';
@@ -23,3 +22,4 @@ export class AdminEmailComponent {
 
 
 }
+
