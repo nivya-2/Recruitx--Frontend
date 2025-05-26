@@ -123,18 +123,16 @@ selectedMemberFromChild: any = null;
 @ViewChild('alerts') alertsComponent!: AlertsComponent;
 
 handleSelectedMember(member: any) {
-  console.log(member)
   const message = `Are you sure you want to add ${member.fullName} as a Recruiter lead?`;
   
   this.alertsComponent.showConfirmDialog({
-    
     message: message,
     header: 'Add Team Lead',
     icon: 'pi pi-user-plus',
     acceptLabel: 'Add',
     rejectLabel: 'Cancel',
     acceptSeverity: 'success',
-    rejectSeverity: 'warn',
+    rejectSeverity: 'info',
     acceptSummary: 'Added',
     rejectSummary: 'Cancelled',
     acceptDetail: `Added ${member.fullName} as a team lead!`,
@@ -148,9 +146,7 @@ handleSelectedMember(member: any) {
   });
 }
 removeSelectedMember(member: any) {
-  console.log(member)
-
-  const message = `Are you sure you want to remove ${member.memberName}?`;
+  const message = `Are you sure you want to remove ${member.fullName}?`;
   
   this.alertsComponent.showConfirmDialog({
     message: message,
@@ -159,10 +155,10 @@ removeSelectedMember(member: any) {
     acceptLabel: 'Remove',
     rejectLabel: 'Cancel',
     acceptSeverity: 'error',
-    rejectSeverity: 'warn',
+    rejectSeverity: 'info',
     acceptSummary: 'Removed',
     rejectSummary: 'Cancelled',
-    acceptDetail: `Removed ${member.memberName}!`,
+    acceptDetail: `Removed ${member.fullName}!`,
     rejectDetail: 'No changes were made.',
     onAccept: () => {
     },

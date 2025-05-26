@@ -26,8 +26,8 @@
 
         </app-assign>
 
-        <div class="input-with-icon">
-          <input
+        <!-- Input box directly passing the click event -->
+        <input
         type="text"
         pInputText
         class="recruiter-search-input"
@@ -35,9 +35,8 @@
         [value]="selectedMemberFromChild ? selectedMemberFromChild.fullName : ''"
         (click)="openAssignPopover($event)"
         readonly
-        
       />
-      </div>
+      
       </div>
     </div>
   </div>
@@ -112,6 +111,5 @@
        (click)="triggerToast(toast)
        ">Assign</app-button>
     </div>
-    
   </div>
 </div>
