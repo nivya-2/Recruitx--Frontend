@@ -54,16 +54,17 @@ export class JrCardComponent {
   { fullName: 'John V', role: 'Senior Lead' },
   { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
   { fullName: 'Lakshmi S', role: 'Lead' },
-  { fullName: 'George Philip', role: 'Associate' },
-  { fullName: 'Shankar Menon', role: 'Recruiter Head' },
-  { fullName: 'John V', role: 'Senior Lead' },
+  { fullName: 'Abhiram Prasad', role: 'Associate' },
+  { fullName: 'Vinayak Sasi', role: 'Recruiter Head' },
+  { fullName: 'Amal K', role: 'Senior Lead' },
   { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
-  { fullName: 'Lakshmi S', role: 'Lead' },
-  { fullName: 'George Philip', role: 'Associate' },{ fullName: 'Shankar Menon', role: 'Recruiter Head' },
-  { fullName: 'John V', role: 'Senior Lead' },
-  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
-  { fullName: 'Lakshmi S', role: 'Lead' },
-  { fullName: 'George Philip', role: 'Associate' }
+  { fullName: 'Sona Nair S', role: 'Lead' },
+  { fullName: 'Sresh Krishna ', role: 'Associate' },
+  { fullName: 'Shaju Vidhya', role: 'Recruiter Head' },
+  { fullName: 'Dennis Vakkachan', role: 'Senior Lead' },
+  { fullName: 'Varghese Kuryan', role: 'Associate Manager' },
+  { fullName: 'Ali Akbar S', role: 'Lead' },
+  { fullName: ' Philip Cheriyan', role: 'Associate' }
 ];
 
 selectedMember: any;
@@ -72,14 +73,9 @@ onRecruiterSelected(member: any) {
   this.selectedMember = member;
   console.log('Selected:', member);
 }
-lastClickEvent: MouseEvent | null = null;
 
 @ViewChild('assignBox') assignBox!: AssignComponent;
-
-ngAfterViewInit() {
-  // Optional: safeguard to ensure the ViewChild is ready
-}
-
+@Output() assignCompleted = new EventEmitter<void>();
 
 openAssignPopover(event: MouseEvent) {
   if (event) {
@@ -89,22 +85,16 @@ openAssignPopover(event: MouseEvent) {
   }
 }
 triggerToast(toastComponent: any) {
-  const selectedName = this.selectedMemberFromChild?.fullName || 'No recruiter selected';
 
+  const selectedName = this.selectedMemberFromChild?.fullName || 'No recruiter selected';
   toastComponent.toastData = {
       severity: 'success',
       summary: 'Assigned',
       detail: `${selectedName} has been assigned successfully!`
     };
   toastComponent.showToast();
-  const assignedMember = this.selectedMemberFromChild;  // or however you store the assigned member
+  const assignedMember = this.selectedMemberFromChild;  
   this.assignCompleted.emit(assignedMember);
-
-
 }
-@Output() assignCompleted = new EventEmitter<void>();
 
-assignClick() {
-    // ✅ Trigger the event to notify the parent
-}
 }
