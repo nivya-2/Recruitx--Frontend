@@ -54,7 +54,7 @@
             [total]="rowData.status.total">
           </app-progressbar>
         </ng-container>
-
+        
         <!-- Check for Date -->
         <ng-template #checkDate>
           <ng-container *ngIf="isDate(rowData[column.key]); else regularValue">
@@ -63,7 +63,25 @@
         </ng-template>
 
          <ng-template #regularValue>
-          {{ rowData[column.key] }}
+           <ng-container *ngIf="column.key === 'fileName'; else normalValue">
+    <div class="file-name-display">
+      <i class="pi pi-file-excel file-icon"></i>
+      <span>{{ rowData[column.key] }}</span>
+    </div>
+  </ng-container>
+  
+  <!-- Special handling for status in file tables -->
+  <ng-template #normalValue>
+    <ng-container *ngIf="column.key === 'fstatus' && isFileStatus(rowData[column.key]); else defaultValue">
+      <span class="file-status" [ngClass]="getStatusClass(rowData[column.key])">
+        {{ rowData[column.key] }}
+      </span>
+    </ng-container>
+  </ng-template>
+  
+  <ng-template #defaultValue>
+    {{ rowData[column.key] }}
+  </ng-template>
          </ng-template>
 
       </ng-container>

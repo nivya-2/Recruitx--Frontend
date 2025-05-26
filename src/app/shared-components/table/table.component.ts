@@ -19,7 +19,7 @@ import { ProgressbarComponent } from '../../ui/progressbar/progressbar.component
 export class TableComponent {
 
   
-  @Input() dataSource:string[]=[];
+  @Input() dataSource:any[]=[];
   @Input() columns:any=[];
   @Input() globalFilterFields: string[]=[];
   @Input() hover:boolean= false;
@@ -82,6 +82,30 @@ hasMultipleActionsInColumn(): boolean {
       console.warn(`No method found for action: ${action} (looking for key: ${action})`);
     }
   }
+
+
+
+isFileStatus(value: any): boolean {
+  // Check if this is a file status string
+  const fileStatuses = ['Ready to upload', 'Uploading', 'Completed', 'Error', 'Processing'];
+  return typeof value === 'string' && fileStatuses.includes(value);
+}
+
+getStatusClass(fstatus: string): string {
+  switch (fstatus) {
+    case 'Ready to upload':
+      return 'ready';
+    case 'Uploading':
+    case 'Processing':
+      return 'processing';
+    case 'Completed':
+      return 'success';
+    case 'Error':
+      return 'error';
+    default:
+      return 'ready';
+  }
+}
 
 
 }

@@ -1,4 +1,4 @@
-<div class="file-table-wrapper">
+<!-- <div class="file-table-wrapper">
       <p-table [value]="uploadedFiles" styleClass="p-datatable-sm">
         <ng-template pTemplate="header">
           <tr>
@@ -37,4 +37,17 @@
           </tr>
         </ng-template>
       </p-table>
+    </div> -->
+
+    <div class="file-table-wrapper">
+      <app-table
+        [dataSource]="fileTableData"
+        [columns]="tableColumns"
+        [globalFilterFields]="globalFilterFields"
+        [hover]="false"
+        [rows]="10"
+        [showFilter]="false"
+        [fontSize]="'12px'"
+        [actionMethods]="actionMethods">
+      </app-table>
     </div>

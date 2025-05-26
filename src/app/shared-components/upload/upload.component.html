@@ -36,23 +36,19 @@
           <span class="selected-files">{{ uploadedFiles.length }} file(s) selected</span>
         </div>
         <div class="footer-right">
-          <button pButton 
-            label="Cancel" 
-            class="p-button-text" 
-            >
-          </button>
-          <button pButton 
+          <app-button (functionemit)="closeModal()">
+            Cancel
+          </app-button>
+          <app-button  
             *ngIf="uploadedFiles.length > 0 && !showFileTable"
-            label="Upload" 
-            class="p-button-primary" 
-            (click)="showFilesTable()">
-          </button>
-          <button pButton 
+            (functionemit)="showFilesTable()">
+                        Upload 
+          </app-button>
+          <app-button 
             *ngIf="showFileTable"
-            label="Done" 
-            class="p-button-primary" 
-            (click)="completeUpload()">
-          </button>
+            (functionemit)="completeUpload()">
+                        Done
+          </app-button>
         </div>
       </div>
       </div>

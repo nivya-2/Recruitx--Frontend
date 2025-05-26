@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FileUploadModule } from 'primeng/fileupload';
 import { FileTableComponent } from "./file-table/file-table.component";
+import { ButtonComponent } from "../../ui/button/button.component";
 
 @Component({
   selector: 'app-upload',
-  imports: [CommonModule, FileUploadModule, FileTableComponent],
+  imports: [CommonModule, FileUploadModule, FileTableComponent, ButtonComponent],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss'
 })
 export class UploadComponent {
 
+  @Input() title: string = 'Add Candidates';
   @Output() onClose = new EventEmitter<void>();
   @Output() onFileUploaded = new EventEmitter<File[]>();
   @Output() onUploadComplete = new EventEmitter<File[]>();
@@ -20,7 +22,8 @@ export class UploadComponent {
   showFileTable = false;
   
   closeModal(): void {
-    this.visible = false;
+    this.uploadedFiles = [];
+    this.showFileTable = false;
     this.onClose.emit();
   }
 
