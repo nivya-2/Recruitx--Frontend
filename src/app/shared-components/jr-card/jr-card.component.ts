@@ -10,13 +10,14 @@ import { IconComponent } from '../../ui/icon/icon.component';
 import { ButtonIconComponent } from "../../ui/button-icon/button-icon.component";
 import { AssignJrComponent } from '../../subpages/assign-jr/assign-jr.component';
 import { AssignComponent } from '../../ui/assign/assign.component';
+import { ToastComponent } from "../../ui/toast/toast.component";
 
 
 
 
 @Component({
   selector: 'app-jr-card',
-  imports: [AssignComponent,CardModule, AvatarModule, DropdownModule, ButtonModule, NgFor, NgClass, ButtonComponent, ProfileBoxComponent, ButtonIconComponent, IconComponent, CommonModule],
+  imports: [AssignComponent, CardModule, AvatarModule, DropdownModule, ButtonModule, NgFor, NgClass, ButtonComponent, ProfileBoxComponent, ButtonIconComponent, IconComponent, CommonModule, ToastComponent],
   templateUrl: './jr-card.component.html',
   styleUrl: './jr-card.component.scss'
 })

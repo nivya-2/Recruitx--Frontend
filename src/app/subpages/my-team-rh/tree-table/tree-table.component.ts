@@ -1,3 +1,4 @@
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { ButtonComponent } from "../../../ui/button/button.component";
@@ -23,6 +24,12 @@ export class TreeTableComponent {
   }
 
 handleTreeTableAction(action: string, row: any): void {
+//emit event to parent
+  if (action === 'Remove') { 
+    this.removeAction.emit(row);
+    return;
+  }
+
   const methodName = 'on' + this.capitalize(action);
   const method = (this as any)[methodName];
 
@@ -42,6 +49,8 @@ capitalize(str: string): string {
   @Input() columns: any[] = [];
   @Input() globalFilterFields: string[] = [];
   @Output() openModal = new EventEmitter<boolean>();
+  @Output() removeAction = new EventEmitter<any>(); //delete function
+
   
   onViewAssignedJR(row: any) {
     this.openModal.emit(true);
@@ -89,6 +98,7 @@ private checkNodesForMultipleActions(nodes: TreeNode[], actionsKey: string): boo
   }
   return false;
 }
+
  
 
 
