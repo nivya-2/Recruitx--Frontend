@@ -1,0 +1,88 @@
+.modal-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .upload-area {
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .upload-dropzone {
+      width: 100%;
+      border: 2px dashed #c2c2c2;
+      border-radius: 8px;
+      padding: 3rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .upload-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .upload-icon {
+      margin-bottom: 1rem;
+      color: #7E57C2;
+      font-size: 2.5rem;
+    }
+    
+    .upload-text {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      color: #666;
+    }
+    
+    .or-text {
+      color: #888;
+      margin-top: 0.2rem;
+    }
+    
+    .format-info {
+      color: #aaa;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+    
+    .file-table-container {
+      padding: 1rem;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid #eee;
+    }
+    
+    .footer-right {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .selected-files {
+      color: #666;
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    
+    :host ::ng-deep .hidden-file-upload .p-button {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }

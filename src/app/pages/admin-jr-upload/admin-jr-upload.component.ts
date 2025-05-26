@@ -4,14 +4,22 @@ import { TableComponent } from '../../shared-components/table/table.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
+import { ModalComponent } from "../../ui/modal/modal.component";
+import { UploadComponent } from "../../shared-components/upload/upload.component";
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent],
+  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ModalComponent, UploadComponent,HttpClientModule],
   templateUrl: './admin-jr-upload.component.html',
   styleUrl: './admin-jr-upload.component.scss'
 })
 export class AdminJrUploadComponent {
+  visible:boolean = false;
+  openModal() {
+    this.visible = !this.visible;
+  }
   dataSource: any[] = [
   {
     jobReqId: 'REQ-2025-DS-006',
