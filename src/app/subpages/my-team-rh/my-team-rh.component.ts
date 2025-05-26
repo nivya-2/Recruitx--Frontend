@@ -132,7 +132,7 @@ handleSelectedMember(member: any) {
     acceptLabel: 'Add',
     rejectLabel: 'Cancel',
     acceptSeverity: 'success',
-    rejectSeverity: 'info',
+    rejectSeverity: 'warn',
     acceptSummary: 'Added',
     rejectSummary: 'Cancelled',
     acceptDetail: `Added ${member.fullName} as a team lead!`,
@@ -146,7 +146,7 @@ handleSelectedMember(member: any) {
   });
 }
 removeSelectedMember(member: any) {
-  const message = `Are you sure you want to remove ${member.fullName}?`;
+  const message = `Are you sure you want to remove ${member.memberName}?`;
   
   this.alertsComponent.showConfirmDialog({
     message: message,
@@ -158,7 +158,7 @@ removeSelectedMember(member: any) {
     rejectSeverity: 'info',
     acceptSummary: 'Removed',
     rejectSummary: 'Cancelled',
-    acceptDetail: `Removed ${member.fullName}!`,
+    acceptDetail: `Removed ${member.memberName}!`,
     rejectDetail: 'No changes were made.',
     onAccept: () => {
     },

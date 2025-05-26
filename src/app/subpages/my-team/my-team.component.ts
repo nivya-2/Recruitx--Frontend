@@ -25,8 +25,25 @@ visible: boolean = false;
 };
 
 handleRemove = (row: any) => {
-  console.log('Remove action for:', row);
-};
+  const message = `Are you sure you want to remove ${row.memberName}?`;
+  
+  this.alertsComponent.showConfirmDialog({
+    message: message,
+    header: 'Remove Recruiter Lead',
+    icon: 'pi pi-user-minus',
+    acceptLabel: 'Remove',
+    rejectLabel: 'Cancel',
+    acceptSeverity: 'error',
+    rejectSeverity: 'warn',
+    acceptSummary: 'Removed',
+    rejectSummary: 'Cancelled',
+    acceptDetail: `Removed ${row.memberName}!`,
+    rejectDetail: 'No changes were made.',
+    onAccept: () => {
+    },
+    onReject: () => {
+    }
+  });};
 
   actionMethods={'View assigned JR': this.onViewAssignedJR,    'Remove': this.handleRemove  };
 
@@ -120,7 +137,7 @@ handleSelectedMember(member: any) {
     acceptLabel: 'Add',
     rejectLabel: 'Cancel',
     acceptSeverity: 'success',
-    rejectSeverity: 'info',
+    rejectSeverity: 'warn',
     acceptSummary: 'Added',
     rejectSummary: 'Cancelled',
     acceptDetail: `Added ${member.fullName} to your team successfully!`,

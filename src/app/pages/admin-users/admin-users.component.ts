@@ -6,12 +6,13 @@ import { HeaderTextComponent } from '../../ui/header-text/header-text.component'
 import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
 import { ButtonComponent } from "../../ui/button/button.component";
 import { AssignComponent } from "../../ui/assign/assign.component";
-import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { NgIf } from '@angular/common';
+import { AlertsComponent } from '../../ui/alerts/alerts.component';
+
 
 @Component({
   selector: 'app-admin-users',
-  imports: [TableComponent,AlertsComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent],
+  imports: [TableComponent, AlertsComponent,CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss'
 })
@@ -79,7 +80,7 @@ export class AdminUsersComponent {
         acceptLabel: 'Add',
         rejectLabel: 'Cancel',
         acceptSeverity: 'success',
-        rejectSeverity: 'info',
+        rejectSeverity: 'warn',
         acceptSummary: 'Added',
         rejectSummary: 'Cancelled',
         acceptDetail: `Added ${member.fullName} as the Recruiter Head!`,
