@@ -1,36 +1,31 @@
-
 <p-table #table [value]="dataSource" [paginator]="true" [rows]="rows" 
           [globalFilterFields]="globalFilterFields"
          [responsiveLayout]="'scroll'" [resizableColumns]="true" scrollHeight="'auto'"
          [sortMode]="'multiple'" [rowHover]="hover" [showCurrentPageReport]="true"
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
          [ngStyle]="{ 'font-size': fontSize }">
-        
 
   <ng-template pTemplate="caption" *ngIf="showFilter">
     <div class="filter-container">
-    <!-- <app-button class="p-button-outlined" (onClick)="clear(table)"><app-icon name="clear" customColor="white" size="20px"></app-icon>Clear</app-button> -->
      <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear" (onClick)="clear(table)"></p-button>
      <p-iconField iconPosition="left">
         <p-inputIcon>
             <i class="pi pi-search"></i>
-             <!-- <app-icon name="search" customColor="#334155"></app-icon> -->
         </p-inputIcon>
          <input pInputText type="text" (input)="table.filterGlobal($any($event.target).value, 'contains')" placeholder="Search all fields" />
      </p-iconField>
     </div>
   </ng-template>
 
-
   <ng-template pTemplate="header">
     <tr>
       <th *ngFor="let column of columns" 
-          [pSortableColumn]="column.key"
+          [pSortableColumn]="column.key === 'status' ? 'statusPercentage' : column.key"
           [ngClass]="'col-' + column.key">
         <div class="header-content">
           <div class="header-text" [ngClass]="{'multi-word': column.label.includes(' '), 'center-actions-header': column.key === 'actions' && hasMultipleActionsInColumn()}">{{ column.label }}</div>
           <div class="header-icons">
-            <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key"></p-sortIcon>
+            <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key === 'status' ? 'statusPercentage' : column.key"></p-sortIcon>
             <p-columnFilter *ngIf="column.filterable" [field]="column.key" display="menu" class="column-filter"/>
           </div>
         </div>
