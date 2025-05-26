@@ -8,10 +8,12 @@ import { ButtonComponent } from "../../ui/button/button.component";
 import { AssignComponent } from "../../ui/assign/assign.component";
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { NgIf } from '@angular/common';
+import { ButtonComponent } from "../../ui/button/button.component";
 
 @Component({
   selector: 'app-admin-users',
   imports: [TableComponent,AlertsComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent],
+  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss'
 })
@@ -117,4 +119,6 @@ export class AdminUsersComponent {
     }
     
     
+recruiterHeadName: string="Nivya Vineeth ";
+
 }

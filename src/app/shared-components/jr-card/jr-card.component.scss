@@ -74,8 +74,12 @@
   flex: 1 1 auto; /* Take up all available space */
   overflow-y: auto;
   padding-right: 10px; /* Space for scrollbar */
-  border-bottom: 1px solid #ccc;      // light gray border
+  // border-bottom: 1px solid #ccc;      // light gray border
   padding: 1rem;
+  // &::-webkit-scrollbar {
+  //   width: 0;
+  //   height: 0;
+  // }
   // &::-webkit-scrollbar {
   //   width: 0;
   //   height: 0;
@@ -104,6 +108,7 @@
 .qualifications-list li {
   padding: 4px 0;
 }
+
 
 
 .assign-button-container {
