@@ -1,10 +1,22 @@
 <div class="field">
   <label [ngStyle]="{ 'font-weight': fontWeight }">{{ label }}</label>
-  <input
+
+  <textarea
+    *ngIf="isTextarea"
+    class="textarea"
+    [placeholder]="placeHolder"
+    [disabled]="disabled"
+    [(ngModel)]="value"
+    (input)="onValueChange($event)"
+    rows="3"></textarea>
+
+  <textarea
+    *ngIf="!isTextarea"
     pInputText
     class="input"
     [placeholder]="placeHolder"
     [disabled]="disabled"
     [(ngModel)]="value"
-    (input)="onValueChange($event)">
+    (input)="onValueChange($event)"
+    rows="1"></textarea>
 </div>

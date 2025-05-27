@@ -3,9 +3,25 @@
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
 }
-
-.input {
-    width: 18vw;
+label{
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+.input,
+.textarea {
+    width: 90%;
     height: 5vh;
     font-family: 'Montserrat', sans-serif;
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 7px;
+    resize: none;
+}
+.input{
+    align-content: center;
+}
+.textarea {
+    height: 15vh;
+    width: 97%;
 }
