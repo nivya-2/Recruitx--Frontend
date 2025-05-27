@@ -4,27 +4,12 @@ import { TableComponent } from '../../shared-components/table/table.component';
 import { ModalComponent } from '../../ui/modal/modal.component';
 import { NgFor } from '@angular/common';
 import { ButtonComponent } from '../../ui/button/button.component';
-interface PanelMember {
-  name: string;
-}
+import { ShortlistInfoComponent } from './shortlist-info/shortlist-info.component';
 
-interface CandidateInfo {
-  candidateId: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  mobile: string;
-  address: string;
-  panelMembers: PanelMember[];
-  deliveryUnit: string;
-  interviewDate: string;
-  interviewStartTime: string;
-  interviewEndTime: string;
-}
 
 @Component({
   selector: 'app-shortlist',
-  imports: [ButtonComponent,ModalComponent,TableComponent,NgFor],
+  imports: [ShortlistInfoComponent,ButtonComponent,ModalComponent,TableComponent,NgFor],
   templateUrl: './shortlist.component.html',
   styleUrl: './shortlist.component.scss'
 })
@@ -35,23 +20,7 @@ export class ShortlistComponent {
   console.log('Shortlist for :', row);
 };
   actionMethods={'Shortlist': this.onShortlist };
-candidateData: CandidateInfo = {
-    candidateId: 'CAND006',
-    firstName: 'Kevin',
-    lastName: 'Joby',
-    email: 'quinn.rivers@gmail.com',
-    mobile: '8054623553',
-    address: '1192 Mulberry Street, Texas, USA',
-    panelMembers: [
-      { name: 'Joby Jose' },
-      { name: 'Lekshmi K' },
-      { name: 'Shanmugha Das' }
-    ],
-    deliveryUnit: 'DU6',
-    interviewDate: '16/04/2025',
-    interviewStartTime: '10:00 A.M.',
-    interviewEndTime: '11:00 A.M.'
-  };
+
 awaitingShortlistingDataSource: any[] = [
     { id: 'CAN006', name: 'Aswin A', interviewDate: '17/04/2025', interviewType: 'Technical L1' , actions: ['Shortlist']},
     { id: 'CAN002', name: 'Priya Sharma', interviewDate: '10/04/2025', interviewType: 'Technical L1' , actions: ['Shortlist']},

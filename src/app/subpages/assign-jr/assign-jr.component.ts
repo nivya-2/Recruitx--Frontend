@@ -3,7 +3,8 @@ import { StatCardComponent } from '../../shared-components/stat-card/stat-card.c
 import { ListViewComponent } from '../../shared-components/list-view/list-view.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { ChartModule } from 'primeng/chart';
-
+import { SelectModule } from 'primeng/select';
+import { FormsModule } from '@angular/forms';
 interface MetricCard {
   title: string;
   value: string | number;
@@ -12,12 +13,19 @@ interface MetricCard {
 }
 @Component({
   selector: 'app-assign-jr',
-  imports: [StatCardComponent,ListViewComponent,HeaderTextComponent,ChartModule],
+  imports: [FormsModule,SelectModule,StatCardComponent,ListViewComponent,HeaderTextComponent,ChartModule],
   templateUrl: './assign-jr.component.html',
   styleUrl: './assign-jr.component.scss'
 })
 
 export class AssignJrComponent {
+  selectedView = 'asc'; // or 'desc' by default
+
+viewOptions = [
+  { name: 'Date Ascending', code: 'asc' },
+  { name: 'Date Descending', code: 'desc' }
+];
+
 metricsData: MetricCard[] = [
     {
       title: 'Total Applications',
@@ -96,5 +104,17 @@ barChartData: any;
           
         }
       };
+        this.sortJobs();
+
     }
+    sortJobs() {
+  this.jobs.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    return this.selectedView === 'asc' 
+      ? dateA.getTime() - dateB.getTime()
+      : dateB.getTime() - dateA.getTime();
+  });
+}
 }

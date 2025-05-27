@@ -5,7 +5,7 @@ import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { TabsClasses } from 'primeng/tabs';
 import { TabsComponent } from '../../shared-components/tabs/tabs.component';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-schedule-interviews',
@@ -17,6 +17,7 @@ export class InterviewsComponent {
    tabs: { title: string; value: number; route: string }[] = [];
   selectedTabIndex = 0;
 
+  constructor(private router: Router, private route: ActivatedRoute) {}
     ngOnInit() {
         this.tabs = [
   { title: 'Schedule', value: 0, route: 'schedule' },
@@ -24,6 +25,12 @@ export class InterviewsComponent {
   { title: 'All Interviews', value: 2, route: 'all-interviews' },
 
 ];
+const currentRoute = this.router.url.split('/').pop();
+
+    const foundTab = this.tabs.find(tab => tab.route === currentRoute);
+    if (foundTab) {
+      this.selectedTabIndex = foundTab.value;
+    }
 
     }
   dataSource: any[] = [ 

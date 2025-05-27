@@ -1,68 +1,68 @@
-    <p-treeTable 
-        #tt
-        [value]="teamsDataSource" 
-        [columns]="columns"
-        [scrollable]="true" 
-        [ngStyle]="{ 'font-size': fontSize }"
-        [sortMode]="'multiple'"
-        [filterMode]="'lenient'">
+<p-treeTable 
+#tt
+[value]="teamsDataSource" 
+[columns]="columns"
+[scrollable]="true" 
+[ngStyle]="{ 'font-size': fontSize }"
+[sortMode]="'multiple'"
+[filterMode]="'lenient'">
 
-        <ng-template pTemplate="caption">
-         <div class="search-container">
-           <p-iconfield class="search-iconfield">
-                <p-inputicon class="pi pi-search" styleClass="search-input-icon" />
-                <input type="text" pInputText placeholder="Search all fields" (input)="tt.filterGlobal($any($event.target).value, 'contains')" />
-          </p-iconfield>
+<ng-template pTemplate="caption">
+ <div class="search-container">
+   <p-iconfield class="search-iconfield">
+        <p-inputicon class="pi pi-search" styleClass="search-input-icon" />
+        <input type="text" pInputText placeholder="Search all fields" (input)="tt.filterGlobal($any($event.target).value, 'contains')" />
+  </p-iconfield>
+ </div>
+
+</ng-template>
+<!-- Header Template -->
+<ng-template pTemplate="header">
+    <tr>
+        <th *ngFor="let col of columns"
+            [ngClass]="{ 'center-actions-header': col.key === 'actions' }"
+            [ttSortableColumn]="col.key !== 'actions' ? col.key : null">
+          <div class="header-content">
+            <div class="header-text" >
+            {{ col.label }}
+            </div>
+            <div class="header-icons">
+            <ng-container *ngIf="col.key !== 'actions'">
+               <p-treetable-sort-icon [field]="col.key">
+               </p-treetable-sort-icon>
+            </ng-container>
+            </div>
          </div>
+        </th>
+    </tr>
+</ng-template>
 
-  </ng-template>
-        <!-- Header Template -->
-        <ng-template pTemplate="header">
-            <tr>
-                <th *ngFor="let col of columns"
-                    [ngClass]="{ 'center-actions-header': col.key === 'actions' }"
-                    [ttSortableColumn]="col.key !== 'actions' ? col.key : null">
-                  <div class="header-content">
-                    <div class="header-text" >
-                    {{ col.label }}
-                    </div>
-                    <div class="header-icons">
-                    <ng-container *ngIf="col.key !== 'actions'">
-                       <p-treetable-sort-icon [field]="col.key">
-                       </p-treetable-sort-icon>
-                    </ng-container>
-                    </div>
-                 </div>
-                </th>
-            </tr>
-        </ng-template>
-        
-        <!-- Body Template -->
-        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-            <tr [ttRow]="rowNode">
-                <td *ngFor="let col of columns" >
-                    <!-- First column with toggler and member name -->
-                    <ng-container *ngIf="col.key === 'memberName'">
-                        <p-treetable-toggler [rowNode]="rowNode" *ngIf="!rowNode.leaf"></p-treetable-toggler>
-                        {{ rowData[col.key] }}
-                    </ng-container>
-                    
-                    <!-- Other columns -->
-                    <ng-container *ngIf="col.key !== 'memberName' && col.key !== 'actions'">
-                        {{ rowData[col.key] }}
-                    </ng-container>
-                    
-                    <!-- Actions column -->
-                    <ng-container *ngIf="col.key === 'actions'">
-                        <div class="action-buttons">
-                            <app-button *ngFor="let action of rowData[col.key]" 
-                                         (functionemit)="handleTreeTableAction(action, rowData)"
-                                       color="#7B61FF">
-                                {{ action }}
-                            </app-button>
-                        </div>
-                    </ng-container>
-                </td>
-            </tr>
-        </ng-template>
-    </p-treeTable>
+<!-- Body Template -->
+<ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+    <tr [ttRow]="rowNode">
+        <td *ngFor="let col of columns" >
+            <!-- First column with toggler and member name -->
+            <ng-container *ngIf="col.key === 'memberName'">
+                <p-treetable-toggler [rowNode]="rowNode" *ngIf="!rowNode.leaf"></p-treetable-toggler>
+                {{ rowData[col.key] }}
+            </ng-container>
+            
+            <!-- Other columns -->
+            <ng-container *ngIf="col.key !== 'memberName' && col.key !== 'actions'">
+                {{ rowData[col.key] }}
+            </ng-container>
+            
+            <!-- Actions column -->
+            <ng-container *ngIf="col.key === 'actions'">
+                <div class="action-buttons">
+                    <app-button *ngFor="let action of rowData[col.key]" 
+                                 (functionemit)="handleTreeTableAction(action, rowData)"
+                               color="#7B61FF">
+                        {{ action }}
+                    </app-button>
+                </div>
+            </ng-container>
+        </td>
+    </tr>
+</ng-template>
+</p-treeTable>

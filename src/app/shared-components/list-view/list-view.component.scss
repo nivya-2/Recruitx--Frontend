@@ -1,48 +1,48 @@
+
 .job-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 8px;
-  }
-  
-  .job-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 12px;
-  }
-  
-  .job-info {
-    flex: 2;
-  }
-  
-  .job-title {
-    font-weight: 600;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .job-meta {
-    font-size: 13px;
-    color: #777;
-    margin-top: 2px;
-  }
-  
-  .job-positions {
-    flex: 3;
-    font-size: 14px;
-    color: #444;
-    text-align: left;
-    white-space: nowrap;
-  }
-  
-  .assign-button-wrapper {
-    flex: 1;
-    margin-left: 75vh;
-  }
-  
-  span[style] {
-    color: black;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.job-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 12px;
+}
+
+.job-info {
+  flex: 2;
+}
+
+.job-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.job-meta {
+  font-size: 13px;
+  color: #777;
+  margin-top: 2px;
+}
+
+.job-positions {
+  flex: 3;
+  font-size: 14px;
+  color: #444;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.assign-button-wrapper {
+  flex: 1;
+  margin-left: 75vh;
+}
+
+span[style] {
+  color: black;
+}

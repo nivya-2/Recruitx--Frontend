@@ -198,4 +198,29 @@
   .increase-icon {
     margin-left: 5px;
   }
-  
+  .list-container {
+  max-height: 75vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+
+  &::-webkit-scrollbar {
+    width: 4px; // tiny width
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); // subtle dark scrollbar
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  // Firefox scrollbar support
+  scrollbar-width:thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}

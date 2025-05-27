@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JrCardComponent } from './jr-card.component';
+import { ShortlistInfoComponent } from './shortlist-info.component';
 
-describe('JrCardComponent', () => {
-  let component: JrCardComponent;
-  let fixture: ComponentFixture<JrCardComponent>;
+describe('ShortlistInfoComponent', () => {
+  let component: ShortlistInfoComponent;
+  let fixture: ComponentFixture<ShortlistInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [JrCardComponent]
+      imports: [ShortlistInfoComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(JrCardComponent);
+    fixture = TestBed.createComponent(ShortlistInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
