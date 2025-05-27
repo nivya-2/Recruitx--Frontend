@@ -1,15 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonLayoutComponent } from '../../layouts/common-layout/common-layout.component';
 import { TableComponent } from '../../shared-components/table/table.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
+import { ButtonComponent } from "../../ui/button/button.component";
+import { AssignComponent } from "../../ui/assign/assign.component";
+import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { UploadComponent } from "../../shared-components/upload/upload.component";
 
 @Component({
   selector: 'app-admin-users',
-  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ModalComponent, UploadComponent],
+  imports: [TableComponent,CommonLayoutComponent,AlertsComponent
+,    CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent,ModalComponent, UploadComponent],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss'
 })
@@ -19,6 +23,7 @@ export class AdminUsersComponent {
   openModal() {
     this.visible = !this.visible;
   }
+    recruiterHeadName = "Nivya Vineeth";
 
   dataSource: any[] = [
   { id: 'EMP877653', name: 'Alia K', jobTitle: 'Senior Executive', role: 'Recruiter', location: 'Kochi', deliveryUnit: 'DU6', email: 'test@mail.com', status1: 'Active', uploadedDate: '25-06-2025', actions: ['Edit'] },
@@ -54,4 +59,70 @@ export class AdminUsersComponent {
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions'); 
 
+    teamList = [
+      { fullName: 'Shankar Menon', role: 'Recruiter Head' },
+      { fullName: 'John V', role: 'Senior Lead' },
+      { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+      { fullName: 'Lakshmi S', role: 'Lead' },
+      { fullName: 'Abhiram Prasad', role: 'Associate' },
+      { fullName: 'Vinayak Sasi', role: 'Recruiter Head' },
+      { fullName: 'Amal K', role: 'Senior Lead' },
+      { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+      { fullName: 'Sona Nair S', role: 'Lead' },
+      { fullName: 'Sresh Krishna ', role: 'Associate' },
+      { fullName: 'Shaju Vidhya', role: 'Recruiter Head' },
+      { fullName: 'Dennis Vakkachan', role: 'Senior Lead' },
+      { fullName: 'Varghese Kuryan', role: 'Associate Manager' },
+      { fullName: 'Ali Akbar S', role: 'Lead' },
+      { fullName: ' Philip Cheriyan', role: 'Associate' }
+    ];
+    selectedMemberFromChild: any = null;
+    
+    handleSelectedMember(member: any) {
+      const message = `Are you sure want to add ${member.fullName} as a Recruiter Head?`;
+      this.alertsComponent.showConfirmDialog({
+        message: message,
+        header: 'Add Recruiter Head',
+        icon: 'pi pi-user-plus',
+        acceptLabel: 'Add',
+        rejectLabel: 'Cancel',
+        acceptSeverity: 'success',
+        rejectSeverity: 'warn',
+        acceptSummary: 'Added',
+        rejectSummary: 'Cancelled',
+        acceptDetail: `Added ${member.fullName} as the Recruiter Head!`,
+        rejectDetail: 'No changes were made.',
+        onAccept: () => {
+          console.log(`${member.fullName} added as team lead.`);
+        },
+        onReject: () => {
+          console.log('Addition cancelled.');
+        }
+      });
+    }
+    
+    
+    
+    @ViewChild('assignBox') assignBox!: AssignComponent;
+
+    openAssignPopover(event: MouseEvent) {
+      if (event) {
+        this.assignBox.open(event);
+      } else {
+        console.warn('No event passed to open popover');
+      }
+    }
+    @ViewChild('alerts') alertsComponent!: AlertsComponent;
+
+
+    onChangeClick(event: MouseEvent) {
+      this.showAssignList = true;
+    }
+    showAssignList = false;
+
+    toggleAssignList() {
+      this.showAssignList = !this.showAssignList;
+    }
+    
+    
 }
