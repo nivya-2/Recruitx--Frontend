@@ -28,6 +28,9 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() rowClickFn: (rowData: any) => void = () => {};
   @Output() openModal = new EventEmitter<boolean>();
   @Input() actionMethods: { [key: string]: (rowData: any) => any } = {};
+   private originalDataSource: any[] = [];
+  private originalOrder: number[] = [];
+
 
   @HostBinding('class.hover-enabled') get isHoverEnabled() {
     return this.hover;
@@ -42,8 +45,44 @@ export class TableComponent implements OnInit, OnChanges {
     );
   }
 
+  // clear(table: Table): void {
+  //   table.clear();
+  // }
   clear(table: Table): void {
+    // Reset global filter input using ViewChild
+    // if (this.globalFilter) {
+    //   this.globalFilter.nativeElement.value = '';
+    // }
+    
+    // Restore original order
+    this.restoreOriginalOrder();
+    
+    // Clear all filters
     table.clear();
+    
+    // Clear sorting
+    table.sortOrder = 0;
+    table.sortField = '';
+    table.multiSortMeta = [];
+    
+    // Reset to first page
+    table.first = 0;
+    
+    // Refresh the table
+    table.reset();
+  }
+
+  private restoreOriginalOrder(): void {
+    if (this.originalDataSource.length > 0) {
+      // Restore original data with computed properties
+      this.dataSource = this.originalDataSource.map((item, index) => ({
+        ...item,
+        statusPercentage: item.status && item.status.total > 0 
+          ? (item.status.current / item.status.total) * 100 
+          : 0,
+        originalIndex: index
+      }));
+    }
   }
 
   handleRowClick(rowData: any): void {
@@ -84,12 +123,27 @@ export class TableComponent implements OnInit, OnChanges {
     this.processDataForSorting();
   }
 
+  // private processDataForSorting(): void {
+  //   this.dataSource = this.dataSource.map(item => ({
+  //     ...item,
+  //     statusPercentage: item.status && item.status.total > 0 
+  //       ? (item.status.current / item.status.total) * 100 
+  //       : 0
+  //   }));
+  // }
   private processDataForSorting(): void {
-    this.dataSource = this.dataSource.map(item => ({
+    // Store original data and order if not already stored
+    if (this.originalDataSource.length === 0) {
+      this.originalDataSource = [...this.dataSource];
+      this.originalOrder = this.dataSource.map((_, index) => index);
+    }
+    
+    this.dataSource = this.dataSource.map((item, index) => ({
       ...item,
       statusPercentage: item.status && item.status.total > 0 
         ? (item.status.current / item.status.total) * 100 
-        : 0
+        : 0,
+      originalIndex: this.originalOrder[index] !== undefined ? this.originalOrder[index] : index
     }));
   }
 }
