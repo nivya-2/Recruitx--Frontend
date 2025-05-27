@@ -27,7 +27,7 @@ export class AdminJrUploadComponent {
     location: 'Kochi',
     hiringManager: 'Arjun Menon',
     assignedTo: 'Anjali Krishna',
-    assignedOn: '02/04/2025',
+    assignedOn: '03/04/2025',
     closeBy: '02/05/2025'
   },
   {
@@ -128,15 +128,15 @@ export class AdminJrUploadComponent {
       {iconName:'delete',size:"32px",iconColour:"green"}
     ]
 
-    columns: Array<{key: string, label: string, filterable: boolean}> = [
-       { key: 'jobReqId', label: 'Requisition ID', filterable: true },
+    columns = [
+  { key: 'jobReqId', label: 'Requisition ID', filterable: false },
   { key: 'jobTitle', label: 'Job Title', filterable: true },
   { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
   { key: 'location', label: 'Location', filterable: true },
   { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
-  { key: 'assignedTo', label: 'Assigned To', filterable: true },
-  { key: 'assignedOn', label: 'Assigned On', filterable: true },
-  { key: 'closeBy', label: 'Close By', filterable: true }
+  { key: 'assignedTo', label: 'Assigned To', filterable: true},
+  { key: 'assignedOn', label: 'Assigned On', filterable: true, type:'date' },
+  { key: 'closeBy', label: 'Close By', filterable: true, type:'date' },
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions'); 

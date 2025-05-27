@@ -17,7 +17,7 @@
     </div>
   </ng-template>
 
-  <ng-template pTemplate="header">
+  <!-- <ng-template pTemplate="header">
     <tr>
       <th *ngFor="let column of columns" 
           [pSortableColumn]="column.key === 'status' ? 'statusPercentage' : column.key"
@@ -31,7 +31,52 @@
         </div>
       </th>
     </tr>
+  </ng-template> -->
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let column of columns" 
+          [pSortableColumn]="column.key === 'status' ? 'statusPercentage' : column.key"
+          [ngClass]="'col-' + column.key">
+        <div class="header-content">
+          <div class="header-text" 
+               [ngClass]="{'multi-word': column.label.includes(' '), 'center-actions-header': column.key === 'actions' && hasMultipleActionsInColumn()}">
+            {{ column.label }}
+          </div>
+          <div class="header-icons">
+            <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key === 'status' ? 'statusPercentage' : column.key"></p-sortIcon>
+            
+            <p-columnFilter *ngIf="column.filterable && column.type === 'date'" 
+                          [field]="column.key" 
+                          display="menu" 
+                          [matchMode]="'equals'"
+                          class="column-filter">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <div class="date-filter-wrapper">
+                  <p-calendar 
+                    [(ngModel)]="dateFilters[column.key]" 
+                    (ngModelChange)="onDateFilterChange($event, column.key)"
+                    dateFormat="dd/mm/yy"
+                    [showIcon]="true"
+                    placeholder="Select date"
+                    [showClear]="true"
+                    [showButtonBar]="true"
+                    styleClass="date-filter-calendar">
+                  </p-calendar>
+                </div>
+              </ng-template>
+            </p-columnFilter>
+            
+            <p-columnFilter *ngIf="column.filterable && column.type !== 'date'" 
+                          [field]="column.key" 
+                          display="menu" 
+                          class="column-filter"/>
+          </div>
+        </div>
+      </th>
+    </tr>
   </ng-template>
+
+
 
   <!-- Table Body -->
   <ng-template pTemplate="body" let-rowData>

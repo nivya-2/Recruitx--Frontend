@@ -1,125 +1,193 @@
-/* You can add global styles to this file, and also import other style files */
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
 
+.filter-container {
+  display: flex;
+  gap: 1vw;
+}
 
-  :host {
-    display: block;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-  }
+.text-center {
+  text-align: center !important;   
+}
 
-
-  .filter-container {
-    display: flex;
-    gap: 1vw;
-  }
-   .text-center{
-    text-align: center !important;   
-   }
-
-   :host.hover-enabled ::ng-deep .p-datatable-tbody > tr:hover {
+:host.hover-enabled ::ng-deep .p-datatable-tbody > tr:hover {
   background-color: #e5deff !important;
   cursor: pointer;
 }
 
+::ng-deep {
+  /* Header Content Styling */
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 3px;
+    padding: 0;
+  }
 
+  /* Base styling for header text */
+  .header-text {
+    flex-grow: 1;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+    white-space: nowrap;
+    font-weight: 600;
+  }
 
-  ::ng-deep {
-    /* Header Content Styling */
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      gap: 3px;
-      padding: 0;
-    }
-  
-    /* Base styling for header text */
-    .header-text {
-      flex-grow: 1;
-      overflow-wrap: break-word;
-      line-height: 1.3;
-      white-space: nowrap; /* Keep single words on one line */
-      font-weight: 600;
-    }
-  
-    /* Only multi-word headers break to new line */
-    .header-text.multi-word {
-      white-space: normal !important;
-    }
+  /* Only multi-word headers break to new line */
+  .header-text.multi-word {
+    white-space: normal !important;
+  }
 
-     .header-text.center-actions-header {
+  .header-text.center-actions-header {
     text-align: center !important;
   }
-  
-    /* Icon container */
-    .header-icons {
-      display: inline-flex;
-      align-items: center;
-      flex-shrink: 0;
-      margin-left: 2px;
-    }
-  
-    /* Styling for PrimeNG sort icons and filters */
-    .p-sorticon, 
-    .p-columnfilter {
-      display: inline-flex;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-    }
-      
- .action-buttons {
-   display: flex;
-  gap: 8px;
-  // flex-wrap: wrap;
-  justify-content: flex-start;
 
-  &.center-label {
-    justify-content: center !important;
+  /* Icon container */
+  .header-icons {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 2px;
+  }
+
+  /* Styling for PrimeNG sort icons and filters */
+  .p-sorticon, 
+  .p-columnfilter {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Date Filter Styling */
+  .p-column-filter-menu {
+    min-width: 280px;
+    
+    .p-column-filter-menu-button {
+      color: #6c757d;
+      
+      &:hover {
+        color: #495057;
+      }
+    }
+  }
+
+  .p-column-filter-overlay {
+    .p-column-filter-overlay-menu {
+      padding: 1rem;
+      
+      .date-filter-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 0;
+        width: 100%;
+        
+        .date-filter-calendar {
+          width: 100%;
+          
+          .p-inputtext {
+            width: 100% !important;
+          }
+          
+          .p-datepicker {
+            .p-datepicker-header {
+              .p-datepicker-prev,
+              .p-datepicker-next {
+                width: 2rem !important;
+                height: 2rem !important;
+                
+                .pi {
+                  font-size: 0.875rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* Calendar Icon Alignment Fix */
+  .p-calendar {
+    .p-calendar-w-btn {
+      .p-button {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+        
+        .pi {
+          margin: 0 !important;
+        }
+      }
+    }
+    
+    .p-inputtext {
+      padding-right: 2.5rem !important;
+    }
+  }
+
+  /* Fix calendar button alignment */
+  .p-calendar.p-calendar-w-btn .p-button.p-calendar-button {
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    border-radius: 0 4px 4px 0 !important;
+  }
+
+  /* Action buttons styling */
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+
+    &.center-label {
+      justify-content: center !important;
+    }
+  }
+
+  /* Table cell styling */
+  .p-datatable .p-datatable-tbody > tr > td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+  }
+
+  .p-datatable .p-datatable-tbody > tr:last-child > td {
+    border-bottom: none;
+  }
+
+  /* Scrollable table */
+  .p-datatable-scrollable .p-datatable-wrapper {
+    overflow-x: auto;
+  }
+  
+  /* Consistent row height */
+  .p-datatable .p-datatable-tbody > tr {
+    height: 60px;
+  }
+  
+  /* Center align action column */
+  .p-datatable .p-datatable-tbody > tr > td:last-child {
+    text-align: center;
+  }
+  
+  /* Row spacing */
+  .p-datatable .p-datatable-tbody > tr:not(:last-child) {
+    margin-bottom: 4px;
   }
 }
-    .p-datatable .p-datatable-tbody > tr > td {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid #f0f0f0;
-      vertical-align: middle;
-    }
 
-  
-    .p-datatable .p-datatable-tbody > tr:last-child > td {
-      border-bottom: none;
-    }
-  
-    /* Fixed column widths */
-    .p-datatable-scrollable .p-datatable-wrapper {
-      overflow-x: auto;
-    }
-    
-    /* Ensure consistent row height */
-    .p-datatable .p-datatable-tbody > tr {
-      height: 60px; /* Adjust as needed */
-    }
-    
-    /* Align button in action column */
-    .p-datatable .p-datatable-tbody > tr > td:last-child {
-      text-align: center;
-    }
-    
-    /* Add some spacing between rows */
-    .p-datatable .p-datatable-tbody > tr:not(:last-child) {
-      margin-bottom: 4px;
-    }
-    
-   
-    
-  }
-
-
-
-
-
-  .file-name-display {
+/* File display styling */
+.file-name-display {
   display: flex;
   align-items: center;
   gap: 0.5rem;
