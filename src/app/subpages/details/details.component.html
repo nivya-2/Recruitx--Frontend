@@ -11,26 +11,30 @@
 
 <div class="base">
     <app-input-text label="Skills - Mandatory" [value]="jobData.mandatorySkills"
-        [disabled]="!isEditMode" [fontWeight]="'600'"></app-input-text>
-    <app-input-text label="Skills - Primary" [value]="jobData.primarySkills" [disabled]="!isEditMode"></app-input-text>
+        [disabled]="true" [fontWeight]="'600'"></app-input-text>
+    <app-input-text label="Skills - Primary" [value]="jobData.primarySkills" [disabled]="true" [fontWeight]="'600'"></app-input-text>
     <app-input-text label="Skills - Good To Have" [value]="jobData.goodToHaveSkills"
-        [disabled]="!isEditMode"></app-input-text>
-    <app-input-text label="Work Location" [value]="jobData.location" [disabled]="!isEditMode"></app-input-text>
+        [disabled]="true" [fontWeight]="'600'"></app-input-text>
+    
 </div>
 <div class="base">
-    <app-input-text label="Qualification" [value]="jobData.qualification" [disabled]="!isEditMode"></app-input-text>
-    <app-input-text label="Total Experience" [value]="jobData.experience" [disabled]="!isEditMode"></app-input-text>
+    <app-input-text label="Work Location" [value]="jobData.location" [disabled]="true" [fontWeight]="'600'"></app-input-text>
+    <app-input-text label="Qualification" [value]="jobData.qualification" [disabled]="true" [fontWeight]="'600'"></app-input-text>
+    <app-input-text label="Total Experience" [value]="jobData.experience" [disabled]="true" [fontWeight]="'600'"></app-input-text>
+    
+</div>
+<div class="base">
     <app-input-text label="Relevant Experience" [value]="jobData.relevantExperience"
-        [disabled]="!isEditMode"></app-input-text>
+        [disabled]="true" [fontWeight]="'600'"></app-input-text>
     <app-input-text label="Expected Date of Joining" [value]="jobData.onboardingDate"
-        [disabled]="!isEditMode"></app-input-text>
+        [disabled]="true" [fontWeight]="'600'"></app-input-text>
 </div>
 <div class="base">
-    <app-text-area label="Job Requisition" [value]="jobData.jobPurpose1" [disabled]="!isEditMode"></app-text-area>
+    <app-text-area label="Job Requisition" [value]="jobData.jobPurpose1" [disabled]="true"></app-text-area>
 </div>
 <div class="base">
     <app-text-area label="Job Description" [value]="jobData.jobPurpose2" [disabled]="!isEditMode"></app-text-area>
 </div>
 <div class="base">
-    <app-text-area label="Job Purpose" [value]="jobData.jobPurpose3" [disabled]="!isEditMode"></app-text-area>
+    <app-text-area label="Job Purpose" [value]="jobData.jobPurpose3" [disabled]="true"></app-text-area>
 </div>

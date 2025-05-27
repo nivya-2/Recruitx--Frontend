@@ -7,6 +7,7 @@ import { TextAreaComponent } from "../../ui/text-area/text-area.component";
 import { ModalComponent } from "../../ui/modal/modal.component";
 
 @Component({
+  standalone: true,
   selector: 'app-details',
   imports: [HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent],
   templateUrl: './details.component.html',
