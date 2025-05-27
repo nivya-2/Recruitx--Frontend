@@ -1,8 +1,8 @@
 
 <div class="base">
   <div class="right-align">
-        <app-button>Add New Applicants</app-button>
-
+        <app-button (functionemit)="openModal()">Add New Applicants </app-button>
+       
     </div>
   <app-table
     [dataSource]="dataSource"
@@ -13,5 +13,14 @@
     [showFilter]="true"
     [rowClickFn]="routes">    
   </app-table>
+
+  <app-modal 
+[(visible)]="visible" 
+header="Add Job Requisitions"
+[maximizable]="true" 
+[style]="{ width: '50rem', height: '35rem' }">
+  <app-upload></app-upload>
+</app-modal>
+
 </div>
 
