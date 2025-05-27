@@ -25,7 +25,7 @@ import { ViewassignedjrCardComponent } from "./shared-components/viewassignedjr-
 
 @Component({
   selector: 'app-root',
-  imports: [ RouterOutlet, SharedComponentsModule],
+  imports: [RouterOutlet, SharedComponentsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

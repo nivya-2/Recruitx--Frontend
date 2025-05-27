@@ -5,11 +5,12 @@ import { InputTextComponent } from "../../ui/input-text/input-text.component";
 import { ButtonComponent } from "../../ui/button/button.component";
 import { TextAreaComponent } from "../../ui/text-area/text-area.component";
 import { ModalComponent } from "../../ui/modal/modal.component";
+import { NgIf } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-details',
-  imports: [HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent],
+  imports: [NgIf,HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
@@ -19,20 +20,6 @@ export class DetailsComponent {
 
   isEditMode: boolean = false;
   visible: boolean = false;
-
-  jobData = {
-    mandatorySkills: 'Python, RESTful APIs, PostgreSQL, Git',
-    primarySkills: 'Django or Flask, Unit Testing, Docker',
-    goodToHaveSkills: 'AWS, CI/CD, Redis, Kubernetes',
-    location: 'Kochi (Hybrid: 3 days on-site, 2 days WFH)',
-    qualification: 'B.Sc. computer science, Engineering, or related field',
-    experience: '5 years',
-    relevantExperience: '3+ years in backend Python development',
-    onboardingDate: '15th May 2025',
-    jobPurpose1: 'To design and implement secure, scalable, and high-performance RESTful APIs for enterprise-grade applications.',
-    jobPurpose2: 'To collaborate with cross-functional teams, including frontend developers, DevOps, and QA, to deliver robust backend features.',
-    jobPurpose3: 'To continuously improve system reliability, automate deployments, and contribute to architectural decisions and best practices.'
-  };
 
   toggleEdit() {
     this.isEditMode = !this.isEditMode;
@@ -44,6 +31,41 @@ export class DetailsComponent {
     // this.isEditMode = editMode;
     this.label = this.isEditMode ? 'Save' : 'Edit';
   }
+formData = {
+    skillsMandatory: 'HTML, CSS, JavaScript',
+    skillsPrimary: 'Angular, TypeScript',
+    skillsGood: 'React, Node.js',
+    role: 'Frontend Developer',
+    workLocation: 'Bangalore, India',
+    relevantExpYears: '2',
+    relevantExpMonths: '6',
+    qualification: 'B.Tech in Computer Science or equivalent',
+    totalExpYears: '3',
+    totalExpMonths: '0',
+    onboardingDate: '15/07/2025',
+    jobDescription: `• Develop and maintain front-end components using Angular
+• Collaborate with UX/UI designers to implement responsive designs
+• Integrate REST APIs and ensure performance optimization
+• Participate in code reviews and team meetings`,
+    jobPurpose: `To build and enhance web applications that improve user experience and business performance.`,
+    jobSpecification: `• Strong proficiency in Angular and TypeScript
+• Good understanding of web standards and accessibility
+• Ability to write clean, maintainable code
+• Excellent problem-solving and teamwork skills`,
+    additionalInfo: `Looking for candidates who can join within 30 days. Hybrid work option available.`
+  };
 
+  // resetForm() {
+  //   // Optional: Reset the formData to initial values or clear
+  // }
+
+  // saveDraft() {
+  //   console.log('Saving Draft:', this.formData);
+  // }
+
+  // submitForm() {
+  //   console.log('Submitting Form:', this.formData);
+  //   // You can call your API here
+  // }
 
 }
