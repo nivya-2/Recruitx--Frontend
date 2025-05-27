@@ -1,12 +1,21 @@
 ::ng-deep .button {
     border: none;
-    padding: 0.7rem 2rem;
+    // padding: 0.7rem 2rem;
     border-radius: 7px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
-    font-size: inherit; 
+    font-size: inherit;
   }
+
 
   :host ::ng-deep .button {
   font-size: inherit;
 }
+
+
+::ng-deep .button,
+::ng-deep .button:hover {
+  border: none !important;
+  margin: 0 !important;
+}
+

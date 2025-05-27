@@ -1,25 +1,27 @@
 import { Component } from '@angular/core';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { TableComponent } from '../../shared-components/table/table.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 
 
 @Component({
   selector: 'app-open-jd',
-  imports: [TableComponent],
+  imports: [TableComponent, RouterOutlet],
   templateUrl: './track-jd.component.html',
   styleUrl: './track-jd.component.scss'
 })
 export class TrackJdComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
+  
+
 onViewJD = (row: any) => {
-  this.router.navigate(['/recruiter/job-description/details']);
+  this.router.navigate(['/recruiter-lead/job-description/details']);
   console.log('View JD for:', row);
 };
 
 onViewApplicants = (row: any) => {
-  this.router.navigate(['/recruiter/job-description/applicants']);
+  this.router.navigate(['/recruiter-lead/job-description/applicants']);
   console.log('View Applicants for:', row);
 };
 
