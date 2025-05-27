@@ -3,14 +3,24 @@
         <!-- Job Requisition Card -->
         <div class="card full-width job-requisition job">
           <div class="job-requisition-header">
-            
             <app-header-text context="table-header" [nopad]="true">Job Requisition Forms</app-header-text>
-            <div class="sort-dropdown">
-              Sort by date <span class="arrow"></span>
-            </div>
+                  <p-select 
+            [options]="viewOptions" 
+            [(ngModel)]="selectedView" 
+            (onChange)="sortJobs()"
+            optionLabel="name" 
+            optionValue="code"
+            placeholder="Sort by date"
+            class="select-dropdown"
+          >
+          </p-select>
           </div>
           <hr />
+          <div class="list-container">
+
           <app-list-view [jobs]="jobs"></app-list-view>
+          </div>
+
         </div>
   
         <!-- Bottom Metrics -->
