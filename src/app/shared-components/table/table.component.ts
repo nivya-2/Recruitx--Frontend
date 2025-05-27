@@ -10,16 +10,25 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { CalendarModule } from 'primeng/calendar'; // Add this import
 import { ProgressbarComponent } from '../../ui/progressbar/progressbar.component';
 import { FormsModule } from '@angular/forms';
+import { FilterService } from 'primeng/api';
 
+
+   export const CustomFilterMatchMode = {
+  DATE_IS: 'dateIs',
+  DATE_BEFORE: 'dateBefore',
+  DATE_AFTER: 'dateAfter'
+};
 
 @Component({
   selector: 'app-table',
-  imports: [ProgressbarComponent, CommonModule, TableModule, InputTextModule, ButtonModule, PaginatorModule, IconField, InputIcon, ButtonComponent, CalendarModule,FormsModule],
+  imports: [ProgressbarComponent, CommonModule, TableModule, InputTextModule, ButtonModule, PaginatorModule, IconField, InputIcon, ButtonComponent, CalendarModule, FormsModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
+
 export class TableComponent implements OnInit, OnChanges {
 
+  
   
   @Input() dataSource:any[]=[];
   @Input() columns:any=[];
@@ -35,6 +44,14 @@ export class TableComponent implements OnInit, OnChanges {
   @HostBinding('class.hover-enabled') get isHoverEnabled() {
     return this.hover;
   }
+
+
+    dateFilters: { [key: string]: Date | null } = {};
+     dateMatchModeOptions = [
+  { label: 'Date Equals', value: CustomFilterMatchMode.DATE_IS },
+  { label: 'Date Before', value: CustomFilterMatchMode.DATE_BEFORE },
+  { label: 'Date After', value: CustomFilterMatchMode.DATE_AFTER }
+];
 
   hasMultipleActionsInColumn(): boolean {
     const actionsColumn = this.columns.find((col: { key: string; }) => col.key === 'actions');
@@ -55,20 +72,109 @@ export class TableComponent implements OnInit, OnChanges {
     }
   }
 
-  isDate(value: any): boolean {
-    if (value instanceof Date) {
-      return true;
+ private parseCustomDate(value: string): Date | null {
+  // Handle dd/MM/yyyy format
+  const ddMMyyyyRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+  const match = value.match(ddMMyyyyRegex);
+  
+  if (match) {
+    const day = parseInt(match[1], 10);
+    const month = parseInt(match[2], 10) - 1; // Month is 0-based in JS
+    const year = parseInt(match[3], 10);
+
+    // Validate ranges
+    if (month < 0 || month > 11 || day < 1 || day > 31 || year < 1000) {
+      return null;
     }
-    
-    if (typeof value === 'string') {
-      const timestamp = Date.parse(value);
-      return !isNaN(timestamp);
+
+    const date = new Date(year, month, day);
+
+    // Check if resulting date matches input values (to avoid JS auto-correction)
+    if (date.getFullYear() === year && date.getMonth() === month && date.getDate() === day) {
+      return date;
     }
-    
-    return false;
+    return null;
   }
 
-  handleActionClick(action: string, rowData: any): void {
+  // Handle ddMMyyyy format
+  if (/^\d{8}$/.test(value)) {
+    const day = parseInt(value.substring(0, 2), 10);
+    const month = parseInt(value.substring(2, 4), 10) - 1;
+    const year = parseInt(value.substring(4, 8), 10);
+
+    const date = new Date(year, month, day);
+
+    // Check if resulting date matches input values
+    if (date.getFullYear() === year && date.getMonth() === month && date.getDate() === day) {
+      return date;
+    }
+    return null;
+  }
+
+  return null;
+}
+
+isDate(value: any): boolean {
+  if (value instanceof Date && !isNaN(value.getTime())) {
+    return true;
+  }
+
+  if (typeof value === 'string') {
+    // Try custom date formats first
+    const customDate = this.parseCustomDate(value);
+    if (customDate) {
+      return true;
+    }
+
+    // For other strings, try parsing normally
+    const timestamp = Date.parse(value);
+    return !isNaN(timestamp);
+  }
+
+  return false;
+}
+
+convertToDate(value: any): Date | null {
+    if (!value) return null;
+    
+    if (value instanceof Date) {
+      return value;
+    }
+
+    if (typeof value === 'string') {
+      const trimmedValue = value.trim();
+      
+      // Handle dd/MM/yyyy format
+      const ddMMyyyyRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+      const match = trimmedValue.match(ddMMyyyyRegex);
+      
+      if (match) {
+        const day = parseInt(match[1], 10);
+        const month = parseInt(match[2], 10) - 1; // Month is 0-based in JS
+        const year = parseInt(match[3], 10);
+        return new Date(year, month, day);
+      }
+
+      // Handle ddMMyyyy format
+      if (/^\d{8}$/.test(trimmedValue)) {
+        const day = parseInt(trimmedValue.substring(0, 2), 10);
+        const month = parseInt(trimmedValue.substring(2, 4), 10) - 1;
+        const year = parseInt(trimmedValue.substring(4, 8), 10);
+        return new Date(year, month, day);
+      }
+
+      // Try parsing other formats
+      const parsedDate = new Date(trimmedValue);
+      if (!isNaN(parsedDate.getTime())) {
+        return parsedDate;
+      }
+    }
+
+    return null;
+  }
+
+
+handleActionClick(action: string, rowData: any): void {
     const method = this.actionMethods[action];
     
     if (method && typeof method === 'function') {
@@ -102,11 +208,77 @@ getStatusClass(fstatus: string): string {
   }
 }
 
+constructor(private filterService: FilterService) {}
+
   // Add computed percentage property to data
   ngOnInit(): void {
     this.processDataForSorting();
+      this.registerCustomDateFilters();
+
+    this.columns.forEach((column: { key: string; }) => {
+      if (this.isDateColumn(column.key)) {
+        this.dateFilters[column.key] = null;
+      }
+    });
   }
 
+   registerCustomDateFilters(): void {
+  this.filterService.register(CustomFilterMatchMode.DATE_IS, (value: any, filter: Date): boolean => {
+    return this.filterDate(value, filter, CustomFilterMatchMode.DATE_IS);
+  });
+
+  this.filterService.register(CustomFilterMatchMode.DATE_BEFORE, (value: any, filter: Date): boolean => {
+    return this.filterDate(value, filter, CustomFilterMatchMode.DATE_BEFORE);
+  });
+
+  this.filterService.register(CustomFilterMatchMode.DATE_AFTER, (value: any, filter: Date): boolean => {
+    return this.filterDate(value, filter, CustomFilterMatchMode.DATE_AFTER);
+  });}
+
+   isDateColumn(columnKey: string): boolean {
+    const dateColumns = ['createdDate', 'updatedDate', 'startDate', 'endDate'];
+    return dateColumns.includes(columnKey);
+  }
+
+  // Handle date filter selection
+  onDateFilterChange(selectedDate: Date, columnKey: string, filterCallback: Function): void {
+    this.dateFilters[columnKey] = selectedDate;
+    
+    if (selectedDate) {
+      // Use custom filter function
+     filterCallback(selectedDate, CustomFilterMatchMode.DATE_IS);
+    }
+  }
+
+  // Handle date filter clear
+  onDateFilterClear(columnKey: string, filterCallback: Function): void {
+    this.dateFilters[columnKey] = null;
+    filterCallback(null);
+  }
+
+  // Custom date filter function
+  filterDate(value: any, filter: Date, matchMode: string): boolean {
+    if (!filter) return true;
+    if (!value) return false;
+
+    const rowDate = this.convertToDate(value);
+    if (!rowDate) return false;
+
+    // Normalize dates to ignore time
+    const filterDate = new Date(filter.getFullYear(), filter.getMonth(), filter.getDate());
+    const valueDate = new Date(rowDate.getFullYear(), rowDate.getMonth(), rowDate.getDate());
+
+    switch (matchMode) {
+      case 'dateIs':
+        return valueDate.getTime() === filterDate.getTime();
+      case 'dateBefore':
+        return valueDate.getTime() < filterDate.getTime();
+      case 'dateAfter':
+        return valueDate.getTime() > filterDate.getTime();
+      default:
+        return true;
+    }
+  }
   ngOnChanges(): void {
     this.processDataForSorting();
   }
@@ -120,6 +292,17 @@ getStatusClass(fstatus: string): string {
     }));
   }
 
+   configureTableFilters(table: any): void {
+    // Set custom filter function for date columns
+    this.columns.forEach((column: { key: string; }) => {
+      if (this.isDateColumn(column.key)) {
+        table.filters[column.key] = {
+          value: null,
+matchMode: CustomFilterMatchMode.DATE_IS
+        };
+      }
+    });
+  }
 
 
 }

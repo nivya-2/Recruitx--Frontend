@@ -99,7 +99,7 @@ export class PendingJdGenComponent {
     { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
     { key: 'location', label: 'Location', filterable: true },
     { key: 'openPositions', label: 'No. of Open Positions', filterable: false },
-    { key: 'createdDate', label: 'Created Date', filterable: false },
+    { key: 'createdDate', label: 'Created Date', filterable: true },
     { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
     { key: 'actions', label: 'Actions', filterable: false }
   ];

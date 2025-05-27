@@ -65,83 +65,60 @@
     padding: 0;
   }
 
-  /* Date Filter Styling */
-  .p-column-filter-menu {
-    min-width: 280px;
-    
-    .p-column-filter-menu-button {
-      color: #6c757d;
-      
-      &:hover {
-        color: #495057;
-      }
-    }
+ ::ng-deep .p-column-filter-menu {
+  .p-fluid {
+    min-width: 200px;
+    padding: 0.5rem;
   }
-
-  .p-column-filter-overlay {
-    .p-column-filter-overlay-menu {
-      padding: 1rem;
-      
-      .date-filter-wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        margin: 0;
-        width: 100%;
-        
-        .date-filter-calendar {
-          width: 100%;
-          
-          .p-inputtext {
-            width: 100% !important;
-          }
-          
-          .p-datepicker {
-            .p-datepicker-header {
-              .p-datepicker-prev,
-              .p-datepicker-next {
-                width: 2rem !important;
-                height: 2rem !important;
-                
-                .pi {
-                  font-size: 0.875rem;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  /* Calendar Icon Alignment Fix */
+  
   .p-calendar {
-    .p-calendar-w-btn {
-      .p-button {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 2.5rem !important;
-        height: 2.5rem !important;
-        
-        .pi {
-          margin: 0 !important;
-        }
-      }
-    }
+    width: 100%;
     
     .p-inputtext {
-      padding-right: 2.5rem !important;
+      font-size: 0.875rem;
     }
   }
+}
 
-  /* Fix calendar button alignment */
-  .p-calendar.p-calendar-w-btn .p-button.p-calendar-button {
-    right: 0 !important;
-    top: 0 !important;
-    bottom: 0 !important;
-    border-radius: 0 4px 4px 0 !important;
+/* Date picker popup styling */
+::ng-deep .p-datepicker {
+  .p-datepicker-header {
+    background: var(--primary-color);
+    color: var(--primary-color-text);
+    border-color: var(--primary-color);
   }
+  
+  .p-datepicker-today {
+    background: var(--primary-50);
+    color: var(--primary-600);
+    border-color: var(--primary-200);
+  }
+  
+  .p-highlight {
+    background: var(--primary-color);
+    color: var(--primary-color-text);
+  }
+}
+
+/* Column filter menu button */
+::ng-deep .p-column-filter-menu-button {
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+/* Filter overlay panel */
+::ng-deep .p-column-filter-overlay {
+  .p-column-filter-row-items {
+    .p-column-filter-row-item {
+      &:hover {
+        background: var(--surface-hover);
+      }
+    }
+  }
+}
+
+ 
 
   /* Action buttons styling */
   .action-buttons {
@@ -193,7 +170,7 @@
   gap: 0.5rem;
   
   .file-icon {
-    color: #2196F3;
+    color: #7B61FF;
     font-size: 1.1rem;
   }
 }
@@ -205,22 +182,22 @@
   font-weight: 500;
   
   &.ready {
-    background-color: #e3f2fd;
-    color: #0d47a1;
+    background-color: #f5f3ff;
+    color: #7B61FF;
   }
   
   &.processing {
-    background-color: #fff3e0;
+    background-color: #f5f3ff;
     color: #e65100;
   }
   
   &.success {
-    background-color: #e8f5e9;
+    background-color: #f5f3ff;
     color: #2e7d32;
   }
   
   &.error {
-    background-color: #ffebee;
+    background-color: #f5f3ff;
     color: #c62828;
   }
 }

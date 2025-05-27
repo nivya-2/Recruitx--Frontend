@@ -3,7 +3,9 @@
          [responsiveLayout]="'scroll'" [resizableColumns]="true" scrollHeight="'auto'"
          [sortMode]="'multiple'" [rowHover]="hover" [showCurrentPageReport]="true"
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-         [ngStyle]="{ 'font-size': fontSize }">
+         [ngStyle]="{ 'font-size': fontSize }"
+         customSort="false"
+        [filterDelay]="300">
 
   <ng-template pTemplate="caption" *ngIf="showFilter">
     <div class="filter-container">
@@ -17,7 +19,7 @@
     </div>
   </ng-template>
 
-  <ng-template pTemplate="header">
+  <!-- <ng-template pTemplate="header">
     <tr>
       <th *ngFor="let column of columns" 
           [pSortableColumn]="column.key === 'status' ? 'statusPercentage' : column.key"
@@ -31,50 +33,55 @@
         </div>
       </th>
     </tr>
-  </ng-template>
-  <!-- <ng-template pTemplate="header">
-    <tr>
-      <th *ngFor="let column of columns" 
-          [pSortableColumn]="column.key === 'status' ? 'statusPercentage' : column.key"
-          [ngClass]="'col-' + column.key">
-        <div class="header-content">
-          <div class="header-text" 
-               [ngClass]="{'multi-word': column.label.includes(' '), 'center-actions-header': column.key === 'actions' && hasMultipleActionsInColumn()}">
-            {{ column.label }}
-          </div>
-          <div class="header-icons">
-            <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key === 'status' ? 'statusPercentage' : column.key"></p-sortIcon>
-            
-            <p-columnFilter *ngIf="column.filterable && column.type === 'date'" 
-                          [field]="column.key" 
-                          display="menu" 
-                          [matchMode]="'equals'"
-                          class="column-filter">
-              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                <div class="date-filter-wrapper">
-                  <p-calendar 
-                    [(ngModel)]="dateFilters[column.key]" 
-                    (ngModelChange)="onDateFilterChange($event, column.key)"
-                    dateFormat="dd/mm/yy"
-                    [showIcon]="true"
-                    placeholder="Select date"
-                    [showClear]="true"
-                    [showButtonBar]="true"
-                    styleClass="date-filter-calendar">
-                  </p-calendar>
-                </div>
-              </ng-template>
-            </p-columnFilter>
-            
-            <p-columnFilter *ngIf="column.filterable && column.type !== 'date'" 
-                          [field]="column.key" 
-                          display="menu" 
-                          class="column-filter"/>
-          </div>
-        </div>
-      </th>
-    </tr>
   </ng-template> -->
+<ng-template pTemplate="header">
+  <tr>
+    <th *ngFor="let column of columns" 
+        [pSortableColumn]="column.key === 'status' ? 'statusPercentage' : column.key"
+        [ngClass]="'col-' + column.key">
+      <div class="header-content">
+        <div class="header-text" 
+             [ngClass]="{'multi-word': column.label.includes(' '), 'center-actions-header': column.key === 'actions' && hasMultipleActionsInColumn()}">
+          {{ column.label }}
+        </div>
+        <div class="header-icons">
+          <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key === 'status' ? 'statusPercentage' : column.key"></p-sortIcon>
+          
+          <!-- Date Column Filter -->
+          <p-columnFilter *ngIf="column.filterable && isDateColumn(column.key)" 
+                        [field]="column.key" 
+                        display="menu" 
+                        matchMode="custom"
+                        [matchModeOptions]="dateMatchModeOptions"
+                        class="column-filter">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <div class="p-fluid">
+                <p-calendar 
+                  [(ngModel)]="dateFilters[column.key]" 
+                  (onSelect)="onDateFilterChange($event, column.key, filter)"
+                  (onClearClick)="onDateFilterClear(column.key, filter)"
+                  dateFormat="dd/mm/yy"
+                  [showIcon]="true"
+                  [showClear]="true"
+                  [showButtonBar]="true"
+                  placeholder="Select date"
+                  inputId="date-filter-{{column.key}}"
+                  styleClass="p-inputtext-sm">
+                </p-calendar>
+              </div>
+            </ng-template>
+          </p-columnFilter>
+          
+          <!-- Regular Column Filter -->
+          <p-columnFilter *ngIf="column.filterable && !isDateColumn(column.key)" 
+                        [field]="column.key" 
+                        display="menu" 
+                        class="column-filter"/>
+        </div>
+      </div>
+    </th>
+  </tr>
+</ng-template>
 
 
 
@@ -97,8 +104,8 @@
         <!-- Check for Date -->
         <ng-template #checkDate>
           <ng-container *ngIf="isDate(rowData[column.key]); else regularValue">
-            {{ rowData[column.key] | date: 'dd/MM/yyyy' }}
-          </ng-container>
+          {{ convertToDate(rowData[column.key]) | date: 'dd/MM/yyyy' }}   
+               </ng-container>
         </ng-template>
 
          <ng-template #regularValue>
