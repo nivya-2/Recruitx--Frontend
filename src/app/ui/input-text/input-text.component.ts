@@ -1,11 +1,11 @@
-import { NgStyle } from '@angular/common';
+import { NgIf, NgStyle } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-input-text',
-  imports: [FormsModule, NgStyle],
+  imports: [FormsModule, NgStyle, NgIf],
   templateUrl: './input-text.component.html',
   styleUrl: './input-text.component.scss',
 })
@@ -15,6 +15,7 @@ export class InputTextComponent {
   @Input() disabled: boolean = true;
   @Input() fontWeight: string = 'normal';
   @Input() placeHolder: string = '';
+  @Input() isTextarea: boolean = false; // Add this to support <textarea>
   @Output() valueChange = new EventEmitter<string>();
 
   onValueChange(event: any) {
