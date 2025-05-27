@@ -75,6 +75,30 @@ export const routes: Routes = [
             (m) => m.TrackJdComponent
           ),
         data: { breadcrumb: 'Track JD' },
+        children: [
+          {
+            path: 'job-description',
+            loadComponent: () => import('./pages/job-description/job-description.component').then(m => m.JobDescriptionComponent),
+            data: { breadcrumb: 'Job Description' },
+            children: [
+              {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'details'
+              },
+              {
+                path: 'details',
+                loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
+                data: { breadcrumb: 'Details' }
+              },
+              {
+                path: 'applicants',
+                loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
+                data: { breadcrumb: 'Applicants' }
+              }
+            ]
+          },
+        ]
       },
       {
         path: 'closedjd',
@@ -86,41 +110,41 @@ export const routes: Routes = [
       },
     ],
   },
- {
-  path: 'recruiter/interviews',
-  loadComponent: () =>
-    import('./pages/interviews/interviews.component')
-      .then(m => m.InterviewsComponent),
-  data: { breadcrumb: 'Interviews' },
-  children: [
-    {
-      path: '',
-      pathMatch: 'full',
-      redirectTo: 'schedule'
-    },
-    {
-      path: 'schedule',
-      loadComponent: () =>
-        import('./subpages/schedule/schedule.component')
-          .then(m => m.ScheduleComponent),
-      data: { breadcrumb: 'Schedule' }
-    },
-    {
-      path: 'shortlist',
-      loadComponent: () =>
-        import('./subpages/shortlist/shortlist.component')
-          .then(m => m.ShortlistComponent),
-      data: { breadcrumb: 'Shortlist' }
-    },
-    {
-      path: 'all-interviews',
-      loadComponent: () =>
-        import('./subpages/all-interviews/all-interviews.component')
-          .then(m => m.AllInterviewsComponent),
-      data: { breadcrumb: 'All Interviews' }
-    }
-  ]
-},
+  {
+    path: 'recruiter/interviews',
+    loadComponent: () =>
+      import('./pages/interviews/interviews.component')
+        .then(m => m.InterviewsComponent),
+    data: { breadcrumb: 'Interviews' },
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'schedule'
+      },
+      {
+        path: 'schedule',
+        loadComponent: () =>
+          import('./subpages/schedule/schedule.component')
+            .then(m => m.ScheduleComponent),
+        data: { breadcrumb: 'Schedule' }
+      },
+      {
+        path: 'shortlist',
+        loadComponent: () =>
+          import('./subpages/shortlist/shortlist.component')
+            .then(m => m.ShortlistComponent),
+        data: { breadcrumb: 'Shortlist' }
+      },
+      {
+        path: 'all-interviews',
+        loadComponent: () =>
+          import('./subpages/all-interviews/all-interviews.component')
+            .then(m => m.AllInterviewsComponent),
+        data: { breadcrumb: 'All Interviews' }
+      }
+    ]
+  },
 
   {
     path: 'recruiter-lead/jrs',
@@ -130,26 +154,26 @@ export const routes: Routes = [
       ).then((m) => m.RecruiterHeadTrackJrComponent),
     data: { breadcrumb: 'JRs' },
     children: [
-    {
-      path: '',
-      pathMatch: 'full',
-      redirectTo: 'assign-jr'
-    },
-    {
-      path: 'assign-jr',
-      loadComponent: () =>
-        import('./subpages/assign-jr/assign-jr.component')
-          .then(m => m.AssignJrComponent),
-      data: { breadcrumb: 'Assign JR' }
-    },
-    {
-      path: 'track-jr',
-      loadComponent: () =>
-        import('./subpages/track-jr/track-jr.component')
-          .then(m => m.TrackJrComponent),
-      data: { breadcrumb: 'Track JRs' }
-    }
-  ]
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'assign-jr'
+      },
+      {
+        path: 'assign-jr',
+        loadComponent: () =>
+          import('./subpages/assign-jr/assign-jr.component')
+            .then(m => m.AssignJrComponent),
+        data: { breadcrumb: 'Assign JR' }
+      },
+      {
+        path: 'track-jr',
+        loadComponent: () =>
+          import('./subpages/track-jr/track-jr.component')
+            .then(m => m.TrackJrComponent),
+        data: { breadcrumb: 'Track JRs' }
+      }
+    ]
   },
   {
     path: 'recruiter-lead/analytics',
@@ -187,44 +211,68 @@ export const routes: Routes = [
             (m) => m.TrackJdComponent
           ),
         data: { breadcrumb: 'Track JD' },
+        children: [
+          {
+            path: 'job-description',
+            loadComponent: () => import('./pages/job-description/job-description.component').then(m => m.JobDescriptionComponent),
+            data: { breadcrumb: 'Job Description' },
+            children: [
+              {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'details'
+              },
+              {
+                path: 'details',
+                loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
+                data: { breadcrumb: 'Details' }
+              },
+              {
+                path: 'applicants',
+                loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
+                data: { breadcrumb: 'Applicants' }
+              }
+            ]
+          },
+        ]
       },
     ],
   },
- {
-  path: 'recruiter-lead/interviews',
-  loadComponent: () =>
-    import('./pages/interviews/interviews.component')
-      .then(m => m.InterviewsComponent),
-  data: { breadcrumb: 'Interviews' },
-  children: [
-    {
-      path: '',
-      pathMatch: 'full',
-      redirectTo: 'schedule'
-    },
-    {
-      path: 'schedule',
-      loadComponent: () =>
-        import('./subpages/schedule/schedule.component')
-          .then(m => m.ScheduleComponent),
-      data: { breadcrumb: 'Schedule' }
-    },
-    {
-      path: 'shortlist',
-      loadComponent: () =>
-        import('./subpages/shortlist/shortlist.component')
-          .then(m => m.ShortlistComponent),
-      data: { breadcrumb: 'Shortlist' }
-    },
-    {
-      path: 'all-interviews',
-      loadComponent: () =>
-        import('./subpages/all-interviews/all-interviews.component')
-          .then(m => m.AllInterviewsComponent),
-      data: { breadcrumb: 'All Interviews' }
-    }
-  ]
-},
+  {
+    path: 'recruiter-lead/interviews',
+    loadComponent: () =>
+      import('./pages/interviews/interviews.component')
+        .then(m => m.InterviewsComponent),
+    data: { breadcrumb: 'Interviews' },
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'schedule'
+      },
+      {
+        path: 'schedule',
+        loadComponent: () =>
+          import('./subpages/schedule/schedule.component')
+            .then(m => m.ScheduleComponent),
+        data: { breadcrumb: 'Schedule' }
+      },
+      {
+        path: 'shortlist',
+        loadComponent: () =>
+          import('./subpages/shortlist/shortlist.component')
+            .then(m => m.ShortlistComponent),
+        data: { breadcrumb: 'Shortlist' }
+      },
+      {
+        path: 'all-interviews',
+        loadComponent: () =>
+          import('./subpages/all-interviews/all-interviews.component')
+            .then(m => m.AllInterviewsComponent),
+        data: { breadcrumb: 'All Interviews' }
+      }
+    ]
+  },
 
   {
     path: 'recruiter-lead/team',
@@ -255,34 +303,34 @@ export const routes: Routes = [
       },
     ],
   },
- {
-  path: 'recruiter-head/jrs',
-  loadComponent: () =>
-    import('./pages/track-jr/track-jr.component')
-      .then(m => m.RecruiterHeadTrackJrComponent),
-  data: { breadcrumb: 'JRs' },
-  children: [
-    {
-      path: '',
-      pathMatch: 'full',
-      redirectTo: 'assign-jr'
-    },
-    {
-      path: 'assign-jr',
-      loadComponent: () =>
-        import('./subpages/assign-jr/assign-jr.component')
-          .then(m => m.AssignJrComponent),
-      data: { breadcrumb: 'Assign JR' }
-    },
-    {
-      path: 'track-jr',
-      loadComponent: () =>
-        import('./subpages/track-jr/track-jr.component')
-          .then(m => m.TrackJrComponent),
-      data: { breadcrumb: 'Track JRs' }
-    }
-  ]
-},
+  {
+    path: 'recruiter-head/jrs',
+    loadComponent: () =>
+      import('./pages/track-jr/track-jr.component')
+        .then(m => m.RecruiterHeadTrackJrComponent),
+    data: { breadcrumb: 'JRs' },
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'assign-jr'
+      },
+      {
+        path: 'assign-jr',
+        loadComponent: () =>
+          import('./subpages/assign-jr/assign-jr.component')
+            .then(m => m.AssignJrComponent),
+        data: { breadcrumb: 'Assign JR' }
+      },
+      {
+        path: 'track-jr',
+        loadComponent: () =>
+          import('./subpages/track-jr/track-jr.component')
+            .then(m => m.TrackJrComponent),
+        data: { breadcrumb: 'Track JRs' }
+      }
+    ]
+  },
   {
     path: 'recruiter-head/analytics',
     loadComponent: () =>
@@ -292,58 +340,59 @@ export const routes: Routes = [
     data: { breadcrumb: 'Analytics' },
   },
   {
-  path: 'recruiter-lead/job-description',
-  loadComponent: () => import('./pages/job-description/job-description.component').then(m => m.JobDescriptionComponent),
-  data: { breadcrumb: 'Job-Description' },
-  children: [
-    {
-      path: '',
-      pathMatch: 'full',
-      redirectTo: 'details'
-    },
-    {
-      path: 'details',
-      loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
-      data: { breadcrumb: 'Details' }
-    },
-    {
-      path: 'applicants',
-      loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
-      data: { breadcrumb: 'Applicants' }
-    }
-  ]
-},{
-  path: 'recruiter/job-description',
-  loadComponent: () => import('./pages/job-description/job-description.component').then(m => m.JobDescriptionComponent),
-  data: { breadcrumb: 'Job-Description' },
-  children: [
-    {
-      path: '',
-      pathMatch: 'full',
-      redirectTo: 'details'
-    },
-    {
-      path: 'details',
-      loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
-      data: { breadcrumb: 'Details' }
-    },
-    {
-      path: 'applicants',
-      loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
-      data: { breadcrumb: 'Applicants' }
-    },
-    
-  ]
-},
-{
-      path: 'recruiter-lead/job-description/applicant-details',
+    path: 'recruiter-lead/job-description',
+    loadComponent: () => import('./pages/job-description/job-description.component').then(m => m.JobDescriptionComponent),
+    data: { breadcrumb: 'Job-Description' },
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'details'
+      },
+      {
+        path: 'details',
+        loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
+        data: { breadcrumb: 'Details' }
+      },
+      {
+        path: 'applicants',
+        loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
+        data: { breadcrumb: 'Applicants' }
+      }
+    ]
+  }, 
+  {
+    path: 'recruiter/job-description',
+    loadComponent: () => import('./pages/job-description/job-description.component').then(m => m.JobDescriptionComponent),
+    data: { breadcrumb: 'Job-Description' },
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'details'
+      },
+      {
+        path: 'details',
+        loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
+        data: { breadcrumb: 'Details' }
+      },
+      {
+        path: 'applicants',
+        loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
+        data: { breadcrumb: 'Applicants' }
+      },
+
+    ]
+  },
+  {
+    path: 'recruiter-lead/job-description/applicant-details',
     loadComponent: () =>
       import(
         './pages/applicant-details/applicant-details.component'
       ).then((m) => m.ApplicantDetailsComponent),
     data: { breadcrumb: 'Applicant Details' },
-    },
-  
+  },
+
   {
     path: 'recruiter/job-description/applicant-details',
     loadComponent: () =>
