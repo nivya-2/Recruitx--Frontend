@@ -8,6 +8,7 @@ import { ModalComponent } from "../../ui/modal/modal.component";
 import { NgIf } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-details',
   imports: [NgIf,HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent],
   templateUrl: './details.component.html',
