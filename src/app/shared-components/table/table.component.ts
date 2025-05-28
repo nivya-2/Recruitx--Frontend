@@ -12,7 +12,13 @@ import { ProgressbarComponent } from '../../ui/progressbar/progressbar.component
 import { FormsModule } from '@angular/forms';
 import { FilterService } from 'primeng/api';
 
-
+interface TableColumn {
+  key: string;
+  label?: string;
+  type?: 'string' | 'number' | 'date' | 'boolean';
+  sortable?: boolean;
+  filterable?: boolean;
+}
    export const CustomFilterMatchMode = {
   DATE_IS: 'dateIs',
   DATE_BEFORE: 'dateBefore',
@@ -215,8 +221,9 @@ constructor(private filterService: FilterService) {}
     this.processDataForSorting();
       this.registerCustomDateFilters();
 
-    this.columns.forEach((column: { key: string; }) => {
-      if (this.isDateColumn(column.key)) {
+    this.columns.forEach((column:TableColumn
+    ) => {
+      if (this.isDateColumn(column.type?column.type:column.key)) {
         this.dateFilters[column.key] = null;
       }
     });
@@ -235,9 +242,8 @@ constructor(private filterService: FilterService) {}
     return this.filterDate(value, filter, CustomFilterMatchMode.DATE_AFTER);
   });}
 
-   isDateColumn(columnKey: string): boolean {
-    const dateColumns = ['createdDate', 'updatedDate', 'startDate', 'endDate'];
-    return dateColumns.includes(columnKey);
+   isDateColumn(columnType: string): boolean {
+    return columnType === 'date' ;
   }
 
   // Handle date filter selection
@@ -294,8 +300,8 @@ constructor(private filterService: FilterService) {}
 
    configureTableFilters(table: any): void {
     // Set custom filter function for date columns
-    this.columns.forEach((column: { key: string; }) => {
-      if (this.isDateColumn(column.key)) {
+    this.columns.forEach((column:TableColumn) => {
+      if (this.isDateColumn(column.type?column.type:column.key)) {
         table.filters[column.key] = {
           value: null,
 matchMode: CustomFilterMatchMode.DATE_IS

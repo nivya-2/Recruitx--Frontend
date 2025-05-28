@@ -44,7 +44,7 @@ export class AdminUsersComponent {
       {iconName:'delete',size:"32px",iconColour:"green"}
     ]
 
-    columns: Array<{key: string, label: string, filterable: boolean}> = [
+    columns: Array<{key: string, label: string, filterable: boolean,type?:string}> = [
       { key: 'id', label: 'Employee ID',filterable: false },
       { key: 'name', label: 'Name',filterable: true},
       { key: 'jobTitle', label: 'Job Title',filterable: true },
@@ -53,7 +53,7 @@ export class AdminUsersComponent {
       { key: 'deliveryUnit', label: 'Delivery Unit',filterable: false },
       { key: 'email', label: 'Email',filterable: false },
       { key: 'status1', label: 'Status',filterable: true },
-      { key: 'uploadedDate', label: 'Uploaded Date',filterable: false },
+      { key: 'uploadedDate', label: 'Uploaded Date',filterable: true, type: 'date' },
       { key: 'actions', label: 'Actions',filterable: false }
     ];
 

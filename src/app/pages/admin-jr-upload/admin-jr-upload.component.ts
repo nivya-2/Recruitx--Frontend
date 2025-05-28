@@ -135,8 +135,8 @@ export class AdminJrUploadComponent {
   { key: 'location', label: 'Location', filterable: true },
   { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
   { key: 'assignedTo', label: 'Assigned To', filterable: true},
-  { key: 'assignedOn', label: 'Assigned On', filterable: true },
-  { key: 'closeBy', label: 'Close By', filterable: true },
+  { key: 'assignedOn', label: 'Assigned On', filterable: true ,type: 'date'},
+  { key: 'closeBy', label: 'Close By', filterable: true ,type: 'date'},
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions'); 

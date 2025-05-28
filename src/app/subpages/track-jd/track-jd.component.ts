@@ -46,11 +46,11 @@ jobDataSource: any[] = [
   { id: 'JD015', roleTitle: 'Marketing Coordinator', deliveryUnit: 'DU5', createdDate: '20/05/2025', associatedJr: 'JR2025-126', statuss: 'Open', actions: ['View JD','View Applicants'] }
 ];
 
-jobColumns: Array<{ key: string, label: string, filterable: boolean }> = [
+jobColumns: Array<{ key: string, label: string, filterable: boolean ,type?:string}> = [
   { key: 'id', label: 'ID', filterable: false },
   { key: 'roleTitle', label: 'Role Title', filterable: true },
   { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
-  { key: 'createdDate', label: 'Created Date', filterable: false },
+  { key: 'createdDate', label: 'Created Date', filterable: true , type: 'date' },
   { key: 'associatedJr', label: 'Associated JR', filterable: false },
   { key: 'statuss', label: 'Status', filterable: true },
   { key: 'actions', label: 'Actions', filterable: false }

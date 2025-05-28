@@ -95,13 +95,13 @@ actions:['Schedule'],
       {iconName:'delete',size:"32px",iconColour:"green"}
     ]
 
-    columns: Array<{key: string, label: string, filterable: boolean}> = [
+    columns: Array<{key: string, label: string, filterable: boolean,type?:string}> = [
       { key: 'id', label: 'ID',filterable: false },
       { key: 'roleTitle', label: 'Role Title',filterable: true},
       { key: 'deliveryUnit', label: 'Delivery Unit',filterable: true },
       { key: 'location', label: 'Location',filterable: true },
       { key: 'experience', label: 'Experience',filterable: false },
-      { key: 'createdDate', label: 'Created Date',filterable: false },
+      { key: 'createdDate', label: 'Created Date',filterable: true ,type: 'date'},
       { key: 'assoJr', label: 'Associated JR',filterable: false },
       { key: 'actions', label: 'Actions',filterable: false }
     ];

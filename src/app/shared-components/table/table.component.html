@@ -48,9 +48,10 @@
           <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key === 'status' ? 'statusPercentage' : column.key"></p-sortIcon>
           
           <!-- Date Column Filter -->
-          <p-columnFilter *ngIf="column.filterable && isDateColumn(column.key)" 
+          <p-columnFilter *ngIf="column.filterable && isDateColumn(column.type)" 
                         [field]="column.key" 
                         display="menu" 
+                        [showClearButton]="false"
                         matchMode="custom"
                         [matchModeOptions]="dateMatchModeOptions"
                         class="column-filter">
@@ -73,8 +74,9 @@
           </p-columnFilter>
           
           <!-- Regular Column Filter -->
-          <p-columnFilter *ngIf="column.filterable && !isDateColumn(column.key)" 
+          <p-columnFilter *ngIf="column.filterable && !isDateColumn(column.type)" 
                         [field]="column.key" 
+                        [showClearButton]="false"
                         display="menu" 
                         class="column-filter"/>
         </div>
