@@ -101,13 +101,13 @@ export class PendingJdGenComponent {
 };
   actionMethods = {'Generate JD': this.onViewJD,   'Draft': this.onViewJD };
 
-  columns: Array<{ key: string, label: string, filterable: boolean }> = [
+  columns: Array<{ key: string, label: string, filterable: boolean ,type?:string}> = [
     { key: 'id', label: 'ID', filterable: false },
     { key: 'roleTitle', label: 'Role Title', filterable: true },
     { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
     { key: 'location', label: 'Location', filterable: true },
     { key: 'openPositions', label: 'No. of Open Positions', filterable: false },
-    { key: 'createdDate', label: 'Created Date', filterable: false },
+    { key: 'createdDate', label: 'Created Date', filterable: true ,type: 'date'},
     { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
     { key: 'actions', label: 'Actions', filterable: false }
   ];

@@ -28,7 +28,7 @@ export class AllInterviewsComponent {
       jobRole: 'Backend Developer',
       scheduledDateTime: '27/05/2025 03:00 PM',
       endTime: '27/05/2025 04:00 PM',
-      interviewRound: '1',
+      interviewRound: 1,
       interviewerName: 'Vikram Sinha',
       interviewerDeliveryUnit: 'DU1',
       createdDate: '25/05/2025'
@@ -38,7 +38,7 @@ export class AllInterviewsComponent {
       jobRole: 'Frontend Developer',
       scheduledDateTime: '28/05/2025 10:00 AM',
       endTime: '28/05/2025 11:00 AM',
-      interviewRound: '2',
+      interviewRound: 2,
       interviewerName: 'Anita Nair',
       interviewerDeliveryUnit: 'DU3',
       createdDate: '25/05/2025'
@@ -48,7 +48,7 @@ export class AllInterviewsComponent {
       jobRole: 'DevOps Engineer',
       scheduledDateTime: '29/05/2025 01:00 PM',
       endTime: '29/05/2025 02:00 PM',
-      interviewRound: '1',
+      interviewRound: 1,
       interviewerName: 'Rajiv Malhotra',
       interviewerDeliveryUnit: 'DU7',
       createdDate: '26/05/2025'
@@ -58,7 +58,7 @@ export class AllInterviewsComponent {
       jobRole: 'QA Analyst',
       scheduledDateTime: '30/05/2025 09:30 AM',
       endTime: '30/05/2025 10:30 AM',
-      interviewRound: '1',
+      interviewRound: 1,
       interviewerName: 'Sonal Jain',
       interviewerDeliveryUnit: 'DU5',
       createdDate: '26/05/2025'

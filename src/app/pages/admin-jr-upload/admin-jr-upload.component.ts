@@ -4,14 +4,21 @@ import { TableComponent } from '../../shared-components/table/table.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
+import { ModalComponent } from "../../ui/modal/modal.component";
+import { UploadComponent } from "../../shared-components/upload/upload.component";
+
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent],
+  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, ModalComponent, UploadComponent],
   templateUrl: './admin-jr-upload.component.html',
   styleUrl: './admin-jr-upload.component.scss'
 })
 export class AdminJrUploadComponent {
+  visible:boolean = false;
+  openModal() {
+    this.visible = !this.visible;
+  }
   dataSource: any[] = [
   {
     jobReqId: 'REQ-2025-DS-006',
@@ -20,7 +27,7 @@ export class AdminJrUploadComponent {
     location: 'Kochi',
     hiringManager: 'Arjun Menon',
     assignedTo: 'Anjali Krishna',
-    assignedOn: '02/04/2025',
+    assignedOn: '03/04/2025',
     closeBy: '02/05/2025'
   },
   {
@@ -121,15 +128,15 @@ export class AdminJrUploadComponent {
       {iconName:'delete',size:"32px",iconColour:"green"}
     ]
 
-    columns: Array<{key: string, label: string, filterable: boolean}> = [
-       { key: 'jobReqId', label: 'Requisition ID', filterable: true },
+    columns = [
+  { key: 'jobReqId', label: 'Requisition ID', filterable: false },
   { key: 'jobTitle', label: 'Job Title', filterable: true },
   { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
   { key: 'location', label: 'Location', filterable: true },
   { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
-  { key: 'assignedTo', label: 'Assigned To', filterable: true },
-  { key: 'assignedOn', label: 'Assigned On', filterable: true },
-  { key: 'closeBy', label: 'Close By', filterable: true }
+  { key: 'assignedTo', label: 'Assigned To', filterable: true},
+  { key: 'assignedOn', label: 'Assigned On', filterable: true ,type: 'date'},
+  { key: 'closeBy', label: 'Close By', filterable: true ,type: 'date'},
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions'); 

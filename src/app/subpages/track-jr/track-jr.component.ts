@@ -78,8 +78,8 @@ export class TrackJrComponent {
     { key: 'status', label: 'Status', filterable: false },
     { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
     { key: 'assignedTo', label: 'Assigned To', filterable: true },
-    { key: 'assignedOn', label: 'Assigned On', filterable: true },
-    { key: 'closeBy', label: 'Close By', filterable: true }
+    { key: 'assignedOn', label: 'Assigned On', filterable: true, type: 'date' },
+    { key: 'closeBy', label: 'Close By', filterable: true,  type: 'date' }
   ];
 
   // Global filter fields
