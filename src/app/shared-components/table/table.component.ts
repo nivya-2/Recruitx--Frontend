@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, HostBinding, Input, Output, OnInit, OnChanges } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -54,6 +54,11 @@ export class TableComponent implements OnInit, OnChanges {
     return this.hover;
   }
 
+  private defaultMatchModes: { [key: string]: string } = {};
+  getDefaultMatchMode(columnKey: string): string {
+  return this.defaultMatchModes[columnKey] || CustomFilterMatchMode.DATE_IS;
+}
+
 
     dateFilters: { [key: string]: Date | null } = {};
      dateMatchModeOptions = [
@@ -96,6 +101,8 @@ export class TableComponent implements OnInit, OnChanges {
     
     // Refresh the table
     table.reset();
+
+   
   }
 
   private restoreOriginalOrder(): void {
@@ -264,6 +271,8 @@ constructor(private filterService: FilterService) {}
     ) => {
       if (this.isDateColumn(column.type?column.type:column.key)) {
         this.dateFilters[column.key] = null;
+              this.defaultMatchModes[column.key] = CustomFilterMatchMode.DATE_IS;
+
       }
     });
   }
@@ -352,17 +361,22 @@ constructor(private filterService: FilterService) {}
     }));
   }
 
-   configureTableFilters(table: any): void {
-    // Set custom filter function for date columns
-    this.columns.forEach((column:TableColumn) => {
-      if (this.isDateColumn(column.type?column.type:column.key)) {
-        table.filters[column.key] = {
-          value: null,
-matchMode: CustomFilterMatchMode.DATE_IS
-        };
-      }
-    });
-  }
+//    configureTableFilters(table: any): void {
+
+//     if (!table.filters) {
+//       table.filters = {};
+//     }
+
+//     // Set custom filter function for date columns
+//     this.columns.forEach((column:TableColumn) => {
+//       if (this.isDateColumn(column.type?column.type:column.key)) {
+//         table.filters[column.key] = {
+//           value: null,
+// matchMode: CustomFilterMatchMode.DATE_IS
+//         };
+//       }
+//     });
+//   }
 
 
 }

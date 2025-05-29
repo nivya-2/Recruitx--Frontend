@@ -52,8 +52,8 @@
                         [field]="column.key" 
                         display="menu" 
                         [showClearButton]="false"
-                        matchMode="custom"
                         [matchModeOptions]="dateMatchModeOptions"
+                        [matchMode]="getDefaultMatchMode(column.key)"
                         class="column-filter">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
               <div class="p-fluid">
