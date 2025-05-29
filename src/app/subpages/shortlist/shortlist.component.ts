@@ -33,10 +33,10 @@ awaitingShortlistingDataSource: any[] = [
     { id: 'CAN008', name: 'Arjun Bansal', interviewDate: '04/04/2025', interviewType: 'Management' , actions: ['Shortlist'] }
   ];
 
-  awaitingColumns: Array<{ key: string, label: string, filterable: boolean }> = [
+  awaitingColumns: Array<{ key: string, label: string, filterable: boolean,type?:string }> = [
   { key: 'id', label: 'Candidate ID', filterable: false },
   { key: 'name', label: 'Name', filterable: true },
-  { key: 'interviewDate', label: 'Interview Date', filterable: false },
+  { key: 'interviewDate', label: 'Interview Date', filterable: true , type: 'date' },
   { key: 'interviewType', label: 'Interview Type', filterable: true },
   { key: 'actions', label: 'Shortlist', filterable: false }  // placeholder for button
 ];

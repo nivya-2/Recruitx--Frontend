@@ -4,10 +4,12 @@ import { CardsComponent } from '../../ui/cards/cards.component';
 import { TableComponent } from '../../shared-components/table/table.component';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalComponent } from "../../ui/modal/modal.component";
+import { UploadComponent } from "../../shared-components/upload/upload.component";
 
 @Component({
   selector: 'app-applicants',
-  imports: [TableComponent,ButtonComponent],
+  imports: [TableComponent, ButtonComponent, ModalComponent, UploadComponent],
   templateUrl: './applicants.component.html',
   styleUrl: './applicants.component.scss'
 })
@@ -24,7 +26,10 @@ ngOnInit(): void {
     this.router.navigate([`/${rolePrefix}/job-description/applicant-details`]);
   };
 }
-
+visible:boolean = false;
+  openModal() {
+    this.visible = !this.visible;
+  }
 dataSource: any[] = [
     {
       candidateId: 'CAN006',

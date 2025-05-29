@@ -1,0 +1,47 @@
+.file-table-wrapper {
+      width: 100%;
+    }
+    
+    :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+      background-color: #f8f9fa;
+      color: #495057;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+    }
+    
+    :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+      padding: 0.75rem 1rem;
+      vertical-align: middle;
+    }
+    
+    .file-name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .file-icon {
+      color: #2196F3;
+      font-size: 1.2rem;
+    }
+    
+    .file-status {
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+    
+    .file-status.ready {
+      background-color: #e3f2fd;
+      color: #0d47a1;
+    }
+    
+    .file-status.error {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+    
+    .file-status.success {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }

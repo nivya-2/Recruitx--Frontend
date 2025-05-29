@@ -6,19 +6,25 @@ import { HeaderTextComponent } from '../../ui/header-text/header-text.component'
 import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
 import { ButtonComponent } from "../../ui/button/button.component";
 import { AssignComponent } from "../../ui/assign/assign.component";
-import { NgIf } from '@angular/common';
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
-
+import { ModalComponent } from "../../ui/modal/modal.component";
+import { UploadComponent } from "../../shared-components/upload/upload.component";
 
 @Component({
   selector: 'app-admin-users',
   imports: [TableComponent,CommonLayoutComponent,AlertsComponent
-,    CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent],
+,    CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent,ModalComponent, UploadComponent],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss'
 })
 export class AdminUsersComponent {
-  recruiterHeadName = "Nivya Vineeth";
+
+    visible:boolean = false;
+  openModal() {
+    this.visible = !this.visible;
+  }
+    recruiterHeadName = "Nivya Vineeth";
+
   dataSource: any[] = [
   { id: 'EMP877653', name: 'Alia K', jobTitle: 'Senior Executive', role: 'Recruiter', location: 'Kochi', deliveryUnit: 'DU6', email: 'test@mail.com', status1: 'Active', uploadedDate: '25-06-2025', actions: ['Edit'] },
   { id: 'EMP877654', name: 'Ravi M', jobTitle: 'HR Associate', role: 'Recruiter Lead', location: 'Bangalore', deliveryUnit: 'DU3', email: 'ravi.m@mail.com', status1: 'Active', uploadedDate: '24-06-2025', actions: ['Edit'] },
@@ -38,7 +44,7 @@ export class AdminUsersComponent {
       {iconName:'delete',size:"32px",iconColour:"green"}
     ]
 
-    columns: Array<{key: string, label: string, filterable: boolean}> = [
+    columns: Array<{key: string, label: string, filterable: boolean,type?:string}> = [
       { key: 'id', label: 'Employee ID',filterable: false },
       { key: 'name', label: 'Name',filterable: true},
       { key: 'jobTitle', label: 'Job Title',filterable: true },
@@ -47,7 +53,7 @@ export class AdminUsersComponent {
       { key: 'deliveryUnit', label: 'Delivery Unit',filterable: false },
       { key: 'email', label: 'Email',filterable: false },
       { key: 'status1', label: 'Status',filterable: true },
-      { key: 'uploadedDate', label: 'Uploaded Date',filterable: false },
+      { key: 'uploadedDate', label: 'Uploaded Date',filterable: true, type: 'date' },
       { key: 'actions', label: 'Actions',filterable: false }
     ];
 
