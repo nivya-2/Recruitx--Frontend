@@ -30,7 +30,15 @@ export class DetailsComponent {
     this.isEditMode = !this.isEditMode;
     // this.isEditMode = editMode;
     this.label = this.isEditMode ? 'Save' : 'Edit';
+    if(this.label=='Save')
+    this.scrollToSection()
   }
+  scrollToSection() {
+  const el = document.querySelector(".jdfields");
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+}
 formData = {
     skillsMandatory: 'HTML, CSS, JavaScript',
     skillsPrimary: 'Angular, TypeScript',
@@ -56,7 +64,7 @@ formData = {
   };
 
   // resetForm() {
-  //   // Optional: Reset the formData to initial values or clear
+    // Optional: Reset the formData to initial values or clear
   // }
 
   // saveDraft() {
@@ -67,5 +75,4 @@ formData = {
   //   console.log('Submitting Form:', this.formData);
   //   // You can call your API here
   // }
-
 }

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { TableComponent } from '../../shared-components/table/table.component';
+import { DetailsComponent } from "../details/details.component";
+import { ModalComponent } from '../../ui/modal/modal.component';
 
 @Component({
   selector: 'app-pending-jd-gen',
-  imports: [ TableComponent],
+  imports: [TableComponent, DetailsComponent, ModalComponent],
   templateUrl: './pending-jd-gen.component.html',
   styleUrl: './pending-jd-gen.component.scss'
 })
@@ -92,6 +94,12 @@ export class PendingJdGenComponent {
       actions: ['Generate JD']
     }
   ];
+  visible: boolean = false;
+  onViewJD = (row: any) => {
+  this.visible = !this.visible;
+  console.log('Shortlist for :', row);
+};
+  actionMethods = {'Generate JD': this.onViewJD,   'Draft': this.onViewJD };
 
   columns: Array<{ key: string, label: string, filterable: boolean ,type?:string}> = [
     { key: 'id', label: 'ID', filterable: false },
@@ -109,5 +117,4 @@ export class PendingJdGenComponent {
    hello=(rowData:any)=>{
     console.log(rowData);
   }
-
 }
