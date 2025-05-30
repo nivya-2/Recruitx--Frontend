@@ -133,7 +133,7 @@ export class AdminJrUploadComponent {
     { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
     { key: 'location', label: 'Location', filterable: true },
     { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
-    { key: 'assignedOn', label: 'Assigned On', filterable: true, type: 'date' },
+    { key: 'assignedOn', label: 'Uploaded On', filterable: true, type: 'date' },
     { key: 'actions', label: 'Actions', filterable: false },
   ];
 
