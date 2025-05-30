@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component,OnInit,ViewChild } from '@angular/core';
 import { CommonLayoutComponent } from '../../layouts/common-layout/common-layout.component';
 import { TableComponent } from '../../shared-components/table/table.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
@@ -7,6 +7,7 @@ import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component'
 import { ModalComponent } from '../../ui/modal/modal.component';
 import { UploadComponent } from '../../shared-components/upload/upload.component';
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
+import { AdminJobRequisitionsService, JobRequisition } from '../../core/services/admin/admin-job-requisitions.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -23,103 +24,104 @@ import { AlertsComponent } from '../../ui/alerts/alerts.component';
   templateUrl: './admin-jr-upload.component.html',
   styleUrl: './admin-jr-upload.component.scss',
 })
-export class AdminJrUploadComponent {
+export class AdminJrUploadComponent implements OnInit {
   visible: boolean = false;
   openModal() {
     this.visible = !this.visible;
   }
-  dataSource: any[] = [
-    {
-      jobReqId: 'REQ-2025-DS-006',
-      jobTitle: 'Data Scientist - Computer Vision',
-      deliveryUnit: 'DU6',
-      location: 'Kochi',
-      hiringManager: 'Arjun Menon',
-      assignedOn: '02/04/2025',
-      actions: ['Delete'],
-    },
-    {
-      jobReqId: 'REQ-2025-DS-006',
-      jobTitle: 'Data Scientist - Computer Vision',
-      deliveryUnit: 'DU6',
-      location: 'Kochi',
-      hiringManager: 'Arjun Menon',
-      assignedOn: '02/04/2025',
-      actions: ['Delete'],
-    },
-    {
-      jobReqId: 'REQ-2025-DS-006',
-      jobTitle: 'Data Scientist - Computer Vision',
-      deliveryUnit: 'DU6',
-      location: 'Kochi',
-      hiringManager: 'Arjun Menon',
-      assignedOn: '02/04/2025',
-      actions: ['Delete'],
-    },
-    {
-      jobReqId: 'REQ-2025-DS-006',
-      jobTitle: 'Data Scientist - Computer Vision',
-      deliveryUnit: 'DU6',
-      location: 'Kochi',
-      hiringManager: 'Arjun Menon',
-      assignedOn: '02/04/2025',
-      actions: ['Delete'],
-    },
-    {
-      jobReqId: 'REQ-2025-DS-006',
-      jobTitle: 'Data Scientist - Computer Vision',
-      deliveryUnit: 'DU6',
-      location: 'Kochi',
-      hiringManager: 'Arjun Menon',
-      assignedOn: '02/04/2025',
-      actions: ['Delete'],
-    },
-    {
-      jobReqId: 'REQ-2025-DS-006',
-      jobTitle: 'Data Scientist - Computer Vision',
-      deliveryUnit: 'DU6',
-      location: 'Kochi',
-      hiringManager: 'Arjun Menon',
-      assignedOn: '02/04/2025',
-      actions: ['Delete'],
-    },
-    {
-      jobReqId: 'REQ-2025-DS-006',
-      jobTitle: 'Data Scientist - Computer Vision',
-      deliveryUnit: 'DU6',
-      location: 'Kochi',
-      hiringManager: 'Arjun Menon',
-      assignedOn: '02/04/2025',
-      actions: ['Delete'],
-    },
-    {
-      jobReqId: 'REQ-2025-DS-006',
-      jobTitle: 'Data Scientist - Computer Vision',
-      deliveryUnit: 'DU6',
-      location: 'Kochi',
-      hiringManager: 'Arjun Menon',
-      assignedOn: '02/04/2025',
-      actions: ['Delete'],
-    },
-    {
-      jobReqId: 'REQ-2025-DS-006',
-      jobTitle: 'Data Scientist - Computer Vision',
-      deliveryUnit: 'DU6',
-      location: 'Kochi',
-      hiringManager: 'Arjun Menon',
-      assignedOn: '02/04/2025',
-      actions: ['Delete'],
-    },
-    {
-      jobReqId: 'REQ-2025-DS-006',
-      jobTitle: 'Data Scientist - Computer Vision',
-      deliveryUnit: 'DU6',
-      location: 'Kochi',
-      hiringManager: 'Arjun Menon',
-      assignedOn: '02/04/2025',
-      actions: ['Delete'],
-    },
-  ];
+  // dataSource: any[] = [
+  //   {
+  //     jobReqId: 'REQ-2025-DS-006',
+  //     jobTitle: 'Data Scientist - Computer Vision',
+  //     deliveryUnit: 'DU6',
+  //     location: 'Kochi',
+  //     hiringManager: 'Arjun Menon',
+  //     assignedOn: '02/04/2025',
+  //     actions: ['Delete'],
+  //   },
+  //   {
+  //     jobReqId: 'REQ-2025-DS-006',
+  //     jobTitle: 'Data Scientist - Computer Vision',
+  //     deliveryUnit: 'DU6',
+  //     location: 'Kochi',
+  //     hiringManager: 'Arjun Menon',
+  //     assignedOn: '02/04/2025',
+  //     actions: ['Delete'],
+  //   },
+  //   {
+  //     jobReqId: 'REQ-2025-DS-006',
+  //     jobTitle: 'Data Scientist - Computer Vision',
+  //     deliveryUnit: 'DU6',
+  //     location: 'Kochi',
+  //     hiringManager: 'Arjun Menon',
+  //     assignedOn: '02/04/2025',
+  //     actions: ['Delete'],
+  //   },
+  //   {
+  //     jobReqId: 'REQ-2025-DS-006',
+  //     jobTitle: 'Data Scientist - Computer Vision',
+  //     deliveryUnit: 'DU6',
+  //     location: 'Kochi',
+  //     hiringManager: 'Arjun Menon',
+  //     assignedOn: '02/04/2025',
+  //     actions: ['Delete'],
+  //   },
+  //   {
+  //     jobReqId: 'REQ-2025-DS-006',
+  //     jobTitle: 'Data Scientist - Computer Vision',
+  //     deliveryUnit: 'DU6',
+  //     location: 'Kochi',
+  //     hiringManager: 'Arjun Menon',
+  //     assignedOn: '02/04/2025',
+  //     actions: ['Delete'],
+  //   },
+  //   {
+  //     jobReqId: 'REQ-2025-DS-006',
+  //     jobTitle: 'Data Scientist - Computer Vision',
+  //     deliveryUnit: 'DU6',
+  //     location: 'Kochi',
+  //     hiringManager: 'Arjun Menon',
+  //     assignedOn: '02/04/2025',
+  //     actions: ['Delete'],
+  //   },
+  //   {
+  //     jobReqId: 'REQ-2025-DS-006',
+  //     jobTitle: 'Data Scientist - Computer Vision',
+  //     deliveryUnit: 'DU6',
+  //     location: 'Kochi',
+  //     hiringManager: 'Arjun Menon',
+  //     assignedOn: '02/04/2025',
+  //     actions: ['Delete'],
+  //   },
+  //   {
+  //     jobReqId: 'REQ-2025-DS-006',
+  //     jobTitle: 'Data Scientist - Computer Vision',
+  //     deliveryUnit: 'DU6',
+  //     location: 'Kochi',
+  //     hiringManager: 'Arjun Menon',
+  //     assignedOn: '02/04/2025',
+  //     actions: ['Delete'],
+  //   },
+  //   {
+  //     jobReqId: 'REQ-2025-DS-006',
+  //     jobTitle: 'Data Scientist - Computer Vision',
+  //     deliveryUnit: 'DU6',
+  //     location: 'Kochi',
+  //     hiringManager: 'Arjun Menon',
+  //     assignedOn: '02/04/2025',
+  //     actions: ['Delete'],
+  //   },
+  //   {
+  //     jobReqId: 'REQ-2025-DS-006',
+  //     jobTitle: 'Data Scientist - Computer Vision',
+  //     deliveryUnit: 'DU6',
+  //     location: 'Kochi',
+  //     hiringManager: 'Arjun Menon',
+  //     assignedOn: '02/04/2025',
+  //     actions: ['Delete'],
+  //   },
+  // ];
+  dataSource: JobRequisition[] = [];
 
   recruitersIcons = [
     { iconName: 'dashboard', size: '32px', iconColour: 'red' },
@@ -128,17 +130,38 @@ export class AdminJrUploadComponent {
   ];
 
   columns = [
-    { key: 'jobReqId', label: 'Requisition ID', filterable: false },
+    { key: 'requisitionId', label: 'Requisition ID', filterable: false },
     { key: 'jobTitle', label: 'Job Title', filterable: true },
     { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
     { key: 'location', label: 'Location', filterable: true },
     { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
-    { key: 'assignedOn', label: 'Assigned On', filterable: true, type: 'date' },
+    { key: 'uploadedOn', label: 'Assigned On', filterable: true, type: 'date' },
     { key: 'actions', label: 'Actions', filterable: false },
   ];
 
   globalFilterFields = this.columns
     .map((c) => c.key)
     .filter((key) => key !== 'actions');
+
+  constructor(private jobService: AdminJobRequisitionsService) {}
+
+  ngOnInit(): void {
+    this.loadJobRequisitions();
+  }
+
+  loadJobRequisitions(): void {
+    this.jobService.getJobRequisitions().subscribe({
+      next: (res) => {
+        this.dataSource = res.map((item) => ({
+          ...item,
+          actions: ['Delete'], // Add actions here if required by table
+        }));
+      },
+      error: (err) => {
+        console.error('Failed to fetch job requisitions', err);
+        // Add error alert/notification handling
+      }
+    });
+  }
 
 }

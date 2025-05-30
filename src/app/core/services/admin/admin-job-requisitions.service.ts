@@ -20,7 +20,7 @@ export class AdminJobRequisitionsService {
 
   constructor(private http: HttpClient) {}
 
-  getApplicants(): Observable<JobRequisition[]> {
+  getJobRequisitions(): Observable<JobRequisition[]> {
     return this.http.get<JobRequisition[]>(this.apiUrl);
   }
   
