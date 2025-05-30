@@ -56,7 +56,7 @@ export class AdminUsersComponent {
       { key: 'email', label: 'Email',filterable: false },
       { key: 'status1', label: 'Status',filterable: true },
       { key: 'actions', label: 'Actions',filterable: false },
-       { key: 'uploadedDate', label: 'Uploaded Date',filterable: true, type: 'date' }
+       { key: 'uploadedDate', label: 'Uploaded On',filterable: true, type: 'date' }
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions'); 

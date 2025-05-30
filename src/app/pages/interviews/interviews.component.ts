@@ -40,7 +40,7 @@ const currentRoute = this.router.url.split('/').pop();
       location: 'Bangalore', 
       experience: 5, 
       createdDate: '05-05-2025', 
-      assoJr: 'JR2025-112',
+      // assoJr: 'JR2025-112',
       actions:'Schedule',
       },
       {  id: 'JD002', 

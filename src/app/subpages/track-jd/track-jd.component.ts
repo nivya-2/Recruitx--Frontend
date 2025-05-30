@@ -51,7 +51,7 @@ jobColumns: Array<{ key: string, label: string, filterable: boolean ,type?:strin
   { key: 'roleTitle', label: 'Role Title', filterable: true },
   { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
   { key: 'createdDate', label: 'Created Date', filterable: true , type: 'date' },
-  { key: 'associatedJr', label: 'Associated JR', filterable: false },
+  // { key: 'associatedJr', label: 'Associated JR', filterable: false },
   { key: 'statuss', label: 'Status', filterable: true },
   { key: 'actions', label: 'Actions', filterable: false }
 ];
