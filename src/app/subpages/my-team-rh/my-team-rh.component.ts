@@ -19,8 +19,8 @@ export class MyTeamRhComponent {
     teamsDataSource: TreeNode[] = []; 
 
   rawTeamData = [
-  { memberName: "Vivek Menon", jobTitle: "Team Lead", jrAssigned: 1, actions: ['View assigned JR','Remove'] },
-  { memberName: "Amit Verma", jobTitle: "Team Lead", jrAssigned: 1, actions: ['View assigned JR','Remove'] },
+  { memberName: "Vivek Menon", jobTitle: "Team Lead", jrAssigned: 1, actions: ['View assigned JR','Change Lead'] },
+  { memberName: "Amit Verma", jobTitle: "Team Lead", jrAssigned: 1, actions: ['View assigned JR','Change Lead'] },
   { memberName: "Meera Krishnan", jobTitle: "Coordinator", jrAssigned: 2, reportingLead: "Vivek Menon", actions: ['View assigned JR','Remove'] },
   { memberName: "Suresh Babu", jobTitle: "Architect", jrAssigned: 3, reportingLead: "Amit Verma", actions: ['View assigned JR','Remove'] },
   { memberName: "Geetha Lakshmi", jobTitle: "Tester", jrAssigned: 4, reportingLead: "Vivek Menon", actions: ['View assigned JR','Remove'] },
@@ -79,12 +79,12 @@ buildTreeData(data: any[]): TreeNode[] {
 teamList = [
   { fullName: 'Shankar Menon', role: 'Recruiter Head' },
   { fullName: 'John V', role: 'Senior Lead' },
-  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Tom Philip', role: 'Associate Manager' },
   { fullName: 'Lakshmi S', role: 'Lead' },
   { fullName: 'Abhiram Prasad', role: 'Associate' },
   { fullName: 'Vinayak Sasi', role: 'Recruiter Head' },
   { fullName: 'Amal K', role: 'Senior Lead' },
-  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Tom Philip', role: 'Associate Manager' },
   { fullName: 'Sona Nair S', role: 'Lead' },
   { fullName: 'Sresh Krishna ', role: 'Associate' },
   { fullName: 'Shaju Vidhya', role: 'Recruiter Head' },

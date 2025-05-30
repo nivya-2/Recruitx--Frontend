@@ -37,7 +37,7 @@
 <ng-template pTemplate="header">
   <tr>
     <th *ngFor="let column of columns" 
-        [pSortableColumn]="column.key === 'status' ? 'statusPercentage' : column.key"
+        [pSortableColumn]="column.key === 'jrProgress' ? 'statusPercentage' : column.key"
         [ngClass]="'col-' + column.key">
       <div class="header-content">
         <div class="header-text" 
@@ -45,7 +45,7 @@
           {{ column.label }}
         </div>
         <div class="header-icons">
-          <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key === 'status' ? 'statusPercentage' : column.key"></p-sortIcon>
+          <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key === 'jrProgrss' ? 'statusPercentage' : column.key"></p-sortIcon>
           
           <!-- Date Column Filter -->
           <p-columnFilter *ngIf="column.filterable && isDateColumn(column.type)" 
@@ -96,10 +96,10 @@
         
         <ng-container *ngIf="column.key !== 'actions'; else actionTpl">
 
-          <ng-container *ngIf="column.key === 'status'; else checkDate">
+          <ng-container *ngIf="column.key === 'jrProgress'; else checkDate">
           <app-progressbar
-            [current]="rowData.status.current"
-            [total]="rowData.status.total">
+            [current]="rowData.jrProgress.current"
+            [total]="rowData.jrProgress.total">
           </app-progressbar>
         </ng-container>
         

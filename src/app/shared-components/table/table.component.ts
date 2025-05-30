@@ -110,8 +110,8 @@ export class TableComponent implements OnInit, OnChanges {
       // Restore original data with computed properties
       this.dataSource = this.originalDataSource.map((item, index) => ({
         ...item,
-        statusPercentage: item.status && item.status.total > 0 
-          ? (item.status.current / item.status.total) * 100 
+        statusPercentage: item.jrProgress && item.jrProgress.total > 0 
+          ? (item.jrProgress.current / item.jrProgress.total) * 100 
           : 0,
         originalIndex: index
       }));
@@ -354,8 +354,8 @@ constructor(private filterService: FilterService) {}
     
     this.dataSource = this.dataSource.map((item, index) => ({
       ...item,
-      statusPercentage: item.status && item.status.total > 0 
-        ? (item.status.current / item.status.total) * 100 
+      statusPercentage: item.jrProgress && item.jrProgress.total > 0 
+        ? (item.jrProgress.current / item.jrProgress.total) * 100 
         : 0,
       originalIndex: this.originalOrder[index] !== undefined ? this.originalOrder[index] : index
     }));

@@ -59,19 +59,19 @@ role: string = '';
 
   if (currentUrl.startsWith('/recruiter-lead')) {
     this.iconList = this.recruiterLeadIcons;
-    this.name = 'Abhinand K';
+    this.name = 'Abhay K';
     this.role = 'Recruiter Lead';
   } else if (currentUrl.startsWith('/recruiter-head')) {
     this.iconList = this.recruiterHeadIcons;
-    this.name = 'Nivya Vineeth';
+    this.name = 'Neena Roy';
     this.role = 'Recruiter head';
   } else if (currentUrl.startsWith('/admin')) {
     this.iconList = this.adminIcons;
-    this.name = 'Anjali Krishna';
+    this.name = 'Anny Tom';
     this.role = 'Admin';
   } else {
     this.iconList = this.recruiterIcons;
-    this.name = 'Kevin Joby';
+    this.name = 'Karan Sharma';
     this.role = 'Recruiter';
   }
 }
