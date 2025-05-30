@@ -1,41 +1,59 @@
-
 <app-common-layout>
-  <app-cards height="5rem" class="custom-padding">
-    <div class="assign-head">
-      <div class="name-sec">
-        <app-header-text context="table-header" [nopad]="true">Recruiter Head : {{recruiterHeadName}} </app-header-text>
+  <app-cards class="custom-padding">
+    <div class="recruiter-head-card">
+      <div class="recruiter-head-info">
+        <div class="icon-info-container">
+          <app-icon name="person" customColor="#7B61FF" size="30px"></app-icon>
+          <div>
+            <div class="head-name">{{ recruiterHeadName }}</div>
+            <div class="head-role">Recruiter Head</div>
+            <div class="head-email">{{ recruiterHeadEmail }}</div>
+          </div>
+        </div>
+        <app-button (click)="openAssignPopover($event)">
+          Change Recruiter Head
+        </app-button>
       </div>
-      <app-button (click)="openAssignPopover($event)">Change</app-button>
     </div>
   </app-cards>
 
   <app-assign
-  [teamList]="teamList"
-  (memberSelected)="handleSelectedMember($event)"
- #assignBox >
+    [teamList]="teamList"
+    (memberSelected)="handleSelectedMember($event)"
+    #assignBox
+  >
+  </app-assign>
 
-        </app-assign>
-        
-        <app-alerts #alerts></app-alerts>
-
+  <app-alerts #alerts></app-alerts>
 
   <app-cards class="custom-padding">
     <div class="admin-users-header">
-      <app-header-text context="table-header" [nopad]="true">Users</app-header-text>
-      <app-button-icon label="Upload" icon="upload" (click)="openModal()"></app-button-icon>
+      <app-header-text context="table-header" [nopad]="true"
+        >Users</app-header-text
+      >
+      <app-button-icon
+        label="Upload Users"
+        icon="upload"
+        (click)="openModal()"
+      ></app-button-icon>
     </div>
-    <app-table [dataSource]="dataSource" [columns]="columns" [globalFilterFields]="globalFilterFields" [hover]="false" [rows]="7" [showFilter]="true"
-      [fontSize]="'12px'"></app-table>
+    <app-table
+      [dataSource]="dataSource"
+      [columns]="columns"
+      [globalFilterFields]="globalFilterFields"
+      [hover]="false"
+      [rows]="7"
+      [showFilter]="true"
+      [fontSize]="'12px'"
+    ></app-table>
   </app-cards>
 
-
-
-<app-modal 
-[(visible)]="visible" 
-header="Add User"
-[maximizable]="true" 
-[style]="{ width: '50rem', height: '35rem' }">
-<app-upload></app-upload>
-</app-modal>
-
+  <app-modal
+    [(visible)]="visible"
+    header="Add User"
+    [maximizable]="true"
+    [style]="{ width: '50rem', height: '35rem' }"
+  >
+    <app-upload></app-upload>
+  </app-modal>
 </app-common-layout>
