@@ -44,7 +44,8 @@ handleRemove = (row: any) => {
     },
     onReject: () => {
     }
-  });};
+  });
+};
 
   actionMethods={'View assigned JR': this.onViewAssignedJR,    'Remove': this.handleRemove  };
 

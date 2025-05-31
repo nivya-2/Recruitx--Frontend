@@ -4,9 +4,10 @@ import { TableComponent } from '../../shared-components/table/table.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
+import { EvaluationFormComponent } from "../evaluation-form/evaluation-form.component";
+import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { ModalComponent } from '../../ui/modal/modal.component';
 import { UploadComponent } from '../../shared-components/upload/upload.component';
-import { AlertsComponent } from '../../ui/alerts/alerts.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,7 +19,8 @@ import { AlertsComponent } from '../../ui/alerts/alerts.component';
     ButtonIconComponent,
     ModalComponent,
     UploadComponent,
-    AlertsComponent
+    AlertsComponent,
+    EvaluationFormComponent
   ],
   templateUrl: './admin-jr-upload.component.html',
   styleUrl: './admin-jr-upload.component.scss',
