@@ -1,0 +1,194 @@
+// .header {
+//   background: #7f56d9;
+//   color: white;
+//   padding: 1rem 1.5rem;
+//   border-radius: 10px 10px 0 0;
+
+//   h2 {
+//     margin: 0;
+//     font-size: 1.5rem;
+//   }
+
+//   p {
+//     margin: 0;
+//     font-size: 0.9rem;
+//   }
+// }
+
+// section {
+//   margin-top: 2rem;
+
+//   h3 {
+//     font-size: 1.2rem;
+//     margin-bottom: 1rem;
+//     color: #7f56d9;
+//     border-bottom: 1px solid #e0e0e0;
+//     padding-bottom: 0.5rem;
+//   }
+// }
+
+// .form-section {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 1.5rem;
+// }
+
+// .three-column {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   gap: 1.5rem;
+// }
+
+// .two-column {
+//   display: grid;
+//   grid-template-columns: repeat(2, 1fr);
+//   gap: 1.5rem;
+// }
+
+// .inline-group {
+//   display: flex;
+//   gap: 1rem;
+// }
+
+// .experience-group {
+//   display: flex;
+//   flex-direction: column;
+
+//   label {
+//     font-weight: 600;
+//     margin-bottom: 0.5rem;
+//     font-size: 0.95rem;
+//     color: #444;
+//   }
+// }
+
+// .actions {
+//   display: flex;
+//   justify-content: flex-end;
+//   gap: 1rem;
+//   margin-top: 2rem;
+
+//   button {
+//     padding: 0.6rem 1.5rem;
+//     border-radius: 5px;
+//     font-weight: 600;
+//     border: none;
+//     cursor: pointer;
+//     font-size: 0.95rem;
+//     transition: background 0.3s ease;
+//   }
+
+//   .reset-btn {
+//     background: #f44336;
+//     color: white;
+
+//     &:hover {
+//       background: #d32f2f;
+//     }
+//   }
+
+//   .draft-btn {
+//     background: #4caf50;
+//     color: white;
+
+//     &:hover {
+//       background: #388e3c;
+//     }
+//   }
+
+//   .submit-btn {
+//     background: #1976d2;
+//     color: white;
+
+//     &:hover {
+//       background: #1565c0;
+//     }
+//   }
+// }
+
+// Optional: Make your textareas taller
+// app-input-text textarea.input {
+//   min-height: 100px;
+//   resize: vertical;
+// }
+// .form-section{
+//     background-color: white;
+// }
+
+.form-section {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section-wrapper {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(126, 86, 162, 0.511);
+}
+
+.section-title {
+  font-size: 1rem;
+  color: #7f56d9;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(127, 86, 217, 0.639);
+  padding-bottom: 0.5rem;
+}
+
+.three-column {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.jdfields{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  button {
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .reset-btn {
+    background-color: #f44336;
+    color: white;
+
+    &:hover {
+      background-color: #d32f2f;
+    }
+  }
+
+  .draft-btn {
+    background-color: #4caf50;
+    color: white;
+
+    &:hover {
+      background-color: #388e3c;
+    }
+  }
+
+  .submit-btn {
+    background-color: #1976d2;
+    color: white;
+
+    &:hover {
+      background-color: #1565c0;
+    }
+  }
+}

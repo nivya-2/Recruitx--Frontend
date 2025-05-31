@@ -87,16 +87,16 @@ handleRemove = (row: any) => {
 teamList = [
   { fullName: 'Shankar Menon', role: 'Recruiter Head' },
   { fullName: 'John V', role: 'Senior Lead' },
-  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Tom Philip', role: 'Associate Manager' },
   { fullName: 'Lakshmi S', role: 'Lead' },
   { fullName: 'George Philip', role: 'Associate' },
   { fullName: 'Shankar Menon', role: 'Recruiter Head' },
   { fullName: 'John V', role: 'Senior Lead' },
-  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Tom Philip', role: 'Associate Manager' },
   { fullName: 'Lakshmi S', role: 'Lead' },
   { fullName: 'George Philip', role: 'Associate' },{ fullName: 'Shankar Menon', role: 'Recruiter Head' },
   { fullName: 'John V', role: 'Senior Lead' },
-  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+  { fullName: 'Tom Philip', role: 'Associate Manager' },
   { fullName: 'Lakshmi S', role: 'Lead' },
   { fullName: 'George Philip', role: 'Associate' }
 ];

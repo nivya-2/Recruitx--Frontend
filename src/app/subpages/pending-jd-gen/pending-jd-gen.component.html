@@ -6,6 +6,17 @@
     [hover]="false"
     [rows]="7"
     [showFilter]="true"
+    [actionMethods]="actionMethods"
     >
   </app-table>
+  <app-modal
+  [(visible)]="visible"
+  [maximizable]="true"
+  [showHeader]="true"
+  header="Job Description"
+  [style]="{ width: '72rem', height: '50rem' }"
+>
+  <app-details></app-details>
+</app-modal>
+
 </div>

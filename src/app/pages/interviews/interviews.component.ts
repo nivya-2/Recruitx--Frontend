@@ -40,7 +40,7 @@ const currentRoute = this.router.url.split('/').pop();
       location: 'Bangalore', 
       experience: 5, 
       createdDate: '05-05-2025', 
-      assoJr: 'JR2025-112',
+      // assoJr: 'JR2025-112',
       actions:'Schedule',
       },
       {  id: 'JD002', 
@@ -121,13 +121,13 @@ const currentRoute = this.router.url.split('/').pop();
       {iconName:'delete',size:"32px",iconColour:"green"}
     ]
 
-    columns: Array<{key: string, label: string, filterable: boolean}> = [
+    columns: Array<{key: string, label: string, filterable: boolean, type?:string}> = [
       { key: 'id', label: 'ID',filterable: false },
       { key: 'roleTitle', label: 'Role Title',filterable: true},
       { key: 'deliveryUnit', label: 'Delivery Unit',filterable: true },
       { key: 'location', label: 'Location',filterable: true },
       { key: 'experience', label: 'Experience',filterable: false },
-      { key: 'createdDate', label: 'Created Date',filterable: false },
+      { key: 'createdDate', label: 'Created Date',filterable: false ,type: 'date'},
       { key: 'assoJr', label: 'Associated JR',filterable: false },
       { key: 'actions', label: 'Actions',filterable: false }
     ];

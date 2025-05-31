@@ -18,9 +18,10 @@ export class TrackJrComponent {
       jobTitle: 'Data Scientist-Computer Vision',
       du: 'DU6',
       location: 'Kochi',
-      status: { current: 2, total: 9 },
+      status:'Open',
+      jrProgress: { current: 2, total: 9 },
       hiringManager: 'Arjun Menon',
-      assignedTo: 'Anjali Krishna',
+      assignedTo: 'Anny Tom',
       assignedOn: '02/04/2025',
       closeBy: '02/05/2025'
     },
@@ -29,7 +30,8 @@ export class TrackJrComponent {
       jobTitle: 'Devops Architect',
       du: 'DU1',
       location: 'Trivandrum',
-      status: { current: 5, total: 7 },
+      status:'Open',
+      jrProgress: { current: 5, total: 7 },
       hiringManager: 'Ravi Varma',
       assignedTo: 'Archana Dev',
       assignedOn: '02/04/2025',
@@ -40,7 +42,8 @@ export class TrackJrComponent {
       jobTitle: 'Automation Test Engineer',
       du: 'DU4',
       location: 'Trivandrum',
-      status: { current: 3, total: 6 },
+      status:'Open',
+      jrProgress: { current: 3, total: 6 },
       hiringManager: 'Ann Mary',
       assignedTo: 'Athira B',
       assignedOn: '02/04/2025',
@@ -51,7 +54,8 @@ export class TrackJrComponent {
       jobTitle: 'Senior QA Automation Engineer',
       du: 'DU3',
       location: 'Kochi',
-      status: { current: 4, total: 12 },
+      status:'Open',
+      jrProgress: { current: 4, total: 12 },
       hiringManager: 'Jayan M S',
       assignedTo: 'Punya V',
       assignedOn: '02/04/2025',
@@ -62,24 +66,38 @@ export class TrackJrComponent {
       jobTitle: 'Technology Lead - .Net',
       du: 'DU6',
       location: 'Kochi',
-      status: { current: 1, total: 9 },
+      status: 'Open',
+      jrProgress: { current: 1, total: 9 },
       hiringManager: 'Madhav B',
-      assignedTo: 'Anjali Krishna',
+      assignedTo: 'Anny Tom',
+      assignedOn: '02/04/2025',
+      closeBy: '02/05/2025'
+    },
+    {
+      jobId: 'REQ-2025-DS-056',
+      jobTitle: 'Technology Lead - .Net',
+      du: 'DU6',
+      location: 'Kochi',
+      status: 'Closed',
+      jrProgress: { current: 5, total: 5 },
+      hiringManager: 'Madhav B',
+      assignedTo: 'Anny Tom',
       assignedOn: '02/04/2025',
       closeBy: '02/05/2025'
     }
   ];
 
   columns = [
-    { key: 'jobId', label: 'Job Req.ID', filterable: true },
+    { key: 'jobId', label: 'ID', filterable: true },
     { key: 'jobTitle', label: 'Job Title', filterable: true },
     { key: 'du', label: 'Delivery Unit', filterable: true },
     { key: 'location', label: 'Location', filterable: true },
-    { key: 'status', label: 'Status', filterable: false },
+    { key: 'status', label: 'Status', filterable: true },
+    { key: 'jrProgress', label: 'Progress', filterable: false },
     { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
     { key: 'assignedTo', label: 'Assigned To', filterable: true },
-    { key: 'assignedOn', label: 'Assigned On', filterable: true },
-    { key: 'closeBy', label: 'Close By', filterable: true }
+    { key: 'assignedOn', label: 'Assigned On', filterable: true, type: 'date' },
+    { key: 'closeBy', label: 'Close By', filterable: true,  type: 'date' }
   ];
 
   // Global filter fields

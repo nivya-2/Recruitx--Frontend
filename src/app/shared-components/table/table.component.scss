@@ -1,116 +1,203 @@
-/* You can add global styles to this file, and also import other style files */
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
 
+.filter-container {
+  display: flex;
+  gap: 1vw;
+}
 
-  :host {
-    display: block;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-  }
+.text-center {
+  text-align: center !important;   
+}
 
-
-  .filter-container {
-    display: flex;
-    gap: 1vw;
-  }
-   .text-center{
-    text-align: center !important;   
-   }
-
-   :host.hover-enabled ::ng-deep .p-datatable-tbody > tr:hover {
+:host.hover-enabled ::ng-deep .p-datatable-tbody > tr:hover {
   background-color: #e5deff !important;
   cursor: pointer;
 }
 
+::ng-deep {
+  /* Header Content Styling */
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 3px;
+    padding: 0;
+  }
 
+  /* Base styling for header text */
+  .header-text {
+    flex-grow: 1;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+    white-space: nowrap;
+    font-weight: 600;
+  }
 
-  ::ng-deep {
-    /* Header Content Styling */
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      gap: 3px;
-      padding: 0;
-    }
-  
-    /* Base styling for header text */
-    .header-text {
-      flex-grow: 1;
-      overflow-wrap: break-word;
-      line-height: 1.3;
-      white-space: nowrap; /* Keep single words on one line */
-      font-weight: 600;
-    }
-  
-    /* Only multi-word headers break to new line */
-    .header-text.multi-word {
-      white-space: normal !important;
-    }
+  /* Only multi-word headers break to new line */
+  .header-text.multi-word {
+    white-space: normal !important;
+  }
 
-     .header-text.center-actions-header {
+  .header-text.center-actions-header {
     text-align: center !important;
   }
-  
-    /* Icon container */
-    .header-icons {
-      display: inline-flex;
-      align-items: center;
-      flex-shrink: 0;
-      margin-left: 2px;
-    }
-  
-    /* Styling for PrimeNG sort icons and filters */
-    .p-sorticon, 
-    .p-columnfilter {
-      display: inline-flex;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-    }
-      
- .action-buttons {
-   display: flex;
-  gap: 8px;
-  // flex-wrap: wrap;
-  justify-content: flex-start;
 
-  &.center-label {
-    justify-content: center !important;
+  /* Icon container */
+  .header-icons {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 2px;
+  }
+
+  /* Styling for PrimeNG sort icons and filters */
+  .p-sorticon, 
+  .p-columnfilter {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+ ::ng-deep .p-column-filter-menu {
+  .p-fluid {
+    min-width: 200px;
+    padding: 0.5rem;
+  }
+  
+  .p-calendar {
+    width: 100%;
+    
+    .p-inputtext {
+      font-size: 0.875rem;
+    }
   }
 }
-    .p-datatable .p-datatable-tbody > tr > td {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid #f0f0f0;
-      vertical-align: middle;
-    }
 
-  
-    .p-datatable .p-datatable-tbody > tr:last-child > td {
-      border-bottom: none;
-    }
-  
-    /* Fixed column widths */
-    .p-datatable-scrollable .p-datatable-wrapper {
-      overflow-x: auto;
-    }
-    
-    /* Ensure consistent row height */
-    .p-datatable .p-datatable-tbody > tr {
-      height: 60px; /* Adjust as needed */
-    }
-    
-    /* Align button in action column */
-    .p-datatable .p-datatable-tbody > tr > td:last-child {
-      text-align: center;
-    }
-    
-    /* Add some spacing between rows */
-    .p-datatable .p-datatable-tbody > tr:not(:last-child) {
-      margin-bottom: 4px;
-    }
-    
-   
-    
+/* Date picker popup styling */
+::ng-deep .p-datepicker {
+  .p-datepicker-header {
+    background: var(--primary-color);
+    color: var(--primary-color-text);
+    border-color: var(--primary-color);
   }
+  
+  .p-datepicker-today {
+    background: var(--primary-50);
+    color: var(--primary-600);
+    border-color: var(--primary-200);
+  }
+  
+  .p-highlight {
+    background: var(--primary-color);
+    color: var(--primary-color-text);
+  }
+}
+
+/* Column filter menu button */
+::ng-deep .p-column-filter-menu-button {
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+/* Filter overlay panel */
+::ng-deep .p-column-filter-overlay {
+  .p-column-filter-row-items {
+    .p-column-filter-row-item {
+      &:hover {
+        background: var(--surface-hover);
+      }
+    }
+  }
+}
+
+ 
+
+  /* Action buttons styling */
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+
+    &.center-label {
+      justify-content: center !important;
+    }
+  }
+
+  /* Table cell styling */
+  .p-datatable .p-datatable-tbody > tr > td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+  }
+
+  .p-datatable .p-datatable-tbody > tr:last-child > td {
+    border-bottom: none;
+  }
+
+  /* Scrollable table */
+  .p-datatable-scrollable .p-datatable-wrapper {
+    overflow-x: auto;
+  }
+  
+  /* Consistent row height */
+  .p-datatable .p-datatable-tbody > tr {
+    height: 60px;
+  }
+  
+  /* Center align action column */
+  .p-datatable .p-datatable-tbody > tr > td:last-child {
+    text-align: center;
+  }
+  
+  /* Row spacing */
+  .p-datatable .p-datatable-tbody > tr:not(:last-child) {
+    margin-bottom: 4px;
+  }
+}
+
+/* File display styling */
+.file-name-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  .file-icon {
+    color: #7B61FF;
+    font-size: 1.1rem;
+  }
+}
+
+.file-status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  
+  &.ready {
+    background-color: #f5f3ff;
+    color: #7B61FF;
+  }
+  
+  &.processing {
+    background-color: #f5f3ff;
+    color: #e65100;
+  }
+  
+  &.success {
+    background-color: #f5f3ff;
+    color: #2e7d32;
+  }
+  
+  &.error {
+    background-color: #f5f3ff;
+    color: #c62828;
+  }
+}

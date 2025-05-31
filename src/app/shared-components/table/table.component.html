@@ -1,9 +1,11 @@
 <p-table #table [value]="dataSource" [paginator]="true" [rows]="rows" 
           [globalFilterFields]="globalFilterFields"
-         [responsiveLayout]="'scroll'" [resizableColumns]="true" scrollHeight="'auto'"
+          [resizableColumns]="true" scrollHeight="'auto'"
          [sortMode]="'multiple'" [rowHover]="hover" [showCurrentPageReport]="true"
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-         [ngStyle]="{ 'font-size': fontSize }">
+         [ngStyle]="{ 'font-size': fontSize }"
+         customSort="false"
+        [filterDelay]="300">
 
   <ng-template pTemplate="caption" *ngIf="showFilter">
     <div class="filter-container">
@@ -17,7 +19,7 @@
     </div>
   </ng-template>
 
-  <ng-template pTemplate="header">
+  <!-- <ng-template pTemplate="header">
     <tr>
       <th *ngFor="let column of columns" 
           [pSortableColumn]="column.key === 'status' ? 'statusPercentage' : column.key"
@@ -31,7 +33,59 @@
         </div>
       </th>
     </tr>
-  </ng-template>
+  </ng-template> -->
+<ng-template pTemplate="header">
+  <tr>
+    <th *ngFor="let column of columns" 
+        [pSortableColumn]="column.key === 'jrProgress' ? 'statusPercentage' : column.key"
+        [ngClass]="'col-' + column.key">
+      <div class="header-content">
+        <div class="header-text" 
+             [ngClass]="{'multi-word': column.label.includes(' '), 'center-actions-header': column.key === 'actions' && hasMultipleActionsInColumn()}">
+          {{ column.label }}
+        </div>
+        <div class="header-icons">
+          <p-sortIcon *ngIf="column.key !== 'actions'" [field]="column.key === 'jrProgrss' ? 'statusPercentage' : column.key"></p-sortIcon>
+          
+          <!-- Date Column Filter -->
+          <p-columnFilter *ngIf="column.filterable && isDateColumn(column.type)" 
+                        [field]="column.key" 
+                        display="menu" 
+                        [showClearButton]="false"
+                        [matchModeOptions]="dateMatchModeOptions"
+                        [matchMode]="getDefaultMatchMode(column.key)"
+                        class="column-filter">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <div class="p-fluid">
+                <p-calendar 
+                  [(ngModel)]="dateFilters[column.key]" 
+                  (onSelect)="onDateFilterChange($event, column.key, filter)"
+                  (onClearClick)="onDateFilterClear(column.key, filter)"
+                  dateFormat="dd/mm/yy"
+                  [showIcon]="true"
+                  [showClear]="true"
+                  [showButtonBar]="false"
+                  placeholder="Select date"
+                  inputId="date-filter-{{column.key}}"
+                  styleClass="p-inputtext-sm">
+                </p-calendar>
+              </div>
+            </ng-template>
+          </p-columnFilter>
+          
+          <!-- Regular Column Filter -->
+          <p-columnFilter *ngIf="column.filterable && !isDateColumn(column.type)" 
+                        [field]="column.key" 
+                        [showClearButton]="false"
+                        display="menu" 
+                        class="column-filter"/>
+        </div>
+      </div>
+    </th>
+  </tr>
+</ng-template>
+
+
 
   <!-- Table Body -->
   <ng-template pTemplate="body" let-rowData>
@@ -42,22 +96,40 @@
         
         <ng-container *ngIf="column.key !== 'actions'; else actionTpl">
 
-          <ng-container *ngIf="column.key === 'status'; else checkDate">
+          <ng-container *ngIf="column.key === 'jrProgress'; else checkDate">
           <app-progressbar
-            [current]="rowData.status.current"
-            [total]="rowData.status.total">
+            [current]="rowData.jrProgress.current"
+            [total]="rowData.jrProgress.total">
           </app-progressbar>
         </ng-container>
-
+        
         <!-- Check for Date -->
         <ng-template #checkDate>
           <ng-container *ngIf="isDate(rowData[column.key]); else regularValue">
-            {{ rowData[column.key] | date: 'dd/MM/yyyy' }}
-          </ng-container>
+          {{ convertToDate(rowData[column.key]) | date: 'dd/MM/yyyy' }}   
+               </ng-container>
         </ng-template>
 
          <ng-template #regularValue>
-          {{ rowData[column.key] }}
+           <ng-container *ngIf="column.key === 'fileName'; else normalValue">
+    <div class="file-name-display">
+      <i class="pi pi-file-excel file-icon"></i>
+      <span>{{ rowData[column.key] }}</span>
+    </div>
+  </ng-container>
+  
+  <!-- Special handling for status in file tables -->
+  <ng-template #normalValue>
+    <ng-container *ngIf="column.key === 'fstatus' && isFileStatus(rowData[column.key]); else defaultValue">
+      <span class="file-status" [ngClass]="getStatusClass(rowData[column.key])">
+        {{ rowData[column.key] }}
+      </span>
+    </ng-container>
+  </ng-template>
+  
+  <ng-template #defaultValue>
+    {{ rowData[column.key] }}
+  </ng-template>
          </ng-template>
 
       </ng-container>

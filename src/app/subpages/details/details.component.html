@@ -5,32 +5,116 @@
 
     <div class="buttonset">
         <app-button (functionemit)="getButtonLabel()">{{label}}</app-button>
-        <app-button>Export</app-button>
+        <app-button *ngIf="isEditMode" (functionemit)="getButtonLabel()">Cancel</app-button>
+        <app-button [disabled]="isEditMode">Export</app-button>
     </div>
 </div>
 
-<div class="base">
-    <app-input-text label="Skills - Mandatory" [value]="jobData.mandatorySkills"
-        [disabled]="!isEditMode" [fontWeight]="'600'"></app-input-text>
-    <app-input-text label="Skills - Primary" [value]="jobData.primarySkills" [disabled]="!isEditMode"></app-input-text>
-    <app-input-text label="Skills - Good To Have" [value]="jobData.goodToHaveSkills"
-        [disabled]="!isEditMode"></app-input-text>
-    <app-input-text label="Work Location" [value]="jobData.location" [disabled]="!isEditMode"></app-input-text>
-</div>
-<div class="base">
-    <app-input-text label="Qualification" [value]="jobData.qualification" [disabled]="!isEditMode"></app-input-text>
-    <app-input-text label="Total Experience" [value]="jobData.experience" [disabled]="!isEditMode"></app-input-text>
-    <app-input-text label="Relevant Experience" [value]="jobData.relevantExperience"
-        [disabled]="!isEditMode"></app-input-text>
-    <app-input-text label="Expected Date of Joining" [value]="jobData.onboardingDate"
-        [disabled]="!isEditMode"></app-input-text>
-</div>
-<div class="base">
-    <app-text-area label="Job Requisition" [value]="jobData.jobPurpose1" [disabled]="!isEditMode"></app-text-area>
-</div>
-<div class="base">
-    <app-text-area label="Job Description" [value]="jobData.jobPurpose2" [disabled]="!isEditMode"></app-text-area>
-</div>
-<div class="base">
-    <app-text-area label="Job Purpose" [value]="jobData.jobPurpose3" [disabled]="!isEditMode"></app-text-area>
-</div>
+<form class="form-section">
+  <!-- Basic Info -->
+  <section class="section-wrapper">
+    <h3 class="section-title">Basic Information</h3>
+    <div class="three-column">
+
+      <app-input-text
+        label="Work Location"
+        [value]="formData.workLocation"
+        [fontWeight]="'600'">
+      </app-input-text>
+    
+      <app-input-text
+        label="Relevant Experience"
+        [value]="`${formData.relevantExpYears} Years ${formData.relevantExpMonths} Months`"
+        [fontWeight]="'600'">
+      </app-input-text>
+    
+      <app-input-text
+        label="Total Experience"
+        [value]="`${formData.totalExpYears} Years ${formData.totalExpMonths} Months`"
+        [fontWeight]="'600'">
+      </app-input-text>
+    </div>
+    <div class="three-column">
+      <app-input-text
+        label="Qualification"
+        [value]="formData.qualification"
+        [fontWeight]="'600'"
+        class="qualification">
+      </app-input-text>
+
+      <app-input-text
+        label="Expected Onboarding Date"
+        [value]="formData.onboardingDate"
+        [fontWeight]="'600'">
+      </app-input-text>
+    </div>
+  </section>
+
+  <section class="section-wrapper">
+    <h3 class="section-title">Skills</h3>
+    <div class="three-column">
+      <app-input-text
+        label="Skills - Mandatory"
+        [value]="formData.skillsMandatory"
+        [fontWeight]="'600'">
+      </app-input-text>
+
+      <app-input-text
+        label="Skills - Primary"
+        [value]="formData.skillsPrimary"
+        [fontWeight]="'600'">
+      </app-input-text>
+
+      <app-input-text
+        label="Skills - Good To Have"
+        [value]="formData.skillsGood"
+        [fontWeight]="'600'">
+      </app-input-text>
+    </div>
+  </section>
+
+  <section class="section-wrapper">
+    <h3 class="section-title">Job Details</h3>
+    <div class="jdfields">
+      <app-input-text
+        label="Job Purpose "
+        [value]="formData.jobPurpose"
+        [disabled]="!isEditMode"
+        [fontWeight]="'600'"
+        [isTextarea]="true">
+      </app-input-text>
+
+      <app-input-text
+        label="Job Description / Duties & Responsibilities"
+        [value]="formData.jobDescription"
+        [disabled]="!isEditMode"
+        [fontWeight]="'600'"
+        [isTextarea]="true">
+      </app-input-text>
+    
+
+    <app-input-text
+      label="Job Specification / Skills and Competencies"
+      [value]="formData.jobSpecification"
+      [disabled]="!isEditMode"
+      [fontWeight]="'600'"
+      [isTextarea]="true">
+    </app-input-text>
+
+    <app-input-text
+      label="Any Additional Information/Specifics "
+      [value]="formData.additionalInfo"
+      [disabled]="!isEditMode"
+      [fontWeight]="'600'"
+      [isTextarea]="true">
+    </app-input-text>
+    </div>
+  </section>
+
+  <!-- Actions -->
+  <!-- <div class="actions">
+    <button type="button" class="reset-btn">Reset</button>
+    <button type="button" class="draft-btn">Save Draft</button>
+    <button type="submit" class="submit-btn">Submit</button>
+  </div> -->
+</form>

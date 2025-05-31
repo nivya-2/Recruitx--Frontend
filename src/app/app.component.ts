@@ -25,7 +25,7 @@ import { ViewassignedjrCardComponent } from "./shared-components/viewassignedjr-
 
 @Component({
   selector: 'app-root',
-  imports: [ RouterOutlet, SharedComponentsModule],
+  imports: [RouterOutlet, SharedComponentsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -34,9 +34,9 @@ export class AppComponent {
   title = 'rec';
   teamList = [
   { fullName: 'John V', role: 'Senior Lead' },
-  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
-  { fullName: 'Jins K. Varghese', role: 'Lead' },
-  { fullName: 'Jins K. Varghese', role: 'Associate' },
+  { fullName: 'Tom Philip', role: 'Associate Manager' },
+  { fullName: 'Tom Philip', role: 'Lead' },
+  { fullName: 'Tom Philip', role: 'Associate' },
 ];
 
 onMemberSelect(member: any) {

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AllJdComponent } from './all-jd.component';
+import { JdFormComponent } from './jd-form.component';
 
-describe('AllJdComponent', () => {
-  let component: AllJdComponent;
-  let fixture: ComponentFixture<AllJdComponent>;
+describe('JdFormComponent', () => {
+  let component: JdFormComponent;
+  let fixture: ComponentFixture<JdFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AllJdComponent]
+      imports: [JdFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AllJdComponent);
+    fixture = TestBed.createComponent(JdFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
