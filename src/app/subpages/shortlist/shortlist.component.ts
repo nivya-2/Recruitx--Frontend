@@ -5,6 +5,8 @@ import { ModalComponent } from '../../ui/modal/modal.component';
 import { NgFor } from '@angular/common';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { ShortlistInfoComponent } from './shortlist-info/shortlist-info.component';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 @Component({
@@ -14,11 +16,31 @@ import { ShortlistInfoComponent } from './shortlist-info/shortlist-info.componen
   styleUrl: './shortlist.component.scss'
 })
 export class ShortlistComponent {
+  constructor(private router: Router, private route: ActivatedRoute) {}
+  currentUrl:any;
   visible: boolean = false;
+  ngOnInit(): void {
+    this.currentUrl = this.router.url;
+    
+
+  }
   onShortlist = (row: any) => {
-  this.visible = !this.visible;
-  console.log('Shortlist for :', row);
+  // this.visible = !this.visible;
+  if (this.currentUrl.startsWith('/recruiter-lead')) {
+    this.router.navigate(['/recruiter-lead/interviews/shortlist/eval-form']);
+
+  } else if (this.currentUrl.startsWith('/recruiter')) {
+  this.router.navigate(['/recruiter/interviews/shortlist/eval-form']);
 };
+}
+
+// onViewJD = (row: any) => {
+//   this.router.navigate(['/recruiter/job-description/details']);
+//   console.log('View JD for:', row);
+// };
+
+
+
   actionMethods={'Shortlist': this.onShortlist };
 
 awaitingShortlistingDataSource: any[] = [

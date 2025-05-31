@@ -7,6 +7,7 @@ export const routes: Routes = [
       import('./pages/login/login.component').then((m) => m.LoginComponent),
     data: { breadcrumb: 'Login' },
   },
+
   {
     path: 'admin/add-jr',
     loadComponent: () =>
@@ -373,4 +374,15 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'recruiter-lead/interviews/shortlist/eval-form',
+    loadComponent: () =>
+      import('./pages/evaluation-form/evaluation-form.component').then((m) => m.EvaluationFormComponent),
+    
+  },
+  {
+    path: 'recruiter/interviews/shortlist/eval-form',
+    loadComponent: () =>
+      import('./pages/evaluation-form/evaluation-form.component').then((m) => m.EvaluationFormComponent),
+  }
 ];

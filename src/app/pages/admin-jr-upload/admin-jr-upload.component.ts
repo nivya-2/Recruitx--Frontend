@@ -4,10 +4,11 @@ import { TableComponent } from '../../shared-components/table/table.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { ButtonIconComponent } from '../../ui/button-icon/button-icon.component';
+import { EvaluationFormComponent } from "../evaluation-form/evaluation-form.component";
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent],
+  imports: [TableComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, ButtonIconComponent, EvaluationFormComponent],
   templateUrl: './admin-jr-upload.component.html',
   styleUrl: './admin-jr-upload.component.scss'
 })

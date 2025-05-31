@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { EvaluationFormComponent } from "../evaluation-form/evaluation-form.component";
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink],
+  imports: [RouterLink, EvaluationFormComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
