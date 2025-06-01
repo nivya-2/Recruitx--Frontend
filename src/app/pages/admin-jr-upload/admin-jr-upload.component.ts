@@ -8,13 +8,17 @@ import { EvaluationFormComponent } from "../evaluation-form/evaluation-form.comp
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { ModalComponent } from '../../ui/modal/modal.component';
 import { UploadComponent } from '../../shared-components/upload/upload.component';
+import { SchedulePageComponent } from '../schedule-page/schedule-page.component';
+
 
 @Component({
   selector: 'app-admin-dashboard',
+  standalone:true,
   imports: [
     TableComponent,
     CommonLayoutComponent,
     CardsComponent,
+    SchedulePageComponent,
     HeaderTextComponent,
     ButtonIconComponent,
     ModalComponent,

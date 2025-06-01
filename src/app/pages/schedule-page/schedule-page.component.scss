@@ -1,0 +1,704 @@
+
+// .interview-scheduling-container {
+//     height: 100vh; /* Consider 'min-height' if content can exceed viewport */
+//     /* MODIFICATION: Add overflow-y: auto if content might get too long and cause double scrollbars with schedule-timeline */
+//     /* overflow-y: auto; */
+//     font-family: 'Montserrat';
+//     }
+//     .card1{
+//       width: 300px;
+//       padding-left: 1rem;
+//     }
+//   .time{
+//     width: 100px !important;
+//   }
+//   .flex-test {
+//     display: flex !important;
+//   }
+//   .select-candi{
+//     width: 300px !important;
+//   }
+//   .btn-lst{
+//     display: flex;
+//     justify-content: end;
+//   }
+//   .flex-test1 {
+// display: flex;
+// margin-bottom: 1rem; 
+// gap: 1rem;
+// align-items: center;
+// justify-content: space-between;
+//   }
+//   .name-level{
+//     margin-top: -20px;
+//   }
+//   .gap{
+//     gap: 5rem;
+//   }
+//   .wdth{
+//     width: 300px;
+//   }
+//   .center-test {
+//     justify-content: center;
+//     align-items: center;
+//   }
+//   /* .side-test{
+//     justify-content: space-between;
+//   } */
+  
+//   h3 {
+//     padding-top: 10px;
+//   }
+
+//   /* Styling for the new candidate dropdown label and field can inherit general field styles */
+//   /* No specific new CSS needed for the candidate dropdown itself unless you want to override PrimeNG defaults drastically */
+
+//   /* Fix the form field alignment */
+//   .form-row {
+//     display: flex;
+//     gap: 1rem; /* Space between date, start time, end time dropdowns */
+//     align-items: flex-end; /* Aligns items (label + input group) to the bottom */
+//   }
+  
+//   .form-row .field {
+//     flex: 1; /* Make each field take equal space */
+//     display: flex;
+//     flex-direction: column; /* Stack label on top of input */
+//   }
+  
+//   /* Ensure labels have consistent height and spacing */
+//   .form-row .field label {
+//     display: block;
+//     margin-bottom: 0.5rem; /* Space between label and input */
+//     font-weight: 500;
+//     color: #374151;
+//     height: 1.5rem; /* Fixed height for alignment, adjust as needed */
+//     line-height: 1.5rem;
+//   }
+  
+//   /* Fix for the empty label spacing */
+//   .empty-label {
+//     visibility: hidden; /* Keeps space but hides label */
+//   }
+
+//   /* Candidate item selection style (was for the list, now not directly used but kept if you reintroduce a list elsewhere) */
+//   .candidate-item {
+//     transition: background-color 0.15s;
+//   }
+
+//   .candidate-item.selected {
+//     background-color: #e3f2fd; /* Light blue background */
+//     border-left: 3px solid #2196f3; /* Blue left border */
+//   }
+
+//   .schedule-timeline {
+//     max-height: 500px; /* Or adjust as per your design, e.g., 450px */
+//     overflow-y: auto; /* Enables vertical scrollbar if content exceeds max-height */
+//   }
+
+//   .time-slot {
+//     min-height: 40px; /* Minimum height for each time slot row */
+//     /* display: flex; align-items: center; -- already in HTML via PrimeFlex */
+//   }
+
+//   /* Classes for booked/occupied slots in the timeline */
+//   .time-slot.occupied {
+//     background-color: #f3e5f5; /* Light purple for general occupied */
+//   }
+
+//   .time-slot.interview {
+//     background-color: #e8f5e8; /* Light green for scheduled interviews */
+//     /* If 'interview' class is always with 'occupied', this will override .occupied */
+//   }
+
+//   .time-slot.conflict { /* This class is not currently being applied by the TS logic but kept if you implement UI for it */
+//     background-color: #ffebee; /* Light red for conflicts */
+//   }
+
+//   .time-label {
+//     background-color: #fafafa; /* Light grey background for time labels (e.g., 08:00) */
+//     font-family: monospace;
+//     /* width: 60px; -- Replaced by w-2 in PrimeFlex, but can be set here for consistency */
+//     text-align: center; /* Center the time text if needed */
+//   }
+
+//   .candidate-details {
+//     background-color: #f8f9fa; /* Light background for the candidate details box */
+//   }
+
+//  .gap-card{
+//   gap: 2rem;
+//  }
+
+//   .card-2 { /* Specific styling for the schedule display card */
+//     min-width: 700px; /* Minimum width for the schedule card */
+//     /* MODIFICATION: Removed fixed height to allow content to define height naturally with max-height on timeline */
+//     height: 500px; 
+//     padding-bottom: 1rem; /* Reduced padding-bottom as fixed height is removed */
+//     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+//     border: 1px solid #e0e0e0;
+//     border-radius: 8px;
+//   }
+// .schedule-time{
+//   text-align: center;
+// }
+//   .pos-alt { /* Placeholder message "Select interviewers..." */
+//     argin-left: 5%;
+//     margin-top: 10%;
+//     border: 1px solid #ccc; /* Lighter border */
+//     padding: 10rem; /* Adjust padding */
+//     text-align: center;
+//     margin: 2rem auto; /* Center block with auto margins */
+//     max-width: 80%; /* Prevent it from being too wide */
+//   }
+// small{
+// margin-top: .5rem;
+// }
+//   .interviewer-columns {
+//     display: flex;
+//     gap: 1rem; /* Space between interviewer columns */
+//     flex-wrap: wrap; /* Allow columns to wrap on smaller screens if needed */
+//   }
+  
+//   .interviewer-columns.single-column .interviewer-column {
+//     flex: 0 0 100%; /* Take full width */
+//     max-width: 100%;
+//   }
+  
+//   .interviewer-columns.two-columns .interviewer-column {
+//     flex: 0 0 calc(50% - 0.5rem); /* Adjust for gap: 50% of container minus half the gap */
+//     max-width: calc(50% - 0.5rem);
+//   }
+  
+//   .interviewer-columns.three-columns .interviewer-column {
+//     flex: 0 0 calc(33.333% - (2rem / 3)); /* Adjust for gap: 33.33% minus two-thirds of the gap */
+//     max-width: calc(33.333% - (2rem / 3));
+//   }
+  
+//   .interviewer-column {
+//     /* flex: 1; -- Base flex properties are now set by the column count classes */
+//     /* min-width is handled by the column count classes */
+//   }
+  
+//   @media (max-width: 992px) { /* Adjust breakpoint for when 3 columns become too narrow */
+//     .interviewer-columns.three-columns .interviewer-column {
+//       flex: 0 0 calc(50% - 0.5rem);
+//       max-width: calc(50% - 0.5rem);
+//     }
+//   }
+
+//   @media (max-width: 768px) { /* Tablet and mobile */
+//     .interviewer-columns .interviewer-column { /* All columns stack vertically */
+//       flex: 0 0 100% !important;
+//       max-width: 100% !important;
+//     }
+//     .card-2 {
+//       min-width: auto; /* Allow schedule card to shrink on small screens */
+//     }
+//   }
+  
+//   /* Adjust timeline font sizes for smaller columns */
+//   .interviewer-columns.two-columns .time-label,
+//   .interviewer-columns.three-columns .time-label {
+//     /* width: 50px; -- If not using PrimeFlex w-* classes */
+//     font-size: 0.7rem; /* Smaller font for time */
+//   }
+  
+//   .interviewer-columns.three-columns .schedule-timeline {
+//     font-size: 0.8rem; /* Smaller font in the timeline content for 3 columns */
+//   }
+  
+//   .interviewer-columns.three-columns .time-slot {
+//     min-height: 35px; /* Slightly reduce min-height for 3 columns */
+//   }
+
+//   /* General field styling (for labels on top of inputs) */
+//   .field {
+//     display: flex;
+//     flex-direction: column;
+//     margin-bottom: 1rem; /* Default bottom margin for fields not in .form-row */
+//   }
+  
+//   .field label:not(.empty-label) { /* Exclude empty label from this margin */
+//     margin-bottom: 0.5rem;
+//     font-weight: 500;
+//     color: #374151; /* Dark gray for labels */
+//   }
+  
+//   /* Ensure equal spacing between fields when using PrimeFlex gap utilities */
+//   .flex.gap-3 .field {
+//     min-width: 0; /* Prevents flex items from overflowing when in a gapped flex container */
+//   }
+  
+//   /* Style the dropdowns and calendar to have consistent height */
+//   /* PrimeNG components often have their own specific structure, target inner elements if needed */
+//   .p-dropdown,
+//   .p-calendar .p-inputtext { /* Target input part of calendar */
+//     height: 2.5rem; /* Example height, align with your design */
+//     width: 100%; /* Make them full width of their container field */
+//   }
+//   .p-calendar { /* To make the whole calendar component align height-wise */
+//      width: 100%;
+//   }
+  
+//   .p-calendar .p-button { /* Style calendar icon button if needed */
+//     height: 2.5rem;
+//   }
+
+//   .p-multiselect {
+//     width: 100%;
+//   }
+
+//   /* Error message styling */
+//   .p-error {
+//     font-size: 0.75rem;
+//     margin-top: 0.25rem;
+//   }
+
+//   /* Responsive adjustments for the main form row */
+//   @media (max-width: 768px) { /* Mobile screens */
+//     .form-row {
+//       flex-direction: column; /* Stack date/time fields vertically */
+//       gap: 1rem; /* Keep gap when stacked */
+//       align-items: stretch; /* Make items take full width */
+//     }
+    
+//     .form-row .field {
+//       flex: none; /* Override flex:1 for stacked layout */
+//     }
+//     .form-row .field label {
+//         height: auto; /* Allow label height to be natural when stacked */
+//     }
+//   }
+
+//   /* Ensure the overall layout doesn't create horizontal scrollbars on smaller viewports due to fixed min-width */
+//   @media (max-width: 768px) {
+//     .col-12.lg\:col-6 { /* Or whatever your column classes are for the two main cards */
+//         width: 100%;
+//         /* padding-left: 0.5rem;
+//         padding-right: 0.5rem; */
+//     }
+//     .flex-1.p-4 { /* Main content area */
+//         /* padding: 1rem; */ /* Reduce padding on small screens */
+//     }
+//   }
+//   .level-font{
+//     font-size: 20px !important;
+//     font-weight: 400 !important;
+//   }
+//   .heading {
+//     font-size: 18px;
+//     font-weight: 800;
+//     margin-bottom: 10px;
+//   }
+  
+//   .details-container {
+//     border: 1px solid #ddd;
+//     border-radius: 8px;
+//     padding: 16px;
+//     width: fit-content;
+//     background-color: #fff;
+//   }
+  
+//   .row {
+//     display: flex;
+//     justify-content: flex-start;
+//     align-items: center;
+//     margin-bottom: 8px;
+//   }
+  
+//   .label {
+//     font-weight: 600;
+//     min-width: 180px; /* adjust width as needed for consistent label space */
+//   }
+  
+//   .value {
+//     font-weight: 400;
+//   }
+  
+
+.interview-scheduling-container {
+  height: 100vh;
+  font-family: 'Montserrat';
+}
+.card1{
+width: 300px;
+height: 517px;
+padding-left: 1rem;
+box-sizing: border-box;
+position: relative;
+}
+::ng-deep .p-dropdown.sel-candi{
+  width: 284px !important;
+  margin-bottom: 1rem;
+}
+
+.flex-test {
+display: flex !important;
+}
+.select-candi{
+width: 300px !important;
+}
+.btn-lst{
+display: flex;
+justify-content: end;
+align-items: end;
+position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.flex-test1 {
+display: flex;
+margin-bottom: 1rem;
+gap: 1rem;
+align-items: center;
+justify-content: space-between;
+width: 100%;
+}
+.name-level{
+margin-top: -20px;
+margin-left: 1px;
+// align-items: center;
+// text-align: center;
+
+}
+.gap{
+gap: 12rem;
+}
+
+.center-test {
+// justify-content: center;
+align-items: center;
+padding-left: 10px;
+}
+
+h3.schedule-time {
+text-align: center;
+font-weight: 600;
+font-size: 1.1rem;
+color: #333;
+margin: 0;
+padding-top: 0;
+line-height: normal;
+white-space: nowrap;
+}
+
+.form-row {
+display: flex;
+gap: 1rem;
+align-items: flex-end;
+}
+
+.form-row .field {
+flex: 1;
+display: flex;
+flex-direction: column;
+}
+
+.form-row .field label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: 500;
+color: #374151;
+height: 1.5rem;
+line-height: 1.5rem;
+}
+
+.empty-label {
+visibility: hidden;
+}
+
+.candidate-details {
+background-color: #f8f9fa;
+}
+
+.gap-card{
+gap: 2rem;
+}
+
+.card-2 {
+min-width: auto;
+width: 100%;
+height: 520px;
+// min-height: 400px;
+padding-bottom: 1rem;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+border: 1px solid #e0e0e0;
+border-radius: 8px;
+display: flex;
+flex-direction: column;
+box-sizing: border-box;
+}
+
+.schedule-display-header {
+  padding: 0 0.5rem;
+}
+
+.pos-alt {
+border: 1px solid #e0e0e0;
+padding: 11rem;
+text-align: center;
+margin: 2rem auto;
+max-width: 80%;
+background-color: #f9f9f9;
+margin-top: 10px;
+}
+small{
+margin-top: .5rem;
+}
+
+.field {
+display: flex;
+flex-direction: column;
+margin-bottom: 1rem;
+}
+
+.field label:not(.empty-label) {
+margin-bottom: 0.5rem;
+font-weight: 500;
+color: #374151;
+}
+
+.p-dropdown,
+.p-calendar .p-inputtext {
+height: 2.5rem;
+width: 100%;
+}
+.p-calendar {
+ width: 100%;
+}
+
+.p-calendar .p-button {
+height: 2.5rem;
+}
+
+.p-multiselect {
+width: 100%;
+}
+
+.p-error {
+font-size: 0.75rem;
+margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+.form-row {
+  flex-direction: column;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.form-row .field {
+  flex: none;
+}
+.form-row .field label {
+    height: auto;
+}
+.flex-test.gap-card {
+  flex-direction: column;
+}
+}
+
+.level-font{
+font-size: 20px !important;
+font-weight: 400 !important;
+}
+
+.details-container {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 10px;
+// width: 300px;
+// background-color: red;
+margin-top: 1rem;
+}
+
+.row {
+display: flex;
+justify-content: flex-start;
+align-items: center;
+margin-bottom: 12px;
+}
+
+.label {
+font-weight: 600;
+min-width: 175px;
+}
+
+.value {
+font-weight: 400;
+}
+
+/* Styles for the Schedule Grid */
+.schedule-grid-wrapper {
+  flex-grow: 1;
+  overflow: auto;
+  border: 1px solid #d1d5db; // This wrapper has a border
+  margin: 0 1px 1px 1px;
+  position: relative;
+  
+
+  &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+  }
+  &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+      background: #a1a1a1;
+  }
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+.schedule-grid-container {
+  display: grid;
+  /* Time axis fixed width, interviewer columns share remaining space with a min width */
+  grid-template-columns: 60px repeat(var(--interviewer-count, 1), minmax(120px, 1fr));
+  min-width: fit-content;
+}
+
+.grid-header-cell,
+.grid-cell {
+  padding: 8px;
+  border-bottom: 1px solid #d1d5db;
+  border-right: 1px solid #d1d5db;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.grid-header-cell {
+  background-color: #f9fafb;
+  font-weight: 500;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 50px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.grid-header-cell.time-axis-header {
+  position: sticky;
+  left: 0;
+  z-index: 11;
+}
+
+.interviewer-subname {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.all-day-label,
+.time-label {
+  background-color: #f9fafb;
+  font-weight: 500;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  justify-content: flex-end;
+  padding-right: 10px;
+  min-height: 40px;
+}
+.all-day-label {
+  min-height: 30px;
+}
+
+
+.all-day-slot, // This class might be unused if you removed the All Day row
+.timeslot-cell {
+  position: relative;
+  background-color: #fff; // Default background
+  min-height: 40px;
+  padding: 0; // Remove padding to allow event blocks or preview to use full cell space
+
+  // Style for non-working hours
+  // &.non-working-hours {
+  //   background-image: repeating-linear-gradient(
+  //       45deg,
+  //       #f3f4f6,
+  //       #f3f4f6 5px,
+  //       #e9ecef 5px,
+  //       #e9ecef 10px
+  //   );
+  //   background-color: #f9fafb; // Fallback
+  // }
+
+  // Style for the tentative schedule preview
+  &.tentative-schedule-preview {
+      background-color:rgba(188, 169, 233, 0.4) !important; /* Light yellow. Use !important to ensure override */
+      /* Example: background-color: #e3f2fd !important; /* Light blue */
+  }
+
+  // Ensure event blocks are styled correctly within any timeslot-cell
+  // This .event-block rule is nested inside .timeslot-cell
+  .event-block {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    border-radius: 5px;
+    padding: 3px 5px;
+    color: white;
+    font-size: 0.75em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+    z-index: 2; /* Ensures event blocks are on top of cell backgrounds (including preview) */
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.current-candidate-event {
+        background-color: #c4b5fd; // Light purple
+        border-color: #a78bfa;
+    }
+    &.other-candidate-event {
+        background-color: #8b5cf6; // Darker purple
+        border-color: #7c3aed;
+    }
+  }
+}
+
+/*
+  The .event-block rule above is now correctly nested.
+  If you had a separate, non-nested .event-block rule elsewhere that was more general,
+  you'd keep that, but the one specifically for behavior *inside* .timeslot-cell
+  is now properly placed.
+*/
+
+.card-width{
+  width: 700px;
+}
+h2{
+  width: 400px;
+}
+.cent-text{
+  padding-top: 20px;
+}
+.padding{
+  margin-top: 25px;
+  align-items: center;
+display: flex;
+justify-content: center;
+gap: 1.5rem;
+margin-bottom: 1rem;
+}
+::ng-deep .btn-cls .button .p-button{
+  padding: .5rem !important;
+}
+.height-int{
+  height: 90px;
+}
