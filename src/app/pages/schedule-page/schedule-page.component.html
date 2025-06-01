@@ -2,6 +2,34 @@
   <div class="flex-test  center-test gap">
     
     <div class="name-level">
+      <div class=" mb-4">
+        <label for="candidateDropdown" class="block font-medium mb-2"></label>
+        <p-dropdown 
+          inputId="candidateDropdown"
+          [options]="candidates" 
+          [(ngModel)]="selectedCandidate" 
+          optionLabel="name" 
+          placeholder="Search here"
+          [filter]="true" 
+          filterBy="name" 
+          appendTo="self"
+          [showClear]="true" 
+          (onChange)="onCandidateChange($event)" 
+          name="selectedCandidateDropdown"
+          class="w-full select-candi sel-candi"
+          #candidateDropdownModel="ngModel">
+          <ng-template pTemplate="selectedItem">
+              <div class="flex align-items-center gap-2" *ngIf="selectedCandidate">
+                  <div>{{selectedCandidate.name}}</div>
+              </div>
+          </ng-template>
+          <ng-template let-candidate pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                  <div>{{candidate.name}} <span class="text-sm text-500"></span></div>
+              </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
       <h2 class="text-xl font-semibold mb-4 cent-text">
         {{ selectedCandidate?.name || 'Select Candidate' }}
         <span *ngIf="selectedCandidate" class="font-medium text-base ml-2 level-font">
@@ -24,33 +52,28 @@
           
           <div class="card card1">
             <form #schedulingForm="ngForm">
-              <div class=" mb-4">
-                <label for="candidateDropdown" class="block font-medium mb-2"></label>
-                <p-dropdown 
-                  inputId="candidateDropdown"
-                  [options]="candidates" 
-                  [(ngModel)]="selectedCandidate" 
+             
+              <div class="field mb-4 height-int">
+                <label class="block font-medium mb-2">Interviewers *</label>
+                <p-multiSelect 
+                  [(ngModel)]="selectedInterviewers" 
+                  name="interviewers"
+                  [options]="interviewers" 
                   optionLabel="name" 
-                  placeholder="Search here"
-                  [filter]="true" 
-                  filterBy="name" 
-                  appendTo="self"
-                  [showClear]="true" 
-                  (onChange)="onCandidateChange($event)" 
-                  name="selectedCandidateDropdown"
-                  class="w-full select-candi sel-candi"
-                  #candidateDropdownModel="ngModel">
-                  <ng-template pTemplate="selectedItem">
-                      <div class="flex align-items-center gap-2" *ngIf="selectedCandidate">
-                          <div>{{selectedCandidate.name}}</div>
-                      </div>
+                  optionValue="id"
+                  [selectionLimit]="3"
+                  placeholder="Select interviewers"
+                  (onChange)="onInterviewersChange()"
+                  class="w-full"
+                  #interviewersModel="ngModel" required>
+                  <ng-template let-interviewer pTemplate="item">
+                    <div class="flex align-items-center gap-2">
+                      <span>{{ interviewer.name }}</span>
+                    </div>
                   </ng-template>
-                  <ng-template let-candidate pTemplate="item">
-                      <div class="flex align-items-center gap-2">
-                          <div>{{candidate.name}} <span class="text-sm text-500"></span></div>
-                      </div>
-                  </ng-template>
-                </p-dropdown>
+                </p-multiSelect>
+                <small class="text-500">Select up to 3 interviewers</small> <br>
+                <!-- <small *ngIf="interviewersModel.invalid && (interviewersModel.dirty || interviewersModel.touched) && (!selectedInterviewers || selectedInterviewers.length === 0)" class="p-error">At least one interviewer is required.</small> -->
               </div>
               <div class="field">
                 <label class="block font-medium mb-2">Date *</label>
@@ -62,7 +85,7 @@
                   dateFormat="dd/mm/yy"
                   (onSelect)="onDateChange()"
                   placeholder="Select date"
-                  class="w-full"
+                  class="w-full date-pick"
                   #dateModel="ngModel" required>
                 </p-calendar>
                 <small *ngIf="dateModel.invalid && (dateModel.dirty || dateModel.touched)" class="p-error">Date is required.</small>
@@ -100,28 +123,7 @@
                   </div>
                 </div>
 
-              <div class="field mb-4 height-int">
-                <label class="block font-medium mb-2">Interviewers *</label>
-                <p-multiSelect 
-                  [(ngModel)]="selectedInterviewers" 
-                  name="interviewers"
-                  [options]="interviewers" 
-                  optionLabel="name" 
-                  optionValue="id"
-                  [selectionLimit]="3"
-                  placeholder="Select interviewers"
-                  (onChange)="onInterviewersChange()"
-                  class="w-full"
-                  #interviewersModel="ngModel" required>
-                  <ng-template let-interviewer pTemplate="item">
-                    <div class="flex align-items-center gap-2">
-                      <span>{{ interviewer.name }}</span>
-                    </div>
-                  </ng-template>
-                </p-multiSelect>
-                <small class="text-500">Select up to 3 interviewers</small> <br>
-                <!-- <small *ngIf="interviewersModel.invalid && (interviewersModel.dirty || interviewersModel.touched) && (!selectedInterviewers || selectedInterviewers.length === 0)" class="p-error">At least one interviewer is required.</small> -->
-              </div>
+             
 
               <div *ngIf="conflicts.length > 0" class="mb-4">
                 <p-message 
@@ -158,14 +160,7 @@
               </div>
                 
               <div class="flex justify-content-end mt-4 btn-lst ">
-                <!-- <p-button 
-                  label="Schedule Meeting" 
-                  icon="pi pi-calendar-plus"
-                  (onClick)="scheduleInterview()"
-                  [disabled]="!canSchedule() || schedulingForm.invalid || !selectedCandidate" 
-                  class="p-button-primary">
-                </p-button> -->
-                <app-button (functionemit)="scheduleInterview()"                   
+               <app-button (functionemit)="scheduleInterview()"                   
                 [disabled]="!canSchedule() || schedulingForm.invalid || !selectedCandidate" >Schedule Meetings</app-button>
 
               </div>
@@ -179,11 +174,6 @@
           <div class="card card-2 card-width">
             
             <div class="flex justify-content-between align-items-center mb-4 schedule-display-header flex-test padding">
-              <!-- <p-button 
-                icon="pi pi-chevron-left" 
-                (onClick)="previousDay()"
-                styleClass="p-button-sm p-button-text">
-              </p-button> -->
               <app-button (functionemit)="previousDay()" class="btn-cls">
                 <app-icon name="keyboard_arrow_left" size="28px" customColor="#ffff"></app-icon>
               </app-button>
@@ -191,11 +181,6 @@
                  Schedule for
                  <div> {{ selectedDate | date:'EEEE, MMMM d, yyyy' }}</div>
               </h3>
-              <!-- <p-button 
-                icon="pi pi-chevron-right" 
-                (onClick)="nextDay()"
-                styleClass="p-button-sm p-button-text">
-              </p-button> -->
               <app-button (functionemit)="nextDay()" class="btn-cls">
                 <app-icon name="keyboard_arrow_right" size="28px" customColor="#ffff"></app-icon>
               </app-button>
