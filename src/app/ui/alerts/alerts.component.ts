@@ -31,6 +31,9 @@ interface ConfirmDialogOptions {
   providers: [ConfirmationService, MessageService]
 })
 export class AlertsComponent {
+  showToast(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
   @Input() header = 'Confirmation';
   @Input() message = 'Are you sure you want to proceed?';
   @Input() icon = 'pi pi-exclamation-triangle';

@@ -34,9 +34,9 @@ export class AppComponent {
   title = 'rec';
   teamList = [
   { fullName: 'John V', role: 'Senior Lead' },
-  { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
-  { fullName: 'Jins K. Varghese', role: 'Lead' },
-  { fullName: 'Jins K. Varghese', role: 'Associate' },
+  { fullName: 'Tom Philip', role: 'Associate Manager' },
+  { fullName: 'Tom Philip', role: 'Lead' },
+  { fullName: 'Tom Philip', role: 'Associate' },
 ];
 
 onMemberSelect(member: any) {

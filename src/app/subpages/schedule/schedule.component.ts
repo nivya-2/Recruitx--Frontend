@@ -102,7 +102,7 @@ actions:['Schedule'],
       { key: 'location', label: 'Location',filterable: true },
       { key: 'experience', label: 'Experience',filterable: false },
       { key: 'createdDate', label: 'Created Date',filterable: true ,type: 'date'},
-      { key: 'assoJr', label: 'Associated JR',filterable: false },
+      // { key: 'assoJr', label: 'Associated JR',filterable: false },
       { key: 'actions', label: 'Actions',filterable: false }
     ];
 

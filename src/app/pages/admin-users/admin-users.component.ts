@@ -9,10 +9,11 @@ import { AssignComponent } from "../../ui/assign/assign.component";
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { UploadComponent } from "../../shared-components/upload/upload.component";
+import { IconComponent } from '../../ui/icon/icon.component';
 
 @Component({
   selector: 'app-admin-users',
-  imports: [TableComponent,CommonLayoutComponent,AlertsComponent
+  imports: [IconComponent,TableComponent,CommonLayoutComponent,AlertsComponent
 ,    CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent,ModalComponent, UploadComponent],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss'
@@ -23,7 +24,8 @@ export class AdminUsersComponent {
   openModal() {
     this.visible = !this.visible;
   }
-    recruiterHeadName = "Nivya Vineeth";
+    recruiterHeadName = "Neena Roy";
+    recruiterHeadEmail="neena@experionglobal.com"
 
   dataSource: any[] = [
   { id: 'EMP877653', name: 'Alia K', jobTitle: 'Senior Executive', role: 'Recruiter', location: 'Kochi', deliveryUnit: 'DU6', email: 'test@mail.com', status1: 'Active', uploadedDate: '25-06-2025', actions: ['Edit'] },
@@ -53,8 +55,8 @@ export class AdminUsersComponent {
       { key: 'deliveryUnit', label: 'Delivery Unit',filterable: false },
       { key: 'email', label: 'Email',filterable: false },
       { key: 'status1', label: 'Status',filterable: true },
-      { key: 'uploadedDate', label: 'Uploaded Date',filterable: true, type: 'date' },
-      { key: 'actions', label: 'Actions',filterable: false }
+      { key: 'actions', label: 'Actions',filterable: false },
+       { key: 'uploadedDate', label: 'Uploaded On',filterable: true, type: 'date' }
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions'); 
@@ -62,12 +64,12 @@ export class AdminUsersComponent {
     teamList = [
       { fullName: 'Shankar Menon', role: 'Recruiter Head' },
       { fullName: 'John V', role: 'Senior Lead' },
-      { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+      { fullName: 'Tom Philip', role: 'Associate Manager' },
       { fullName: 'Lakshmi S', role: 'Lead' },
       { fullName: 'Abhiram Prasad', role: 'Associate' },
       { fullName: 'Vinayak Sasi', role: 'Recruiter Head' },
       { fullName: 'Amal K', role: 'Senior Lead' },
-      { fullName: 'Jins K. Varghese', role: 'Associate Manager' },
+      { fullName: 'Tom Philip', role: 'Associate Manager' },
       { fullName: 'Sona Nair S', role: 'Lead' },
       { fullName: 'Sresh Krishna ', role: 'Associate' },
       { fullName: 'Shaju Vidhya', role: 'Recruiter Head' },
