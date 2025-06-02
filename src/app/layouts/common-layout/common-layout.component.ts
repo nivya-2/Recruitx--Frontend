@@ -22,13 +22,13 @@ import { BreadcrumbsComponent } from '../../ui/breadcrumbs/breadcrumbs.component
 export class CommonLayoutComponent {
     @Input() breadcrumbItems?: MenuItem[]; // ✅ Optional breadcrumbs input
   recruiterIcons: IconItem[] = [
-    { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter/analytics' },
+    // { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter/analytics' },
     { iconName: 'timeline', size: '28px', iconColour: '#B8AAFF', label: 'My JDs', route: '/recruiter/my-jd' },
     { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Interview', route: '/recruiter/interviews' }
   ];
 
   recruiterLeadIcons: IconItem[] = [
-    { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-lead/analytics' },
+    // { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-lead/analytics' },
     { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'JRs', route: '/recruiter-lead/jrs' },
     { iconName: 'timeline', size: '28px', iconColour: '#B8AAFF', label: 'My JDs', route: '/recruiter-lead/my-jd' },
     { iconName: 'date_range', size: '28px', iconColour: '#B8AAFF', label: 'Interview', route: '/recruiter-lead/interviews' },
@@ -36,7 +36,7 @@ export class CommonLayoutComponent {
   ];
 
   recruiterHeadIcons: IconItem[] = [
-    { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-head/analytics' },
+    // { iconName: 'bar_chart', size: '28px', iconColour: '#B8AAFF', label: 'Analytics', route: '/recruiter-head/analytics' },
     { iconName: 'assignment', size: '28px', iconColour: '#B8AAFF', label: 'JRs', route: '/recruiter-head/jrs' },
     { iconName: 'group', size: '28px', iconColour: '#B8AAFF', label: 'Teams', route: '/recruiter-head/team' },
   ];
