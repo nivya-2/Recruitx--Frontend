@@ -15,11 +15,19 @@ export class ButtonComponent {
   @Input() action: () => void = () => {};
   @Input() disabled: boolean = false;
 
-  handleClick() {
-    if (this.action) {
-      const result = this.action();
+  // handleClick() {
+  //   if (this.action) {
+  //     const result = this.action();
     
+  //   this.functionemit.emit();
+  //   }
+  // }
+  handleClick() {
+  if (this.disabled) return;
+  if (this.action) {
+    this.action();
     this.functionemit.emit();
-    }
   }
+}
+
 }

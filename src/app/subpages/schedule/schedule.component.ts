@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TableComponent } from '../../shared-components/table/table.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-schedule',
@@ -107,5 +108,22 @@ actions:['Schedule'],
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');  
+    constructor(private router: Router, private route: ActivatedRoute) {}
+    currentUrl:any;
+    visible: boolean = false;
+    ngOnInit(): void {
+      this.currentUrl = this.router.url;
+      
+  
+    }
+    onSchedule = (row: any) => {
+      if (this.currentUrl.startsWith('/recruiter-lead')) {
+        this.router.navigate(['recruiter-lead/interviews/schedule/schedule-page']);
+    
+      } else if (this.currentUrl.startsWith('/recruiter')) {
+      this.router.navigate(['/recruiter/interviews/schedule/schedule-page']);
+    };
+    }
+    actionMethods={'Schedule': this.onSchedule };
 
 }
