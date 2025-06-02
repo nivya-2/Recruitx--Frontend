@@ -433,5 +433,17 @@ export const routes: Routes = [
     path: 'recruiter/interviews/shortlist/eval-form',
     loadComponent: () =>
       import('./pages/evaluation-form/evaluation-form.component').then((m) => m.EvaluationFormComponent),
+  },
+
+  {
+    path: 'recruiter-lead/interviews/schedule/schedule-page',
+    loadComponent: () =>
+      import('./pages/schedule-page/schedule-page.component').then((m) => m.SchedulePageComponent),
+    
+  },
+  {
+    path: 'recruiter/interviews/schedule/schedule-page',
+    loadComponent: () =>
+      import('./pages/schedule-page/schedule-page.component').then((m) => m.SchedulePageComponent),
   }
 ];

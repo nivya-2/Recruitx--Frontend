@@ -1,0 +1,389 @@
+.interview-scheduling-container {
+  height: 100vh;
+  font-family: 'Montserrat';
+}
+.card1{
+width: 300px;
+height: 517px;
+padding-left: 1rem;
+box-sizing: border-box;
+position: relative;
+}
+::ng-deep .p-dropdown.sel-candi{
+  width: 284px !important;
+  margin-bottom: 1rem;
+}
+
+.flex-test {
+display: flex !important;
+}
+.select-candi{
+width: 288px !important;
+}
+
+.btn-lst{
+display: flex;
+justify-content: end;
+align-items: end;
+position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.flex-test1 {
+display: flex;
+margin-bottom: 1rem;
+gap: 1rem;
+align-items: center;
+justify-content: space-between;
+width: 100%;
+}
+.name-level{
+margin-top: -15px;
+margin-left: 1px;
+display: flex;
+    align-items: end;
+    gap: 2rem;
+// align-items: center;
+// text-align: center;
+
+}
+.gap{
+gap: 12rem;
+}
+
+.center-test {
+// justify-content: center;
+align-items: center;
+padding-left: 10px;
+}
+
+h3.schedule-time {
+text-align: center;
+font-weight: 600;
+font-size: 1.1rem;
+color: #333;
+margin: 0;
+padding-top: 0;
+line-height: normal;
+white-space: nowrap;
+}
+
+.form-row {
+display: flex;
+gap: 1rem;
+align-items: flex-end;
+}
+
+.form-row .field {
+flex: 1;
+display: flex;
+flex-direction: column;
+}
+
+.form-row .field label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: 500;
+color: #374151;
+height: 1.5rem;
+line-height: 1.5rem;
+}
+
+.empty-label {
+visibility: hidden;
+}
+
+.candidate-details {
+background-color: #f8f9fa;
+}
+
+.gap-card{
+gap: 2rem;
+}
+
+.card-2 {
+min-width: auto;
+width: 100%;
+height: 520px;
+// min-height: 400px;
+padding-bottom: 1rem;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+border: 1px solid #e0e0e0;
+border-radius: 8px;
+display: flex;
+flex-direction: column;
+box-sizing: border-box;
+}
+
+.schedule-display-header {
+  padding: 0 0.5rem;
+}
+
+.pos-alt {
+border: 1px solid #e0e0e0;
+padding: 11rem;
+text-align: center;
+margin: 2rem auto;
+max-width: 80%;
+background-color: #f9f9f9;
+margin-top: 10px;
+}
+small{
+margin-top: .5rem;
+}
+
+.field {
+display: flex;
+flex-direction: column;
+margin-bottom: 1rem;
+}
+
+.field label:not(.empty-label) {
+margin-bottom: 0.5rem;
+font-weight: 500;
+color: #374151;
+}
+
+.p-dropdown,
+.p-calendar .p-inputtext {
+height: 2.5rem;
+width: 100%;
+}
+.p-calendar {
+ width: 100%;
+}
+
+.p-calendar .p-button {
+height: 2.5rem;
+}
+
+.p-multiselect {
+width: 100%;
+}
+
+.p-error {
+font-size: 0.75rem;
+margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+.form-row {
+  flex-direction: column;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.form-row .field {
+  flex: none;
+}
+.form-row .field label {
+    height: auto;
+}
+.flex-test.gap-card {
+  flex-direction: column;
+}
+}
+
+.level-font{
+font-size: 20px !important;
+font-weight: 400 !important;
+}
+
+.details-container {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 10px;
+// width: 300px;
+// background-color: red;
+margin-top: 1rem;
+}
+
+.row {
+display: flex;
+justify-content: flex-start;
+align-items: center;
+margin-bottom: 12px;
+}
+
+.label {
+font-weight: 600;
+min-width: 175px;
+}
+
+.value {
+font-weight: 400;
+}
+
+/* Styles for the Schedule Grid */
+.schedule-grid-wrapper {
+  flex-grow: 1;
+  overflow: auto;
+  border: 1px solid #d1d5db; // This wrapper has a border
+  margin: 0 1px 1px 1px;
+  position: relative;
+  
+
+  &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+  }
+  &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+      background: #a1a1a1;
+  }
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+.schedule-grid-container {
+  display: grid;
+  /* Time axis fixed width, interviewer columns share remaining space with a min width */
+  grid-template-columns: 60px repeat(var(--interviewer-count, 1), minmax(120px, 1fr));
+  min-width: fit-content;
+}
+
+.grid-header-cell,
+.grid-cell {
+  padding: 8px;
+  border-bottom: 1px solid #d1d5db;
+  border-right: 1px solid #d1d5db;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.grid-header-cell {
+  background-color: #f9fafb;
+  font-weight: 500;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 50px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.grid-header-cell.time-axis-header {
+  position: sticky;
+  left: 0;
+  z-index: 11;
+}
+
+.interviewer-subname {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.all-day-label,
+.time-label {
+  background-color: #f9fafb;
+  font-weight: 500;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  justify-content: flex-end;
+  padding-right: 10px;
+  min-height: 40px;
+}
+.all-day-label {
+  min-height: 30px;
+}
+
+
+.all-day-slot, // This class might be unused if you removed the All Day row
+.timeslot-cell {
+  position: relative;
+  background-color: #fff; // Default background
+  min-height: 40px;
+  padding: 0; // Remove padding to allow event blocks or preview to use full cell space
+
+  // Style for non-working hours
+  // &.non-working-hours {
+  //   background-image: repeating-linear-gradient(
+  //       45deg,
+  //       #f3f4f6,
+  //       #f3f4f6 5px,
+  //       #e9ecef 5px,
+  //       #e9ecef 10px
+  //   );
+  //   background-color: #f9fafb; // Fallback
+  // }
+
+  // Style for the tentative schedule preview
+  &.tentative-schedule-preview {
+      background-color:rgba(188, 169, 233, 0.4) !important; /* Light yellow. Use !important to ensure override */
+      /* Example: background-color: #e3f2fd !important; /* Light blue */
+  }
+
+  // Ensure event blocks are styled correctly within any timeslot-cell
+  // This .event-block rule is nested inside .timeslot-cell
+  .event-block {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    border-radius: 5px;
+    padding: 3px 5px;
+    color: white;
+    font-size: 0.75em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+    z-index: 2; /* Ensures event blocks are on top of cell backgrounds (including preview) */
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.current-candidate-event {
+        background-color: #c4b5fd; // Light purple
+        border-color: #a78bfa;
+    }
+    &.other-candidate-event {
+        background-color: #8b5cf6; // Darker purple
+        border-color: #7c3aed;
+    }
+  }
+}
+
+/*
+  The .event-block rule above is now correctly nested.
+  If you had a separate, non-nested .event-block rule elsewhere that was more general,
+  you'd keep that, but the one specifically for behavior *inside* .timeslot-cell
+  is now properly placed.
+*/
+
+.card-width{
+  width: 700px;
+}
+h2{
+  width: 400px;
+}
+.cent-text{
+  padding-top: 20px;
+}
+.padding{
+  margin-top: 25px;
+  align-items: center;
+display: flex;
+justify-content: center;
+gap: 1.5rem;
+margin-bottom: 1rem;
+}
+::ng-deep .btn-cls .button {
+  padding:0.1rem 0.2rem !important;
+}
+.height-int{
+  height: 90px;
+}
