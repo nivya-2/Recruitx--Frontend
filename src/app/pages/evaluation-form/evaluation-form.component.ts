@@ -87,7 +87,7 @@ export class EvaluationFormComponent implements OnInit {
   }
  
  summary: CandidateSummary = {
-  candidateName: "John Does",
+  candidateName: "John Doe",
   technology: "Java, AWS",
   interviewLevel: "Level 1",
   noticePeriod: "30 days",
