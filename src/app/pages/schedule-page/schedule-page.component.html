@@ -1,3 +1,9 @@
+<app-common-layout
+[breadcrumbItems]="items"
+>
+  <app-cards class="custom-padding"> 
+    <app-header-text context="table-header" [nopad]="true">Scheduler</app-header-text>
+
 <div class="interview-scheduling-container ">
   <div class="flex-test  center-test gap">
     
@@ -160,14 +166,13 @@
               </div>
                 
               <div class="flex justify-content-end mt-4 btn-lst ">
-               <app-button (functionemit)="scheduleInterview()"                   
-                [disabled]="!canSchedule() || schedulingForm.invalid || !selectedCandidate" >Schedule Meetings</app-button>
+               <app-button (functionemit)="scheduleAlert($event)"                   
+                [disabled]="!canSchedule() || schedulingForm.invalid || !selectedCandidate" >S1chedule Meeting</app-button>
 
               </div>
             </form>
           </div>
         </div>
-      
         <!-- Schedule Display (NEW GRID LAYOUT - Right Side) -->
         <div class="col-12 lg:col-6 ">
           
@@ -234,4 +239,8 @@
     </div>
   </div>
 <p-toast></p-toast>   
+      <app-alerts #alerts></app-alerts>
+
 </div>
+</app-cards>
+</app-common-layout>

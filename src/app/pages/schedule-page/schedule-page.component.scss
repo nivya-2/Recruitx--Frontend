@@ -381,8 +381,8 @@ justify-content: center;
 gap: 1.5rem;
 margin-bottom: 1rem;
 }
-::ng-deep .btn-cls .button .p-button{
-  padding: .5rem !important;
+::ng-deep .btn-cls .button {
+  padding:0.1rem 0.2rem !important;
 }
 .height-int{
   height: 90px;

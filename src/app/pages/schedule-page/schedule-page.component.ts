@@ -12,10 +12,15 @@ import { Toast } from 'primeng/toast';
 import { ButtonComponent } from "../../ui/button/button.component";
 import { IconComponent } from "../../ui/icon/icon.component";
 import { ButtonIconComponent } from "../../ui/button-icon/button-icon.component";
+import { CommonLayoutComponent } from "../../layouts/common-layout/common-layout.component";
+import { CardsComponent } from "../../ui/cards/cards.component";
+import { HeaderTextComponent } from "../../ui/header-text/header-text.component";
+import { AlertsComponent } from '../../ui/alerts/alerts.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-schedule-page',
-  imports: [Calendar, MultiSelect, Tag, Button, Toast, Message, DropdownModule, FormsModule, CommonModule, ButtonComponent, IconComponent, ButtonIconComponent],
+  imports: [Calendar, MultiSelect, Tag, Button, Toast, Message, DropdownModule, FormsModule, CommonModule, ButtonComponent, IconComponent, ButtonIconComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, AlertsComponent],
   templateUrl:'./schedule-page.component.html',
   styleUrl: './schedule-page.component.scss',
   providers: [MessageService]
@@ -84,14 +89,24 @@ export class SchedulePageComponent implements OnInit {
   allScheduledEventsForCurrentDate: any[] = [];
 myInterview: any;
 
-
-  constructor(private messageService: MessageService) {}
+constructor(private router: Router,private messageService: MessageService) {
+  this.currentUrl = this.router.url;
+}
 
   ngOnInit() {
     this.initializeSampleData();
     this.updateScheduledEventsForCurrentDate();
     this.calculateCurrentMeetingDuration(); // Calculate initial duration (likely 0)
     // Load events for the initial date
+      this.currentUrl = this.router.url;
+      if (this.currentUrl.startsWith('/recruiter-lead')) {
+        this.items=[{ label: 'Interview', routerLink: '/recruiter-lead/interviews' }, {label: 'Schedule', routerLink: '/recruiter-lead/interviews/Schedule'}, {label: 'Scheduling Page', routerLink: '/recruiter-lead/interviews/Schedule/schedule-page'}]
+        this.router.navigate(['/recruiter-lead/interviews/shortlist/schedule-page']);
+      } else if (this.currentUrl.startsWith('/recruiter')) {
+        this.items=[{ label: 'Interview', routerLink: '/recruiter/interviews' }, {label: 'Schedule', routerLink: '/recruiter/interviews/Schedule'}, {label: 'Scheduling Page', routerLink: '/recruiter/interviews/Schedule/schedule-page'}]
+  
+      }
+    
   }
 
   initializeSampleData() {
@@ -208,7 +223,35 @@ myInterview: any;
       this.currentMeetingDuration = 0;
     }
   }
+
+  items:any = [];
+  currentUrl:any;
+ 
+  @ViewChild('alerts') alertsComponent!: AlertsComponent;
   
+  scheduleAlert(row: any){
+      const message = `Are you sure you want to schedule a interview with ${this.selectedCandidate.name}?`;
+      
+      this.alertsComponent.showConfirmDialog({
+        message: message,
+        header: `Add ${this.selectedCandidate.stage}`,
+        icon: 'pi pi-add',
+        acceptLabel: 'Schedule',
+        rejectLabel: 'Cancel',
+        acceptSeverity: 'success',
+        rejectSeverity: 'warn',
+        // acceptSummary: 'Removed',
+        // rejectSummary: 'Cancelled',
+        // acceptDetail: `Removed !`,
+        // rejectDetail: 'No changes were made.',
+        onAccept: () => {
+          this.scheduleInterview();
+        },
+        onReject: () => {
+        }
+      });
+    
+  }
   formatDurationDisplay(totalMinutes: number): string {
     if (totalMinutes <= 0) {
       return ''; // Or handle as needed, e.g., '(0 min)' or empty

@@ -1,6 +1,7 @@
 <app-common-layout>
   <app-cards class="custom-padding"> 
-    <!-- <div class="admin-dashboard-header">
+    <div class="admin-dashboard-header">
+      <app-header-text context="table-header" [nopad]="true">Job Requisitions</app-header-text>
       <app-button-icon label="Upload JRs" icon="upload" (click)="openModal()"></app-button-icon>
     </div>
     <app-alerts #alerts></app-alerts>
@@ -13,10 +14,7 @@ header="Add Job Requisitions"
 [maximizable]="true" 
 [style]="{ width: '50rem', height: '35rem' }">
   <app-upload></app-upload>
-</app-modal> -->
-<app-header-text context="table-header" [nopad]="true">Scheduler</app-header-text>
-
-<app-schedule-page></app-schedule-page>
+</app-modal>
 
   </app-cards>
 </app-common-layout>
