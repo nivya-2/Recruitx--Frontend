@@ -16,14 +16,21 @@ export class TrackJdComponent {
   
 
 onViewJD = (row: any) => {
-  this.router.navigate(['/recruiter-lead/job-description/details']);
-  console.log('View JD for:', row);
-};
 
-onViewApplicants = (row: any) => {
-  this.router.navigate(['/recruiter-lead/job-description/applicants']);
-  console.log('View Applicants for:', row);
-};
+    const rolePrefix = this.router.url.includes('recruiter-lead') ? 'recruiter-lead' : 'recruiter';
+
+    this.router.navigate([`/${rolePrefix}/job-description/details`], { relativeTo: this.route });
+
+  };
+ 
+  onViewApplicants = (row: any) => {
+
+    const rolePrefix = this.router.url.includes('recruiter-lead') ? 'recruiter-lead' : 'recruiter';
+
+    this.router.navigate([`/${rolePrefix}/job-description/applicants`], { relativeTo: this.route });
+
+  };
+ 
 
 
 actionMethods = {'View JD': this.onViewJD,   'View Applicants': this.onViewApplicants };
