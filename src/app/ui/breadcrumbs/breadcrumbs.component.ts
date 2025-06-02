@@ -31,7 +31,7 @@ export class BreadcrumbsComponent implements OnInit {
     }
   }
 
-  private generateBreadcrumbs(): void {
+  public generateBreadcrumbs(): void {
     const breadcrumbs: MenuItem[] = [];
     let url = '';
 
