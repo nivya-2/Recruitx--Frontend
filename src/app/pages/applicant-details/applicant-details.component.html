@@ -31,9 +31,10 @@
       </div>
 
       <div class="right-align">
-        <app-button class="scaled">Next Stage</app-button>
-        <app-button class="scaled" (click)="rejectCandidate()">Reject</app-button>
+        <app-button class="scaled" (click)="selectCandidate($event)" [disabled]="finished">Next Stage</app-button>
+        <app-button class="scaled" (click)="rejectCandidate($event)">Reject</app-button>
       </div>
     </app-cards>
   </div>
 </app-common-layout>
+<app-alerts #alerts></app-alerts>

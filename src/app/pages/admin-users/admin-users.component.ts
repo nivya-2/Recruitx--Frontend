@@ -13,8 +13,8 @@ import { IconComponent } from '../../ui/icon/icon.component';
 
 @Component({
   selector: 'app-admin-users',
-  imports: [IconComponent,TableComponent,CommonLayoutComponent,AlertsComponent
-,    CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent,ModalComponent, UploadComponent],
+  imports: [IconComponent, TableComponent, CommonLayoutComponent, AlertsComponent,
+    CardsComponent, HeaderTextComponent, ButtonIconComponent, ButtonComponent, AssignComponent, ModalComponent, UploadComponent],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss'
 })
