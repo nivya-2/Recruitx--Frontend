@@ -4,7 +4,7 @@ import { Button } from 'primeng/button';
 import { Toast } from 'primeng/toast';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 
-interface ConfirmDialogOptions {
+export interface ConfirmDialogOptions {
   message: string;
   header?: string;
   icon?: string;
