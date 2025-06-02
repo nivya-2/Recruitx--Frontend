@@ -51,17 +51,14 @@ export class JrCardComponent {
   }
   
   teamList = [
-  { fullName: 'Shankar Menon', role: 'Recruiter Head' },
   { fullName: 'John V', role: 'Senior Lead' },
   { fullName: 'Tom Philip', role: 'Associate Manager' },
   { fullName: 'Lakshmi S', role: 'Lead' },
   { fullName: 'Abhiram Prasad', role: 'Associate' },
-  { fullName: 'Vinayak Sasi', role: 'Recruiter Head' },
   { fullName: 'Amal K', role: 'Senior Lead' },
   { fullName: 'Tom Philip', role: 'Associate Manager' },
   { fullName: 'Sona Nair S', role: 'Lead' },
   { fullName: 'Sresh Krishna ', role: 'Associate' },
-  { fullName: 'Shaju Vidhya', role: 'Recruiter Head' },
   { fullName: 'Dennis Vakkachan', role: 'Senior Lead' },
   { fullName: 'Varghese Kuryan', role: 'Associate Manager' },
   { fullName: 'Ali Akbar S', role: 'Lead' },
