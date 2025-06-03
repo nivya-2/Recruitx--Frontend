@@ -6,11 +6,12 @@
     <div class="buttonset">
         <app-button (functionemit)="getButtonLabel()">{{label}}</app-button>
         <app-button *ngIf="isEditMode" (functionemit)="getButtonLabel()">Cancel</app-button>
-        <app-button [disabled]="isEditMode">Export</app-button>
+        <app-button (functionemit)="handleSelectedMember($event)" [disabled]="isEditMode">Export</app-button>
     </div>
 </div>
+    <app-alerts #export></app-alerts>
 
-<form class="form-section">
+<form class="form-section" id="jd-form">
   <!-- Basic Info -->
   <section class="section-wrapper">
     <h3 class="section-title">Basic Information</h3>
