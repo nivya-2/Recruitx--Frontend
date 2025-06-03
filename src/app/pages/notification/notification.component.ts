@@ -24,105 +24,6 @@ import { HeaderTextComponent } from '../../ui/header-text/header-text.component'
   templateUrl: './notification.component.html',
   styleUrl: './notification.component.scss'
 })
-// export class NotificationComponent implements OnInit {
-//   notifications: any[] = [];
-//   paginatedNotifications: any[] = [];
-//   first: number = 0;
-
-//   sortOptions = [
-//     { label: 'Latest first', value: 'latest' },
-//     { label: 'Oldest first', value: 'oldest' }
-//   ];
-//   selectedSort = 'latest';
-
-//   ngOnInit() {
-//     // Mock notifications
-//     this.notifications = Array.from({ length: 25 }, (_, i) => ({
-//       title: 'New JR!',
-//       message: 'Hey Everyone, new JR alert! A new JR is awaiting to be assigned.',
-//       avatar: 'assets/avatar.png'
-//     }));
-//     this.paginate(0);
-//   }
-
-//   onPageChange(event: any) {
-//     this.first = event.first;
-//     this.paginate(this.first);
-//   }
-
-//   paginate(startIndex: number) {
-//     this.paginatedNotifications = this.notifications.slice(startIndex, startIndex + 6);
-//   }
-// }
-// export class NotificationComponent implements OnInit {
-//   notifications: any[] = [];
-//   groupedNotifications: any[] = [];
-//   searchTerm: string = '';
-//   activeTabIndex: number = 0;
-
-//   ngOnInit() {
-//     this.notifications = [
-//       { title: 'New JR!', message: 'A new JR is awaiting to be assigned.', avatar: 'assets/avatar.png', date: new Date(), read: false },
-//       { title: 'Reminder', message: 'Feedback pending from 3 candidates.', avatar: 'assets/avatar.png', date: new Date(Date.now() - 86400000), read: true },
-//       { title: 'Update', message: 'Job description updated.', avatar: 'assets/avatar.png', date: new Date(Date.now() - 3 * 86400000), read: false },
-//     ];
-
-//     this.filterNotifications();
-//   }
-
-//   onTabChange(index: number) {
-//     this.activeTabIndex = index;
-//     this.filterNotifications();
-//   }
-
-//   filterNotifications() {
-//     let filtered = this.notifications;
-
-//     if (this.activeTabIndex === 1) {
-//       filtered = filtered.filter(n => !n.read); // Unread
-//     } else if (this.activeTabIndex === 2) {
-//       filtered = filtered.filter(n => n.read); // Read
-//     }
-
-//     if (this.searchTerm) {
-//       const term = this.searchTerm.toLowerCase();
-//       filtered = filtered.filter(n =>
-//         n.title.toLowerCase().includes(term) || n.message.toLowerCase().includes(term)
-//       );
-//     }
-
-//     this.groupedNotifications = this.groupByDate(filtered);
-//   }
-
-//   groupByDate(notifs: any[]) {
-//     const groups: any = {};
-
-//     for (let notif of notifs) {
-//       const dateLabel = this.getDateLabel(notif.date);
-
-//       if (!groups[dateLabel]) {
-//         groups[dateLabel] = [];
-//       }
-
-//       groups[dateLabel].push(notif);
-//     }
-
-//     return Object.keys(groups).map(label => ({
-//       label,
-//       notifications: groups[label]
-//     }));
-//   }
-
-//   getDateLabel(date: Date) {
-//     const today = new Date();
-//     const notifDate = new Date(date);
-//     const diff = (today.setHours(0,0,0,0) - notifDate.setHours(0,0,0,0)) / 86400000;
-
-//     if (diff === 0) return 'Today';
-//     if (diff === 1) return 'Yesterday';
-//     return notifDate.toLocaleDateString();
-//   }
-// }
 
 export class NotificationComponent implements OnInit {
   notifications: any[] = [];
@@ -182,28 +83,6 @@ filterNotifications() {
 
   this.filteredNotifications = filtered;
 }
-
-
-  // filterNotifications() {
-  //   let filtered = this.notifications;
-
-  //   // Tab-based filter
-  //   if (this.activeTabIndex === 1) {
-  //     filtered = filtered.filter(n => !n.read); // Unread
-  //   } else if (this.activeTabIndex === 2) {
-  //     filtered = filtered.filter(n => n.read); // Read
-  //   }
-
-  //   // Search filter
-  //   if (this.searchTerm) {
-  //     const term = this.searchTerm.toLowerCase();
-  //     filtered = filtered.filter(n =>
-  //       n.title.toLowerCase().includes(term) || n.message.toLowerCase().includes(term)
-  //     );
-  //   }
-
-  //   this.groupNotifications(filtered);
-  // }
 
   groupNotifications(notifs: any[]) {
     const groups: { [key: string]: any } = {};
