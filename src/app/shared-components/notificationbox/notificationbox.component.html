@@ -1,0 +1,18 @@
+<div class="notification-box">
+  <div class="header">
+    <span>Notifications</span>
+    <a (click)="onMarkAllAsRead()">Mark all as read</a>
+  </div>
+
+  <div *ngFor="let notification of notifications" class="item">
+    <app-profile [fullName]="notification.sender"></app-profile>
+    <span class="text">
+      <strong>{{ notification.role }}</strong>{{ notification.message.split(notification.role)[1] }}
+    </span>
+    <span *ngIf="!notification.read" class="dot"></span>
+  </div>
+
+  <div class="more">
+    <a href="#" class="more-link">More Notifications</a>
+  </div>
+</div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JdFormComponent } from './jd-form.component';
+import { NotificationboxComponent } from './notificationbox.component';
 
-describe('JdFormComponent', () => {
-  let component: JdFormComponent;
-  let fixture: ComponentFixture<JdFormComponent>;
+describe('NotificationboxComponent', () => {
+  let component: NotificationboxComponent;
+  let fixture: ComponentFixture<NotificationboxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [JdFormComponent]
+      imports: [NotificationboxComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(JdFormComponent);
+    fixture = TestBed.createComponent(NotificationboxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
