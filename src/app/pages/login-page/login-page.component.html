@@ -1,0 +1,38 @@
+<div class="login-page">
+    <!-- Left: Login Form -->
+    <div class="login-form-container">
+        <div class="login-form">
+            <h2 class="title">Sign In</h2>
+
+            <div class="p-fluid">
+                <div class="p-field">
+                    <!-- <label for="username">Username</label> -->
+                    <app-input-text label="Username" [placeHolder]="'Enter your username'" [disabled]="false">
+                    </app-input-text>
+                </div>
+
+                <div class="p-field">
+                    <!-- <label for="password">Password</label>
+                    <input id="password" type="password" pPassword /> -->
+                    <app-input-text label="Password" [placeHolder]="'Enter your password'"
+                        [disabled]="false">
+                    </app-input-text>
+                </div>
+
+                <div class="forgot-password">
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <!-- <button pButton type="button" label="Login" class="p-button-rounded p-button-primary w-full"></button> -->
+                <div class="login-button">
+                    <app-button >Login</app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right: Image -->
+    <div class="login-image-container">
+        <img src="assets\Login Page image.png" alt="RecruitX Dashboard" />
+    </div>
+</div>
