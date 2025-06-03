@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { InputTextComponent } from "../../ui/input-text/input-text.component";
@@ -6,11 +6,12 @@ import { ButtonComponent } from "../../ui/button/button.component";
 import { TextAreaComponent } from "../../ui/text-area/text-area.component";
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { NgIf } from '@angular/common';
+import { AlertsComponent } from '../../ui/alerts/alerts.component';
 
 @Component({
   standalone: true,
   selector: 'app-details',
-  imports: [NgIf,HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent],
+  imports: [NgIf,HeaderTextComponent, CardsComponent,AlertsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
@@ -26,13 +27,7 @@ export class DetailsComponent {
     return this.isEditMode;
   }
 
-  getButtonLabel() {
-    this.isEditMode = !this.isEditMode;
-    // this.isEditMode = editMode;
-    this.label = this.isEditMode ? 'Save' : 'Edit';
-    if(this.label=='Save')
-    this.scrollToSection()
-  }
+
   scrollToSection() {
   const el = document.querySelector(".jdfields");
   if (el) {
@@ -75,4 +70,42 @@ formData = {
   //   console.log('Submitting Form:', this.formData);
   //   // You can call your API here
   // }
+
+  @ViewChild('alerts') alertsComponent!: AlertsComponent;
+
+  onEdit() {
+    this.scrollToSection();
+    this.isEditMode = true;
+    this.label = 'Save';
+  }
+  
+  onSave() {
+    const message = `Are you sure you want to save changes in JD?`;
+    this.alertsComponent.showConfirmDialog({
+      message,
+      icon:'pi pi-save',
+      header: 'Save Changes',
+      acceptLabel: 'Save',
+      rejectLabel: 'Cancel',
+      acceptSeverity: 'success',
+      rejectSeverity: 'warn',
+      acceptSummary: 'Saved',
+      rejectSummary: 'Cancelled',
+      acceptDetail: `Saved all edits in JD!`,
+      rejectDetail: 'No changes were made.',
+      onAccept: () => {
+        this.isEditMode = false;
+        this.label = 'Edit';
+      },
+      onReject: () => {
+        // Do nothing
+      }
+    });
+  }
+  
+  onCancel() {
+    this.isEditMode = false;
+    this.label = 'Edit';
+  }
+  
 }

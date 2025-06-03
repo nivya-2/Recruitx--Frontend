@@ -6,6 +6,7 @@ import { EmailComponent } from "./email/email.component";
 import { AccordionComponent } from "./accordion/accordion.component";
 import { EmailTemplate } from './email-templates.model';
 
+
 @Component({
   selector: 'app-admin-email',
   imports: [CommonLayoutComponent, CardsComponent, HeaderTextComponent, EmailComponent, AccordionComponent],

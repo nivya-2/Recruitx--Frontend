@@ -41,11 +41,33 @@ export class MyTeamRhComponent {
     { key: 'actions', label: 'Actions', filterable: false }
 
   ];
-
+  teamList = [
+    { fullName: 'Shankar Menon', role: 'Recruiter Head' },
+    { fullName: 'John V', role: 'Senior Lead' },
+    { fullName: 'Tom Philip', role: 'Associate Manager' },
+    { fullName: 'Lakshmi S', role: 'Lead' },
+    { fullName: 'Abhiram Prasad', role: 'Associate' },
+    { fullName: 'Vinayak Sasi', role: 'Recruiter Head' },
+    { fullName: 'Amal K', role: 'Senior Lead' },
+    { fullName: 'Tom Philip', role: 'Associate Manager' },
+    { fullName: 'Sona Nair S', role: 'Lead' },
+    { fullName: 'Sresh Krishna ', role: 'Associate' },
+    { fullName: 'Shaju Vidhya', role: 'Recruiter Head' },
+    { fullName: 'Dennis Vakkachan', role: 'Senior Lead' },
+    { fullName: 'Varghese Kuryan', role: 'Associate Manager' },
+    { fullName: 'Ali Akbar S', role: 'Lead' },
+    { fullName: ' Philip Cheriyan', role: 'Associate' }
+  ];
   teamsGlobalFilterFields = this.teamsColumns.map(c => c.key).filter(key => key !== 'actions');
-  
+  currentAction: 'add' | 'change' = 'add';
+  currentMemberToChange: any = null; 
   visible: boolean = false;  
-  
+  selectedMemberFromChild: any = null;
+  addButtonClickEvent: MouseEvent | null = null;
+  lastClickEvent: MouseEvent | null = null;
+  @ViewChild('assignBox') assignBox!: AssignComponent;
+  @ViewChild('alerts') alertsComponent!: AlertsComponent;
+
 
   ngOnInit() {
   this.teamsDataSource = this.buildTreeData(this.rawTeamData);
@@ -76,74 +98,84 @@ buildTreeData(data: any[]): TreeNode[] {
   });
 }
 
-teamList = [
-  { fullName: 'Shankar Menon', role: 'Recruiter Head' },
-  { fullName: 'John V', role: 'Senior Lead' },
-  { fullName: 'Tom Philip', role: 'Associate Manager' },
-  { fullName: 'Lakshmi S', role: 'Lead' },
-  { fullName: 'Abhiram Prasad', role: 'Associate' },
-  { fullName: 'Vinayak Sasi', role: 'Recruiter Head' },
-  { fullName: 'Amal K', role: 'Senior Lead' },
-  { fullName: 'Tom Philip', role: 'Associate Manager' },
-  { fullName: 'Sona Nair S', role: 'Lead' },
-  { fullName: 'Sresh Krishna ', role: 'Associate' },
-  { fullName: 'Shaju Vidhya', role: 'Recruiter Head' },
-  { fullName: 'Dennis Vakkachan', role: 'Senior Lead' },
-  { fullName: 'Varghese Kuryan', role: 'Associate Manager' },
-  { fullName: 'Ali Akbar S', role: 'Lead' },
-  { fullName: ' Philip Cheriyan', role: 'Associate' }
-];
+
 
 selectedMember: any;
-
 onRecruiterSelected(member: any) {
   this.selectedMember = member;
   console.log('Selected:', member);
 }
-lastClickEvent: MouseEvent | null = null;
 
-@ViewChild('assignBox') assignBox!: AssignComponent;
 
 ngAfterViewInit() {
   // Optional: safeguard to ensure the ViewChild is ready
 }
 
 onHostClick(event: MouseEvent) {
-  this.lastClickEvent = event;
+  console.log("onhostclick clicked")
+  this.addButtonClickEvent = event;
 }
 
-openAssignPopover() {
-  if (this.lastClickEvent) {
-    this.assignBox.open(this.lastClickEvent);
+handleChangeLeadAction(data: { row: any, event?: Event }) {
+  console.log("Change lead action triggered", data);
+    this.currentAction = 'change';
+  this.currentMemberToChange = data.row;
+  
+  if (data.event && this.assignBox) {
+    this.openAssignPopoverForChangeLead(data.event);
   } else {
-    console.warn('No click event captured to open popover');
+    console.error("Missing event or assignBox:", {
+      event: !!data.event,
+      assignBox: !!this.assignBox
+    });
   }
 }
-selectedMemberFromChild: any = null;
-@ViewChild('alerts') alertsComponent!: AlertsComponent;
-
-handleSelectedMember(member: any) {
-  const message = `Are you sure you want to add ${member.fullName} as a Recruiter lead?`;
+openAssignPopoverForAdd() {
+  console.log("add button clicked");
+  this.currentAction = 'add'; // Set action type to 'add'
+  this.currentMemberToChange = null; // Clear any previous member
   
-  this.alertsComponent.showConfirmDialog({
-    message: message,
-    header: 'Add Team Lead',
-    icon: 'pi pi-user-plus',
-    acceptLabel: 'Add',
-    rejectLabel: 'Cancel',
-    acceptSeverity: 'success',
-    rejectSeverity: 'warn',
-    acceptSummary: 'Added',
-    rejectSummary: 'Cancelled',
-    acceptDetail: `Added ${member.fullName} as a team lead!`,
-    rejectDetail: 'No changes were made.',
-    onAccept: () => {
-      console.log(`${member.fullName} added as team lead.`);
-    },
-    onReject: () => {
-      console.log('Addition cancelled.');
-    }
-  });
+  if (this.addButtonClickEvent && this.assignBox) {
+    this.assignBox.open(this.addButtonClickEvent);
+  } else {
+    console.warn('No add button click event captured');
+  }
+}
+
+// Modified method for opening assign popover for Change Lead
+openAssignPopoverForChangeLead(event: Event) {
+  console.log("change lead button clicked");
+ if (this.assignBox && event) {
+    this.assignBox.open(event);
+  } else {
+    console.warn('No change lead event available');
+  }
+}
+handleSelectedMember(member: any) {
+  if (this.currentAction === 'add') {
+    const message = `Are you sure you want to add ${member.fullName} as a Recruiter lead?`;
+    this.alertsComponent.showConfirmDialog({
+      message: message,
+      header: 'Add Team Lead',
+      icon: 'pi pi-user-plus',
+      acceptLabel: 'Add',
+      rejectLabel: 'Cancel',
+      acceptSeverity: 'success',
+      rejectSeverity: 'warn',
+      acceptSummary: 'Added',
+      rejectSummary: 'Cancelled',
+      acceptDetail: `Added ${member.fullName} as a team lead!`,
+      rejectDetail: 'No changes were made.',
+      onAccept: () => {
+        console.log(`${member.fullName} added as team lead.`);
+      },
+      onReject: () => {
+        console.log('Addition cancelled.');
+      }
+    });
+  } else if (this.currentAction === 'change') {
+    this.changeLead(member, this.currentMemberToChange);
+  }
 }
 removeSelectedMember(member: any) {
   const message = `Are you sure you want to remove ${member.memberName}?`;
@@ -154,7 +186,7 @@ removeSelectedMember(member: any) {
     icon: 'pi pi-user-minus',
     acceptLabel: 'Remove',
     rejectLabel: 'Cancel',
-    acceptSeverity: 'error',
+    acceptSeverity: 'success',
     rejectSeverity: 'info',
     acceptSummary: 'Removed',
     rejectSummary: 'Cancelled',
@@ -163,6 +195,31 @@ removeSelectedMember(member: any) {
     onAccept: () => {
     },
     onReject: () => {
+    }
+  });
+}
+changeLead(newMember: any, oldMember: any) {
+  const message = `Are you sure you want to change ${oldMember.memberName}'s lead from ${oldMember.reportingLead || 'current lead'} to ${newMember.fullName}?`;
+  
+  this.alertsComponent.showConfirmDialog({
+    message: message,
+    header: 'Change Recruiter Lead',
+    // icon: 'pi pi-exchange-alt',
+    acceptLabel: 'Change',
+    rejectLabel: 'Cancel',
+    acceptSeverity: 'success',
+    rejectSeverity: 'info',
+    acceptSummary: 'Changed',
+    rejectSummary: 'Cancelled',
+    acceptDetail: `Changed ${oldMember.memberName}'s lead to ${newMember.fullName}!`,
+    rejectDetail: 'No changes were made.',
+    onAccept: () => {
+      console.log(`${oldMember.memberName}'s lead changed to ${newMember.fullName}.`);
+      // Add your logic to actually change the team lead here
+      // You might want to update the rawTeamData and rebuild the tree
+    },
+    onReject: () => {
+      console.log('Lead change cancelled.');
     }
   });
 }
