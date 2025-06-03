@@ -21,3 +21,34 @@
 .child3{
     flex:2;
 }
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999; // below your notification dropdown
+}
+
+.notification-wrapper {
+  position: relative;
+  cursor: pointer;
+
+  .notification-dot {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+  }
+
+  .notification-dropdown {
+    position: absolute;
+    right: 0;
+    margin-top: 10px;
+    z-index: 1000;
+  }
+}
