@@ -216,7 +216,7 @@
                   <div class="grid-cell time-label">{{ formatHourForDisplay(hour) }}</div>
                   <div *ngFor="let interviewerId of selectedInterviewers" 
                        class="grid-cell timeslot-cell"
-                       [class.non-working-hours]="!isWorkingHour(hour)"  [class.tentative-schedule-preview]="isCellInTentativeSchedule(hour)">
+                       [class.non-working-hours]="!isWorkingHour(hour)"  >
                     <!-- Event Blocks will be positioned absolutely within this cell -->
                     <div *ngFor="let event of getEventsForCell(interviewerId, hour)"
                          class="event-block"
@@ -229,6 +229,11 @@
                          title="{{event.candidateName}}: {{formatEventTimeForBlock(event.startTime)}}-{{formatEventTimeForBlock(event.endTime)}}">
                          {{ formatEventTimeForBlock(event.startTime) }}-{{ formatEventTimeForBlock(event.endTime) }}
                     </div>
+                    <div *ngIf="isTentativePreviewVisibleInCell(hour)"
+                    class="tentative-preview-block"
+                    [style.top]="calculateTentativePreviewTopPosition(hour)"
+                    [style.height]="calculateTentativePreviewHeight(hour)">
+               </div>
                   </div>
                 </ng-container>
               </div>
