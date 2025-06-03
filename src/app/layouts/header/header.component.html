@@ -1,13 +1,25 @@
 <div class="flex-row">
-    <div class="child1">
-        <app-header-text context="title">
-            Dashboard
-        </app-header-text>
+  <div class="child1">
+    <app-header-text context="title"> Dashboard </app-header-text>
+  </div>
+  <div *ngIf="search" class="child1">
+    <!-- <app-searchbar></app-searchbar> -->
+  </div>
+  <div class="flex-row2 child3">
+    <!-- <app-icon name="notifications" customColor="#636363"></app-icon> -->
+<div *ngIf="showNotifications" class="backdrop" (click)="showNotifications = false"></div>
+    <div class="notification-wrapper" (click)="toggleNotifications($event)">
+    <app-icon name="notifications" customColor="#636363"></app-icon>
+    <span *ngIf="hasUnread" class="notification-dot"></span>
+
+    <div class="notification-dropdown" *ngIf="showNotifications">
+      <app-notificationbox
+        [notifications]="notifications"
+        (markRead)="markAllAsRead()"
+      ></app-notificationbox>
     </div>
-    <div *ngIf='search' class="child1">
-        <!-- <app-searchbar></app-searchbar> -->
-    </div>
-    <div class="flex-row2 child3">
-    <!-- <app-icons name="notifications" customColor="#636363" size="30"></app-icons> -->
-    <app-profile-box [fullName]="name" [role]="role"></app-profile-box></div>
+  </div>
+
+    <app-profile-box [fullName]="name" [role]="role"></app-profile-box>
+  </div>
 </div>

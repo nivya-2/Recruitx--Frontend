@@ -1,0 +1,51 @@
+.notification-box {
+  background: white;
+  width: 350px;
+  padding: 2.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    a {
+      font-size: 0.75rem;
+      cursor: pointer;
+      color: #007bff;
+    }
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 0.875rem;
+
+    .text {
+      flex: 1;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background-color: red;
+      border-radius: 50%;
+    }
+  }
+
+  .more {
+
+    text-align: center;
+    margin-top: 1rem;
+
+    .more-link {
+      color: #5a4ff3;
+      font-weight: bold;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
