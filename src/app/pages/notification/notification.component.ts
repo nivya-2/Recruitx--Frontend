@@ -9,6 +9,8 @@ import { CardsComponent } from '../../ui/cards/cards.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { TabViewModule } from 'primeng/tabview';
 import { ButtonComponent } from '../../ui/button/button.component';
+import { IconComponent } from '../../ui/icon/icon.component';
+import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 
 @Component({
   selector: 'app-notification',
@@ -16,7 +18,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
     PaginatorModule,
     AvatarModule,
     FormsModule,
-    CardModule, NgFor, CardsComponent, InputTextModule,
+    CardModule, NgFor, CardsComponent, InputTextModule,IconComponent,HeaderTextComponent,
     CardModule, TabViewModule,
     AvatarModule, CommonModule, ButtonComponent],
   templateUrl: './notification.component.html',
