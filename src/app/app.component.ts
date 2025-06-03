@@ -20,12 +20,13 @@ import { TrackJrComponent } from "./subpages/track-jr/track-jr.component";
 import { TeamComponent } from "./pages/recruiter-head-team/team.component";
 import { MyTeamComponent } from "./subpages/my-team/my-team.component";
 import { ViewassignedjrCardComponent } from "./shared-components/viewassignedjr-card/viewassignedjr-card.component";
+import { NotificationComponent } from './pages/notification/notification.component';
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SharedComponentsModule],
+  imports: [RouterOutlet, SharedComponentsModule, NotificationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

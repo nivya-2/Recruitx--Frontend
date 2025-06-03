@@ -1,0 +1,47 @@
+<app-cards>
+    <div class="p-4">
+        <h2 class="mb-3">Notifications</h2>
+
+        <!-- Search & Mark All -->
+        <div class="notification">
+            <input type="text" pInputText placeholder="Search notifications..." [(ngModel)]="searchTerm"
+                (ngModelChange)="filterNotifications()" />
+
+            <app-button (click)="markAllAsRead()" >
+                <i class="pi pi-check mr-2"></i>
+                Mark all as read
+            </app-button>
+
+        </div>
+
+        <!-- Tabs -->
+        <p-tabview [(activeIndex)]="activeTabIndex" (activeIndexChange)="onTabChange($event)">
+            <p-tabPanel header="All"></p-tabPanel>
+            <p-tabPanel header="Unread"></p-tabPanel>
+            <p-tabPanel header="Read"></p-tabPanel>
+        </p-tabview>
+
+        <!-- Grouped Notifications -->
+
+        <p-card *ngFor="let notif of filteredNotifications" class="notification-card">
+            <div class="notification">
+
+                <!-- Left: Title and message -->
+                <div>
+                    <h5 ><strong>{{ notif.title }}</strong></h5>
+                    <p >{{ notif.message }}</p>
+                </div>
+
+                <!-- Right: Date and button -->
+                <div class="date-button" >
+                    <small class="p-text-secondary date">{{ notif.date | date: 'dd-MM-yy' }}</small>
+                    <app-button *ngIf="!notif.read" (click)="markAsRead(notif)" class="p-button-text"
+                        [disabled]="false">
+                        Mark as read
+                        <i class="pi pi-check-circle"></i>
+                    </app-button>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</app-cards>
