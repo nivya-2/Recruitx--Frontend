@@ -8,6 +8,7 @@ resizable="false"
 [header]="header"
 (onHide)="onHide()"
 [maximizable]="maximizable"
-[style]="style">
+[style]="style"
+(click)="$event.stopPropagation()">
 <ng-content></ng-content>
 </p-dialog>
