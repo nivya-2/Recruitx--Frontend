@@ -4,10 +4,11 @@ import { ProfileBoxComponent } from '../../ui/profile-box/profile-box.component'
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { IconComponent } from '../../ui/icon/icon.component';
 import { NotificationboxComponent } from '../../shared-components/notificationbox/notificationbox.component';
+import { Popover } from 'primeng/popover';
 
 @Component({
   selector: 'app-header',
-  imports: [NgIf,HeaderTextComponent,ProfileBoxComponent,IconComponent, NotificationboxComponent],
+  imports: [NgIf,HeaderTextComponent,ProfileBoxComponent,IconComponent, NotificationboxComponent, Popover],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -44,6 +45,12 @@ export class HeaderComponent {
       this.showNotifications = false;
     }
   }
+
+
+logout() {
+  // Implement logout logic here
+  console.log('Logging out...');
+}
 
 
 }

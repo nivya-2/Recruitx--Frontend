@@ -20,6 +20,22 @@
     </div>
   </div>
 
-    <app-profile-box [fullName]="name" [role]="role"></app-profile-box>
+    <!-- <app-profile-box [fullName]="name" [role]="role"></app-profile-box> -->
+
+    <div class="profile-wrapper">
+  <app-profile-box
+    [fullName]="name"
+    [role]="role"
+    (click)="popover.toggle($event)">
+  </app-profile-box>
+
+  <p-popover #popover [dismissable]="true">
+    <div class="logout-item" (click)="logout()">
+      <!-- <i class="pi pi-sign-out" style="margin-right: 8px;"></i> -->
+       <app-icon name="logout" customColor="#636363"></app-icon>
+      Logout
+    </div>
+  </p-popover>
+
   </div>
 </div>
