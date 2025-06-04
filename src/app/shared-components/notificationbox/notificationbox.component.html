@@ -7,12 +7,20 @@
   <div *ngFor="let notification of notifications" class="item">
     <app-profile [fullName]="notification.sender"></app-profile>
     <span class="text">
-      <strong>{{ notification.role }}</strong>{{ notification.message.split(notification.role)[1] }}
+      <strong>{{ notification.role }}</strong
+      >{{ notification.message.split(notification.role)[1] }}
     </span>
     <span *ngIf="!notification.read" class="dot"></span>
   </div>
 
   <div class="more">
-    <a href="#" class="more-link">More Notifications</a>
+    <div class="more-link" (click)="openModal($event)">More Notifications</div>
   </div>
+  <app-modal
+    header="Notifications"
+    [maximizable]="true"
+    [(visible)]="visible"
+    [style]="{ width: '60rem', height: '35rem' }"
+    ><app-notification></app-notification
+  ></app-modal>
 </div>

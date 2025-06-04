@@ -15,7 +15,7 @@ export class HeaderComponent {
   @Input() name: string = 'Arthur Pendragon';
   @Input() role: string = 'Recruiter Head';
   @Input() search = true;
-    showNotifications = false;
+  showNotifications = false;
 
   notifications = [
     { id: 1, message: 'Hiring Manager Arjun Menon uploaded a new JR.', read: false, sender: 'Arjun Menon', role: 'Hiring Manager' },
@@ -44,4 +44,6 @@ export class HeaderComponent {
       this.showNotifications = false;
     }
   }
+
+
 }
