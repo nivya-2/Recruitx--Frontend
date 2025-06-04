@@ -21,32 +21,9 @@ import { AlertsComponent } from '../../ui/alerts/alerts.component';
 })
 export class DetailsComponent {
  
-  @ViewChild('export') alertsComponent!: AlertsComponent;
-  handleSelectedMember(member: any) {
-  const message = "Choose the format you want to export Job Description as";
-  
-  this.alertsComponent.showConfirmDialog({
-    message: message,
-    header: 'Export Job Description',
-    icon: 'pi pi-file-export',
-    acceptLabel: 'PDF',
-    rejectLabel: 'Excel',
-    acceptSeverity: 'success',
-    rejectSeverity: 'success',
-    acceptSummary: 'Exported AS PDF',
-    rejectSummary: 'Exported as Excel',
-    acceptDetail: `Export As PDF`,
-    rejectDetail: 'Export As Excel',
-    onAccept: () => {
-      this.exportAsPDF();
-      console.log(`Successfully exported as PDF.`);
-    },
-    onReject: () => {
-      this.exportAsExcel();
-      console.log('Successfully exported as Excel.');
-    }
-  });
-}
+  modal(){
+    this.visible = !this.visible;
+  }
    
   label: string = 'Edit';
 
