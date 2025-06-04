@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -14,7 +15,8 @@ export const routes: Routes = [
       import('./pages/admin-jr-upload/admin-jr-upload.component').then(
         (m) => m.AdminJrUploadComponent
       ),
-    data: { breadcrumb: 'JRs' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'JRs', roles: ['Admin'] },
   },
   {
     path: 'admin/users',
@@ -22,7 +24,9 @@ export const routes: Routes = [
       import('./pages/admin-users/admin-users.component').then(
         (m) => m.AdminUsersComponent
       ),
-    data: { breadcrumb: 'Users' },
+          canActivate: [AuthGuard],
+
+    data: { breadcrumb: 'Users', roles: ['Admin'] },
   },
   {
     path: 'admin/email',
@@ -30,7 +34,8 @@ export const routes: Routes = [
       import('./pages/admin-email/admin-email.component').then(
         (m) => m.AdminEmailComponent
       ),
-    data: { breadcrumb: 'Email' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Email', roles: ['Admin'] },
   },
   {
     path: 'recruiter/track-jr',
@@ -38,7 +43,8 @@ export const routes: Routes = [
       import('./pages/recruiter-track-jr/recruiter-dashboard.component').then(
         (m) => m.RecruiterDashboardComponent
       ),
-    data: { breadcrumb: 'Track JR' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Track JR', roles: ['Recruiter'] },
   },
   {
     path: 'recruiter/analytics',
@@ -46,7 +52,8 @@ export const routes: Routes = [
       import('./pages/recruiter-analytics/recruiter-analytics.component').then(
         (m) => m.RecruiterAnalyticsComponent
       ),
-    data: { breadcrumb: 'Analytics' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Analytics', roles: ['Recruiter'] },
   },
   {
     path: 'recruiter/my-jd',
@@ -54,7 +61,8 @@ export const routes: Routes = [
       import('./pages/my-jd/my-jd.component').then(
         (m) => m.MyJdComponent
       ),
-    data: { breadcrumb: 'My JDs' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'My JDs' ,  roles: ['Recruiter']},
     children: [
       {
         path: '',
@@ -67,7 +75,8 @@ export const routes: Routes = [
           import('./subpages/pending-jd-gen/pending-jd-gen.component').then(
             (m) => m.PendingJdGenComponent
           ),
-        data: { breadcrumb: 'Pending JD Generation' },
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Pending JD Generation' , roles: ['Recruiter']},
       },
       {
         path: 'trackjd',
@@ -75,7 +84,8 @@ export const routes: Routes = [
           import('./subpages/track-jd/track-jd.component').then(
             (m) => m.TrackJdComponent
           ),
-        data: { breadcrumb: 'Track JD' },
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Track JD' , roles: ['Recruiter']},
         children: [
           {
             path: 'job-description',
@@ -90,12 +100,14 @@ export const routes: Routes = [
               {
                 path: 'details',
                 loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
-                data: { breadcrumb: 'Details' }
+                canActivate: [AuthGuard],
+                data: { breadcrumb: 'Details' , roles: ['Recruiter']}
               },
               {
                 path: 'applicants',
                 loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
-                data: { breadcrumb: 'Applicants' }
+                canActivate: [AuthGuard],
+                data: { breadcrumb: 'Applicants', roles: ['Recruiter'] }
               }
             ]
           },
@@ -107,7 +119,8 @@ export const routes: Routes = [
           import('./subpages/closed-jd/closed-jd.component').then(
             (m) => m.ClosedJdComponent
           ),
-        data: { breadcrumb: 'Closed JD' },
+          canActivate: [AuthGuard],
+        data: { breadcrumb: 'Closed JD', roles: ['Recruiter']},
       },
     ],
   },
@@ -116,7 +129,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/interviews/interviews.component')
         .then(m => m.InterviewsComponent),
-    data: { breadcrumb: 'Interviews' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Interviews' ,  roles: ['Recruiter']},
     children: [
       {
         path: '',
@@ -128,21 +142,24 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./subpages/schedule/schedule.component')
             .then(m => m.ScheduleComponent),
-        data: { breadcrumb: 'Schedule' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Schedule', roles: ['Recruiter']}
       },
       {
         path: 'shortlist',
         loadComponent: () =>
           import('./subpages/shortlist/shortlist.component')
             .then(m => m.ShortlistComponent),
-        data: { breadcrumb: 'Shortlist' }
+            canActivate: [AuthGuard],
+        data: { breadcrumb: 'Shortlist' , roles: ['Recruiter']}
       },
       {
         path: 'all-interviews',
         loadComponent: () =>
           import('./subpages/all-interviews/all-interviews.component')
             .then(m => m.AllInterviewsComponent),
-        data: { breadcrumb: 'All Interviews' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'All Interviews', roles: ['Recruiter'] }
       }
     ]
   },
@@ -153,7 +170,8 @@ export const routes: Routes = [
       import(
         './pages/track-jr/track-jr.component'
       ).then((m) => m.RecruiterHeadTrackJrComponent),
-    data: { breadcrumb: 'JRs' },
+    data: { breadcrumb: 'JRs' , roles: ['Recruiter Lead'] },
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -165,14 +183,16 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./subpages/assign-jr/assign-jr.component')
             .then(m => m.AssignJrComponent),
-        data: { breadcrumb: 'Assign JR' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Assign JR', roles: ['Recruiter Lead']}
       },
       {
         path: 'track-jr',
         loadComponent: () =>
           import('./subpages/track-jr/track-jr.component')
             .then(m => m.TrackJrComponent),
-        data: { breadcrumb: 'Track JRs' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Track JRs', roles: ['Recruiter Lead'] }
       }
     ]
   },
@@ -182,7 +202,8 @@ export const routes: Routes = [
       import(
         './pages/recruiter-lead-analytics/recruiter-lead-analytics.component'
       ).then((m) => m.RecruiterLeadAnalyticsComponent),
-    data: { breadcrumb: 'Analytics' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Analytics', roles: ['Recruiter Lead']},
   },
   {
     path: 'recruiter-lead/my-jd',
@@ -190,7 +211,8 @@ export const routes: Routes = [
       import('./pages/my-jd/my-jd.component').then(
         (m) => m.MyJdComponent
       ),
-    data: { breadcrumb: 'My JDs' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'My JDs', roles: ['Recruiter Lead'] },
     children: [
       {
         path: '',
@@ -203,7 +225,8 @@ export const routes: Routes = [
           import('./subpages/pending-jd-gen/pending-jd-gen.component').then(
             (m) => m.PendingJdGenComponent
           ),
-        data: { breadcrumb: 'Pending JD Generation' },
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Pending JD Generation', roles: ['Recruiter Lead']},
       },
       {
         path: 'trackjd',
@@ -211,12 +234,14 @@ export const routes: Routes = [
           import('./subpages/track-jd/track-jd.component').then(
             (m) => m.TrackJdComponent
           ),
-        data: { breadcrumb: 'Track JD' },
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Track JD', roles: ['Recruiter Lead']},
         children: [
           {
             path: 'job-description',
             loadComponent: () => import('./pages/job-description/job-description.component').then(m => m.JobDescriptionComponent),
-            data: { breadcrumb: 'Job Description' },
+            canActivate: [AuthGuard],
+            data: { breadcrumb: 'Job Description', roles: ['Recruiter Lead'] },
             children: [
               {
                 path: '',
@@ -226,12 +251,14 @@ export const routes: Routes = [
               {
                 path: 'details',
                 loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
-                data: { breadcrumb: 'Details' }
+                canActivate: [AuthGuard],
+                data: { breadcrumb: 'Details', roles: ['Recruiter Lead']}
               },
               {
                 path: 'applicants',
                 loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
-                data: { breadcrumb: 'Applicants' }
+                canActivate: [AuthGuard],
+                data: { breadcrumb: 'Applicants', roles: ['Recruiter Lead'] }
               }
             ]
           },
@@ -244,7 +271,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/interviews/interviews.component')
         .then(m => m.InterviewsComponent),
-    data: { breadcrumb: 'Interviews' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Interviews', roles: ['Recruiter Lead'] },
     children: [
       {
         path: '',
@@ -256,21 +284,24 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./subpages/schedule/schedule.component')
             .then(m => m.ScheduleComponent),
-        data: { breadcrumb: 'Schedule' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Schedule' , roles: ['Recruiter Lead']}
       },
       {
         path: 'shortlist',
         loadComponent: () =>
           import('./subpages/shortlist/shortlist.component')
             .then(m => m.ShortlistComponent),
-        data: { breadcrumb: 'Shortlist' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Shortlist' , roles: ['Recruiter Lead']}
       },
       {
         path: 'all-interviews',
         loadComponent: () =>
           import('./subpages/all-interviews/all-interviews.component')
             .then(m => m.AllInterviewsComponent),
-        data: { breadcrumb: 'All Interviews' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'All Interviews', roles: ['Recruiter Lead'] }
       }
     ]
   },
@@ -279,7 +310,8 @@ export const routes: Routes = [
     path: 'recruiter-lead/team',
     loadComponent: () =>
       import('./pages/recruiter-head-team/team.component').then((m) => m.TeamComponent),
-    data: { breadcrumb: 'Team' },
+    data: { breadcrumb: 'Team' , roles: ['Recruiter Lead'] },
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -292,7 +324,8 @@ export const routes: Routes = [
           import('./subpages/my-team/my-team.component').then(
             (m) => m.MyTeamComponent
           ),
-        data: { breadcrumb: 'My Team' },
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'My Team', roles: ['Recruiter Lead']  },
       },
       {
         path: 'track-jr',
@@ -300,7 +333,8 @@ export const routes: Routes = [
           import('./subpages/track-jr/track-jr.component').then(
             (m) => m.TrackJrComponent
           ),
-        data: { breadcrumb: 'Track JR' },
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Track JR', roles: ['Recruiter Lead'] },
       },
     ],
   },
@@ -309,7 +343,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/track-jr/track-jr.component')
         .then(m => m.RecruiterHeadTrackJrComponent),
-    data: { breadcrumb: 'JRs' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'JRs'  , roles: ['Recruiter Head'] },
     children: [
       {
         path: '',
@@ -321,14 +356,16 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./subpages/assign-jr/assign-jr.component')
             .then(m => m.AssignJrComponent),
-        data: { breadcrumb: 'Assign JR' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Assign JR', roles: ['Recruiter Head'] }
       },
       {
         path: 'track-jr',
         loadComponent: () =>
           import('./subpages/track-jr/track-jr.component')
             .then(m => m.TrackJrComponent),
-        data: { breadcrumb: 'Track JRs' }
+            canActivate: [AuthGuard],
+        data: { breadcrumb: 'Track JRs' , roles: ['Recruiter Head']}
       }
     ]
   },
@@ -338,12 +375,14 @@ export const routes: Routes = [
       import(
         './pages/recruiter-head-analytics/recruiter-head-analytics.component'
       ).then((m) => m.RecruiterHeadAnalyticsComponent),
-    data: { breadcrumb: 'Analytics' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Analytics' , roles: ['Recruiter Head']},
   },
   {
     path: 'recruiter-lead/job-description',
     loadComponent: () => import('./pages/job-description/job-description.component').then(m => m.JobDescriptionComponent),
-    data: { breadcrumb: 'Job-Description' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Job-Description' , roles: ['Recruiter Lead'] },
     children: [
       {
         path: '',
@@ -353,19 +392,22 @@ export const routes: Routes = [
       {
         path: 'details',
         loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
-        data: { breadcrumb: 'Details' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Details' , roles: ['Recruiter Lead'] }
       },
       {
         path: 'applicants',
         loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
-        data: { breadcrumb: 'Applicants' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Applicants', roles: ['Recruiter Lead'] }
       }
     ]
   }, 
   {
     path: 'recruiter/job-description',
     loadComponent: () => import('./pages/job-description/job-description.component').then(m => m.JobDescriptionComponent),
-    data: { breadcrumb: 'Job-Description' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Job-Description', roles: ['Recruiter'] },
     children: [
       {
         path: '',
@@ -375,12 +417,14 @@ export const routes: Routes = [
       {
         path: 'details',
         loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
-        data: { breadcrumb: 'Details' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Details' , roles: ['Recruiter'] }
       },
       {
         path: 'applicants',
         loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
-        data: { breadcrumb: 'Applicants' }
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Applicants', roles: ['Recruiter'] }
       },
 
     ]
@@ -391,7 +435,8 @@ export const routes: Routes = [
       import(
         './pages/applicant-details/applicant-details.component'
       ).then((m) => m.ApplicantDetailsComponent),
-    data: { breadcrumb: 'Applicant Details' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Applicant Details', roles: ['Recruiter Lead']  },
   },
 
   {
@@ -400,14 +445,16 @@ export const routes: Routes = [
       import(
         './pages/applicant-details/applicant-details.component'
       ).then((m) => m.ApplicantDetailsComponent),
-    data: { breadcrumb: 'Analytics' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Analytics', roles: ['Recruiter']  },
   },
 
   {
     path: 'recruiter-head/team',
     loadComponent: () =>
       import('./pages/recruiter-head-team/team.component').then((m) => m.TeamComponent),
-    data: { breadcrumb: 'My Team' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'My Team', roles: ['Recruiter Head'] },
     children: [
       {
         path: '',
@@ -420,6 +467,8 @@ export const routes: Routes = [
           import('./subpages/my-team-rh/my-team-rh.component').then(
             (m) => m.MyTeamRhComponent
           ),
+          canActivate: [AuthGuard],
+        data: { breadcrumb: 'My Team', roles: ['Recruiter Head'] },
       },
     ],
   },
@@ -427,23 +476,29 @@ export const routes: Routes = [
     path: 'recruiter-lead/interviews/shortlist/eval-form',
     loadComponent: () =>
       import('./pages/evaluation-form/evaluation-form.component').then((m) => m.EvaluationFormComponent),
-    
+    canActivate: [AuthGuard],
+    data: {roles: ['Recruiter Lead']  },
   },
   {
     path: 'recruiter/interviews/shortlist/eval-form',
     loadComponent: () =>
       import('./pages/evaluation-form/evaluation-form.component').then((m) => m.EvaluationFormComponent),
+    canActivate: [AuthGuard], 
+    data: {roles: ['Recruiter']  },
   },
 
   {
     path: 'recruiter-lead/interviews/schedule/schedule-page',
     loadComponent: () =>
       import('./pages/schedule-page/schedule-page.component').then((m) => m.SchedulePageComponent),
-    
+     canActivate: [AuthGuard],
+    data: { roles: ['Recruiter Lead']  },
   },
   {
     path: 'recruiter/interviews/schedule/schedule-page',
     loadComponent: () =>
       import('./pages/schedule-page/schedule-page.component').then((m) => m.SchedulePageComponent),
+    canActivate: [AuthGuard], 
+    data: { roles: ['Recruiter']  },
   }
 ];

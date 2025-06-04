@@ -4,16 +4,14 @@
         <div class="login-form">
             <h2 class="title">Sign In</h2>
 
-            <div class="p-fluid">
-                <div class="p-field">
-                    <!-- <label for="username">Username</label> -->
+             <div class="p-fluid"> 
+                <!-- <div class="p-field"> 
                     <app-input-text label="Username" [placeHolder]="'Enter your username'" [disabled]="false">
                     </app-input-text>
                 </div>
 
                 <div class="p-field">
-                    <!-- <label for="password">Password</label>
-                    <input id="password" type="password" pPassword /> -->
+                
                     <app-input-text label="Password" [placeHolder]="'Enter your password'"
                         [disabled]="false">
                     </app-input-text>
@@ -21,11 +19,11 @@
 
                 <div class="forgot-password">
                     <a href="#">Forgot password?</a>
-                </div>
+                </div> -->
 
                 <!-- <button pButton type="button" label="Login" class="p-button-rounded p-button-primary w-full"></button> -->
                 <div class="login-button">
-                    <app-button >Login</app-button>
+                    <app-button  (functionemit)="login()">Login</app-button>
                 </div>
             </div>
         </div>

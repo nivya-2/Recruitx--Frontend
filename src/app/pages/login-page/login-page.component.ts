@@ -11,4 +11,9 @@ import { PasswordModule } from 'primeng/password';
 })
 export class LoginPageComponent {
 
+  login() {
+    // Trigger backend redirect to Azure AD login
+    window.location.href = 'https://localhost:7144/api/auth/login'; // adjust to your backend
+  }
+
 }
