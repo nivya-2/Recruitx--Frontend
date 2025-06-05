@@ -228,7 +228,7 @@ constructor(private router: Router,private messageService: MessageService) {
   currentUrl:any;
  
   @ViewChild('alerts') alertsComponent!: AlertsComponent;
-  
+ 
   scheduleAlert(row: any){
       const message = `Are you sure you want to schedule a interview with ${this.selectedCandidate.name}?`;
       
@@ -240,10 +240,10 @@ constructor(private router: Router,private messageService: MessageService) {
         rejectLabel: 'Cancel',
         acceptSeverity: 'success',
         rejectSeverity: 'warn',
-        // acceptSummary: 'Removed',
-        // rejectSummary: 'Cancelled',
-        // acceptDetail: `Removed !`,
-        // rejectDetail: 'No changes were made.',
+        acceptSummary: 'Interview Scheduled',
+        rejectSummary: 'Cancelled',
+        acceptDetail: `Interview for ${this.selectedCandidate!.name} on ${new Date(this.selectedDate).toLocaleDateString()} from ${this.selectedStartTime} to ${this.selectedEndTime} has been scheduled!`,
+        rejectDetail: 'No changes were made.',
         onAccept: () => {
           this.scheduleInterview();
         },
@@ -270,27 +270,56 @@ constructor(private router: Router,private messageService: MessageService) {
       return durationStr;
     }
   }
-  isCellInTentativeSchedule(cellHour: string): boolean {
-    if (!this.selectedDate || !this.selectedStartTime || !this.selectedEndTime) {
-      return false; // Not enough info for a tentative schedule
-    }
+  isTentativePreviewVisibleInCell(cellHour: string): boolean {
+     // Guard conditions: no preview if essential data is missing or duration is invalid/zero
+  if (!this.selectedDate || !this.selectedStartTime || !this.selectedEndTime || this.currentMeetingDuration <= 0) {
+    return false;
+  }
 
-    // Convert cellHour to start and end minutes for the cell
-    // Assuming cellHour is like "08:00", "09:00" representing the start of an hourly slot
-    const cellStartMinutes = this.timeToMinutes(cellHour);
-    const cellEndMinutes = cellStartMinutes + 60; // Assuming 1-hour grid cells
+  const cellStartMinutes = this.timeToMinutes(cellHour);
+  const cellEndMinutes = cellStartMinutes + 60; // Assuming 1-hour grid cells
 
-    // Get tentative schedule start and end times from the form
+  const tentativeStartMinutes = this.timeToMinutes(this.selectedStartTime);
+  const tentativeEndMinutes = this.timeToMinutes(this.selectedEndTime);
+
+  // Check for overlap: (StartA < EndB) and (EndA > StartB)
+  // True if the cell (A) overlaps with the tentative schedule (B)
+  return cellStartMinutes < tentativeEndMinutes && cellEndMinutes > tentativeStartMinutes;
+  }
+
+  calculateTentativePreviewTopPosition(cellHour: string): string {
+    if (!this.selectedStartTime) return '0%';
+  
+    const cellHourStartMinutes = this.timeToMinutes(cellHour);
+    const tentativeStartMinutes = this.timeToMinutes(this.selectedStartTime);
+  
+    // Calculate offset from the start of the cellHour
+    const offsetMinutes = Math.max(0, tentativeStartMinutes - cellHourStartMinutes);
+  
+    // Convert offset to percentage of cell height (assuming 60 minutes per cell)
+    const topPercentage = (offsetMinutes / 60) * 100;
+    return `${topPercentage}%`;
+  }
+  
+  calculateTentativePreviewHeight(cellHour: string): string {
+    if (!this.selectedStartTime || !this.selectedEndTime || this.currentMeetingDuration <= 0) return '0%';
+  
+    const cellHourStartMinutes = this.timeToMinutes(cellHour);
+    const cellHourEndMinutes = cellHourStartMinutes + 60; // Cell duration is 60 minutes
+  
     const tentativeStartMinutes = this.timeToMinutes(this.selectedStartTime);
     const tentativeEndMinutes = this.timeToMinutes(this.selectedEndTime);
-
-    if (tentativeStartMinutes >= tentativeEndMinutes) {
-      return false; // Invalid time range in form
-    }
-
-    // Check for overlap: (StartA < EndB) and (EndA > StartB)
-    // The cell (A) overlaps with the tentative schedule (B)
-    return cellStartMinutes < tentativeEndMinutes && cellEndMinutes > tentativeStartMinutes;
+  
+    // Determine the portion of the tentative slot that falls within this specific cellHour
+    const effectiveStartInCell = Math.max(tentativeStartMinutes, cellHourStartMinutes);
+    const effectiveEndInCell = Math.min(tentativeEndMinutes, cellHourEndMinutes);
+  
+    // Calculate the duration of the preview block within this cell
+    const durationInCellMinutes = Math.max(0, effectiveEndInCell - effectiveStartInCell);
+  
+    // Convert duration to percentage of cell height (assuming 60 minutes per cell)
+    const heightPercentage = (durationInCellMinutes / 60) * 100;
+    return `${heightPercentage}%`;
   }
 
   updateEndTimeSlots() {
@@ -377,10 +406,6 @@ constructor(private router: Router,private messageService: MessageService) {
     };
     this.scheduledInterviews.push(newInterview);
     this.updateScheduledEventsForCurrentDate(); // Refresh grid data
-    this.messageService.add({
-      severity: 'success', summary: 'Interview Scheduled',
-      detail: `Interview for ${this.selectedCandidate!.name} on ${new Date(this.selectedDate).toLocaleDateString()} from ${this.selectedStartTime} to ${this.selectedEndTime} has been scheduled.`
-    });
     this.resetFormFieldsAfterScheduling();
     this.calculateCurrentMeetingDuration(); // Reset duration for the next new schedule
 
@@ -484,7 +509,7 @@ constructor(private router: Router,private messageService: MessageService) {
     if (!time || !time.includes(':')) return '';
     const [h, m] = time.split(':');
     let hour = parseInt(h, 10);
-    const period = hour >= 12 && hour < 24 ? 'p' : 'a'; // Handle 12 PM and midnight if needed
+    const period = hour >= 12 && hour < 24 ? 'PM' : 'AM'; // Handle 12 PM and midnight if needed
     if (hour === 0) { hour = 12; } // Midnight case
     else if (hour > 12) { hour -= 12; }
     return `${hour}:${m}${period}`;

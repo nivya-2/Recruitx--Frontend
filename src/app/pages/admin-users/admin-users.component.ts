@@ -28,16 +28,16 @@ export class AdminUsersComponent {
     recruiterHeadEmail="neena@experionglobal.com"
 
   dataSource: any[] = [
-  { id: 'EMP877653', name: 'Alia K', jobTitle: 'Senior Executive', role: 'Recruiter', location: 'Kochi', deliveryUnit: 'DU6', email: 'test@mail.com', status1: 'Active', uploadedDate: '25-06-2025', actions: ['Edit'] },
-  { id: 'EMP877654', name: 'Ravi M', jobTitle: 'HR Associate', role: 'Recruiter Lead', location: 'Bangalore', deliveryUnit: 'DU3', email: 'ravi.m@mail.com', status1: 'Active', uploadedDate: '24-06-2025', actions: ['Edit'] },
-  { id: 'EMP877655', name: 'Neha S', jobTitle: 'Talent Specialist', role: 'Recruiter', location: 'Hyderabad', deliveryUnit: 'DU1', email: 'neha.s@mail.com', status1: 'Active', uploadedDate: '23-06-2025', actions:['Edit']},
-  { id: 'EMP877656', name: 'Karan T', jobTitle: 'HR Executive', role: 'Recruiter Lead', location: 'Chennai', deliveryUnit: 'DU2', email: 'karan.t@mail.com', status1: 'Active', uploadedDate: '22-06-2025', actions: ['Edit'] },
-  { id: 'EMP877657', name: 'Divya R', jobTitle: 'Senior Recruiter', role: 'Recruiter', location: 'Pune', deliveryUnit: 'DU4', email: 'divya.r@mail.com', status1: 'Active', uploadedDate: '21-06-2025', actions: ['Edit'] },
-  { id: 'EMP877658', name: 'Amit J', jobTitle: 'Recruitment Lead', role: 'Recruiter Lead', location: 'Mumbai', deliveryUnit: 'DU7', email: 'amit.j@mail.com', status1: 'Active', uploadedDate: '20-06-2025', actions: ['Edit'] },
-  { id: 'EMP877659', name: 'Sneha P', jobTitle: 'HR Partner', role: 'Recruiter', location: 'Delhi', deliveryUnit: 'DU5', email: 'sneha.p@mail.com', status1: 'Active', uploadedDate: '19-06-2025', actions:['Edit'] },
-  { id: 'EMP877660', name: 'Rahul D', jobTitle: 'Staffing Specialist', role: 'Recruiter', location: 'Noida', deliveryUnit: 'DU2', email: 'rahul.d@mail.com', status1: 'Active', uploadedDate: '18-06-2025', actions: ['Edit'] },
-  { id: 'EMP877661', name: 'Priya N', jobTitle: 'Senior HR', role: 'Recruiter Lead', location: 'Ahmedabad', deliveryUnit: 'DU6', email: 'priya.n@mail.com', status1: 'Active', uploadedDate: '17-06-2025', actions: ['Edit'] },
-  { id: 'EMP877662', name: 'Arjun V', jobTitle: 'Recruitment Executive', role: 'Recruiter', location: 'Kolkata', deliveryUnit: 'DU1', email: 'arjun.v@mail.com', status1: 'Active', uploadedDate: '16-06-2025', actions: ['Edit'] }
+  { id: 'EMP877653', name: 'Alia K', jobTitle: 'Senior Executive', role: 'Recruiter', location: 'Kochi', deliveryUnit: 'DU6', email: 'test@mail.com', status1: 'Active',  actions: ['Edit'] },
+  { id: 'EMP877654', name: 'Ravi M', jobTitle: 'HR Associate', role: 'Recruiter Lead', location: 'Bangalore', deliveryUnit: 'DU3', email: 'ravi.m@mail.com', status1: 'Active', actions: ['Edit'] },
+  { id: 'EMP877655', name: 'Neha S', jobTitle: 'Talent Specialist', role: 'Recruiter', location: 'Hyderabad', deliveryUnit: 'DU1', email: 'neha.s@mail.com', status1: 'Active',  actions:['Edit']},
+  { id: 'EMP877656', name: 'Karan T', jobTitle: 'HR Executive', role: 'Recruiter Lead', location: 'Chennai', deliveryUnit: 'DU2', email: 'karan.t@mail.com', status1: 'Active',  actions: ['Edit'] },
+  { id: 'EMP877657', name: 'Divya R', jobTitle: 'Senior Recruiter', role: 'Recruiter', location: 'Pune', deliveryUnit: 'DU4', email: 'divya.r@mail.com', status1: 'Active',  actions: ['Edit'] },
+  { id: 'EMP877658', name: 'Amit J', jobTitle: 'Recruitment Lead', role: 'Recruiter Lead', location: 'Mumbai', deliveryUnit: 'DU7', email: 'amit.j@mail.com', status1: 'Active', actions: ['Edit'] },
+  { id: 'EMP877659', name: 'Sneha P', jobTitle: 'HR Partner', role: 'Recruiter', location: 'Delhi', deliveryUnit: 'DU5', email: 'sneha.p@mail.com', status1: 'Active',  actions:['Edit'] },
+  { id: 'EMP877660', name: 'Rahul D', jobTitle: 'Staffing Specialist', role: 'Recruiter', location: 'Noida', deliveryUnit: 'DU2', email: 'rahul.d@mail.com', status1: 'Active',  actions: ['Edit'] },
+  { id: 'EMP877661', name: 'Priya N', jobTitle: 'Senior HR', role: 'Recruiter Lead', location: 'Ahmedabad', deliveryUnit: 'DU6', email: 'priya.n@mail.com', status1: 'Active',  actions: ['Edit'] },
+  { id: 'EMP877662', name: 'Arjun V', jobTitle: 'Recruitment Executive', role: 'Recruiter', location: 'Kolkata', deliveryUnit: 'DU1', email: 'arjun.v@mail.com', status1: 'Active', actions: ['Edit'] }
 ]
 
     recruitersIcons=[
@@ -56,7 +56,6 @@ export class AdminUsersComponent {
       { key: 'email', label: 'Email',filterable: false },
       { key: 'status1', label: 'Status',filterable: true },
       { key: 'actions', label: 'Actions',filterable: false },
-       { key: 'uploadedDate', label: 'Uploaded On',filterable: true, type: 'date' }
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions'); 
@@ -79,6 +78,38 @@ export class AdminUsersComponent {
       { fullName: ' Philip Cheriyan', role: 'Associate' }
     ];
     selectedMemberFromChild: any = null;
+
+    userStatus(member: any) {
+      const isCurrentlyActive = member.status1 === 'Active';
+      const newStatus = isCurrentlyActive ? 'Inactive' : 'Active';
+    
+      const message = `Are you sure you want to set ${member.name} as ${newStatus}?`;
+    
+      this.alertsComponent.showConfirmDialog({
+        message: message,
+        header: 'Change User Status',
+        icon: 'pi pi-user-edit',
+        acceptLabel: `Set ${newStatus}`,
+        rejectLabel: 'Cancel',
+        acceptSeverity:  'success',
+        rejectSeverity: 'warn',
+        acceptSummary: 'Status Changed',
+        rejectSummary: 'Cancelled',
+        acceptDetail: `${member.name} is now ${newStatus}.`,
+        rejectDetail: 'No changes were made.',
+        onAccept: () => {
+          member.status1 = newStatus;
+          console.log(`${member.name} status changed to ${newStatus}`);
+        },
+        onReject: () => {
+          console.log('Status change cancelled.');
+        }
+      });
+    }
+    
+    actionMethods = {
+      'Edit': (member: any) => this.userStatus(member)
+    };
     
     handleSelectedMember(member: any) {
       const message = `Are you sure want to add ${member.fullName} as a Recruiter Head?`;

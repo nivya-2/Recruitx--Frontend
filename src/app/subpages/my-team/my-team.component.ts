@@ -34,7 +34,7 @@ handleRemove = (row: any) => {
     icon: 'pi pi-user-minus',
     acceptLabel: 'Remove',
     rejectLabel: 'Cancel',
-    acceptSeverity: 'error',
+    acceptSeverity: 'success',
     rejectSeverity: 'warn',
     acceptSummary: 'Removed',
     rejectSummary: 'Cancelled',

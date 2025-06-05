@@ -1,20 +1,22 @@
 <app-assign #assignBox [teamList]="teamList"   (memberSelected)="handleSelectedMember($event)"></app-assign>
- <div (click)="onHostClick($event)">
-    <app-button (functionemit)="openAssignPopover()" class="right-align">
-      Add New Recruiter Lead
-    </app-button>
-  </div>
+<div (click)="onHostClick($event)">
+  <app-button (functionemit)="openAssignPopoverForAdd()" class="right-align">
+    Add New Recruiter Lead
+  </app-button>
+</div>
   <app-alerts #alerts></app-alerts>
 <app-cards width="95%">
-
-    <app-tree-table 
-        [teamsDataSource]="teamsDataSource"
-        [columns]="teamsColumns"
-        [globalFilterFields]="teamsGlobalFilterFields"
-        (openModal)="visible = $event"
-        (removeAction)="removeSelectedMember($event)" 
-        >
-    </app-tree-table>
+<div >
+  <app-tree-table 
+  [teamsDataSource]="teamsDataSource"
+  [columns]="teamsColumns"
+  [globalFilterFields]="teamsGlobalFilterFields"
+  (openModal)="visible = $event"
+  (removeAction)="removeSelectedMember($event)" 
+  (changeLeadAction)="handleChangeLeadAction($event)"
+  >
+</app-tree-table>
+  </div>
 
 <app-modal
  [(visible)]="visible"

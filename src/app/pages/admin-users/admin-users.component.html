@@ -31,11 +31,11 @@
       <app-header-text context="table-header" [nopad]="true"
         >Users</app-header-text
       >
-      <app-button-icon
+      <!-- <app-button-icon
         label="Upload Users"
         icon="upload"
         (click)="openModal()"
-      ></app-button-icon>
+      ></app-button-icon> -->
     </div>
     <app-table
       [dataSource]="dataSource"
@@ -45,6 +45,7 @@
       [rows]="7"
       [showFilter]="true"
       [fontSize]="'12px'"
+      [actionMethods]="actionMethods"
     ></app-table>
   </app-cards>
 

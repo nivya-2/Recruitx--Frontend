@@ -301,33 +301,14 @@ font-weight: 400;
 }
 
 
-.all-day-slot, // This class might be unused if you removed the All Day row
-.timeslot-cell {
+.timeslot-cell { // Ensure this is at the correct nesting level if it's not already global
   position: relative;
-  background-color: #fff; // Default background
+  background-color: #fff;
   min-height: 40px;
-  padding: 0; // Remove padding to allow event blocks or preview to use full cell space
+  padding: 0;
 
-  // Style for non-working hours
-  // &.non-working-hours {
-  //   background-image: repeating-linear-gradient(
-  //       45deg,
-  //       #f3f4f6,
-  //       #f3f4f6 5px,
-  //       #e9ecef 5px,
-  //       #e9ecef 10px
-  //   );
-  //   background-color: #f9fafb; // Fallback
-  // }
+  // ... other styles for .timeslot-cell ...
 
-  // Style for the tentative schedule preview
-  &.tentative-schedule-preview {
-      background-color:rgba(188, 169, 233, 0.4) !important; /* Light yellow. Use !important to ensure override */
-      /* Example: background-color: #e3f2fd !important; /* Light blue */
-  }
-
-  // Ensure event blocks are styled correctly within any timeslot-cell
-  // This .event-block rule is nested inside .timeslot-cell
   .event-block {
     position: absolute;
     left: 4px;
@@ -355,7 +336,24 @@ font-weight: 400;
         border-color: #7c3aed;
     }
   }
+
+  // NEW Styles for the tentative preview block
+  .tentative-preview-block {
+    position: absolute;
+    left: 2px; // Adjust as needed for visual spacing
+    right: 2px; // Adjust as needed
+    background-color: rgba(188, 169, 233, 0.4); // The desired light purple color
+    z-index: 1; // Below actual events, but above cell background
+    box-sizing: border-box;
+    border-radius: 3px; // Optional: for rounded corners
+    // pointer-events: none; // Optional: if you don't want it to interfere with mouse events
+  }
 }
+
+
+
+
+
 
 /*
   The .event-block rule above is now correctly nested.
