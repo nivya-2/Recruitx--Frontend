@@ -53,3 +53,18 @@
     z-index: 1000;
   }
 }
+
+.logout-item {
+  cursor: pointer;
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  width: 150px;
+  border-radius: 4px;
+  &:hover {
+    background-color: #f1f1f1;
+  }
+}
+.profile-wrapper{
+    cursor: pointer;
+}
