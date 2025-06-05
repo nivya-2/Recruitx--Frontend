@@ -109,7 +109,7 @@ export class ApplicantDetailsComponent {
     email: 'arjunmenon@gmail.com',
     totalExperience: '4 years',
     relevantExperience: '3 years',
-    noticePeriod: '30 dys',
+    noticePeriod: '30 days',
     currentCTC: 600000,
     expectedCTC: 750000,
     source: 'Linkedin',

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import 'quill/dist/quill.snow.css';
@@ -9,10 +9,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
 import { EmailTemplate } from '../email-templates.model';
+import { AlertsComponent } from '../../../ui/alerts/alerts.component';
 
 @Component({
   selector: 'app-email',
   imports: [ CommonModule,
+    AlertsComponent,
     FormsModule,
     ReactiveFormsModule,
     EditorModule,
@@ -150,11 +152,34 @@ RecruitX Team`;
     console.log('Preview email:', this.previewData);
   }
 
-  saveTemplate(): void {
-    alert('Template saved successfully!');
-    console.log('Template saved:', {
-      subject: this.invitationForm.get('emailSubject')?.value,
-      content: this.invitationForm.get('emailContent')?.value
+  // saveTemplate(): void {
+  //   alert('Template saved successfully!');
+  //   console.log('Template saved:', {
+  //     subject: this.invitationForm.get('emailSubject')?.value,
+  //     content: this.invitationForm.get('emailContent')?.value
+  //   });
+  // }
+  @ViewChild('alerts') alertsComponent!: AlertsComponent;
+
+  saveTemplate(mail:any){
+    
+    const message = `Are you sure you want to save all changes in ${this.template?.name}?`;
+    this.alertsComponent.showConfirmDialog({
+      message: message,
+      header: 'Save Changes',
+      // icon: 'pi pi-user-plus',
+      acceptLabel: 'Save',
+      rejectLabel: 'Cancel',
+      acceptSeverity: 'success',
+      rejectSeverity: 'warn',
+      acceptSummary: 'Saved',
+      rejectSummary: 'Cancelled',
+      acceptDetail: `Email template saved successfully!`,
+      rejectDetail: 'No changes were made.',
+      onAccept: () => {
+      },
+      onReject: () => {
+      }
     });
   }
 

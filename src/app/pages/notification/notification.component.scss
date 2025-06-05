@@ -1,0 +1,28 @@
+// .notification-card {
+//     padding: 1rem !important;
+//     margin-bottom: 0.75rem;
+// }
+.notification-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.date-button {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.notification {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}

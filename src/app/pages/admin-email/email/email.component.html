@@ -53,8 +53,9 @@
         label="Save Template"
         icon="pi pi-save"
         class="p-button-primary"
-        (click)="saveTemplate()"
+        (click)="saveTemplate($event)"
       ></button>
     </div>
   </form>
 </div>
+<app-alerts #alerts></app-alerts>

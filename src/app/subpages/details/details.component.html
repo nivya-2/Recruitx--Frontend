@@ -4,10 +4,13 @@
     </div>
 
     <div class="buttonset">
-        <app-button (functionemit)="getButtonLabel()">{{label}}</app-button>
-        <app-button *ngIf="isEditMode" (functionemit)="getButtonLabel()">Cancel</app-button>
-        <app-button (functionemit)="modal()" [disabled]="isEditMode">Export</app-button>
+      <app-button *ngIf="!isEditMode" (functionemit)="onEdit()">{{ label }}</app-button>
+      <app-button *ngIf="isEditMode" (functionemit)="onSave()">Save</app-button>
+      <app-button *ngIf="isEditMode" (functionemit)="onCancel()">Cancel</app-button>
+      <app-button [disabled]="isEditMode" (functionemit)="onSubmit()">Submit</app-button>
+      <app-button (functionemit)="modal()" [disabled]="isEditMode">Export</app-button>
     </div>
+    
 </div>
 <app-modal [(visible)]="visible"
   [maximizable]="false"
@@ -129,3 +132,4 @@
     <button type="submit" class="submit-btn">Submit</button>
   </div> -->
 </form>
+<app-alerts #alerts></app-alerts>

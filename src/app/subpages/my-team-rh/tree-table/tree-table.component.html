@@ -6,8 +6,7 @@
 [ngStyle]="{ 'font-size': fontSize }"
 [sortMode]="'multiple'"
 [filterMode]="'lenient'"
-[globalFilterFields]="getGlobalFields()"
->
+[globalFilterFields]="getGlobalFields()">
 
 <ng-template pTemplate="caption">
  <div class="search-container">
@@ -57,11 +56,12 @@
             <!-- Actions column -->
             <ng-container *ngIf="col.key === 'actions'">
                 <div class="action-buttons">
-                    <app-button *ngFor="let action of rowData[col.key]" 
-                                 (functionemit)="handleTreeTableAction(action, rowData)"
-                               color="#7B61FF">
-                        {{ action }}
-                    </app-button>
+                    <div *ngFor="let action of rowData[col.key]" 
+                         (click)="handleTreeTableAction(action, rowData, $event)">
+                        <app-button color="#7B61FF">
+                            {{ action }}
+                        </app-button>
+                    </div>
                 </div>
             </ng-container>
         </td>

@@ -1,0 +1,37 @@
+<div>
+
+    <div class="notification">
+        <input type="text" pInputText placeholder="Search notifications" [(ngModel)]="searchTerm"
+            (ngModelChange)="filterNotifications()" />
+
+        <app-button (click)="markAllAsRead()">
+            Mark all as read
+        </app-button>
+
+    </div>
+
+    <p-tabview [(activeIndex)]="activeTabIndex" (activeIndexChange)="onTabChange($event)">
+        <p-tabPanel header="All"></p-tabPanel>
+        <p-tabPanel header="Unread"></p-tabPanel>
+        <p-tabPanel header="Read"></p-tabPanel>
+    </p-tabview>
+
+    <div *ngFor="let notif of filteredNotifications" class="notification-list">
+        <div class="notification">
+
+            <div>
+                <!-- <div class="notification-title">{{ notif.title }}</div> -->
+                <p>{{ notif.message }}</p>
+            </div>
+
+            <div class="date-button">
+
+                <app-button *ngIf="!notif.read" (click)="markAsRead(notif)" class="p-button-text" [disabled]="false">
+                    Mark as read
+                </app-button>
+                <span class="date">{{ notif.date | date: 'dd/MM/yyyy' }}</span>
+
+            </div>
+        </div>
+    </div>
+</div>

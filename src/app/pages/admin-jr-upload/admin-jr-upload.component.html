@@ -6,7 +6,8 @@
     </div>
     <app-alerts #alerts></app-alerts>
     <app-table [dataSource]="dataSource" [columns]="columns" [globalFilterFields]="globalFilterFields" [hover]="false" [rows]="7" [showFilter]="true"
-    [fontSize]="'12px'"></app-table>
+    [fontSize]="'12px'"[actionMethods]="actionMethods"
+    ></app-table>
 
 <app-modal 
 [(visible)]="visible" 
@@ -15,6 +16,6 @@ header="Add Job Requisitions"
 [style]="{ width: '50rem', height: '35rem' }">
   <app-upload></app-upload>
 </app-modal>
-
   </app-cards>
 </app-common-layout>
+<app-alerts #alerts></app-alerts>

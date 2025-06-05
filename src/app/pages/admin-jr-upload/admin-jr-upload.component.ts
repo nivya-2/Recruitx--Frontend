@@ -30,6 +30,8 @@ import { SchedulePageComponent } from '../schedule-page/schedule-page.component'
   styleUrl: './admin-jr-upload.component.scss',
 })
 export class AdminJrUploadComponent {
+  @ViewChild('alerts') alertsComponent!: AlertsComponent;
+
   visible: boolean = false;
   openModal() {
     this.visible = !this.visible;
@@ -132,7 +134,7 @@ export class AdminJrUploadComponent {
     { iconName: 'home', size: '32px', iconColour: 'blue' },
     { iconName: 'delete', size: '32px', iconColour: 'green' },
   ];
-
+  actionMethods = {'Delete': () => this.deleteJr()};
   columns = [
     { key: 'jobReqId', label: 'Requisition ID', filterable: false },
     { key: 'jobTitle', label: 'Job Title', filterable: true },
@@ -146,5 +148,26 @@ export class AdminJrUploadComponent {
   globalFilterFields = this.columns
     .map((c) => c.key)
     .filter((key) => key !== 'actions');
+
+    deleteJr() {
+      const message = `Are you sure you want to delete this JR?`;
+      this.alertsComponent.showConfirmDialog({
+        message: message,
+        header: 'Delete JR',
+        // icon: 'pi pi-user-plus',
+        acceptLabel: 'Delete',
+        rejectLabel: 'Cancel',
+        acceptSeverity: 'success',
+        rejectSeverity: 'warn',
+        acceptSummary: 'Deleted',
+        rejectSummary: 'Cancelled',
+        acceptDetail: `JR Deleted successfully!`,
+        rejectDetail: 'No changes were made.',
+        onAccept: () => {
+        },
+        onReject: () => {
+        }
+      });
+    }
 
 }

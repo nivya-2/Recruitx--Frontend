@@ -23,22 +23,30 @@ export class TreeTableComponent {
       .filter(key => key !== 'actions');
   }
 
-handleTreeTableAction(action: string, row: any): void {
-//emit event to parent
-  if (action === 'Remove') { 
-    this.removeAction.emit(row);
-    return;
+  handleTreeTableAction(action: string, row: any, event?: Event): void {
+    console.log("Tree table action:", action, "Event:", event); // Debug log
+    
+    //emit event to parent
+    if (action === 'Remove') { 
+      this.removeAction.emit(row);
+      return;
+    }
+  
+    if (action === 'Change Lead') { 
+      console.log("Emitting change lead with event:", event); // Debug log
+      this.changeLeadAction.emit({ row: row, event: event });
+      return;
+    }
+  
+    const methodName = 'on' + this.capitalize(action);
+    const method = (this as any)[methodName];
+  
+    if (typeof method === 'function') {
+      method.call(this, row);
+    } else {
+      console.warn(`No method defined for action: ${methodName}`);
+    }
   }
-
-  const methodName = 'on' + this.capitalize(action);
-  const method = (this as any)[methodName];
-
-  if (typeof method === 'function') {
-    method.call(this, row);
-  } else {
-    console.warn(`No method defined for action: ${methodName}`);
-  }
-}
 
 capitalize(str: string): string {
   return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
@@ -50,6 +58,8 @@ capitalize(str: string): string {
   @Input() globalFilterFields: string[] = [];
   @Output() openModal = new EventEmitter<boolean>();
   @Output() removeAction = new EventEmitter<any>(); //delete function
+  @Output() changeLeadAction = new EventEmitter<any>(); //change function
+
 
   
   onViewAssignedJR(row: any) {
