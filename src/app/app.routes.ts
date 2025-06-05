@@ -95,16 +95,16 @@ export const routes: Routes = [
               {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'details'
+                redirectTo: 'details/:id'
               },
               {
-                path: 'details',
+                path: 'details/:id',
                 loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
                 canActivate: [AuthGuard],
                 data: { breadcrumb: 'Details' , roles: ['Recruiter']}
               },
               {
-                path: 'applicants',
+                path: 'applicants/:id',
                 loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
                 canActivate: [AuthGuard],
                 data: { breadcrumb: 'Applicants', roles: ['Recruiter'] }
@@ -246,16 +246,16 @@ export const routes: Routes = [
               {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'details'
+                redirectTo: 'details/:id'
               },
               {
-                path: 'details',
+                path: 'details/:id',
                 loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
                 canActivate: [AuthGuard],
                 data: { breadcrumb: 'Details', roles: ['Recruiter Lead']}
               },
               {
-                path: 'applicants',
+                path: 'applicants/:id',
                 loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
                 canActivate: [AuthGuard],
                 data: { breadcrumb: 'Applicants', roles: ['Recruiter Lead'] }
@@ -387,16 +387,16 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'details'
+        redirectTo: 'details/:id'
       },
       {
-        path: 'details',
+        path: 'details/:id',
         loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
         canActivate: [AuthGuard],
         data: { breadcrumb: 'Details' , roles: ['Recruiter Lead'] }
       },
       {
-        path: 'applicants',
+        path: 'applicants/:id',
         loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
         canActivate: [AuthGuard],
         data: { breadcrumb: 'Applicants', roles: ['Recruiter Lead'] }
@@ -412,16 +412,16 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'details'
+        redirectTo: 'details/:id'
       },
       {
-        path: 'details',
+        path: 'details/:id',
         loadComponent: () => import('./subpages/details/details.component').then(m => m.DetailsComponent),
         canActivate: [AuthGuard],
         data: { breadcrumb: 'Details' , roles: ['Recruiter'] }
       },
       {
-        path: 'applicants',
+        path: 'applicants/:id',
         loadComponent: () => import('./subpages/applicants/applicants.component').then(m => m.ApplicantsComponent),
         canActivate: [AuthGuard],
         data: { breadcrumb: 'Applicants', roles: ['Recruiter'] }

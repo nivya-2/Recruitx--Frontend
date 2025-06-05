@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
         return this.router.parseUrl('/unauthorized');
       }
     } catch {
-                console.log('Access denied. User role:', this.auth.role);
+                console.log('Access denied. User role:', this.auth.role, 'Expected roles:');
 
       return this.router.parseUrl('/unauthorized');
     }

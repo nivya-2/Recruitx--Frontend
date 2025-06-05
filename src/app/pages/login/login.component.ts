@@ -14,8 +14,5 @@ constructor(private router: Router) {}
 onclick(url: string) {
   this.router.navigate([url]);
 }
-login() {
-    // Trigger backend redirect to Azure AD login
-    window.location.href = 'https://localhost:7126/api/auth/login'; // adjust to your backend
-  }
+
 }
