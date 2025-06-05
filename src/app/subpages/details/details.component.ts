@@ -15,7 +15,7 @@ import { AlertsComponent } from '../../ui/alerts/alerts.component';
 @Component({
   standalone: true,
   selector: 'app-details',
-  imports: [NgIf,HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent],
+  imports: [NgIf, HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent, AlertsComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
