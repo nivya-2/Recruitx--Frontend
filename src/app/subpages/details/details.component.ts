@@ -6,17 +6,25 @@ import { ButtonComponent } from "../../ui/button/button.component";
 import { TextAreaComponent } from "../../ui/text-area/text-area.component";
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { NgIf } from '@angular/common';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
 
 @Component({
   standalone: true,
   selector: 'app-details',
-  imports: [NgIf,HeaderTextComponent, CardsComponent,AlertsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent],
+  imports: [NgIf, HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent, AlertsComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent {
-
+ 
+  modal(){
+    this.visible = !this.visible;
+  }
+   
   label: string = 'Edit';
 
   isEditMode: boolean = false;
@@ -34,6 +42,25 @@ export class DetailsComponent {
     el.scrollIntoView({ behavior: 'smooth' });
   }
 }
+exportAsPDF() {
+  const jdForm = document.getElementById('jd-form');
+  if (jdForm) {
+    html2canvas(jdForm).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('JobDescription.pdf');
+    });
+  }
+}
+
+
+
+
 formData = {
     skillsMandatory: 'HTML, CSS, JavaScript',
     skillsPrimary: 'Angular, TypeScript',
@@ -57,6 +84,69 @@ formData = {
 • Excellent problem-solving and teamwork skills`,
     additionalInfo: `Looking for candidates who can join within 30 days. Hybrid work option available.`
   };
+
+exportAsExcel(): void {
+  const formData = this.formData; // Ensure formData is defined in your component
+
+  const jdData = [
+    {
+      'Work Location': formData.workLocation,
+      'Relevant Experience': `${formData.relevantExpYears} Years ${formData.relevantExpMonths} Months`,
+      'Total Experience': `${formData.totalExpYears} Years ${formData.totalExpMonths} Months`,
+      'Qualification': formData.qualification,
+      'Expected Onboarding Date': formData.onboardingDate,
+      'Skills - Mandatory': formData.skillsMandatory,
+      'Skills - Primary': formData.skillsPrimary,
+      'Skills - Good To Have': formData.skillsGood,
+      'Job Purpose': formData.jobPurpose,
+      'Job Description / Duties & Responsibilities': formData.jobDescription,
+      'Job Specification / Skills and Competencies': formData.jobSpecification,
+      'Any Additional Information/Specifics': formData.additionalInfo
+    }
+  ];
+
+  // Generate worksheet
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jdData);
+
+  // Apply wrapText and top alignment styles
+  const range = XLSX.utils.decode_range(ws['!ref']!);
+  for (let R = range.s.r; R <= range.e.r; ++R) {
+    for (let C = range.s.c; C <= range.e.c; ++C) {
+      const cellAddress = XLSX.utils.encode_cell({ r: R, c: C });
+      const cell = ws[cellAddress];
+      if (!cell) continue;
+      if (!cell.s) cell.s = {};
+      cell.s.alignment = { wrapText: true, vertical: 'top' };
+    }
+  }
+
+  // Estimate column widths based on content
+  const columnKeys = Object.keys(jdData[0]);
+  ws['!cols'] = columnKeys.map((key) => {
+    const maxLength = Math.max(
+      key.length,
+      ...jdData.map(row => ((row as any)[key] ? (row as any)[key].toString().length : 0))
+    );
+    return { wch: Math.min(100, maxLength + 5) };
+  });
+
+  // Create workbook
+  const wb: XLSX.WorkBook = {
+    Sheets: { 'Job Description': ws },
+    SheetNames: ['Job Description']
+  };
+
+  // Export to file
+  const excelBuffer: any = XLSX.write(wb, {
+    bookType: 'xlsx',
+    type: 'array',
+    cellStyles: true
+  });
+  const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+  saveAs(blob, 'JobDescription.xlsx');
+}
+
+
 
   // resetForm() {
     // Optional: Reset the formData to initial values or clear
