@@ -7,35 +7,40 @@
   </div>
   <div class="flex-row2 child3">
     <!-- <app-icon name="notifications" customColor="#636363"></app-icon> -->
-<div *ngIf="showNotifications" class="backdrop" (click)="showNotifications = false"></div>
+    <div
+      *ngIf="showNotifications"
+      class="backdrop"
+      (click)="showNotifications = false"
+    ></div>
     <div class="notification-wrapper" (click)="toggleNotifications($event)">
-    <app-icon name="notifications" customColor="#636363"></app-icon>
-    <span *ngIf="hasUnread" class="notification-dot"></span>
+      <app-icon name="notifications" customColor="#636363"></app-icon>
+      <span *ngIf="hasUnread" class="notification-dot"></span>
 
-    <div class="notification-dropdown" *ngIf="showNotifications">
-      <app-notificationbox
-        [notifications]="notifications"
-        (markRead)="markAllAsRead()"
-      ></app-notificationbox>
+      <div class="notification-dropdown" *ngIf="showNotifications">
+        <app-notificationbox
+          [notifications]="notifications"
+          (markRead)="markAllAsRead()"
+        ></app-notificationbox>
+      </div>
     </div>
-  </div>
 
     <!-- <app-profile-box [fullName]="name" [role]="role"></app-profile-box> -->
 
     <div class="profile-wrapper">
-  <app-profile-box
-    [fullName]="name"
-    [role]="role"
-    (click)="popover.toggle($event)">
-  </app-profile-box>
+      <app-profile-box
+        [fullName]="name"
+        [role]="role"
+        (click)="popover.toggle($event)"
+      >
+      </app-profile-box>
 
-  <p-popover #popover [dismissable]="true">
-    <div class="logout-item" (click)="logout()">
-      <!-- <i class="pi pi-sign-out" style="margin-right: 8px;"></i> -->
-       <app-icon name="logout" customColor="#636363"></app-icon>
-      Logout
+      <p-popover #popover [dismissable]="true">
+        <div class="logout-item" (click)="logout()">
+          <!-- <i class="pi pi-sign-out" style="margin-right: 8px;"></i> -->
+          <app-icon name="logout" customColor="#636363"></app-icon>
+          Logout
+        </div>
+      </p-popover>
     </div>
-  </p-popover>
-
   </div>
 </div>

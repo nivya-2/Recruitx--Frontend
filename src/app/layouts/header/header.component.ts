@@ -5,6 +5,7 @@ import { HeaderTextComponent } from '../../ui/header-text/header-text.component'
 import { IconComponent } from '../../ui/icon/icon.component';
 import { NotificationboxComponent } from '../../shared-components/notificationbox/notificationbox.component';
 import { Popover } from 'primeng/popover';
+import { LogoutApiService } from '../../core/services/api/logout-api.service';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +25,7 @@ export class HeaderComponent {
     { id: 3, message: 'Hiring Manager John Roy uploaded a new JR.', read: true, sender: 'John Roy', role: 'Hiring Manager' },
   ];
 
-  constructor(private eRef: ElementRef) {}
+  constructor(private eRef: ElementRef , private logoutApiService: LogoutApiService) {}
 
   toggleNotifications(event: MouseEvent): void {
     event.stopPropagation(); // Prevents closing immediately
@@ -49,8 +50,8 @@ export class HeaderComponent {
 
 logout() {
   // Implement logout logic here
+  this.logoutApiService.logout();
   console.log('Logging out...');
 }
-
 
 }
