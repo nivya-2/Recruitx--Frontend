@@ -1,43 +1,37 @@
-<app-cards>
-    <div>
-        <!-- <h2>Notifications</h2> -->
-        <app-header-text context="table-header" [nopad]="true">Notifications</app-header-text>
+<div>
 
-        <div class="notification">
-            <input type="text" pInputText placeholder="Search notifications" [(ngModel)]="searchTerm"
-                (ngModelChange)="filterNotifications()" />
+    <div class="notification">
+        <input type="text" pInputText placeholder="Search notifications" [(ngModel)]="searchTerm"
+            (ngModelChange)="filterNotifications()" />
 
-            <app-button (click)="markAllAsRead()">
-                <!-- <app-icon name="done_all" size="20px" customColor="white"></app-icon> -->
-                Mark all as read
-            </app-button>
+        <app-button (click)="markAllAsRead()">
+            Mark all as read
+        </app-button>
 
-        </div>
-
-        <p-tabview [(activeIndex)]="activeTabIndex" (activeIndexChange)="onTabChange($event)">
-            <p-tabPanel header="All"></p-tabPanel>
-            <p-tabPanel header="Unread"></p-tabPanel>
-            <p-tabPanel header="Read"></p-tabPanel>
-        </p-tabview>
-
-        <app-cards *ngFor="let notif of filteredNotifications" class="notification-card">
-            <div class="notification">
-
-                <div>
-                    <div class="notification-title">{{ notif.title }}</div>
-                    <p>{{ notif.message }}</p>
-                </div>
-
-                <div class="date-button">
-                    <span class="date">{{ notif.date | date: 'dd-MM-yy' }}</span>
-
-                    <app-button *ngIf="!notif.read" (click)="markAsRead(notif)" class="p-button-text"
-                        [disabled]="false">
-                        Mark as read
-                        <!-- <app-icon name="check_circle" size="20px" customColor="white"></app-icon> -->
-                    </app-button>
-                </div>
-            </div>
-        </app-cards>
     </div>
-</app-cards>
+
+    <p-tabview [(activeIndex)]="activeTabIndex" (activeIndexChange)="onTabChange($event)">
+        <p-tabPanel header="All"></p-tabPanel>
+        <p-tabPanel header="Unread"></p-tabPanel>
+        <p-tabPanel header="Read"></p-tabPanel>
+    </p-tabview>
+
+    <div *ngFor="let notif of filteredNotifications" class="notification-list">
+        <div class="notification">
+
+            <div>
+                <!-- <div class="notification-title">{{ notif.title }}</div> -->
+                <p>{{ notif.message }}</p>
+            </div>
+
+            <div class="date-button">
+
+                <app-button *ngIf="!notif.read" (click)="markAsRead(notif)" class="p-button-text" [disabled]="false">
+                    Mark as read
+                </app-button>
+                <span class="date">{{ notif.date | date: 'dd/MM/yyyy' }}</span>
+
+            </div>
+        </div>
+    </div>
+</div>
