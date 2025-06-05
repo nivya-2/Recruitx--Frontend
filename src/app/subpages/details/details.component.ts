@@ -107,5 +107,9 @@ formData = {
     this.isEditMode = false;
     this.label = 'Edit';
   }
+  onSubmit() {
+    this.isEditMode = false;
+    this.label = 'Edit';
+  }
   
 }
