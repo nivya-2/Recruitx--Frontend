@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export interface PendingJd {
   jobRequisitionId: number;
   roleTitle: string;
-  deliveryUnit: string;
+  businessUnit: string;
   location: string;
   openPositions: number;
   createdDate: string;

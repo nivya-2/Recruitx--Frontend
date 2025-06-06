@@ -30,7 +30,7 @@ export class PendingJdGenComponent implements OnInit {
       next: (data) => {
         this.dataSource = data.map(jr => ({
           ...jr,
-          id: `JR${jr.jobRequisitionId.toString().padStart(3, '0')}`, // Format as JR0001
+          id: `JR${jr.jobRequisitionId.toString().padStart(3, '0')}`,
            // Default actions
         }));
         this.isLoading = false;
@@ -137,7 +137,7 @@ export class PendingJdGenComponent implements OnInit {
   columns: Array<{ key: string, label: string, filterable: boolean ,type?:string}> = [
     { key: 'id', label: 'ID', filterable: false },
     { key: 'roleTitle', label: 'Role Title', filterable: true },
-    { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
+    { key: 'businessUnit', label: 'Delivery Unit', filterable: true },
     { key: 'location', label: 'Location', filterable: true },
     { key: 'openPositions', label: 'No. of Open Positions', filterable: false },
     { key: 'createdDate', label: 'Created Date', filterable: true ,type: 'date'},
