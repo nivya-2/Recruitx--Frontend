@@ -7,12 +7,24 @@
       <app-button *ngIf="!isEditMode" (functionemit)="onEdit()">{{ label }}</app-button>
       <app-button *ngIf="isEditMode" (functionemit)="onSave()">Save</app-button>
       <app-button *ngIf="isEditMode" (functionemit)="onCancel()">Cancel</app-button>
-      <app-button [disabled]="isEditMode">Export</app-button>
+      <app-button [disabled]="isEditMode" (functionemit)="onSubmit()">Submit</app-button>
+      <app-button (functionemit)="modal()" [disabled]="isEditMode">Export</app-button>
     </div>
     
 </div>
-
-<form class="form-section">
+<app-modal [(visible)]="visible"
+  [maximizable]="false"
+  [showHeader]="true"
+  header="Export Job Description"
+  [style]="{ width: '38rem', height: '12rem' }">
+  
+  <p>Choose the format you want to export the Job Description in.</p>
+  <div class="export-options">
+   <app-button (functionemit)="exportAsPDF()" >PDF</app-button>
+   <app-button (functionemit)="exportAsExcel()" >Excel</app-button>
+   </div>
+</app-modal>
+<form class="form-section" id="jd-form">
   <!-- Basic Info -->
   <section class="section-wrapper">
     <h3 class="section-title">Basic Information</h3>
