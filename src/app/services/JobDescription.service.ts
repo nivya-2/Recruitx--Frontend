@@ -27,12 +27,41 @@ export interface JobDescriptionDTO {
 })
 export class JobDescriptionService {
 
-  private apiUrl = 'https://localhost:7144/api/JobDescription/my-job-descriptions'; // replace with your real API endpoint
+  private apiUrl = 'https://localhost:7144/api/JobDescription'; // replace with your real API endpoint
 
   constructor(private http: HttpClient) { }
 
-  getJobDescription(jobRequisitionId: number): Observable<JobDescriptionDTO> {
-    // Assuming your API endpoint to get job description by requisition Id
-    return this.http.get<JobDescriptionDTO>(`${this.apiUrl}/${jobRequisitionId}`);
+   getJobDescription(jobRequisitionId: number): Observable<JobDescriptionDTO> {
+    // This endpoint should point to your method for getting a saved JD
+    return this.http.get<JobDescriptionDTO>(`${this.apiUrl}/my-job-descriptions/${jobRequisitionId}`, { withCredentials: true });
+  }
+
+  /**
+   * --- NEW METHOD ---
+   * Fetches initial data from a Job Requisition to PRE-FILL a new Job Description form.
+   * Used for the 'Generate JD' action.
+   * NOTE: The URL here is an example. You must match it to your actual backend endpoint.
+   */
+  generateJdFromRequisition(jobRequisitionId: number): Observable<JobDescriptionDTO> {
+    // This endpoint should fetch base details (like role, location) from the requisition itself.
+    // The backend would map these details to a JobDescriptionDTO.
+    return this.http.get<JobDescriptionDTO>(`${this.apiUrl}/draft/${jobRequisitionId}`, { withCredentials: true });
+  }
+
+  /**
+   * --- NEW METHOD ---
+   * Saves or updates a job description.
+   * Used by the 'onSave' method in your DetailsComponent.
+   */
+  updateJobDescription(jobRequisitionId: number, jdData: JobDescriptionDTO): Observable<JobDescriptionDTO> {
+    // Uses HTTP PUT to send the updated data to the server.
+    // The server would then persist these changes to the database.
+    return this.http.post<JobDescriptionDTO>(`${this.apiUrl}/save-draft`, jdData, { withCredentials: true , responseType: 'text' as 'json'});
+  }
+
+   submitJobDescription(jobRequisitionId: number, jdData: JobDescriptionDTO): Observable<JobDescriptionDTO> {
+    // Uses HTTP PUT to send the updated data to the server.
+    // The server would then persist these changes to the database.
+    return this.http.put<JobDescriptionDTO>(`${this.apiUrl}/generateJD`, jdData, { withCredentials: true ,responseType: 'text' as 'json'});
   }
 }

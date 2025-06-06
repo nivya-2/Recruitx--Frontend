@@ -4,10 +4,12 @@ import { TableComponent } from '../../shared-components/table/table.component';
 import { DetailsComponent } from "../details/details.component";
 import { ModalComponent } from '../../ui/modal/modal.component';
 import { PendingJd, PendingJdService } from '../../services/pending-jd-gen.service';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pending-jd-gen',
-  imports: [TableComponent, DetailsComponent, ModalComponent],
+  imports: [TableComponent, DetailsComponent, ModalComponent,CommonModule],
   templateUrl: './pending-jd-gen.component.html',
   styleUrl: './pending-jd-gen.component.scss'
 })
@@ -15,6 +17,7 @@ import { PendingJd, PendingJdService } from '../../services/pending-jd-gen.servi
 export class PendingJdGenComponent implements OnInit {
   dataSource: PendingJd[] = []
     isLoading: boolean = true;
+    selectedAction: 'GenerateJD' | 'Draft' | null = null;
 
   
     constructor(private pendingJdService: PendingJdService) {}
@@ -31,7 +34,6 @@ export class PendingJdGenComponent implements OnInit {
         this.dataSource = data.map(jr => ({
           ...jr,
           id: `JR${jr.jobRequisitionId.toString().padStart(3, '0')}`,
-           // Default actions
         }));
         this.isLoading = false;
       },
@@ -126,13 +128,26 @@ export class PendingJdGenComponent implements OnInit {
   //     actions: ['Generate JD']
   //   }
   // ];
-  
+  selectedJdId: number = 0;
   visible: boolean = false;
-  onViewJD = (row: any) => {
-  this.visible = !this.visible;
-  console.log('Shortlist for :', row);
-};
-  actionMethods = {'Generate JD': this.onViewJD,   'Draft': this.onViewJD };
+
+
+  onGenerateJD = (row: any) => {
+    this.selectedJdId = row.jobRequisitionId;
+    this.selectedAction = 'GenerateJD'; // Set action type
+    this.visible = true; // Open modal
+    console.log(`Generate JD for: ${this.selectedJdId}`);
+  };
+
+  onDraft = (row: any) => {
+    this.selectedJdId = row.jobRequisitionId;
+    this.selectedAction = 'Draft'; // Set action type
+    this.visible = true; // Open modal
+    console.log(`Open Draft for: ${this.selectedJdId}`);
+  };
+
+
+  actionMethods = {'GenerateJD': this.onGenerateJD,   'Draft': this.onDraft };
 
   columns: Array<{ key: string, label: string, filterable: boolean ,type?:string}> = [
     { key: 'id', label: 'ID', filterable: false },

@@ -30,7 +30,7 @@ const jobId = Number(this.route.snapshot.paramMap.get('id'));
     }
 
 
-  this.routes = (row: any): void => {
+  this.routes = (row: any) => {
     const segments = this.route.snapshot.pathFromRoot
       .flatMap(r => r.url.map(u => u.path));
 
@@ -65,6 +65,7 @@ visible:boolean = false;
     this.visible = !this.visible;
   }
     dataSource: CandidateDTO[]|any = [];
+
 
 
 // dataSource: any[] = [
@@ -181,5 +182,7 @@ visible:boolean = false;
 
   
   globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');
+      actionMethods = {'Details': this.routes}
+
 }
 
