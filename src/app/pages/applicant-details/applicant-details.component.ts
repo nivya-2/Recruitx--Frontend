@@ -7,21 +7,22 @@ import { KeyValuePipe, NgFor, NgIf } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
+import { CandidateDetailsDTO, CandidateService } from '../../services/Applicant-details.service';
 
-interface Candidate {
-  id: string;
-  name: string;
-  mobile: string;
-  email: string;
-  totalExperience: string;
-  relevantExperience: string;
-  noticePeriod: string;
-  currentCTC: number;
-  expectedCTC: number;
-  source: string;
-  location: string;
-  employer: string;
-}
+// interface Candidate {
+//   id: string;
+//   name: string;
+//   mobile: string;
+//   email: string;
+//   totalExperience: string;
+//   relevantExperience: string;
+//   noticePeriod: string;
+//   currentCTC: number;
+//   expectedCTC: number;
+//   source: string;
+//   location: string;
+//   employer: string;
+// }
 
 interface StatusItem {
   label: string;
@@ -48,35 +49,36 @@ interface StatusItem {
 export class ApplicantDetailsComponent {
   candidateStatus = '';
   finished:boolean=false;
-  fieldLabels: Record<keyof Candidate | string, string> = {
-    id: 'Candidate ID',
-    name: 'Name',
-    mobile: 'Mobile Number',
-    email: 'Email',
+  fieldLabels: Record<keyof CandidateDetailsDTO | string, string> = {
+    candidateID: 'Candidate ID',
+    candidateName: 'Name',
+    candidatePhone: 'Mobile Number',
+    candidateEmail: 'Email',
     totalExperience: 'Total Experience',
-    relevantExperience: 'Relevant Experience',
+    relavantExperience: 'Relevant Experience',
     noticePeriod: 'Notice Period',
     currentCTC: 'Current CTC',
     expectedCTC: 'Expected CTC',
     source: 'Source of Application',
-    location: 'Current Location',
-    employer: 'Current Employer',
+    currentLocation: 'Current Location',
+    currentEmployer: 'Current Employer',
   };
 
-  fieldOrder: (keyof Candidate)[] = [
-    'id',
-    'name',
-    'mobile',
-    'email',
-    'totalExperience',
-    'relevantExperience',
-    'noticePeriod',
-    'currentCTC',
-    'expectedCTC',
-    'source',
-    'location',
-    'employer',
+  fieldOrder: (keyof CandidateDetailsDTO)[] = [
+  'candidateID',
+  'candidateName',
+  'candidatePhone',
+  'candidateEmail',
+  'totalExperience',
+  'relavantExperience',
+  'noticePeriod',
+  'currentCTC',
+  'expectedCTC',
+  'source',
+  'currentLocation',
+  'currentEmployer',
   ];
+  
 
   statusList: StatusItem[] = [
     { label: 'Applied', date: '2024-09-23', completed: true },
@@ -87,6 +89,9 @@ export class ApplicantDetailsComponent {
     { label: 'Offer Letter accepted', completed: false },
     { label: 'Joined', completed: false },
   ];
+
+  candidate: any;
+
   updateNextPendingStatus(statusList: StatusItem[]): void {
     const nextPending = statusList.find(item => !item.completed);
     if (nextPending) {
@@ -102,24 +107,24 @@ export class ApplicantDetailsComponent {
     return [...nextSteps, 'Reject'];
   }
 
-  candidate = {
-    id: 'CND-034',
-    name: 'Arjun Menon',
-    mobile: '8089888786',
-    email: 'arjunmenon@gmail.com',
-    totalExperience: '4 years',
-    relevantExperience: '3 years',
-    noticePeriod: '30 days',
-    currentCTC: 600000,
-    expectedCTC: 750000,
-    source: 'Linkedin',
-    location: 'Trivandrum',
-    employer: 'UST',
-  };
+  // candidate = {
+  //   id: 'CND-034',
+  //   name: 'Arjun Menon',
+  //   mobile: '8089888786',
+  //   email: 'arjunmenon@gmail.com',
+  //   totalExperience: '4 years',
+  //   relevantExperience: '3 years',
+  //   noticePeriod: '30 days',
+  //   currentCTC: 600000,
+  //   expectedCTC: 750000,
+  //   source: 'Linkedin',
+  //   location: 'Trivandrum',
+  //   employer: 'UST',
+  // };
 
   items: MenuItem[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute,  private candidateService: CandidateService) {}
 
   ngOnInit(): void {
     const urlSegments = this.router.url.split('/');
@@ -130,11 +135,29 @@ export class ApplicantDetailsComponent {
       { label: 'Applicants', routerLink: `/${prefix}/job-description/applicants` },
       { label: 'Arjun Menon', routerLink: `/${prefix}/job-description/applicant-details` },
     ];
+    
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+  if (!isNaN(id)) {
+    this.loadCandidate(id);
   }
+
+  }
+
+  loadCandidate(id: number): void {
+  this.candidateService.getCandidateDetails(id).subscribe({
+    next: (data) => {
+      this.candidate = data;
+    },
+    error: (err) => {
+      console.error('Error fetching candidate details:', err);
+    }
+  });
+}
+
   @ViewChild('alerts') alertsComponent!: AlertsComponent;
   
   selectCandidate(row: any){
-      const message = `Are you sure you want to progress ${this.candidate.name} to next stage?`;
+      const message = `Are you sure you want to progress ${this.candidate.candidateName} to next stage?`;
       this.alertsComponent.showConfirmDialog({
         message: message,
         header: `Next Stage`,
@@ -145,7 +168,7 @@ export class ApplicantDetailsComponent {
         rejectSeverity: 'warn',
         acceptSummary: 'Success',
         rejectSummary: 'Cancelled',
-        acceptDetail: `${this.candidate.name} progressed to next stage !`,
+        acceptDetail: `${this.candidate.candidateName} progressed to next stage !`,
         rejectDetail: 'No changes were made.',
         onAccept: () => { 
           this.updateNextPendingStatus(this.statusList) 
@@ -156,7 +179,7 @@ export class ApplicantDetailsComponent {
   }
 
   rejectCandidate(row: any){
-    const message = `Are you sure you want to reject ${this.candidate.name}?`;
+    const message = `Are you sure you want to reject ${this.candidate.candidateName}?`;
     this.alertsComponent.showConfirmDialog({
       message: message,
       header: `Reject Applicant`,
@@ -167,7 +190,7 @@ export class ApplicantDetailsComponent {
       rejectSeverity: 'warn',
       acceptSummary: 'Rejected',
       rejectSummary: 'Cancelled',
-      acceptDetail: `Rejected ${this.candidate.name}!`,
+      acceptDetail: `Rejected ${this.candidate.candidateName}!`,
       rejectDetail: 'No changes were made.',
       onAccept: () => {  
         this.candidateStatus = 'rejected';

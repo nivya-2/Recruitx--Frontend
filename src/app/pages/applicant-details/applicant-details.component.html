@@ -2,7 +2,7 @@
   <div class="main">
     <app-cards class="details">
       <div class="heading">Candidate Details</div>
-      <div class="candidate-details">
+      <div class="candidate-details" *ngIf="candidate">
         <div class="row" *ngFor="let key of fieldOrder">
           <div class="label">{{ fieldLabels[key] }}</div>
           <div class="value">{{ candidate[key] }}</div>

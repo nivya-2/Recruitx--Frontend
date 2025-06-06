@@ -36,7 +36,17 @@ const jobId = Number(this.route.snapshot.paramMap.get('id'));
 
     const rolePrefix = segments.includes('recruiter-lead') ? 'recruiter-lead' : 'recruiter';
 
-    this.router.navigate([`/${rolePrefix}/job-description/applicant-details`]);
+    // this.router.navigate([`/${rolePrefix}/job-description/applicant-details/`]);
+    this.routes = (row: any) => {
+  const segments = this.route.snapshot.pathFromRoot
+    .flatMap(r => r.url.map(u => u.path));
+
+  const rolePrefix = segments.includes('recruiter-lead') ? 'recruiter-lead' : 'recruiter';
+
+  const candidateId = row?.candidateId?.replace(/^CAN/, ''); // remove prefix if needed
+  this.router.navigate([`/${rolePrefix}/job-description/applicant-details`, candidateId]);
+};
+
   };
 }
 

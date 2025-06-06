@@ -430,7 +430,7 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'recruiter-lead/job-description/applicant-details',
+    path: 'recruiter-lead/job-description/applicant-details/:id',
     loadComponent: () =>
       import(
         './pages/applicant-details/applicant-details.component'
@@ -440,7 +440,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'recruiter/job-description/applicant-details',
+    path: 'recruiter/job-description/applicant-details/:id',
     loadComponent: () =>
       import(
         './pages/applicant-details/applicant-details.component'
