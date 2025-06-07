@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiResponse } from './auth.service';
 
 export interface TrackJdDTO {
   jobRequisitionId: number;
@@ -20,9 +21,9 @@ export class TrackJdService {
 
   constructor(private http: HttpClient) { }
 
-  getJobDescriptionsForUser(): Observable<TrackJdDTO[]> {
+  getJobDescriptionsForUser(): Observable<ApiResponse<TrackJdDTO[]>> {
     // With credentials: true to include cookies in the request
-    return this.http.get<TrackJdDTO[]>(`${this.apiUrl}`, { 
+    return this.http.get<ApiResponse<TrackJdDTO[]>>(`${this.apiUrl}`, { 
       withCredentials: true 
     });
   }

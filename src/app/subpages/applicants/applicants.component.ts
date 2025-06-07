@@ -43,7 +43,7 @@ const jobId = Number(this.route.snapshot.paramMap.get('id'));
 
   const rolePrefix = segments.includes('recruiter-lead') ? 'recruiter-lead' : 'recruiter';
 
-  const candidateId = row?.candidateId?.replace(/^CAN/, ''); // remove prefix if needed
+  const candidateId = row?.candidateId?.replace(/^CAN00/, ''); // remove prefix if needed
   this.router.navigate([`/${rolePrefix}/job-description/applicant-details`, candidateId]);
 };
 
@@ -52,8 +52,8 @@ const jobId = Number(this.route.snapshot.paramMap.get('id'));
 
 loadCandidates(jobId: number): void {
     this.candidateService.getCandidatesByJobRequisitionId(jobId).subscribe({
-      next: (data) => {
-        this.dataSource = data.map(candidate => ({
+      next: (response) => {
+        this.dataSource = response.data.map(candidate => ({
           ...candidate,
           candidateId: `CAN${candidate.candidateId.toString().padStart(3, '0')}`, 
           // Format as CAN0001

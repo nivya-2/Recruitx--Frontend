@@ -145,8 +145,8 @@ export class ApplicantDetailsComponent {
 
   loadCandidate(id: number): void {
   this.candidateService.getCandidateDetails(id).subscribe({
-    next: (data) => {
-      this.candidate = data;
+    next: (response) => {
+      this.candidate = response.data;
     },
     error: (err) => {
       console.error('Error fetching candidate details:', err);

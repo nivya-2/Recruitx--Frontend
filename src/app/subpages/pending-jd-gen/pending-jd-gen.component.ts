@@ -30,7 +30,8 @@ export class PendingJdGenComponent implements OnInit {
 
   loadPendingJds(): void {
     this.pendingJdService.getPendingJds().subscribe({
-      next: (data) => {
+      next: (response) => {
+        const data = response.data ;
         this.dataSource = data.map(jr => ({
           ...jr,
           id: `JR${jr.jobRequisitionId.toString().padStart(3, '0')}`,

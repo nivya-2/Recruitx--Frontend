@@ -68,7 +68,8 @@ actionMethods = {'View JD': this.onViewJD,   'View Applicants': this.onViewAppli
 
  loadJobDescriptions(): void {
     this.trackJdService.getJobDescriptionsForUser().subscribe({
-      next: (data) => {
+      next: (response) => {
+        const data = response.data;
          this.jobDataSource = data.map(jd => ({
         ...jd,
         id: `JR${jd.jobRequisitionId.toString().padStart(3, '0')}`

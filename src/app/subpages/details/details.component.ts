@@ -14,6 +14,7 @@ import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { JobDescriptionDTO, JobDescriptionService } from '../../services/JobDescription.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
+import { ApiResponse } from '../../services/auth.service';
 
 @Component({
   standalone: true,
@@ -64,7 +65,7 @@ export class DetailsComponent implements OnInit {
     this.isLoading = true;
     this.isDraftSaved = (action === 'Draft' ); // If action is 'Draft' or null, we assume it's a draft view
 
-    let apiCall: Observable<JobDescriptionDTO>;
+    let apiCall: Observable<ApiResponse<JobDescriptionDTO>>;
 
     // Decide which API to call based on the action
     if (action === 'GenerateJD') {
@@ -74,7 +75,8 @@ export class DetailsComponent implements OnInit {
     }
 
     apiCall.subscribe({
-      next: (data) => {
+      next: (response) => {
+        const data = response.data;
         this.populateFormData(data);
         this.isLoading = false;
       },

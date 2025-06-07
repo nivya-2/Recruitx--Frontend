@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiResponse } from './auth.service';
 
 export interface PendingJd {
   jobRequisitionId: number;
@@ -22,7 +23,7 @@ export class PendingJdService {
 
   constructor(private http: HttpClient) {}
 
-  getPendingJds(): Observable<PendingJd[]> {
-    return this.http.get<PendingJd[]>(this.apiUrl, { withCredentials: true });
+  getPendingJds(): Observable<ApiResponse<PendingJd[]>> {
+    return this.http.get<ApiResponse<PendingJd[]>>(this.apiUrl, { withCredentials: true });
   }
 }

@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiResponse } from './auth.service';
 
 export interface CandidateDetailsDTO {
   candidateID: number;
@@ -26,7 +27,7 @@ export class CandidateService {
 
   constructor(private http: HttpClient) {}
 
-  getCandidateDetails(applicationId: number): Observable<CandidateDetailsDTO> {
-    return this.http.get<CandidateDetailsDTO>(`${this.baseUrl}/${applicationId}`);
+  getCandidateDetails(applicationId: number): Observable<ApiResponse<CandidateDetailsDTO>> {
+    return this.http.get<ApiResponse<CandidateDetailsDTO>>(`${this.baseUrl}/${applicationId}`);
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiResponse } from './auth.service';
 
 export interface CandidateDTO {
   candidateId: number;
@@ -20,7 +21,7 @@ export class CandidateService {
 
   constructor(private http: HttpClient) {}
 
-  getCandidatesByJobRequisitionId(jobId: number): Observable<CandidateDTO[]> {
-    return this.http.get<CandidateDTO[]>(`${this.baseUrl}/${jobId}`);
+  getCandidatesByJobRequisitionId(jobId: number): Observable<ApiResponse<CandidateDTO[]>> {
+    return this.http.get<ApiResponse<CandidateDTO[]>>(`${this.baseUrl}/${jobId}`);
   }
 }
