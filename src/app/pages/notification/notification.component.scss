@@ -1,6 +1,10 @@
-.notification-card {
-    padding: 1rem !important;
-    margin-bottom: 0.75rem;
+// .notification-card {
+//     padding: 1rem !important;
+//     margin-bottom: 0.75rem;
+// }
+.notification-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .notification-title {
@@ -10,9 +14,9 @@
 
 .date-button {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-end;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
 }
 
 .notification {
@@ -20,4 +24,5 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: 1rem;
 }

@@ -55,9 +55,11 @@ gap: 12rem;
 // justify-content: center;
 align-items: center;
 padding-left: 10px;
+margin-top: 1rem;
 }
 
 h3.schedule-time {
+  font-size: 1rem;
 text-align: center;
 font-weight: 600;
 font-size: 1.1rem;
@@ -185,7 +187,7 @@ margin-top: 0.25rem;
 }
 
 .level-font{
-font-size: 20px !important;
+font-size: 1rem !important;
 font-weight: 400 !important;
 }
 
@@ -370,6 +372,9 @@ h2{
 }
 .cent-text{
   padding-top: 20px;
+  font-size: 1rem;
+  font-weight: 600 !important;
+
 }
 .padding{
   margin-top: 25px;
