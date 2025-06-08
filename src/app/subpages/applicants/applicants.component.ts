@@ -6,6 +6,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { UploadComponent } from "../../shared-components/upload/upload.component";
+import { CandidateDTO, CandidateService } from '../../core/services/api/applicants.service';
 
 @Component({
   selector: 'app-applicants',
@@ -14,127 +15,175 @@ import { UploadComponent } from "../../shared-components/upload/upload.component
   styleUrl: './applicants.component.scss'
 })
 export class ApplicantsComponent {
-constructor(private router: Router, private route: ActivatedRoute) {}
+  isLoading: boolean = true;
+  
+constructor(private router: Router, private route: ActivatedRoute,  private candidateService: CandidateService) {}
+
 routes!: (row: any) => void;
 ngOnInit(): void {
-  this.routes = (row: any): void => {
+
+const jobId = Number(this.route.snapshot.paramMap.get('id'));
+    if (!isNaN(jobId)) {
+      this.loadCandidates(jobId);
+    } else {
+      console.error('Invalid or missing job requisition ID in route.');
+    }
+
+
+  this.routes = (row: any) => {
     const segments = this.route.snapshot.pathFromRoot
       .flatMap(r => r.url.map(u => u.path));
 
     const rolePrefix = segments.includes('recruiter-lead') ? 'recruiter-lead' : 'recruiter';
 
-    this.router.navigate([`/${rolePrefix}/job-description/applicant-details`]);
+    // this.router.navigate([`/${rolePrefix}/job-description/applicant-details/`]);
+    this.routes = (row: any) => {
+  const segments = this.route.snapshot.pathFromRoot
+    .flatMap(r => r.url.map(u => u.path));
+
+  const rolePrefix = segments.includes('recruiter-lead') ? 'recruiter-lead' : 'recruiter';
+
+ const applicationId = row?.applicationID;
+
+this.router.navigate([`/${rolePrefix}/job-description/applicant-details`, applicationId]);
+};
+
   };
 }
+
+loadCandidates(jobId: number): void {
+    this.candidateService.getCandidatesByJobRequisitionId(jobId).subscribe({
+      next: (response) => {
+        this.dataSource = response.data.map(candidate => ({
+          ...candidate,
+          candidateId: `CAN${candidate.candidateId.toString().padStart(3, '0')}`, 
+          // Format as CAN0001
+
+        }));
+                this.isLoading = false;
+
+      },
+      error: (err) => {
+        console.error('Failed to fetch candidate data:', err);
+        this.isLoading = false;
+      }
+    });
+  }
+
+
 visible:boolean = false;
   openModal() {
     this.visible = !this.visible;
   }
-dataSource: any[] = [
-    {
-      candidateId: 'CAN006',
-      name: 'Arjun Menon',
-      email: 'arjunmenon@gmail.com',
-      phone: '987654892',
-      totalExp: 7,
-      relevantExp: 5,
-      currentLocation: 'Kochi',
-      noticePeriod: 90,
-      source: 'LinkedIn',
-      actions: ['Details']
-    },
-    {
-      candidateId: 'CAN006',
-      name: 'Arjun Menon',
-      email: 'arjunmenon@gmail.com',
-      phone: '987654892',
-      totalExp: 7,
-      relevantExp: 5,
-      currentLocation: 'Kochi',
-      noticePeriod: 90,
-      source: 'LinkedIn',
-      actions: ['Details']
-    },
-    {
-      candidateId: 'CAN006',
-      name: 'Arjun Menon',
-      email: 'arjunmenon@gmail.com',
-      phone: '987654892',
-      totalExp: 7,
-      relevantExp: 5,
-      currentLocation: 'Kochi',
-      noticePeriod: 90,
-      source: 'LinkedIn',
-      actions: ['Details']
-    },
-    {
-      candidateId: 'CAN006',
-      name: 'Arjun Menon',
-      email: 'arjunmenon@gmail.com',
-      phone: '987654892',
-      totalExp: 7,
-      relevantExp: 5,
-      currentLocation: 'Kochi',
-      noticePeriod: 90,
-      source: 'LinkedIn',
-      actions: ['Details']
-    },
-    {
-      candidateId: 'CAN006',
-      name: 'Arjun Menon',
-      email: 'arjunmenon@gmail.com',
-      phone: '987654892',
-      totalExp: 7,
-      relevantExp: 5,
-      currentLocation: 'Kochi',
-      noticePeriod: 90,
-      source: 'LinkedIn',
-      actions: ['Details']
-    },
-    {
-      candidateId: 'CAN006',
-      name: 'Arjun Menon',
-      email: 'arjunmenon@gmail.com',
-      phone: '987654892',
-      totalExp: 7,
-      relevantExp: 5,
-      currentLocation: 'Kochi',
-      noticePeriod: 90,
-      source: 'LinkedIn',
-      actions: ['Details']
-    },
-    {
-      candidateId: 'CAN006',
-      name: 'Arjun Menon',
-      email: 'arjunmenon@gmail.com',
-      phone: '987654892',
-      totalExp: 7,
-      relevantExp: 5,
-      currentLocation: 'Kochi',
-      noticePeriod: 90,
-      source: 'LinkedIn',
-      actions: ['Details']
-    },
-    {
-      candidateId: 'CAN006',
-      name: 'Arjun Menon',
-      email: 'arjunmenon@gmail.com',
-      phone: '987654892',
-      totalExp: 7,
-      relevantExp: 5,
-      currentLocation: 'Kochi',
-      noticePeriod: 90,
-      source: 'LinkedIn',
-      actions: ['Details']
-    }
-  ];
+    dataSource: CandidateDTO[]|any = [];
+
+
+
+// dataSource: any[] = [
+//     {
+//       candidateId: 'CAN006',
+//       name: 'Arjun Menon',
+//       email: 'arjunmenon@gmail.com',
+//       phone: '987654892',
+//       totalExp: 7,
+//       relevantExp: 5,
+//       currentLocation: 'Kochi',
+//       noticePeriod: 90,
+//       source: 'LinkedIn',
+//       actions: ['Details']
+//     },
+//     {
+//       candidateId: 'CAN006',
+//       name: 'Arjun Menon',
+//       email: 'arjunmenon@gmail.com',
+//       phone: '987654892',
+//       totalExp: 7,
+//       relevantExp: 5,
+//       currentLocation: 'Kochi',
+//       noticePeriod: 90,
+//       source: 'LinkedIn',
+//       actions: ['Details']
+//     },
+//     {
+//       candidateId: 'CAN006',
+//       name: 'Arjun Menon',
+//       email: 'arjunmenon@gmail.com',
+//       phone: '987654892',
+//       totalExp: 7,
+//       relevantExp: 5,
+//       currentLocation: 'Kochi',
+//       noticePeriod: 90,
+//       source: 'LinkedIn',
+//       actions: ['Details']
+//     },
+//     {
+//       candidateId: 'CAN006',
+//       name: 'Arjun Menon',
+//       email: 'arjunmenon@gmail.com',
+//       phone: '987654892',
+//       totalExp: 7,
+//       relevantExp: 5,
+//       currentLocation: 'Kochi',
+//       noticePeriod: 90,
+//       source: 'LinkedIn',
+//       actions: ['Details']
+//     },
+//     {
+//       candidateId: 'CAN006',
+//       name: 'Arjun Menon',
+//       email: 'arjunmenon@gmail.com',
+//       phone: '987654892',
+//       totalExp: 7,
+//       relevantExp: 5,
+//       currentLocation: 'Kochi',
+//       noticePeriod: 90,
+//       source: 'LinkedIn',
+//       actions: ['Details']
+//     },
+//     {
+//       candidateId: 'CAN006',
+//       name: 'Arjun Menon',
+//       email: 'arjunmenon@gmail.com',
+//       phone: '987654892',
+//       totalExp: 7,
+//       relevantExp: 5,
+//       currentLocation: 'Kochi',
+//       noticePeriod: 90,
+//       source: 'LinkedIn',
+//       actions: ['Details']
+//     },
+//     {
+//       candidateId: 'CAN006',
+//       name: 'Arjun Menon',
+//       email: 'arjunmenon@gmail.com',
+//       phone: '987654892',
+//       totalExp: 7,
+//       relevantExp: 5,
+//       currentLocation: 'Kochi',
+//       noticePeriod: 90,
+//       source: 'LinkedIn',
+//       actions: ['Details']
+//     },
+//     {
+//       candidateId: 'CAN006',
+//       name: 'Arjun Menon',
+//       email: 'arjunmenon@gmail.com',
+//       phone: '987654892',
+//       totalExp: 7,
+//       relevantExp: 5,
+//       currentLocation: 'Kochi',
+//       noticePeriod: 90,
+//       source: 'LinkedIn',
+//       actions: ['Details']
+//     }
+//   ];
 
   columns: Array<{ key: string, label: string, filterable: boolean }> = [
     { key: 'candidateId', label: 'Candidate ID', filterable: false },
-    { key: 'name', label: 'Name', filterable: true },
-    { key: 'email', label: 'Email ID', filterable: true },
-    { key: 'phone', label: 'Phone Number', filterable: false },
-    { key: 'totalExp', label: 'Total Experience (In years)', filterable: false },
+    { key: 'candidateName', label: 'Name', filterable: true },
+    { key: 'candidateEmail', label: 'Email ID', filterable: true },
+    { key: 'candidatePhone', label: 'Phone Number', filterable: false },
+    { key: 'totalExperienceYears', label: 'Total Experience (In years)', filterable: false },
     // { key: 'relevantExp', label: 'Relevant Experience (In years)', filterable: false },
     // { key: 'currentLocation', label: 'Current Location', filterable: true },
     // { key: 'noticePeriod', label: 'Notice Period (In Days)', filterable: false },
@@ -144,5 +193,7 @@ dataSource: any[] = [
 
   
   globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');
+      actionMethods = {'Details': this.routes}
+
 }
 

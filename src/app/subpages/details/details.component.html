@@ -2,7 +2,6 @@
     <div class="header">
         <app-header-text [nopad]="true" context="table-header">Software Developer - Backend (Python)</app-header-text>
     </div>
-
     <div class="buttonset">
       <app-button *ngIf="!isEditMode" (functionemit)="onEdit()">{{ label }}</app-button>
       <app-button *ngIf="isEditMode" (functionemit)="onSave()">Save</app-button>
@@ -12,6 +11,12 @@
     </div>
     
 </div>
+  <div *ngIf="isLoading" class="loading-container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+
+<div *ngIf="!isLoading">
+  
 <app-modal [(visible)]="visible"
   [maximizable]="false"
   [showHeader]="true"
@@ -24,6 +29,7 @@
    <app-button (functionemit)="exportAsExcel()" >Excel</app-button>
    </div>
 </app-modal>
+
 <form class="form-section" id="jd-form">
   <!-- Basic Info -->
   <section class="section-wrapper">
@@ -132,4 +138,5 @@
     <button type="submit" class="submit-btn">Submit</button>
   </div> -->
 </form>
+</div>
 <app-alerts #alerts></app-alerts>
