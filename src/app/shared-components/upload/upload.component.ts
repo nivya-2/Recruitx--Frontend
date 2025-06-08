@@ -20,10 +20,12 @@ export class UploadComponent {
   visible = true;
   uploadedFiles: File[] = [];
   showFileTable = false;
-  
+  hideUploadBox = false;
   closeModal(): void {
     this.uploadedFiles = [];
     this.showFileTable = false;
+    this.hideUploadBox = false;
+
     this.onClose.emit();
   }
 
@@ -41,11 +43,14 @@ export class UploadComponent {
   
   showFilesTable(): void {
     this.showFileTable = true;
+    this.hideUploadBox = true;
+
   }
   
   completeUpload(): void {
     this.onUploadComplete.emit(this.uploadedFiles);
     this.closeModal();
+
   }
 
 }
