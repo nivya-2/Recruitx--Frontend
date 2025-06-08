@@ -1,8 +1,11 @@
 <app-common-layout [breadcrumbItems]="items">
-  <div class="main">
+   <div *ngIf="isLoading" class="loading-container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  <div class="main" *ngIf="!isLoading">
     <app-cards class="details">
       <div class="heading">Candidate Details</div>
-      <div class="candidate-details">
+      <div class="candidate-details" *ngIf="candidate">
         <div class="row" *ngFor="let key of fieldOrder">
           <div class="label">{{ fieldLabels[key] }}</div>
           <div class="value">{{ candidate[key] }}</div>
@@ -21,8 +24,7 @@
           <div
             class="circle"
             [class.completed]="step.completed"
-            [class.rejected]="!step.completed && candidateStatus === 'rejected'"
-          ></div>
+            [class.rejected]="!step.completed && isRejected"></div>
           <div class="content">
             <div class="date" *ngIf="step.date">{{ step.date }}</div>
             <div class="label">{{ step.label }}</div>
@@ -31,8 +33,8 @@
       </div>
 
       <div class="right-align">
-        <app-button class="scaled" (click)="selectCandidate($event)" [disabled]="finished">Next Stage</app-button>
-        <app-button class="scaled" (click)="rejectCandidate($event)">Reject</app-button>
+        <app-button class="scaled" (click)="selectCandidate()" [disabled]="finished || isJobClosed">Next Stage</app-button>
+        <app-button class="scaled" (click)="rejectCandidate()"[disabled]="finished || isJobClosed">Reject</app-button>
       </div>
     </app-cards>
   </div>
