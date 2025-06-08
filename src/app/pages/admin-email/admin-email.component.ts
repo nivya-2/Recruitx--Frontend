@@ -5,7 +5,8 @@ import { HeaderTextComponent } from '../../ui/header-text/header-text.component'
 import { EmailComponent } from "./email/email.component";
 import { AccordionComponent } from "./accordion/accordion.component";
 // import { EmailTemplate } from './email-templates.model';
-import { EmailTemplate, EmailTemplateServiceService } from '../../email-template-service.service';
+import { EmailTemplate, EmailTemplateServiceService } from '../../services/email-template-service.service';
+import { response } from 'express';
 
 
 @Component({
@@ -30,8 +31,8 @@ export class AdminEmailComponent {
   }
 
   ngOnInit(): void {
-    this.emailTemplateService.getGroupedEmailTemplates().subscribe(grouped => {
-      this.emailTemplates = grouped;
+    this.emailTemplateService.getGroupedEmailTemplates().subscribe(response => {
+      this.emailTemplates = response.data;
       // console.log('Email Templates:', this.emailTemplates);
     });
 
