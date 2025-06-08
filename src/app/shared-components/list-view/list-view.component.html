@@ -6,7 +6,7 @@
     </div>
     <div class="job-positions"><span style="color: black;"> |&nbsp;&nbsp; </span>{{ job.positions }} Open Positions</div>
     <div class="assign-button-wrapper">
-      <app-button (functionemit)="assignClick()">Assign</app-button>
+<app-button (functionemit)="assignClick(job.id)">Assign</app-button>
             </div>
   </div>
 </div>
@@ -20,6 +20,7 @@
       [headerBgColor]="'#ffffff'"
       [style]="{ width: '50rem', height: '40rem' }"
      >
-     <app-jr-card (assignCompleted)="handleAssignCompleted($event)"></app-jr-card>
+     <app-jr-card (assignCompleted)="handleAssignCompleted($event)"
+     [jobDetails]="selectedJobDetails"></app-jr-card>
 
      </app-modal>
