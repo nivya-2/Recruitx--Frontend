@@ -60,4 +60,8 @@ export class UserApiService {
   setUserActive(userId: number): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/set-active/${userId}`, {});
   }
+  setRecruiterHead(userId: number): Observable<void> {
+  return this.http.put<void>(`${this.baseUrl}/set-recruiter-head/${userId}`, {});
+}
+
 }
