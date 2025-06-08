@@ -26,6 +26,7 @@
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",
+    "mammoth": "^1.9.1",
     "ng2-charts": "^8.0.0",
     "package": "^1.0.1",
     "primeicons": "^7.0.0",
