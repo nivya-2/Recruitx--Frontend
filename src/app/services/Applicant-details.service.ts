@@ -18,8 +18,21 @@ export interface CandidateDetailsDTO {
   source: string;
   currentLocation: string;
   currentEmployer: string;
+  status: string;
+  jrStatus:string;
 }
 
+export interface TimelineStep {
+  label: string;
+  date?: string;
+  completed: boolean;
+}
+
+export interface ApplicationDetailsPageDTO {
+  candidateInfo: CandidateDetailsDTO;
+  statusTimeline: TimelineStep[];
+  isProcessFinished: boolean;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -28,7 +41,11 @@ export class CandidateService {
 
   constructor(private http: HttpClient) {}
 
-  getCandidateDetails(applicationId: number): Observable<ApiResponse<CandidateDetailsDTO>> {
-    return this.http.get<ApiResponse<CandidateDetailsDTO>>(`${this.baseUrl}/${applicationId}`);
+  getApplicationPageDetails(applicationId: number): Observable<{ data: ApplicationDetailsPageDTO }> {
+    return this.http.get<{ data: ApplicationDetailsPageDTO }>(`${this.baseUrl}/${applicationId}`);
+  }
+
+    updateApplicationStatus(applicationId: number, action: 'progress' | 'reject'): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/${applicationId}/update-status`, { action });
   }
 }

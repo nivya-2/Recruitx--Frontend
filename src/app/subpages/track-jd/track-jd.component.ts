@@ -72,9 +72,11 @@ actionMethods = {'View JD': this.onViewJD,   'View Applicants': this.onViewAppli
         const data = response.data;
          this.jobDataSource = data.map(jd => ({
         ...jd,
-        id: `JR${jd.jobRequisitionId.toString().padStart(3, '0')}`
-      }));
-        
+        id: `JR${jd.jobRequisitionId.toString().padStart(3, '0')}`,
+        jrProgress:{current:jd.filledPositions, total:jd.numberOfPositions},
+      }
+      
+    ));
         this.isLoading = false;
       },
       error: (err) => {
@@ -90,6 +92,7 @@ jobColumns: Array<{ key: string, label: string, filterable: boolean ,type?:strin
   { key: 'roleTitle', label: 'Role Title', filterable: true },
   { key: 'businessUnit', label: 'Delivery Unit', filterable: true },
   { key: 'createdDate', label: 'Created Date', filterable: true , type: 'date' },
+  {key: 'jrProgress', label: 'Progress', filterable: false},
   // { key: 'associatedJr', label: 'Associated JR', filterable: false },
   { key: 'jobStatus', label: 'Status', filterable: true },
   { key: 'actions', label: 'Actions', filterable: false }
