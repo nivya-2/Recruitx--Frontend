@@ -14,7 +14,7 @@ import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
 import { ApiResponse } from '../../core/services/api/auth.service';
-import { JobDescriptionService, JobDescriptionDTO } from '../../core/services/api/JobDescription.service';
+import { JobDescriptionService, JobDescriptionDTO } from '../../core/services/api/job-description.service';
 
 @Component({
   standalone: true,

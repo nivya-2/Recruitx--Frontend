@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { CandidateService1 } from './applicant-details.service';
 
 
-describe('ApplicantDetailsService', () => {
+describe('CandidateService1', () => {
   let service: CandidateService1;
 
   beforeEach(() => {
