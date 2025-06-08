@@ -16,7 +16,7 @@ import { CandidateDTO, CandidateService } from '../../services/Applicants.servic
 })
 export class ApplicantsComponent {
   isLoading: boolean = true;
-
+  
 constructor(private router: Router, private route: ActivatedRoute,  private candidateService: CandidateService) {}
 
 routes!: (row: any) => void;
@@ -43,8 +43,9 @@ const jobId = Number(this.route.snapshot.paramMap.get('id'));
 
   const rolePrefix = segments.includes('recruiter-lead') ? 'recruiter-lead' : 'recruiter';
 
-  const candidateId = row?.candidateId?.replace(/^CAN00/, ''); // remove prefix if needed
-  this.router.navigate([`/${rolePrefix}/job-description/applicant-details`, candidateId]);
+ const applicationId = row?.applicationID;
+
+this.router.navigate([`/${rolePrefix}/job-description/applicant-details`, applicationId]);
 };
 
   };

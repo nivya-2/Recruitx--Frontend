@@ -6,6 +6,7 @@ import { ApiResponse } from './auth.service';
 
 export interface CandidateDetailsDTO {
   candidateID: number;
+  applicationID: number;
   candidateName: string;
   candidatePhone: string;
   candidateEmail: string;

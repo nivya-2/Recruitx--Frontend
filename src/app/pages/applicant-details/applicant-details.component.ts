@@ -133,7 +133,7 @@ export class ApplicantDetailsComponent {
     this.items = [
       { label: 'Job-Description', routerLink: `/${prefix}/job-description` },
       { label: 'Applicants', routerLink: `/${prefix}/job-description/applicants` },
-      { label: 'Arjun Menon', routerLink: `/${prefix}/job-description/applicant-details` },
+      { label: `Candidate Details`, routerLink: `/${prefix}/job-description/applicant-details` },
     ];
     
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -147,7 +147,14 @@ export class ApplicantDetailsComponent {
   this.candidateService.getCandidateDetails(id).subscribe({
     next: (response) => {
       this.candidate = response.data;
-    },
+      
+      // Format candidateID with prefix 'CAN'
+      this.candidate.candidateID = `CAN${this.candidate.candidateID.toString().padStart(3, '0')}`;
+      this.candidate.totalExperience = `${this.candidate.totalExperience}  years`;
+      this.candidate.relavantExperience = `${this.candidate.relavantExperience}  years`;
+      this.candidate.noticePeriod = `${this.candidate.noticePeriod}  days`;
+      this.candidate.currentCTC = `${this.candidate.currentCTC} LPA`;
+      this.candidate.expectedCTC = this.candidate.expectedCTC  ? `${this.candidate.expectedCTC} LPA`  : 'Not specified';    },
     error: (err) => {
       console.error('Error fetching candidate details:', err);
     }
