@@ -2,7 +2,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiResponse } from './auth.service';
 
 export interface CandidateDetailsDTO {
   candidateID: number;
@@ -36,7 +35,7 @@ export interface ApplicationDetailsPageDTO {
 @Injectable({
   providedIn: 'root',
 })
-export class CandidateService {
+export class CandidateService1 {
   private baseUrl = 'https://localhost:7144/api/JobDescription/my-job-descriptions/applicant-details'; // Adjust base URL as needed
 
   constructor(private http: HttpClient) {}

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { TableComponent } from '../../shared-components/table/table.component';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { TrackJdDTO, TrackJdService } from '../../services/Track-Jd.service';
+import { TrackJdService, TrackJdDTO } from '../../core/services/api/track-jd.service';
 
 
 @Component({

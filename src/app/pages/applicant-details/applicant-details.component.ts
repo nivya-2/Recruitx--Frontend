@@ -7,9 +7,9 @@ import { KeyValuePipe, NgFor, NgIf } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
-import { ApplicationDetailsPageDTO, CandidateDetailsDTO, CandidateService, TimelineStep } from '../../services/Applicant-details.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner'; 
 import { finalize } from 'rxjs';
+import { ApplicationDetailsPageDTO, CandidateDetailsDTO, CandidateService1, TimelineStep } from '../../core/services/api/applicant-details.service';
 
 // interface Candidate {
 //   id: string;
@@ -185,7 +185,7 @@ else {
   // };
 
 
-  constructor(private router: Router, private route: ActivatedRoute,  private candidateService: CandidateService) {}
+  constructor(private router: Router, private route: ActivatedRoute,  private candidateService: CandidateService1) {}
 
   
 

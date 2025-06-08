@@ -6,7 +6,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { UploadComponent } from "../../shared-components/upload/upload.component";
-import { CandidateDTO, CandidateService } from '../../services/Applicants.service';
+import { CandidateDTO, CandidateService } from '../../core/services/api/applicants.service';
 
 @Component({
   selector: 'app-applicants',

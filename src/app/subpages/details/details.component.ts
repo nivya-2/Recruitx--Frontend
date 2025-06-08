@@ -11,10 +11,10 @@ import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
-import { JobDescriptionDTO, JobDescriptionService } from '../../services/JobDescription.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
-import { ApiResponse } from '../../services/auth.service';
+import { ApiResponse } from '../../core/services/api/auth.service';
+import { JobDescriptionService, JobDescriptionDTO } from '../../core/services/api/JobDescription.service';
 
 @Component({
   standalone: true,
