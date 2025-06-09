@@ -46,7 +46,7 @@ getJobDetailsById(id: number): Observable<ApiResponse<JobRequisitionInfo>> {
     return this.http.get<ApiResponse<JobRequisitionInfo>>(`${this.apiUrl}/info/${id}`);
   }
   assignJobRequisition(id: number, payload: AssignJrPayload): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${id}/assign`, payload);
+    return this.http.post(`${this.apiUrl}/${id}/assign`, payload,{withCredentials: true});
   }
 
   delete(id: number): Observable<void> {

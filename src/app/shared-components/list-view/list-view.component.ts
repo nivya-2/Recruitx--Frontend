@@ -7,9 +7,10 @@ import { JrCardComponent } from "../jr-card/jr-card.component";
 import { AlertsComponent } from "../../ui/alerts/alerts.component";
 import { ToastComponent } from "../../ui/toast/toast.component";
 import { JrApiService } from '../../core/services/api/jr-api.service';
+import { ProgressSpinner } from 'primeng/progressspinner';
 @Component({
   selector: 'app-list-view',
-  imports: [ButtonComponent, NgFor, ModalComponent, JrCardComponent, AlertsComponent, ToastComponent],
+  imports: [ProgressSpinner,ButtonComponent, NgFor, ModalComponent, JrCardComponent, AlertsComponent, ToastComponent],
   templateUrl: './list-view.component.html',
   styleUrl: './list-view.component.scss'
 })
