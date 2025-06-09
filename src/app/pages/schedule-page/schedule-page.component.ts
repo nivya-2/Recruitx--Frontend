@@ -17,6 +17,9 @@ import { CardsComponent } from "../../ui/cards/cards.component";
 import { HeaderTextComponent } from "../../ui/header-text/header-text.component";
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { Router } from '@angular/router';
+import {InterviewPanelService, InterviewMeetingDetails, PanelMeetingsResponse, PanelMember, ScheduleInterviewRequest } from '../../interview-panel.service';
+import { forkJoin, of } from 'rxjs'; // IMPORT forkJoin and of for handling multiple API calls
+import { log } from 'console';
 
 @Component({
   selector: 'app-schedule-page',
@@ -29,39 +32,27 @@ export class SchedulePageComponent implements OnInit {
   // Sample data
   candidates: any[] = [
     { id: 'CND-101', name: 'Emma Johnson', mobNumber: '7012345678', email: 'emma.johnson@example.com', stage: 'Technical Level 1', totalExp: 3, relevantExp: 2, currentEmployer: 'Google' },
-    { id: 'CND-102', name: 'Liam Smith', mobNumber: '7123456789', email: 'liam.smith@example.com', stage: 'Technical Level 2', totalExp: 5, relevantExp: 4, currentEmployer: 'Amazon' },
-    { id: 'CND-103', name: 'Olivia Brown', mobNumber: '7234567890', email: 'olivia.brown@example.com', stage: 'Technical Level 3', totalExp: 7, relevantExp: 6, currentEmployer: 'Microsoft' },
-    { id: 'CND-104', name: 'Noah Davis', mobNumber: '7345678901', email: 'noah.davis@example.com', stage: 'Management Level 1', totalExp: 8, relevantExp: 7, currentEmployer: 'Facebook' },
-    { id: 'CND-105', name: 'Ava Wilson', mobNumber: '7456789012', email: 'ava.wilson@example.com', stage: 'Management Level 2', totalExp: 10, relevantExp: 9, currentEmployer: 'Apple' },
-    { id: 'CND-106', name: 'William Miller', mobNumber: '7567890123', email: 'william.miller@example.com', stage: 'Technical Level 1', totalExp: 2, relevantExp: 1, currentEmployer: 'Netflix' },
-    { id: 'CND-107', name: 'Sophia Moore', mobNumber: '7678901234', email: 'sophia.moore@example.com', stage: 'Technical Level 2', totalExp: 4, relevantExp: 3, currentEmployer: 'Tesla' },
-    { id: 'CND-108', name: 'James Taylor', mobNumber: '7789012345', email: 'james.taylor@example.com', stage: 'Technical Level 3', totalExp: 6, relevantExp: 5, currentEmployer: 'Spotify' },
-    { id: 'CND-109', name: 'Isabella Anderson', mobNumber: '7890123456', email: 'isabella.anderson@example.com', stage: 'Management Level 1', totalExp: 9, relevantExp: 8, currentEmployer: 'Adobe' },
-    { id: 'CND-110', name: 'Benjamin Thomas', mobNumber: '7901234567', email: 'benjamin.thomas@example.com', stage: 'Management Level 2', totalExp: 11, relevantExp: 10, currentEmployer: 'Salesforce' }
+  { id: 'CND-110', name: 'Benjamin Thomas', mobNumber: '7901234567', email: 'benjamin.thomas@example.com', stage: 'Management Level 2', totalExp: 11, relevantExp: 10, currentEmployer: 'Salesforce' }
   ];
 
-  interviewers: any[] = [
-    { id: 'INT-006', name: 'Lucas' },
-    { id: 'INT-007', name: 'Amelia' },
-    { id: 'INT-008', name: 'Ethan' },
-    { id: 'INT-009', name: 'Mia' },
-    { id: 'INT-010', name: 'Jack' },
-    { id: 'INT-011', name: 'Lily' }
-  ];
+isLoadingInterviewers = true; // To show a loading state in the UI
+  interviewerError: string | null = null; // To show an error message
+  // interviewers: PanelMember[] = []; // Now strongly typed
+  
+  gridError: string | null = null;
 
   // Time slots for the FORM dropdowns
-  timeSlots = [
-    
-    { label: '9:00 AM', value: '09:00' }, { label: '9:30 AM', value: '09:30' },
+ timeSlots = [
+    { label: '9:00 AM',  value: '09:00' }, { label: '9:30 AM',  value: '09:30' },
     { label: '10:00 AM', value: '10:00' }, { label: '10:30 AM', value: '10:30' },
     { label: '11:00 AM', value: '11:00' }, { label: '11:30 AM', value: '11:30' },
     { label: '12:00 PM', value: '12:00' }, { label: '12:30 PM', value: '12:30' },
-    { label: '1:00 PM', value: '13:00' }, { label: '1:30 PM', value: '13:30' },
-    { label: '2:00 PM', value: '14:00' }, { label: '2:30 PM', value: '14:30' },
-    { label: '3:00 PM', value: '15:00' }, { label: '3:30 PM', value: '15:30' },
-    { label: '4:00 PM', value: '16:00' }, { label: '4:30 PM', value: '16:30' },
-    { label: '5:00 PM', value: '17:00' }, { label: '5:30 PM', value: '17:30' },
-    { label: '6:00 PM', value: '18:00' }
+    { label: '1:00 PM',  value: '13:00' }, { label: '1:30 PM',  value: '13:30' },
+    { label: '2:00 PM',  value: '14:00' }, { label: '2:30 PM',  value: '14:30' },
+    { label: '3:00 PM',  value: '15:00' }, { label: '3:30 PM',  value: '15:30' },
+    { label: '4:00 PM',  value: '16:00' }, { label: '4:30 PM',  value: '16:30' },
+    { label: '5:00 PM',  value: '17:00' }, { label: '5:30 PM',  value: '17:30' },
+    { label: '6:00 PM',  value: '18:00' }
   ];
 
   // Component state
@@ -75,108 +66,234 @@ export class SchedulePageComponent implements OnInit {
   minDate: Date = new Date();
   filteredEndTimeSlots: any[] = [];
   currentMeetingDuration: number = 0; // Initialize to 0 or null
-
-
+  displayHours: string[] = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+  workingHoursStart = 5;
+  workingHoursEnd = 20;
+  allScheduledEventsForCurrentDate: any[] = [];
+  items: any = [];
+  currentUrl: any;
+ isGridLoading = false;
   @ViewChild('candidateDropdown') candidateDropdown: Dropdown | undefined;
 
   // NEW Properties for Grid UI
-  displayHours: string[] = [ // Hours for the time axis on the grid
-    '08:00', '09:00', '10:00', '11:00', '12:00',
-    '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'
-  ];
-  workingHoursStart = 9; // 9 AM (inclusive)
-  workingHoursEnd = 16;  // 5 PM (exclusive, so up to 16:xx)
-  allScheduledEventsForCurrentDate: any[] = [];
+  
+  
 myInterview: any;
 
-constructor(private router: Router,private messageService: MessageService) {
+constructor(private router: Router,private messageService: MessageService,     private interviewPanelService: InterviewPanelService
+ ) {
   this.currentUrl = this.router.url;
 }
+    // this.loadMeetingsForGrid();
 
-  ngOnInit() {
-    this.initializeSampleData();
-    this.updateScheduledEventsForCurrentDate();
-    this.calculateCurrentMeetingDuration(); // Calculate initial duration (likely 0)
-    // Load events for the initial date
-      this.currentUrl = this.router.url;
-      if (this.currentUrl.startsWith('/recruiter-lead')) {
-        this.items=[{ label: 'Interview', routerLink: '/recruiter-lead/interviews' }, {label: 'Schedule', routerLink: '/recruiter-lead/interviews/Schedule'}, {label: 'Scheduling Page', routerLink: '/recruiter-lead/interviews/Schedule/schedule-page'}]
-        this.router.navigate(['/recruiter-lead/interviews/shortlist/schedule-page']);
-      } else if (this.currentUrl.startsWith('/recruiter')) {
-        this.items=[{ label: 'Interview', routerLink: '/recruiter/interviews' }, {label: 'Schedule', routerLink: '/recruiter/interviews/Schedule'}, {label: 'Scheduling Page', routerLink: '/recruiter/interviews/Schedule/schedule-page'}]
-  
-      }
+   ngOnInit() {
+    // Set up initial UI state
+    this.currentUrl = this.router.url;
+    if (this.currentUrl.startsWith('/recruiter-lead')) {
+      this.items = [{ label: 'Interview', routerLink: '/recruiter-lead/interviews' }, { label: 'Schedule', routerLink: '/recruiter-lead/interviews/Schedule' }, { label: 'Scheduling Page', routerLink: '/recruiter-lead/interviews/Schedule/schedule-page' }];
+    } else if (this.currentUrl.startsWith('/recruiter')) {
+      this.items = [{ label: 'Interview', routerLink: '/recruiter/interviews' }, { label: 'Schedule', routerLink: '/recruiter/interviews/Schedule' }, { label: 'Scheduling Page', routerLink: '/recruiter/interviews/Schedule/schedule-page' }];
+    }
+
+    // Load initial data from APIs
+    this.loadInterviewPanel();
     
+    // Initialize component state
+    this.updateScheduledEventsForCurrentDate(); // Initialize with empty array
+    this.calculateCurrentMeetingDuration();
+  }
+  loadInterviewPanel(): void {
+    this.isLoadingInterviewers = true;
+    this.interviewerError = null;
+    this.interviewPanelService.getPanelMembers().subscribe({
+      next: (members: PanelMember[]) => {
+        this.interviewers = members.map(member => ({
+          id: member.email,
+          name: member.name
+        }));
+        this.isLoadingInterviewers = false;
+      },
+      error: (err) => {
+        console.error('Failed to load interview panel members', err);
+        this.interviewerError = 'Could not load panel members. Please try again later.';
+        this.isLoadingInterviewers = false;
+      }
+    });
   }
 
-  initializeSampleData() {
-    const today = new Date();
-    this.scheduledInterviews = [
-      {
-        id: 'SCH-001',
-        candidateId: 'CND-037',
-        candidateName: 'Sophia Martinez',
-        date: new Date(today),
-        startTime: '11:30',
-        endTime: '12:00',
-        interviewers: ['INT-006'],
-        interviewerNames: ['Lucas']
+  // initializeSampleData() {
+  //   const today = new Date();
+  //   this.scheduledInterviews = [
+  //     {
+  //       id: 'SCH-001',
+  //       candidateId: 'CND-037',
+  //       candidateName: 'Sophia Martinez',
+  //       date: new Date(today),
+  //       startTime: '11:30',
+  //       endTime: '12:00',
+  //       interviewers: ['INT-006'],
+  //       interviewerNames: ['Lucas']
+  //     },
+  //     {
+  //       id: 'SCH-002',
+  //       candidateId: 'CND-038',
+  //       candidateName: 'James Anderson',
+  //       date: new Date(today),
+  //       startTime: '12:00',
+  //       endTime: '13:00',
+  //       interviewers: ['INT-007'],
+  //       interviewerNames: ['Amelia']
+  //     },
+  //     {
+  //       id: 'SCH-003',
+  //       candidateId: 'CND-039',
+  //       candidateName: 'Emily Johnson',
+  //       date: new Date(today),
+  //       startTime: '14:00',
+  //       endTime: '15:00',
+  //       interviewers: ['INT-008'],
+  //       interviewerNames: ['Ethan']
+  //     },
+  //     {
+  //       id: 'SCH-004',
+  //       candidateId: 'CND-040',
+  //       candidateName: 'Michael Smith',
+  //       date: new Date(today),
+  //       startTime: '10:00',
+  //       endTime: '11:30',
+  //       interviewers: ['INT-009'],
+  //       interviewerNames: ['Mia']
+  //     },
+  //     {
+  //       id: 'SCH-005',
+  //       candidateId: 'CND-041',
+  //       candidateName: 'Olivia Brown',
+  //       date: new Date(today),
+  //       startTime: '09:00',
+  //       endTime: '09:30',
+  //       interviewers: ['INT-010'],
+  //       interviewerNames: ['Jack']
+  //     },
+  //     {
+  //       id: 'SCH-006',
+  //       candidateId: 'CND-042',
+  //       candidateName: 'William Garcia',
+  //       date: new Date(today),
+  //       startTime: '15:00',
+  //       endTime: '15:30',
+  //       interviewers: ['INT-011'],
+  //       interviewerNames: ['Lily']
+  //     }
+  //   ];
+  // }
+  
+ loadMeetingDataForGrid(): void {
+    if (!this.selectedDate || !this.selectedInterviewers || this.selectedInterviewers.length === 0) {
+      this.scheduledInterviews = [];
+      this.updateScheduledEventsForCurrentDate();
+      return;
+    }
+
+    this.isGridLoading = true;
+    this.gridError = null;
+    const dateStr = this.formatDateForApi(this.selectedDate);
+
+    const apiCalls = this.selectedInterviewers.map(interviewerEmail =>
+      this.interviewPanelService.getPanelMemberMeetings(interviewerEmail, dateStr)
+      
+    );
+
+    forkJoin(apiCalls).subscribe({
+      next: (responses: any[]) => {
+        console.log('--- RAW API RESPONSES RECEIVED ---', responses);
+        
+        const allMeetingsForGrid: any[] = [];
+        
+        responses.forEach(response => {
+          // --- THIS IS THE CRITICAL FIX ---
+          // The real data is nested inside response.data
+          const actualData = response.data; 
+
+          if (actualData && actualData.interviews && actualData.interviews.length > 0) {
+            console.log(`Found ${actualData.interviews.length} meeting(s) for ${actualData.searchParameters.panelMemberEmail}`);
+            
+            const transformedMeetings = this.transformApiData(
+              actualData.interviews, 
+              actualData.searchParameters.panelMemberEmail
+            );
+            
+            allMeetingsForGrid.push(...transformedMeetings);
+          }
+        });
+
+        console.log('--- FINAL TRANSFORMED DATA FOR GRID ---', allMeetingsForGrid);
+        this.scheduledInterviews = allMeetingsForGrid;
+        this.updateScheduledEventsForCurrentDate(); // This will refresh the grid's visual display
+        this.checkForConflicts();
+        this.isGridLoading = false;
       },
-      {
-        id: 'SCH-002',
-        candidateId: 'CND-038',
-        candidateName: 'James Anderson',
-        date: new Date(today),
-        startTime: '12:00',
-        endTime: '13:00',
-        interviewers: ['INT-007'],
-        interviewerNames: ['Amelia']
-      },
-      {
-        id: 'SCH-003',
-        candidateId: 'CND-039',
-        candidateName: 'Emily Johnson',
-        date: new Date(today),
-        startTime: '14:00',
-        endTime: '15:00',
-        interviewers: ['INT-008'],
-        interviewerNames: ['Ethan']
-      },
-      {
-        id: 'SCH-004',
-        candidateId: 'CND-040',
-        candidateName: 'Michael Smith',
-        date: new Date(today),
-        startTime: '10:00',
-        endTime: '11:30',
-        interviewers: ['INT-009'],
-        interviewerNames: ['Mia']
-      },
-      {
-        id: 'SCH-005',
-        candidateId: 'CND-041',
-        candidateName: 'Olivia Brown',
-        date: new Date(today),
-        startTime: '09:00',
-        endTime: '09:30',
-        interviewers: ['INT-010'],
-        interviewerNames: ['Jack']
-      },
-      {
-        id: 'SCH-006',
-        candidateId: 'CND-042',
-        candidateName: 'William Garcia',
-        date: new Date(today),
-        startTime: '15:00',
-        endTime: '15:30',
-        interviewers: ['INT-011'],
-        interviewerNames: ['Lily']
+      error: (err) => {
+        console.error('--- ERROR FETCHING MEETINGS ---', err);
+        this.gridError = 'Could not load meeting schedules.';
+        this.isGridLoading = false;
+        this.scheduledInterviews = [];
+        this.updateScheduledEventsForCurrentDate();
       }
-    ];
+    });
   }
+
+ /**
+   * Transforms the data from the API into the format used by the component's grid UI.
+   */
+  transformApiData(meetings: InterviewMeetingDetails[], interviewerEmail: string): any[] {
+    return meetings.map(meeting => {
+      // 1. A UTC string like "2025-06-09T04:30:00" is received.
+      const startDate = new Date(meeting.startTime); // 2. Creates a local Date object, e.g., 10:00 AM IST.
+      const endDate = new Date(meeting.endTime);
+
+      return {
+        id: meeting.id,
+        candidateName: meeting.candidateName,
+        date: startDate,
+        // 3. formatTimeForGrid(startDate) now correctly calls .getHours() and returns "10:00".
+        startTime: this.formatTimeForGrid(startDate),
+        endTime: this.formatTimeForGrid(endDate),
+        interviewers: [interviewerEmail],
+        interviewerNames: [this.getInterviewerName(interviewerEmail)],
+        duration: (endDate.getTime() - startDate.getTime()) / (1000 * 60)
+      };
+    });
+  }
+
+   formatDateForApi(date: Date): string {
+    const day = ('0' + date.getDate()).slice(-2);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
+  /**
+   * Helper function to format a Date object into 'HH:mm' string.
+   */
+ formatTimeForGrid(date: Date): string {
+  // Clone the date to avoid modifying the original
+  const updatedDate = new Date(date.getTime());
+
+  // Add 5 hours and 30 minutes
+  updatedDate.setHours(updatedDate.getHours() + 5);
+  updatedDate.setMinutes(updatedDate.getMinutes() + 30);
+
+  // Get hours and minutes after the adjustment
+  const hours = ('0' + updatedDate.getHours()).slice(-2);
+  const minutes = ('0' + updatedDate.getMinutes()).slice(-2);
+  console.log(hours,minutes,987)
+
+  return `${hours}:${minutes}`;
+}
+
   
 
-  onCandidateChange(event: any) {
+
+ onCandidateChange(event: any) {
     if (this.selectedCandidate) {
       this.resetFormForNewCandidate();
       this.checkForConflicts();
@@ -184,14 +301,15 @@ constructor(private router: Router,private messageService: MessageService) {
       this.resetFormForNewCandidate();
       this.conflicts = [];
     }
-    // The grid UI will update automatically due to Angular's change detection
-    // when selectedCandidate changes, as it's used in ngClass for event blocks.
   }
 
-  onDateChange() {
-    this.updateScheduledEventsForCurrentDate(); // Reload events for the new date for the grid
-    this.checkForConflicts(); // Check conflicts for the form
+ onDateChange(): void {
+    this.loadMeetingDataForGrid();
+    this.checkForConflicts();
   }
+
+
+
 
   onTimeChange() {
     this.updateEndTimeSlots();
@@ -200,12 +318,57 @@ constructor(private router: Router,private messageService: MessageService) {
     }
     this.checkForConflicts();
   }
+selectedInterviewer: string = '';
 
-  onInterviewersChange() {
-    this.checkForConflicts();
-    console.log(this.currentMeetingDuration)
-    // Grid UI updates automatically as selectedInterviewers is used in *ngFor
+ onInterviewersChange(): void {
+    console.log('Interviewers changed. Selected:', this.selectedInterviewers);
+
+    // --- START OF STATIC DATA TEST ---
+
+    // Check if the user specifically selected Jessica Brown's email
+    // NOTE: Replace 'jessicabrown@RecruitXexp.onmicrosoft.com' with the actual email/id from your dropdown
+    if (this.selectedInterviewers.includes('jessicabrown@RecruitXexp.onmicrosoft.com')) {
+      console.log('STATIC TEST: "Jessica Brown" selected. Injecting sample data.');
+
+      
+    }
+    this.loadMeetingDataForGrid();
   }
+printMeetingTimes(email: string, date: string): void {
+  this.interviewPanelService.getPanelMemberMeetings(email, date)
+    .subscribe({
+      next: (res) => {
+        const interviews = res?.data?.interviews ?? [];
+
+        if (interviews.length === 0) {
+          console.log(`No meetings found for ${email} on ${date}.`);
+          return;
+        }
+
+        interviews.forEach((interview: { startTime: string | number | Date; endTime: string | number | Date; }) => {
+          console.log(`Meeting for ${email}:`);
+          console.log('  Start Time:', new Date(interview.startTime).toLocaleString());
+          console.log('  End Time:', new Date(interview.endTime).toLocaleString());
+        });
+      },
+      error: (err) => {
+        console.error('Failed to load meetings:', err);
+      }
+    });
+}
+
+getFormattedDate(date: Date): string {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+}
+
+
+interviewers: { id: string, name: string }[] = [];
+
+  
+  
   calculateCurrentMeetingDuration() {
     if (this.selectedStartTime && this.selectedEndTime) {
       const startMinutes = this.timeToMinutes(this.selectedStartTime);
@@ -224,8 +387,6 @@ constructor(private router: Router,private messageService: MessageService) {
     }
   }
 
-  items:any = [];
-  currentUrl:any;
  
   @ViewChild('alerts') alertsComponent!: AlertsComponent;
  
@@ -355,12 +516,16 @@ constructor(private router: Router,private messageService: MessageService) {
     }
   }
 
-  hasTimeConflict(start1: string, end1: string, start2: string, end2: string): boolean {
-    const start1Minutes = this.timeToMinutes(start1);
-    const end1Minutes = this.timeToMinutes(end1);
-    const start2Minutes = this.timeToMinutes(start2);
-    const end2Minutes = this.timeToMinutes(end2);
-    return (start1Minutes < end2Minutes && end1Minutes > start2Minutes);
+hasTimeConflict(start1: string, end1: string, start2: string, end2: string): boolean {
+const start1Minutes = this.timeToMinutes(start1);
+const end1Minutes = this.timeToMinutes(end1);
+const start2Minutes = this.timeToMinutes(start2);
+const end2Minutes = this.timeToMinutes(end2);
+return (start1Minutes < end2Minutes && end1Minutes > start2Minutes);
+}
+   getInterviewerName(interviewerEmail: string): string {
+    const interviewer = this.interviewers.find(i => i.id === interviewerEmail);
+    return interviewer ? interviewer.name : 'Unknown';
   }
 
   timeToMinutes(time: string): number {
@@ -369,10 +534,7 @@ constructor(private router: Router,private messageService: MessageService) {
     return hours * 60 + minutes;
   }
 
-  getInterviewerName(interviewerId: string): string {
-    const interviewer = this.interviewers.find(i => i.id === interviewerId);
-    return interviewer ? interviewer.name : 'Unknown';
-  }
+  
 
   canSchedule(): boolean {
     return !!(
@@ -385,32 +547,64 @@ constructor(private router: Router,private messageService: MessageService) {
     );
   }
 
-  scheduleInterview() {
+scheduleInterview() {
+    // 1. Guard Clause: Double-check if we can schedule
     if (!this.canSchedule()) {
       this.messageService.add({
         severity: 'error', summary: 'Cannot Schedule',
-        detail: 'Please fill all required fields, select a candidate, and resolve conflicts.'
+        detail: 'Please fill all required fields and resolve conflicts.'
       });
       return;
     }
-    const newInterview: any = {
-      id: 'SCH-' + Date.now(),
-      candidateId: this.selectedCandidate!.id,
-      candidateName: this.selectedCandidate!.name,
-      date: new Date(this.selectedDate),
-      startTime: this.selectedStartTime,
-      endTime: this.selectedEndTime,
-      interviewers: [...this.selectedInterviewers],
-      interviewerNames: this.selectedInterviewers.map(id => this.getInterviewerName(id)),
-      duration: this.timeToMinutes(this.selectedEndTime) - this.timeToMinutes(this.selectedStartTime)
-    };
-    this.scheduledInterviews.push(newInterview);
-    this.updateScheduledEventsForCurrentDate(); // Refresh grid data
-    this.resetFormFieldsAfterScheduling();
-    this.calculateCurrentMeetingDuration(); // Reset duration for the next new schedule
 
-    this.checkForConflicts();
+    // 2. Find the selected start and end time labels (e.g., "2:30 PM")
+    const startTimeLabel = this.timeSlots.find(slot => slot.value === this.selectedStartTime)?.label;
+    const endTimeLabel = this.timeSlots.find(slot => slot.value === this.selectedEndTime)?.label;
+
+    if (!startTimeLabel || !endTimeLabel) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid time selected.' });
+      return;
+    }
+
+    // 3. Construct the request object for the API
+    const request: ScheduleInterviewRequest = {
+      panelMemberEmails: this.selectedInterviewers,
+      date: this.formatDateForApi(this.selectedDate), // "dd-MM-yyyy"
+      startTime: startTimeLabel, // "h:mm AM/PM" format
+      endTime: endTimeLabel,
+      candidateName: this.selectedCandidate!.name,
+      interviewLevel: this.selectedCandidate!.stage,
+      jobRole: "Senior Software Engineer" // TODO: Get this from a real property if available
+    };
+
+    console.log('--- Scheduling Interview with Request ---', request);
+
+    // 4. Call the service
+    this.interviewPanelService.scheduleInterview(request).subscribe({
+      next: (response) => {
+        // This is inside the onAccept callback of your existing scheduleAlert
+        // We will just show the success message directly here.
+        this.messageService.add({ 
+          severity: 'success', 
+          summary: 'Interview Scheduled', 
+          detail: `Interview for ${request.candidateName} has been scheduled!` 
+        });
+        
+        // 5. Refresh the grid to show the new meeting
+        this.loadMeetingDataForGrid();
+        this.resetFormFieldsAfterScheduling();
+      },
+      error: (err) => {
+        console.error('Failed to schedule interview', err);
+        this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Scheduling Failed', 
+          detail: 'Could not schedule the interview. Please try again.' 
+        });
+      }
+    });
   }
+  
 
   resetFormForNewCandidate() {
     this.selectedStartTime = '';
@@ -432,34 +626,58 @@ constructor(private router: Router,private messageService: MessageService) {
 
   }
 
-  previousDay() {
+  previousDay() { /* ... unchanged (though it should call onDateChange) ... */
     const prevDay = new Date(this.selectedDate);
     prevDay.setDate(prevDay.getDate() - 1);
     this.selectedDate = prevDay;
-    this.updateScheduledEventsForCurrentDate();
-    this.checkForConflicts();
+    this.onDateChange(); // Trigger data reload
   }
-
-  nextDay() {
+  nextDay() { /* ... unchanged (though it should call onDateChange) ... */
     const nextDay = new Date(this.selectedDate);
     nextDay.setDate(nextDay.getDate() + 1);
     this.selectedDate = nextDay;
-    this.updateScheduledEventsForCurrentDate();
-    this.checkForConflicts();
+    this.onDateChange(); // Trigger data reload
   }
 
   // --- NEW Methods for Grid UI ---
-  updateScheduledEventsForCurrentDate() {
+  // updateScheduledEventsForCurrentDate() {
+  //   if (this.selectedDate) {
+  //     const dateStr = this.selectedDate.toDateString();
+  //     this.allScheduledEventsForCurrentDate = this.scheduledInterviews.filter(
+  //       interview => new Date(interview.date).toDateString() === dateStr
+  //     );
+  //   } else {
+  //     this.allScheduledEventsForCurrentDate = [];
+  //   }
+  // }
+ updateScheduledEventsForCurrentDate() {
     if (this.selectedDate) {
-      const dateStr = this.selectedDate.toDateString();
+      // 1. Get the selected date but treat it as a local date (e.g., June 8th).
+      const localDate = new Date(this.selectedDate);
+      
+      // 2. Create the start of the selected day in UTC.
+      // E.g., if you select June 8th, this becomes '2025-06-08T00:00:00.000Z'
+      const startOfDayUtc = new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()));
+
+      // 3. Create the end of the selected day in UTC (which is the start of the next day).
+      // E.g., '2025-06-09T00:00:00.000Z'
+      const endOfDayUtc = new Date(startOfDayUtc);
+      endOfDayUtc.setDate(startOfDayUtc.getDate() + 1);
+
+      // 4. Filter by checking if the interview's date falls within this 24-hour UTC window.
       this.allScheduledEventsForCurrentDate = this.scheduledInterviews.filter(
-        interview => new Date(interview.date).toDateString() === dateStr
+        interview => {
+          // 'interview.date' is the full Date object we stored earlier.
+          const interviewDate = interview.date; 
+          
+          // The comparison is now between three Date objects, which is reliable.
+          return interviewDate >= startOfDayUtc && interviewDate < endOfDayUtc;
+        }
       );
     } else {
       this.allScheduledEventsForCurrentDate = [];
     }
   }
-
   formatHourForDisplay(time: string): string { // e.g., "08:00" -> "8am"
     const hour = parseInt(time.split(':')[0], 10);
     if (hour === 0) return '12am';
@@ -505,13 +723,23 @@ constructor(private router: Router,private messageService: MessageService) {
     return ((durationInCellMinutes / 60) * 100) + '%';
   }
 
-  formatEventTimeForBlock(time: string): string { // e.g., "11:30" -> "11:30a"
+ formatEventTimeForBlock(time: string): string {
     if (!time || !time.includes(':')) return '';
+    
     const [h, m] = time.split(':');
     let hour = parseInt(h, 10);
-    const period = hour >= 12 && hour < 24 ? 'PM' : 'AM'; // Handle 12 PM and midnight if needed
-    if (hour === 0) { hour = 12; } // Midnight case
-    else if (hour > 12) { hour -= 12; }
+    const period = hour >= 12 ? 'pm' : 'am';
+    
+    if (hour === 0) {
+      hour = 12; // Midnight case
+    } else if (hour > 12) {
+      hour -= 12; // Convert to 12-hour format
+    }
+    
     return `${hour}:${m}${period}`;
   }
+   trackByInterviewer(index: number, interviewerEmail: string): string {
+    return interviewerEmail;
+  }
+  
 }

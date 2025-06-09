@@ -63,7 +63,7 @@
                 <label class="block font-medium mb-2">Interviewers *</label>
                 <p-multiSelect 
                 [disabled]="!selectedCandidate"
-                  [(ngModel)]="selectedInterviewers" 
+                      [(ngModel)]="selectedInterviewers" 
                   name="interviewers"
                   [options]="interviewers" 
                   optionLabel="name" 
@@ -202,45 +202,70 @@
             <div *ngIf="selectedInterviewers && selectedInterviewers.length > 0" 
                  class="schedule-grid-wrapper "
                  [style.--interviewer-count]="selectedInterviewers.length">
-              <div class="schedule-grid-container ">
-                <!-- Grid Header: Empty Top-Left + Interviewer Names -->
-                <div class="grid-header-cell time-axis-header"></div> <!-- Top-left empty cell -->
-                <div *ngFor="let interviewerId of selectedInterviewers" class="grid-header-cell interviewer-name-header">
-                  <div >{{ getInterviewerName(interviewerId) }}</div>
-                  <div> <span class="interviewer-subname" *ngIf="currentMeetingDuration > 0"> {{ formatDurationDisplay(currentMeetingDuration) }}</span></div> <!-- TODO: Make dynamic if needed -->
-                </div>
+                   <div *ngIf="isGridLoading" class="grid-overlay">
+    <div class="grid-overlay-content">
+      <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+      <span>Loading Schedules...</span>
+    </div>
+  </div>
 
-                <!-- All Day Row -->
-                <!-- <div class="grid-cell all-day-label">All Day</div>
-                <div *ngFor="let interviewerId of selectedInterviewers" class="grid-cell all-day-slot">
-                </div> -->
+  <!-- This div will show an error message if the API call fails. -->
+  <div *ngIf="gridError" class="grid-overlay error">
+    <div class="grid-overlay-content">
+      <i class="pi pi-exclamation-triangle" style="font-size: 2rem"></i>
+      <span>{{ gridError }}</span>
+    </div>
+  </div>
+              <div class="schedule-grid-container">
 
-                <!-- Time Rows -->
-                <ng-container *ngFor="let hour of displayHours">
-                  <div class="grid-cell time-label">{{ formatHourForDisplay(hour) }}</div>
-                  <div *ngFor="let interviewerId of selectedInterviewers" 
-                       class="grid-cell timeslot-cell"
-                       [class.non-working-hours]="!isWorkingHour(hour)"  >
-                    <!-- Event Blocks will be positioned absolutely within this cell -->
-                    <div *ngFor="let event of getEventsForCell(interviewerId, hour)"
-                         class="event-block"
-                         [style.top]="calculateEventTopPosition(event, hour)"
-                         [style.height]="calculateEventHeight(event, hour)"
-                         [ngClass]="{
-                             'current-candidate-event': selectedCandidate && event.candidateId === selectedCandidate.id,
-                             'other-candidate-event': !selectedCandidate || (selectedCandidate && event.candidateId !== selectedCandidate.id)
-                         }"
-                         title="{{event.candidateName}}: {{formatEventTimeForBlock(event.startTime)}}-{{formatEventTimeForBlock(event.endTime)}}">
-                         {{ formatEventTimeForBlock(event.startTime) }}-{{ formatEventTimeForBlock(event.endTime) }}
-                    </div>
-                    <div *ngIf="isTentativePreviewVisibleInCell(hour)"
-                    class="tentative-preview-block"
-                    [style.top]="calculateTentativePreviewTopPosition(hour)"
-                    [style.height]="calculateTentativePreviewHeight(hour)">
-               </div>
-                  </div>
-                </ng-container>
-              </div>
+  <!-- ========================================================= -->
+  <!-- MODIFICATION 1: Added trackBy for performance           -->
+  <!-- ========================================================= -->
+  <!-- Grid Header: Empty Top-Left + Interviewer Names -->
+  <div class="grid-header-cell time-axis-header"></div> <!-- Top-left empty cell -->
+  <div *ngFor="let interviewerEmail of selectedInterviewers; trackBy: trackByInterviewer" class="grid-header-cell interviewer-name-header">
+    <div>{{ getInterviewerName(interviewerEmail) }}</div>
+    <div>
+      <span class="interviewer-subname" *ngIf="currentMeetingDuration > 0">
+        {{ formatDurationDisplay(currentMeetingDuration) }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Grid Body -->
+  <ng-container *ngFor="let hour of displayHours">
+    <div class="grid-cell time-label">{{ formatHourForDisplay(hour) }}</div>
+    <div *ngFor="let interviewerEmail of selectedInterviewers; trackBy: trackByInterviewer"
+         class="grid-cell timeslot-cell"
+         [class.non-working-hours]="!isWorkingHour(hour)">
+      
+      <!-- Event Blocks will be positioned absolutely within this cell -->
+      <div *ngFor="let event of getEventsForCell(interviewerEmail, hour)"
+           class="event-block"
+           [style.top]="calculateEventTopPosition(event, hour)"
+           [style.height]="calculateEventHeight(event, hour)"
+           [ngClass]="{
+               'current-candidate-event': selectedCandidate && event.candidateId === selectedCandidate.id,
+               'other-candidate-event': !selectedCandidate || (selectedCandidate && event.candidateId !== selectedCandidate.id)
+           }"
+           title="{{event.candidateName}}: {{formatEventTimeForBlock(event.startTime)}}-{{formatEventTimeForBlock(event.endTime)}}">
+        {{ formatEventTimeForBlock(event.startTime) }}-{{ formatEventTimeForBlock(event.endTime) }}
+      </div>
+      
+      <!-- Tentative preview for the meeting you are scheduling -->
+      <div *ngIf="isTentativePreviewVisibleInCell(hour)"
+           class="tentative-preview-block"
+           [style.top]="calculateTentativePreviewTopPosition(hour)"
+           [style.height]="calculateTentativePreviewHeight(hour)">
+      </div>
+    </div>
+  </ng-container>
+ 
+  <div *ngIf="!isGridLoading && scheduledInterviews.length === 0" class="no-meetings-message">
+    No scheduled meetings found for the selected day.
+  </div>
+
+</div>
             </div>
           </div>
         </div>
