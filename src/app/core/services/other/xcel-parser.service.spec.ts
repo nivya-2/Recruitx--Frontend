@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserApiService } from './user-api-service.service';
+import { XcelParserService } from './xcel-parser.service';
 
-describe('UserApiServiceService', () => {
-  let service: UserApiService;
+describe('XcelParserService', () => {
+  let service: XcelParserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UserApiService);
+    service = TestBed.inject(XcelParserService);
   });
 
   it('should be created', () => {

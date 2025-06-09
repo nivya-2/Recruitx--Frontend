@@ -11,15 +11,16 @@ import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
-import { JobDescriptionDTO, JobDescriptionService } from '../../services/JobDescription.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
-import { ApiResponse } from '../../services/auth.service';
+import { ApiResponse } from '../../core/services/api/auth.service';
+import { JobDescriptionService, JobDescriptionDTO } from '../../core/services/api/job-description.service';
+import { ProgressSpinnerModule } from 'primeng/progressspinner'; 
 
 @Component({
   standalone: true,
   selector: 'app-details',
-  imports: [NgIf, HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent, AlertsComponent],
+  imports: [NgIf, ProgressSpinnerModule,HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent, AlertsComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserApiService } from './user-api-service.service';
+import { TrackJdService } from './track-jd.service';
 
-describe('UserApiServiceService', () => {
-  let service: UserApiService;
+describe('TrackJdService', () => {
+  let service: TrackJdService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UserApiService);
+    service = TestBed.inject(TrackJdService);
   });
 
   it('should be created', () => {

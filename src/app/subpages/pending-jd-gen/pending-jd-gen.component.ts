@@ -3,9 +3,9 @@ import { HeaderTextComponent } from '../../ui/header-text/header-text.component'
 import { TableComponent } from '../../shared-components/table/table.component';
 import { DetailsComponent } from "../details/details.component";
 import { ModalComponent } from '../../ui/modal/modal.component';
-import { PendingJd, PendingJdService } from '../../services/pending-jd-gen.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PendingJd, PendingJdService } from '../../core/services/api/pending-jd-gen.service';
 
 @Component({
   selector: 'app-pending-jd-gen',

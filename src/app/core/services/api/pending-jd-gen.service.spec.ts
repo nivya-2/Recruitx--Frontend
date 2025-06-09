@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { PendingJdService } from './pending-jd-gen.service';
 
-import { UserApiService } from './user-api-service.service';
 
-describe('UserApiServiceService', () => {
-  let service: UserApiService;
+describe('PendingJdGenService', () => {
+  let service: PendingJdService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UserApiService);
+    service = TestBed.inject(PendingJdService);
   });
 
   it('should be created', () => {

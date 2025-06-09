@@ -10,6 +10,8 @@ export interface TrackJdDTO {
   businessUnit: string;
   createdDate: string;
   jobStatus: string;
+  filledPositions:number;
+  numberOfPositions:number;
   actions: string[];
 }
 
