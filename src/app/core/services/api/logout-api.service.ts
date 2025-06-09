@@ -10,17 +10,19 @@ export class LogoutApiService {
    constructor(private http: HttpClient, private router: Router) {}
 
   logout() {
-    return this.http.post('http://localhost:5053/api/Auth/logout', {}).subscribe({
-      next: (res) => {
-        console.log('Logout successful');
-        // Clear any localStorage or sessionStorage tokens
-        // localStorage.removeItem('authToken');
-        // Redirect to login
-        // this.router.navigate(['/login']);
-      },
-      error: (err) => {
-        console.error('Logout failed', err);
-      },
-    });
+  // return this.http.get('http://localhost:7144/api/Auth/logout').subscribe({
+  //   next: (res) => {
+  //     console.log('Logout successful');
+  //     // Clear client-side storage if any
+  //     this.router.navigate(['/login']);
+  //   },
+  //   error: (err) => {
+  //     console.error('Logout failed', err);
+  //   },
+  // });
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = 'https://localhost:7144/api/Auth/logout';
+
   }
 }

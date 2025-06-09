@@ -11,16 +11,24 @@
     [hover]="true"
     [rows]="7"
     [showFilter]="true"
-    [rowClickFn]="routes">    
+    [rowClickFn]="routes"
+    [loading]="isLoading"
+    [actionMethods]="actionMethods">    
   </app-table>
 
   <app-modal 
 [(visible)]="visible" 
-header="Add Job Requisitions"
+header="Add Applicants"
 [maximizable]="true" 
 [style]="{ width: '50rem', height: '35rem' }">
-  <app-upload></app-upload>
-</app-modal>
+  <app-upload
+  [acceptTypes]="accept"   
+   (onUploadComplete)="handleUploadComplete($event)" >
 
+  </app-upload>
+  <div *ngIf="isUploading" class="loading-container">
+    <p-progressSpinner></p-progressSpinner>
+</div>
+</app-modal>
 </div>
 

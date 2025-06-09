@@ -15,6 +15,11 @@ export interface UserDetails {
   email: string;
   status: string;
 }
+export interface UserProfile {
+
+  name: string;
+  role: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +68,32 @@ export class UserApiService {
   setRecruiterHead(userId: number): Observable<void> {
   return this.http.put<void>(`${this.baseUrl}/set-recruiter-head/${userId}`, {});
 }
+getLoggedInUserProfile(): Observable<UserProfile> {
+  return this.http.get<ApiResponse<UserProfile>>('https://localhost:7144/api/Auth/profile',{withCredentials: true})
+    .pipe(
+      map(response => {
+        if (response.success && response.statusCode === 200) {
+          return response.data;
+        } else {
+          switch (response.statusCode) {
+            case 401:
+              throw new Error('Unauthorized: Please login again');
+            case 403:
+              throw new Error('Forbidden: Access denied to user profile');
+            case 404:
+              throw new Error('User profile not found');
+            case 500:
+              throw new Error('Server error while fetching profile');
+            default:
+              throw new Error(response.message || 'Failed to fetch user profile');
+          }
+        }
+      }),
+      catchError(error => {
+        throw new Error(error.message || 'Error occurred while fetching profile');
+      })
+    );
+}
+
 
 }

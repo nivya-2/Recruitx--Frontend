@@ -7,6 +7,7 @@
     [rows]="7"
     [showFilter]="true"
     [actionMethods]="actionMethods"
+    [loading]="isLoading"
     >
   </app-table>
   <app-modal
@@ -16,7 +17,11 @@
   header="Job Description"
   [style]="{ width: '72rem', height: '50rem' }"
 >
-  <app-details></app-details>
+  <app-details
+  *ngIf="visible"
+  [jdId]="selectedJdId"
+  [actionType]="selectedAction"
+  ></app-details>
 </app-modal>
 
 </div>

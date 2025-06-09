@@ -6,21 +6,62 @@ import { ModalComponent } from "../../ui/modal/modal.component";
 import { JrCardComponent } from "../jr-card/jr-card.component";
 import { AlertsComponent } from "../../ui/alerts/alerts.component";
 import { ToastComponent } from "../../ui/toast/toast.component";
-
+import { JrApiService } from '../../core/services/api/jr-api.service';
+import { ProgressSpinner } from 'primeng/progressspinner';
 @Component({
   selector: 'app-list-view',
-  imports: [ButtonComponent, NgFor, ModalComponent, JrCardComponent, AlertsComponent, ToastComponent],
+  imports: [ProgressSpinner,ButtonComponent, NgFor, ModalComponent, JrCardComponent, AlertsComponent, ToastComponent],
   templateUrl: './list-view.component.html',
   styleUrl: './list-view.component.scss'
 })
 export class ListViewComponent {
+  constructor(private jrApi: JrApiService) {}
+  selectedJob: any | null = null;
   visible : boolean =false;
-  @Input() jobs: { title: string; date: string; location: string; positions: number }[] = [];
-assignClick() {
-   this.visible=!this.visible
-  }
+@Input() jobs: { id: number; title: string; date: string; location: string; positions: number }[] = [];
+
  
 @ViewChild('toastComp') toastComponent: any;
+
+selectedJobId: number | null = null;
+
+assignClick(jobId: number) {
+  this.selectedJobId = jobId;
+  this.visible = true;
+
+  // Replace this with actual API call
+  this.fetchJobDetails(jobId);
+}
+selectedJobDetails: any = {
+    
+  };
+
+fetchJobDetails(jobId: number) {
+  this.jrApi.getJobDetailsById(jobId).subscribe({
+    next: (response) => {
+      const data = response.data;
+
+      this.selectedJobDetails = {
+        id: data.id,
+        requisitionId: `REQ–2025–DSCV–${data.id.toString().padStart(3, '0')}`,  // or however you generate the tag
+        jobTitle: data.jobTitle,
+        deliveryUnit: data.department, // assuming department = DU6
+        team: data.department,         // if team is same as department, otherwise change
+        location: data.location,
+        openPositions: data.openPositions,
+        raisedOn: new Date(data.requestedDate).toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        }),
+        hiringManager: data.hiringManager,
+        recruiter: 'Not Assigned',
+        qualifications: [data.qualification] // wrap as array
+      };
+
+      this.visible = true;
+    },
+    
+  });
+}
 
 
 handleAssignCompleted(assignedMember: any) {
