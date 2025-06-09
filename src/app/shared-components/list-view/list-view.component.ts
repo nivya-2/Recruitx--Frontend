@@ -1,7 +1,7 @@
 
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../../ui/button/button.component';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { JrCardComponent } from "../jr-card/jr-card.component";
 import { AlertsComponent } from "../../ui/alerts/alerts.component";
@@ -10,11 +10,13 @@ import { JrApiService } from '../../core/services/api/jr-api.service';
 import { ProgressSpinner } from 'primeng/progressspinner';
 @Component({
   selector: 'app-list-view',
-  imports: [ProgressSpinner,ButtonComponent, NgFor, ModalComponent, JrCardComponent, AlertsComponent, ToastComponent],
+  imports: [NgIf,ProgressSpinner,ButtonComponent, NgFor, ModalComponent, JrCardComponent, AlertsComponent, ToastComponent],
   templateUrl: './list-view.component.html',
   styleUrl: './list-view.component.scss'
 })
 export class ListViewComponent {
+   isLoading = false;
+
   constructor(private jrApi: JrApiService) {}
   selectedJob: any | null = null;
   visible : boolean =false;
@@ -28,25 +30,31 @@ selectedJobId: number | null = null;
 assignClick(jobId: number) {
   this.selectedJobId = jobId;
   this.visible = true;
+     this.isLoading = true;
 
   // Replace this with actual API call
   this.fetchJobDetails(jobId);
+  this.isLoading = false;
+
 }
 selectedJobDetails: any = {
     
   };
 
-fetchJobDetails(jobId: number) {
+  
+
+fetchJobDetails(jobId: number): void {
+
   this.jrApi.getJobDetailsById(jobId).subscribe({
     next: (response) => {
       const data = response.data;
 
       this.selectedJobDetails = {
         id: data.id,
-        requisitionId: `REQ–2025–DSCV–${data.id.toString().padStart(3, '0')}`,  // or however you generate the tag
+        requisitionId: `REQ–2025–DSCV–${data.id.toString().padStart(3, '0')}`,
         jobTitle: data.jobTitle,
-        deliveryUnit: data.department, // assuming department = DU6
-        team: data.department,         // if team is same as department, otherwise change
+        deliveryUnit: data.department,
+        team: data.department,
         location: data.location,
         openPositions: data.openPositions,
         raisedOn: new Date(data.requestedDate).toLocaleDateString('en-US', {
@@ -54,14 +62,17 @@ fetchJobDetails(jobId: number) {
         }),
         hiringManager: data.hiringManager,
         recruiter: 'Not Assigned',
-        qualifications: [data.qualification] // wrap as array
+        qualifications: [data.qualification]
       };
 
       this.visible = true;
     },
-    
+    error: (err) => {
+      console.error('Error fetching job details', err);
+    }
   });
 }
+
 
 
 handleAssignCompleted(assignedMember: any) {

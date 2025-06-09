@@ -22,7 +22,12 @@
       [headerBgColor]="'#ffffff'"
       [style]="{ width: '50rem', height: '40rem' }"
      >
+     <div *ngIf="isLoading" class="loading-container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  <div *ngIf="!isLoading" class="loading-container">
+  
      <app-jr-card (assignCompleted)="handleAssignCompleted($event)"
      [jobDetails]="selectedJobDetails"></app-jr-card>
-
+</div>
      </app-modal>

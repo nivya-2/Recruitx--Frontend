@@ -16,8 +16,12 @@
           </div>
           <hr />
           <div class="list-container">
-
-          <app-list-view [jobs]="jobs"></app-list-view>
+            <div *ngIf="isLoading" class="loading-container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  <div *ngIf="!isLoading" class="loading-container">
+<app-list-view [jobs]="jobs"></app-list-view>
+          </div>
           </div>
 
         </div>
