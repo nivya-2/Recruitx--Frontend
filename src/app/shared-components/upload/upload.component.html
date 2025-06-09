@@ -16,8 +16,9 @@
         <p-fileUpload 
           mode="basic" 
           [auto]="true"
-          [maxFileSize]="52428800"
-          accept=".docx"
+          [maxFileSize]="5242880000"
+          [accept]="acceptTypes"
+          [multiple]="true"
           [showUploadButton]="false"
           [showCancelButton]="false"
           chooseLabel=""
