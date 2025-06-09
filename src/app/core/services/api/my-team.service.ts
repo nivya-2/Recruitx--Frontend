@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiResponse } from '../core/services/api/CommonAPIResponse';
+import { ApiResponse } from './CommonAPIResponse';
 import { map, Observable } from 'rxjs';
 
 export interface Team {

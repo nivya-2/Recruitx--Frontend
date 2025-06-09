@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms'; // For ngModel
 import { AccordionModule } from 'primeng/accordion';
 import { CommonModule } from '@angular/common';
 // import { EMAIL_TEMPLATES, EmailTemplate } from '../email-templates.model';
-import { EmailTemplate, EmailTemplateServiceService } from '../../../services/email-template-service.service';
+import { EmailTemplate, EmailTemplateServiceService } from '../../../core/services/api/email-template-service.service';
 
 @Component({
   selector: 'app-accordion',

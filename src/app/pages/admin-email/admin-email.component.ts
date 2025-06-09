@@ -3,10 +3,11 @@ import { CommonLayoutComponent } from '../../layouts/common-layout/common-layout
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { EmailComponent } from "./email/email.component";
-import { AccordionComponent } from "./accordion/accordion.component";
+import { AccordionComponent } from "../admin-email/accordion/accordion.component";
 // import { EmailTemplate } from './email-templates.model';
-import { EmailTemplate, EmailTemplateServiceService } from '../../services/email-template-service.service';
+import { EmailTemplate, EmailTemplateServiceService } from '../../core/services/api/email-template-service.service'
 import { response } from 'express';
+import { from } from 'rxjs';
 
 
 @Component({

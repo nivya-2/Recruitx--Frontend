@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
 // import { EmailTemplate } from '../email-templates.model';
 import { AlertsComponent } from '../../../ui/alerts/alerts.component';
-import { EmailTemplate } from '../../../services/email-template-service.service';
+import { EmailTemplate } from '../../../core/services/api/email-template-service.service';
 
 @Component({
   selector: 'app-email',

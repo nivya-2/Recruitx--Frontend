@@ -7,7 +7,7 @@ import { ViewassignedjrCardComponent } from "../../shared-components/viewassigne
 import { AssignComponent } from "../../ui/assign/assign.component";
 import { ButtonComponent } from "../../ui/button/button.component";
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
-import { Team, MyTeamService } from '../../services/my-team.service';
+import { Team, MyTeamService } from '../../core/services/api/my-team.service';
 
 @Component({
   selector: 'app-my-team-rh',
