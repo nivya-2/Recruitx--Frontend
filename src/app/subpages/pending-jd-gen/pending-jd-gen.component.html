@@ -21,6 +21,8 @@
   *ngIf="visible"
   [jdId]="selectedJdId"
   [actionType]="selectedAction"
+  (actionCompleted)="handleActionComplete()" 
+
   ></app-details>
 </app-modal>
 

@@ -11,12 +11,12 @@
           <p>Drag & drop to upload</p>
           <p class="or-text">or browse</p>
         </div>
-        <div class="format-info">docx format, up to 50 MB</div>
+        <div class="format-info">{{acceptTypes}} format, up to 5 MB</div>
         
         <p-fileUpload 
           mode="basic" 
           [auto]="true"
-          [maxFileSize]="5242880000"
+          [maxFileSize]="5242880"
           [accept]="acceptTypes"
           [multiple]="true"
           [showUploadButton]="false"

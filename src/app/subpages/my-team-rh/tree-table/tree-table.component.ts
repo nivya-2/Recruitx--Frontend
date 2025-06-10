@@ -56,15 +56,15 @@ capitalize(str: string): string {
   @Input() teamsDataSource: TreeNode[] = [];
   @Input() columns: any[] = [];
   @Input() globalFilterFields: string[] = [];
-  @Output() openModal = new EventEmitter<boolean>();
+  @Output() openModal = new EventEmitter();
   @Output() removeAction = new EventEmitter<any>(); //delete function
   @Output() changeLeadAction = new EventEmitter<any>(); //change function
 
 
   
   onViewAssignedJR(row: any) {
-    this.openModal.emit(true);
-    console.log('test');
+    this.openModal.emit([row.userId]);
+    console.log('test',[row.userId]);
   
  }
 

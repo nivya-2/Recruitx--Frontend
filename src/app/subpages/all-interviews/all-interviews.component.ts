@@ -27,7 +27,7 @@ export class AllInterviewsComponent implements OnInit {
   completedInterviewsDataSource: InterviewDTO[] = [];
 
   upcomingColumns = [
-    { key: 'candidateName', label: 'Candidate Name', filterable: true },
+    { key: 'candidateName', label: 'Candidate Name', filterable: false },
     { key: 'jobRole', label: 'Job Role', filterable: true },
     { key: 'jobDescription', label: 'Job Description ID', filterable: true },
     { key: 'date', label: 'Scheduled Date', filterable: false },

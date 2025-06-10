@@ -60,7 +60,7 @@ awaitingShortlistingDataSource: any[] = [];
   { key: 'jdId', label: 'Job Description ID', filterable: false },
   { key: 'interviewDate', label: 'Interview Date', filterable: true , type: 'date' },
   { key: 'interviewType', label: 'Interview Type', filterable: true },
-  { key: 'actions', label: 'Shortlist', filterable: false }  // placeholder for button
+  { key: 'actions', label: 'Shortlist', filterable: false , type:'actions'}  // placeholder for button
 ];
 awaitingGlobalFilterFields = this.awaitingColumns.map(c => c.key).filter(k => k !== 'actions');
 }
