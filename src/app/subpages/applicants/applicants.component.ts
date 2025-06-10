@@ -152,6 +152,7 @@ async handleUploadComplete(files: File[]): Promise<void> {
       // 3. Call your backend service to save the new candidates
       this.uploadService.bulkAddCandidates(this.jobId, candidatesToSubmit).subscribe({
         next: (response) => {
+          console.log(response);
           this.triggerToast(`${candidatesToSubmit.length} candidates added successfully!`, 'success');
           this.closeModal();
           this.loadCandidates(this.jobId);

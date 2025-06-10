@@ -52,7 +52,7 @@ export class AdminJrUploadComponent implements OnInit {
       if (response?.success && Array.isArray(response.data)) {
         const jobRequisitions: JobRequisitionDto[] = response.data;
         this.dataSource = jobRequisitions.map(jr => ({
-          jobReqId: `REQ_2025_${jr.id.toString().padStart(3, '0')}`,
+          jobReqId: `EXP_${jr.id.toString().padStart(3, '0')}`,
           jobTitle: jr.role,
           deliveryUnit: jr.departmentName,
           location: jr.locationName,
@@ -358,7 +358,7 @@ export class AdminJrUploadComponent implements OnInit {
   ];
 
   columns = [
-    { key: 'jobReqId', label: 'Requisition ID', filterable: false },
+    { key: 'jobReqId', label: 'ID', filterable: false },
     { key: 'jobTitle', label: 'Job Title', filterable: true },
     { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
     { key: 'location', label: 'Location', filterable: true },
