@@ -6,3 +6,7 @@
     margin: -1px;
   }
   
+  :host ::ng-deep .p-dialog .p-dialog-header .p-icon {
+  color: white !important;
+  fill: white !important;
+}

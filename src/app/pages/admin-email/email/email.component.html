@@ -20,8 +20,8 @@
       <div class="placeholders">
         <p-chip
           *ngFor="let variable of availableVariables"
-          [label]="variable.key"
-          (click)="insertVariable(variable.key)"
+          [label]="variable"
+          (click)="insertVariable(variable)"
           [style]="{cursor: 'pointer'}"
         />
       </div>
