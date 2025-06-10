@@ -17,7 +17,7 @@ import { CardsComponent } from "../../ui/cards/cards.component";
 import { HeaderTextComponent } from "../../ui/header-text/header-text.component";
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { Router } from '@angular/router';
-import {InterviewPanelService, InterviewMeeting, PanelMember, ScheduleInterviewRequest  } from '../../interview-panel.service';
+import {InterviewPanelService, InterviewMeeting, PanelMember, ScheduleInterviewRequest  } from '../../core/services/api/interview-panel.service';
 import { forkJoin, of } from 'rxjs'; // IMPORT forkJoin and of for handling multiple API calls
 import { log } from 'console';
 
