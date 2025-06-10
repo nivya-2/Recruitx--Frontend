@@ -93,16 +93,17 @@ export class SchedulePageComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private messageService: MessageService, private candidateService: JdCandidateService) {
     this.currentUrl = this.router.url;
   }
-  jdId: number = 0;
+  jrId: number = 0;
   ngOnInit() {
-    this.jdId = Number(this.route.snapshot.paramMap.get('id'));
+    this.jrId = Number(this.route.snapshot.paramMap.get('id'));
     // this.candidateService.getCandidatesByJdId(this.jdId).subscribe(data => {
     //   this.candidates = data;
     //   console.log(this.candidates);
     // });
-    this.candidateService.getCandidatesByJdId(this.jdId).subscribe((response: any) => {
-  this.candidates = response.data || [];
-});
+    this.candidateService.getCandidatesByJdId(this.jrId).subscribe((response: any) => {
+      this.candidates = response.data || [];
+      console.log(this.candidates);
+    });
 
 
 

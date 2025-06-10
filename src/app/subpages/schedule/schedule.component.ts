@@ -26,20 +26,20 @@ export class ScheduleComponent {
     filterable: boolean;
     type?: string;
   }> = [
-    { key: 'id', label: 'ID', filterable: false },
-    { key: 'roleTitle', label: 'Role Title', filterable: true },
-    { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
-    { key: 'location', label: 'Location', filterable: true },
-    { key: 'experience', label: 'Experience', filterable: false },
-    {
-      key: 'createdDate',
-      label: 'Created Date',
-      filterable: true,
-      type: 'date',
-    },
-    // { key: 'assoJr', label: 'Associated JR',filterable: false },
-    { key: 'actions', label: 'Actions', filterable: false, type:'actions' },
-  ];
+      { key: 'id', label: 'ID', filterable: false },
+      { key: 'roleTitle', label: 'Role Title', filterable: true },
+      { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
+      { key: 'location', label: 'Location', filterable: true },
+      { key: 'experience', label: 'Experience', filterable: false },
+      {
+        key: 'createdDate',
+        label: 'Created Date',
+        filterable: true,
+        type: 'date',
+      },
+      // { key: 'assoJr', label: 'Associated JR',filterable: false },
+      { key: 'actions', label: 'Actions', filterable: false, type: 'actions' },
+    ];
 
   globalFilterFields = this.columns
     .map((c) => c.key)
@@ -48,7 +48,7 @@ export class ScheduleComponent {
     private router: Router,
     private route: ActivatedRoute,
     private interviewService: InterviewServiceService
-  ) {}
+  ) { }
   currentUrl: any;
   visible: boolean = false;
   ngOnInit(): void {
@@ -56,7 +56,7 @@ export class ScheduleComponent {
     this.interviewService.getToScheduleInterviews().subscribe({
       next: (data) => {
         this.dataSource = Array.isArray(data)
-          ? data.map((d) => ({ ...d,id: `EXP_${d.id.toString().padStart(3, '0')}`, actions: ['Schedule'] }))
+          ? data.map((d) => ({ ...d, id: `EXP_${d.id.toString().padStart(3, '0')}`,experience: `${d.experience} years`, originalId: d.id , actions: ['Schedule'] }))
           : [];
 
         console.log(' Schedule data loaded:', this.dataSource);
@@ -66,14 +66,30 @@ export class ScheduleComponent {
       },
     });
   }
+  // onSchedule = (row: any) => {
+  //   if (this.currentUrl.startsWith('/recruiter-lead')) {
+  //     this.router.navigate([
+  //       'recruiter-lead/interviews/schedule/schedule-page',
+  //     ]);
+  //   } else if (this.currentUrl.startsWith('/recruiter')) {
+  //     this.router.navigate(['/recruiter/interviews/schedule/schedule-page']);
+  //   }
+  // };
   onSchedule = (row: any) => {
+    const jrId = row.originalId || row.id; // use the real id
+    // const jdId = 4;
     if (this.currentUrl.startsWith('/recruiter-lead')) {
       this.router.navigate([
         'recruiter-lead/interviews/schedule/schedule-page',
+        jrId,
       ]);
     } else if (this.currentUrl.startsWith('/recruiter')) {
-      this.router.navigate(['/recruiter/interviews/schedule/schedule-page']);
+      this.router.navigate([
+        '/recruiter/interviews/schedule/schedule-page',
+        jrId,
+      ]);
     }
   };
+
   actionMethods = { Schedule: this.onSchedule };
 }

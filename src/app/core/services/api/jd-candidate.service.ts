@@ -23,7 +23,7 @@ export class JdCandidateService {
 
   constructor(private http: HttpClient) {}
 
-  getCandidatesByJdId(jdId: number): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>(`${this.baseUrl}/${jdId}`);
+  getCandidatesByJdId(jrId: number): Observable<Candidate[]> {
+    return this.http.get<Candidate[]>(`${this.baseUrl}/${jrId}`);
   }
 }
