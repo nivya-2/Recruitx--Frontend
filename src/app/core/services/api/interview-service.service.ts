@@ -11,7 +11,7 @@ export interface InterviewDTO {
   interviewerName: string;
   interviewerDeliveryUnit: string;
   createdDate: string;
-  status: string
+  status: string;
 }
 
 export interface ToScheduleDto {
@@ -27,36 +27,36 @@ export interface ToScheduleDto {
 
 export interface ToShortlistDto {
   id: string;
+  jdId: number;
   name: string;
   interviewDate: string;
   interviewType: string;
   actions: string[];
 }
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InterviewServiceService {
-
- private baseUrl = 'https://localhost:7144/api/Interviews';
+  private baseUrl = 'https://localhost:7144/api/Interviews';
 
   constructor(private http: HttpClient) {}
 
-  // getAllInterviews(): Observable<InterviewDTO[]> {
-  //   return this.http.get<InterviewDTO[]>(`${this.baseUrl}`);
-  // }
   getAllInterviews(): Observable<InterviewDTO[]> {
-  return this.http.get<{ data: InterviewDTO[] }>(this.baseUrl).pipe(
-    map(response => response.data) // ✅ unwrap the data array
-  );
-}
+    return this.http.get<{ data: InterviewDTO[] }>(this.baseUrl).pipe(
+      map((response) => response.data) // ✅ unwrap the data array
+    );
+  }
 
   getToScheduleInterviews(): Observable<ToScheduleDto[]> {
-    return this.http.get<ToScheduleDto[]>(`${this.baseUrl}/to-schedule`);
+    return this.http
+      .get<{ data: ToScheduleDto[] }>(`${this.baseUrl}/to-schedule`)
+      .pipe(map((response) => response.data));
   }
 
   getToShortlistInterviews(): Observable<ToShortlistDto[]> {
-    return this.http.get<ToShortlistDto[]>(`${this.baseUrl}/to-shortlist`);
+    return this.http
+      .get<{ data: ToShortlistDto[] }>(`${this.baseUrl}/to-shortlist`)
+      .pipe(map((response) => response.data));
   }
 }
