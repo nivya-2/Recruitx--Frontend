@@ -38,7 +38,7 @@ export class ScheduleComponent {
       type: 'date',
     },
     // { key: 'assoJr', label: 'Associated JR',filterable: false },
-    { key: 'actions', label: 'Actions', filterable: false },
+    { key: 'actions', label: 'Actions', filterable: false, type:'actions' },
   ];
 
   globalFilterFields = this.columns
