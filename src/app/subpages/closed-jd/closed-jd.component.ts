@@ -27,7 +27,7 @@ dataSource:any = [
     { key: 'deliveryUnit', label: 'Delivery Unit', filterable: true },
     { key: 'location', label: 'Location', filterable: true },
     { key: 'experience', label: 'Experience', filterable: false },
-    { key: 'createdDate', label: 'Created Date', filterable: false },
+    { key: 'createdDate', label: 'Created Date', filterable: false,type:'date' },
     { key: 'associatedJr', label: 'Associated JR', filterable: false }
   ];
 

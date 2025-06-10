@@ -26,54 +26,54 @@ export class AllInterviewsComponent {
     {
       candidateName: 'Sneha Kulkarni',
       jobRole: 'Backend Developer',
-      date: '27/05/2025',
+      date: new Date('2025-04-17'),
       time: '03:00 PM - 04:00 PM',
       interviewRound: 1,
       interviewerName: 'Vikram Sinha',
       interviewerDeliveryUnit: 'DU1',
-      createdDate: '25/05/2025'
+      createdDate: new Date('2025-04-17')
     },
     {
       candidateName: 'Arjun Mehta',
       jobRole: 'Frontend Developer',
-      date: '28/05/2025',
+      date:new Date('2025-04-17'),
       time: '10:00 AM - 11:00 AM',
       interviewRound: 2,
       interviewerName: 'Anita Nair',
       interviewerDeliveryUnit: 'DU3',
-      createdDate: '25/05/2025'
+      createdDate:new Date('2025-04-17')
     },
     {
       candidateName: 'Priya Sharma',
       jobRole: 'DevOps Engineer',
-      date: '29/05/2025',
+      date: new Date('2025-04-17'),
       time: '01:00 PM - 02:00 PM',
       interviewRound: 1,
       interviewerName: 'Rajiv Malhotra',
       interviewerDeliveryUnit: 'DU7',
-      createdDate: '26/05/2025'
+      createdDate: new Date('2025-04-17')
     },
     {
       candidateName: 'Kunal Desai',
       jobRole: 'QA Analyst',
-      date: '30/05/2025',
+      date: new Date('2025-04-17'),
       time: '09:30 AM - 10:30 AM',
       interviewRound: 1,
       interviewerName: 'Sonal Jain',
       interviewerDeliveryUnit: 'DU5',
-      createdDate: '26/05/2025'
+      createdDate: new Date('2025-04-17')
     }
   ];
 
   upcomingColumns = [
     { key: 'candidateName', label: 'Candidate Name', filterable: true },
     { key: 'jobRole', label: 'Job Role', filterable: true },
-    { key: 'date', label: 'Scheduled Date', filterable: false },
+    { key: 'date', label: 'Scheduled Date', filterable: false, type:'date' },
     { key: 'time', label: 'Time', filterable: false },
     { key: 'interviewRound', label: 'Interview Round', filterable: false },
     { key: 'interviewerName', label: 'Interviewer', filterable: true },
     { key: 'interviewerDeliveryUnit', label: 'Delivery Unit', filterable: true },
-    { key: 'createdDate', label: 'Created Date', filterable: false }
+    { key: 'createdDate', label: 'Created Date', filterable: false, type: 'date' }
   ];
 
   completedInterviewsDataSource: any[] = [
@@ -85,7 +85,7 @@ export class AllInterviewsComponent {
       interviewRound: '2',
       interviewerName: 'John Smith',
       interviewerDeliveryUnit: 'DU8',
-      createdDate: '20/05/2025'
+      createdDate: new Date('2025-04-17')
     },
     {
       candidateName: 'Rajat Verma',
@@ -95,7 +95,7 @@ export class AllInterviewsComponent {
       interviewRound: '1',
       interviewerName: 'Sarah Johnson',
       interviewerDeliveryUnit: 'DU4',
-      createdDate: '19/05/2025'
+      createdDate:new Date('2025-04-17')
     },
     {
       candidateName: 'Aditya Pillai',
@@ -105,7 +105,7 @@ export class AllInterviewsComponent {
       interviewRound: '3',
       interviewerName: 'Mike Wilson',
       interviewerDeliveryUnit: 'DU6',
-      createdDate: '18/05/2025'
+      createdDate:new Date('2025-04-17')
     },
     {
       candidateName: 'Neha Iyer',
@@ -115,7 +115,7 @@ export class AllInterviewsComponent {
       interviewRound: '1',
       interviewerName: 'Deepak Shah',
       interviewerDeliveryUnit: 'DU2',
-      createdDate: '17/05/2025'
+      createdDate:new Date('2025-04-17')
     },
     {
       candidateName: 'Manoj Nair',
@@ -125,7 +125,7 @@ export class AllInterviewsComponent {
       interviewRound: '2',
       interviewerName: 'Leena George',
       interviewerDeliveryUnit: 'DU7',
-      createdDate: '16/05/2025'
+      createdDate: new Date('2025-04-17')
     }
   ];
 
@@ -137,7 +137,7 @@ export class AllInterviewsComponent {
     { key: 'interviewRound', label: 'Interview Round', filterable: false },
     { key: 'interviewerName', label: 'Interviewer', filterable: true },
     { key: 'interviewerDeliveryUnit', label: 'Delivery Unit', filterable: true },
-    { key: 'createdDate', label: 'Created Date', filterable: false }
+    { key: 'createdDate', label: 'Created Date', filterable: false, type:'date' }
   ];
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { TableComponent } from '../../shared-components/table/table.component';
@@ -12,15 +12,19 @@ import { ToastrService } from 'ngx-toastr';
 import { CandidateData, XcelParserService } from '../../core/services/other/xcel-parser.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner'; 
 import { BulkAddResultDTO, BulkUploadCandidatesService, MappedCandidateData } from '../../core/services/api/bulk-upload-candidates.service';
+import { error } from 'console';
+import { ToastComponent } from "../../ui/toast/toast.component";
 
 
 @Component({
   selector: 'app-applicants',
-  imports: [TableComponent, ButtonComponent, ModalComponent, UploadComponent, CommonModule,ProgressSpinnerModule],
+  imports: [TableComponent, ButtonComponent, ModalComponent, UploadComponent, CommonModule, ProgressSpinnerModule, ToastComponent],
   templateUrl: './applicants.component.html',
   styleUrl: './applicants.component.scss'
 })
 export class ApplicantsComponent {
+
+    @ViewChild('toast') toastComponent!: any;
   isLoading: boolean = true;
   isUploading: boolean = false;
   accept:string ='.csv,.xlsx';
@@ -30,10 +34,10 @@ constructor(
     private candidateService: CandidateService,
     private uploadService:BulkUploadCandidatesService,
     private candidateParserService: XcelParserService,
-    private toastr: ToastrService
   ) {}
 
 jobId:number=0;
+
 routes!: (row: any) => void;
 
 ngOnInit(): void {
@@ -66,6 +70,14 @@ this.router.navigate([`/${rolePrefix}/job-description/applicant-details`, applic
 
   };
 }
+ triggerToast(message: string, type: 'success' | 'error' = 'success') {
+  this.toastComponent.toastData = {
+    severity: type,
+    summary: type === 'success' ? 'Success' : 'Error',
+    detail: message,
+  };
+  this.toastComponent.showToast();
+}
 
 loadCandidates(jobId: number): void {
     this.candidateService.getCandidatesByJobRequisitionId(jobId).subscribe({
@@ -94,15 +106,16 @@ visible:boolean = false;
     dataSource: CandidateDTO[]|any = [];
 
 async handleUploadComplete(files: File[]): Promise<void> {
+    
     if (!files || files.length === 0) {
-      this.toastr.warning('No files were selected for upload.');
+      this.triggerToast('No files were selected for upload.',"error");
       return;
     }
 
     let filesWithErrors: string[] = [];
     
     if (isNaN(this.jobId)) {
-      this.toastr.error('Job ID is missing or invalid.', 'Configuration Error');
+      this.triggerToast('Job ID is missing or invalid.,"error"');
       return;
     }
         this.isUploading = true; // Start the spinner
@@ -126,7 +139,7 @@ async handleUploadComplete(files: File[]): Promise<void> {
 
       // Check if any candidates were parsed at all
       if (allParsedCandidates.length === 0) {
-        this.toastr.error('None of the selected files could be read or they were empty.', 'Parsing Failed');
+        this.triggerToast('None of the selected files could be read or they were empty, Parsing Failed', 'error');
         return; // Exit the function
       }
     
@@ -135,17 +148,17 @@ async handleUploadComplete(files: File[]): Promise<void> {
 
       const candidatesToSubmit = this.mapParsedDataToDTO(allParsedCandidates);
       console.log(candidatesToSubmit);
-    
+      
       // 3. Call your backend service to save the new candidates
       this.uploadService.bulkAddCandidates(this.jobId, candidatesToSubmit).subscribe({
         next: (response) => {
-          this.toastr.success(`${candidatesToSubmit.length} candidates added successfully!`, 'Upload Successful');
+          this.triggerToast(`${candidatesToSubmit.length} candidates added successfully!`, 'success');
           this.closeModal();
-          this.loadCandidates(this.jobId); // Refresh the main table
+          this.loadCandidates(this.jobId);
         },
         error: (err) => {
           console.error('Error submitting candidates:', err);
-          this.toastr.error(err.error?.message || 'Failed to save new candidates.', 'API Error');
+          this.triggerToast(err.error?.message || 'Failed to save new candidates.', 'error');
         },
         complete: () => {
           this.isUploading = false;
@@ -154,7 +167,7 @@ async handleUploadComplete(files: File[]): Promise<void> {
     }
     catch (error: any) {
       console.error('File parsing error:', error);
-      this.toastr.error(error.message, 'Parsing Error');
+      this.triggerToast(error.message, 'error');
       this.isUploading = false;
     }
   }
@@ -202,7 +215,7 @@ async handleUploadComplete(files: File[]): Promise<void> {
 }
 
 
-  columns: Array<{ key: string, label: string, filterable: boolean }> = [
+  columns: Array<{ key: string, label: string, filterable: boolean , type?:string}> = [
     { key: 'candidateId', label: 'Candidate ID', filterable: false },
     { key: 'candidateName', label: 'Name', filterable: true },
     { key: 'candidateEmail', label: 'Email ID', filterable: true },
@@ -212,7 +225,7 @@ async handleUploadComplete(files: File[]): Promise<void> {
     // { key: 'currentLocation', label: 'Current Location', filterable: true },
     // { key: 'noticePeriod', label: 'Notice Period (In Days)', filterable: false },
     { key: 'source', label: 'Application Source', filterable: true },
-    { key: 'actions', label: 'View Details', filterable: false }
+    { key: 'actions', label: 'View Details', filterable: false, type:'actions' }
   ];
 
   
