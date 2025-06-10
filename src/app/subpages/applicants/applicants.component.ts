@@ -159,6 +159,7 @@ async handleUploadComplete(files: File[]): Promise<void> {
         error: (err) => {
           console.error('Error submitting candidates:', err);
           this.triggerToast(err.error?.message || 'Failed to save new candidates.', 'error');
+          this.closeModal();
         },
         complete: () => {
           this.isUploading = false;
@@ -168,13 +169,15 @@ async handleUploadComplete(files: File[]): Promise<void> {
     catch (error: any) {
       console.error('File parsing error:', error);
       this.triggerToast(error.message, 'error');
-      this.isUploading = false;
+      this.closeModal();
     }
   }
   closeModal() {
 
     this.visible=!this.visible;
     this.loadCandidates(this.jobId); 
+    this.isUploading = false;
+
 
   }
 
