@@ -12,8 +12,8 @@ import { ButtonIconComponent } from "../../ui/button-icon/button-icon.component"
 import { AssignJrComponent } from '../../subpages/assign-jr/assign-jr.component';
 import { AssignComponent } from '../../ui/assign/assign.component';
 import { ToastComponent } from "../../ui/toast/toast.component";
-
-
+import { UserApiService } from '../../core/services/api/user-api-service.service';
+import {AssignJrPayload, JrApiService} from '../../core/services/api/jr-api.service';
 
 
 
@@ -24,32 +24,54 @@ import { ToastComponent } from "../../ui/toast/toast.component";
   styleUrl: './jr-card.component.scss'
 })
 export class JrCardComponent {
+  constructor(private userService: UserApiService,private jrService: JrApiService) {
+    
+  }
+
+  ngOnInit() {
+  this.loadTeamList();
+}
+loadTeamList(): void {
+  this.userService.getAllUsers().subscribe({
+    next: users => {
+      this.teamList = users
+        .filter(user =>  user.roleTitle=='Recruiter Lead' || user.roleTitle=='Recruiter') // Exclude Recruiter Head
+        .map(user => ({
+          id: user.userId,
+          fullName: user.name,
+          role: user.roleTitle
+        }));
+    },
+    error: err => {
+      console.error('Failed to fetch team list:', err);
+      this.teamList = []; // fallback to empty if needed
+    }
+  });
+}
   @Input() name: string = 'Arthur Pendragon';
   @Input() role: string = 'Tech Lead';
-  jobDetails = {
-    jobTag:'Urgent',
-    requisitionId: 'REQ–2025–DSCV–006',
-    jobTitle: 'Data Scientist – Computer Vision',
-    deliveryUnit: 'DU6',
-    team:'Advanced AI & ML Solutions',
-    location: 'Kochi',
-    openPositions: 6,
-    raisedOn: 'April 2, 2025',
-    hiringManager: 'Arjun Menon',
-    recruiter: 'Not Assigned',
-    qualifications: [
-      "Bachelor’s/Master’s degree in Computer Science, Data Science, or related field.",
-      "2+ years of hands-on experience in computer vision or a similar role.",
-      "Strong portfolio or GitHub with previous CV projects preferred."
-    ]
-  };
+  @Input() jobDetails: any = null; // This will hold the job details object
 
   selectedMemberFromChild: any = null;
 
-  handleSelectedMember(member: any) {
-    this.selectedMemberFromChild = member;
+  handleSelectedMember(member: any): void {
+        this.selectedMemberFromChild = member;
+
+    const userid = member.id;
+    console.log('Selected member:', userid);
+    console.log('Job requisition ID:', this.jobDetails.id);
+
+    const payload: AssignJrPayload = {
+      jobRequisitionId: this.jobDetails.id,
+      assignedTo: userid
+    };
+    console.log('Payload for assignment:', payload);
+    this.jrService.assignJobRequisition(this.jobDetails.id, payload).subscribe({
+      next: (res) => console.log('Assignment successful:', res),
+      error: (err) => console.error('Error assigning job requisition:', err)
+    });
   }
-  
+
   teamList = [
   { fullName: 'John V', role: 'Senior Lead' },
   { fullName: 'Tom Philip', role: 'Associate Manager' },

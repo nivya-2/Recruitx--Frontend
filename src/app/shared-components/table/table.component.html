@@ -5,6 +5,7 @@
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
          [ngStyle]="{ 'font-size': fontSize }"
          customSort="false"
+         [loading]="loading"
         [filterDelay]="300">
 
   <ng-template pTemplate="caption" *ngIf="showFilter">

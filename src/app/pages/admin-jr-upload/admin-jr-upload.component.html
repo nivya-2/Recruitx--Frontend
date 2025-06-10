@@ -5,17 +5,33 @@
       <app-button-icon label="Upload JRs" icon="upload" (click)="openModal()"></app-button-icon>
     </div>
     <app-alerts #alerts></app-alerts>
-    <app-table [dataSource]="dataSource" [columns]="columns" [globalFilterFields]="globalFilterFields" [hover]="false" [rows]="7" [showFilter]="true"
-    [fontSize]="'12px'"[actionMethods]="actionMethods"
-    ></app-table>
+    <app-table 
+      [dataSource]="dataSource" 
+      [columns]="columns" 
+      [globalFilterFields]="globalFilterFields" 
+      [hover]="false" 
+      [rows]="7" 
+      [showFilter]="true"
+      [fontSize]="'12px'"
+      [actionMethods]="actionMethods">
+      
+    </app-table>
 
-<app-modal 
-[(visible)]="visible" 
-header="Add Job Requisitions"
-[maximizable]="true" 
-[style]="{ width: '50rem', height: '35rem' }">
-  <app-upload></app-upload>
-</app-modal>
+    <app-modal 
+      [(visible)]="visible" 
+      header="Add Job Requisitions"
+      [maximizable]="true" 
+      [style]="{ width: '50rem', height: '35rem' }">
+      
+      <app-upload
+        [title]="'Upload Job Requisitions'"
+        (onClose)="closeModal()"
+        (onFileUploaded)="onFilesUploaded($event)"
+        (onUploadComplete)="onUploadComplete($event)">
+      </app-upload>
+      
+    </app-modal>
+
   </app-cards>
 </app-common-layout>
 <app-alerts #alerts></app-alerts>
