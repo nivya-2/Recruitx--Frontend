@@ -72,7 +72,7 @@ actionMethods = {'View JD': this.onViewJD,   'View Applicants': this.onViewAppli
         const data = response.data;
          this.jobDataSource = data.map(jd => ({
         ...jd,
-        id: `JR${jd.jobRequisitionId.toString().padStart(3, '0')}`,
+        id: `EXP_${jd.jobRequisitionId.toString().padStart(3, '0')}`,
         jrProgress:{current:jd.filledPositions, total:jd.numberOfPositions},
       }
       

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { InputTextComponent } from "../../ui/input-text/input-text.component";
@@ -31,6 +31,8 @@ export class DetailsComponent implements OnInit {
   formData:any =[];
   isLoading: boolean = true;
   isDraftSaved: boolean = false;
+   @Output() actionCompleted = new EventEmitter<void>();
+
 
   constructor(private jobDescService: JobDescriptionService, private route: ActivatedRoute) {}
   ngOnInit(): void {
@@ -481,6 +483,8 @@ exportAsExcel(): void {
         this.isDraftSaved = true;
         this.isEditMode = false;
         this.label = 'Edit';
+        this.actionCompleted.emit(); 
+
       },
     });
   }
@@ -541,6 +545,8 @@ exportAsExcel(): void {
       next: (submitResponse) => {
         console.log("Submit successful:", submitResponse);
         this.isEditMode = false;
+        this.actionCompleted.emit(); 
+
         // Disable all buttons as the process is complete
       },
     });
