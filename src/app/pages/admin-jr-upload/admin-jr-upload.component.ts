@@ -12,6 +12,8 @@ import { SchedulePageComponent } from '../schedule-page/schedule-page.component'
 import { DocxParserService, JobRequisitionData } from '../../core/services/other/docxparser.service';
 import { JrApiService } from '../../core/services/api/jr-api.service';
 import { ApiResponse } from '../../core/services/api/CommonAPIResponse';
+import { NgIf } from '@angular/common';
+import { ProgressSpinner } from 'primeng/progressspinner';
 export interface JobRequisitionDto {
   id: number;
   role: string;
@@ -34,40 +36,43 @@ export interface JobRequisitionDto {
     ModalComponent,
     UploadComponent,
     AlertsComponent,
-    EvaluationFormComponent
+    EvaluationFormComponent,
+    NgIf,
+    ProgressSpinner
   ],
   templateUrl: './admin-jr-upload.component.html',
   styleUrl: './admin-jr-upload.component.scss',
 })
 export class AdminJrUploadComponent implements OnInit {
+    isLoading = false;
   private loadJobRequisitions(): void {
-    this.jrApiService.getAll().subscribe({
-      next: (response: ApiResponse<JobRequisitionDto[]>) => {
-        console.log('API Response:', response); // Debug log
-        
-        // Check if response is successful and has data array
-        if (response && response.success && Array.isArray(response.data)) {
-          const jobRequisitions: JobRequisitionDto[] = response.data;
-          
-          this.dataSource = jobRequisitions.map(jr => ({
-            jobReqId: `REQ_2025_${jr.id.toString().padStart(3, '0')}`,
-            jobTitle: jr.role,
-            deliveryUnit: jr.departmentName,
-            location: jr.locationName,
-            hiringManager: jr.hiringManagerName,
-            assignedOn: jr.requestedOn,
-            actions: jr.isAssigned ? [] : ['Delete']
-          }));
-        } else {
-          console.warn('Unexpected API response format or unsuccessful response:', response);
-          this.dataSource = [];
-        }
-      },
-      error: (error) => {
-        console.error('Error loading job requisitions:', error);
-        this.dataSource = []; // Set empty array on error
+  this.isLoading = true;
+  this.jrApiService.getAll().subscribe({
+    next: (response: ApiResponse<JobRequisitionDto[]>) => {
+      if (response?.success && Array.isArray(response.data)) {
+        const jobRequisitions: JobRequisitionDto[] = response.data;
+        this.dataSource = jobRequisitions.map(jr => ({
+          jobReqId: `REQ_2025_${jr.id.toString().padStart(3, '0')}`,
+          jobTitle: jr.role,
+          deliveryUnit: jr.departmentName,
+          location: jr.locationName,
+          hiringManager: jr.hiringManagerName,
+          assignedOn: jr.requestedOn,
+          actions: jr.isAssigned ? [] : ['Delete']
+        }));
+      } else {
+        console.warn('Unexpected API response format or unsuccessful response:', response);
+        this.dataSource = [];
       }
-    });
+      this.isLoading = false; // ✅ correctly placed
+    },
+    error: (error) => {
+      console.error('Error loading job requisitions:', error);
+      this.dataSource = [];
+      this.isLoading = false; // ✅ also here
+    }
+  });
+
   }
   ngOnInit(): void {
     this.loadJobRequisitions();
@@ -149,8 +154,11 @@ export class AdminJrUploadComponent implements OnInit {
   }
 
   async onUploadComplete(files: File[]): Promise<void> {
+    this.isLoading=true;
     if (!files || files.length === 0) {
       console.warn('No files to process');
+      this.isLoading=true;
+
       return;
     }
 
@@ -168,6 +176,7 @@ export class AdminJrUploadComponent implements OnInit {
   }
 
   private async processUploadedFiles(files: File[]): Promise<void> {
+    this.isLoading=true;
     console.log('\n=== PROCESSING FILES ===');
     
     for (let i = 0; i < files.length; i++) {
@@ -200,9 +209,13 @@ export class AdminJrUploadComponent implements OnInit {
 
         // Post the job requisition using mapped data
         await this.postJobRequisitionWithPayload(mappedPayload);
+        this.isLoading=false;
+
 
       } catch (error) {
         console.error(`Error processing ${file.name}:`, error);
+        this.isLoading=false;
+
       }
     }
   }
