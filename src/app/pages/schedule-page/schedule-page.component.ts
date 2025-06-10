@@ -17,7 +17,7 @@ import { CardsComponent } from "../../ui/cards/cards.component";
 import { HeaderTextComponent } from "../../ui/header-text/header-text.component";
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { Router } from '@angular/router';
-import {InterviewPanelService, InterviewMeetingDetails, PanelMeetingsResponse, PanelMember, ScheduleInterviewRequest } from '../../interview-panel.service';
+import {InterviewPanelService, InterviewMeeting, PanelMember, ScheduleInterviewRequest  } from '../../interview-panel.service';
 import { forkJoin, of } from 'rxjs'; // IMPORT forkJoin and of for handling multiple API calls
 import { log } from 'console';
 
@@ -37,7 +37,6 @@ export class SchedulePageComponent implements OnInit {
 
 isLoadingInterviewers = true; // To show a loading state in the UI
   interviewerError: string | null = null; // To show an error message
-  // interviewers: PanelMember[] = []; // Now strongly typed
   
   gridError: string | null = null;
 
@@ -76,7 +75,7 @@ isLoadingInterviewers = true; // To show a loading state in the UI
   @ViewChild('candidateDropdown') candidateDropdown: Dropdown | undefined;
 
   // NEW Properties for Grid UI
-  
+    interviewers: { id: string, name: string }[] = [];
   
 myInterview: any;
 
@@ -122,73 +121,9 @@ constructor(private router: Router,private messageService: MessageService,     p
   }
 
   // initializeSampleData() {
-  //   const today = new Date();
-  //   this.scheduledInterviews = [
-  //     {
-  //       id: 'SCH-001',
-  //       candidateId: 'CND-037',
-  //       candidateName: 'Sophia Martinez',
-  //       date: new Date(today),
-  //       startTime: '11:30',
-  //       endTime: '12:00',
-  //       interviewers: ['INT-006'],
-  //       interviewerNames: ['Lucas']
-  //     },
-  //     {
-  //       id: 'SCH-002',
-  //       candidateId: 'CND-038',
-  //       candidateName: 'James Anderson',
-  //       date: new Date(today),
-  //       startTime: '12:00',
-  //       endTime: '13:00',
-  //       interviewers: ['INT-007'],
-  //       interviewerNames: ['Amelia']
-  //     },
-  //     {
-  //       id: 'SCH-003',
-  //       candidateId: 'CND-039',
-  //       candidateName: 'Emily Johnson',
-  //       date: new Date(today),
-  //       startTime: '14:00',
-  //       endTime: '15:00',
-  //       interviewers: ['INT-008'],
-  //       interviewerNames: ['Ethan']
-  //     },
-  //     {
-  //       id: 'SCH-004',
-  //       candidateId: 'CND-040',
-  //       candidateName: 'Michael Smith',
-  //       date: new Date(today),
-  //       startTime: '10:00',
-  //       endTime: '11:30',
-  //       interviewers: ['INT-009'],
-  //       interviewerNames: ['Mia']
-  //     },
-  //     {
-  //       id: 'SCH-005',
-  //       candidateId: 'CND-041',
-  //       candidateName: 'Olivia Brown',
-  //       date: new Date(today),
-  //       startTime: '09:00',
-  //       endTime: '09:30',
-  //       interviewers: ['INT-010'],
-  //       interviewerNames: ['Jack']
-  //     },
-  //     {
-  //       id: 'SCH-006',
-  //       candidateId: 'CND-042',
-  //       candidateName: 'William Garcia',
-  //       date: new Date(today),
-  //       startTime: '15:00',
-  //       endTime: '15:30',
-  //       interviewers: ['INT-011'],
-  //       interviewerNames: ['Lily']
-  //     }
-  //   ];
-  // }
   
- loadMeetingDataForGrid(): void {
-    if (!this.selectedDate || !this.selectedInterviewers || this.selectedInterviewers.length === 0) {
+  loadMeetingDataForGrid(): void {
+      if (!this.selectedInterviewers || this.selectedInterviewers.length === 0) {
       this.scheduledInterviews = [];
       this.updateScheduledEventsForCurrentDate();
       return;
@@ -198,69 +133,52 @@ constructor(private router: Router,private messageService: MessageService,     p
     this.gridError = null;
     const dateStr = this.formatDateForApi(this.selectedDate);
 
+    // Create an array of parallel GET requests.
     const apiCalls = this.selectedInterviewers.map(interviewerEmail =>
       this.interviewPanelService.getPanelMemberMeetings(interviewerEmail, dateStr)
-      
     );
 
+    // forkJoin will now receive an array of arrays of meetings, e.g., [[meeting1], [meeting2, meeting3]]
     forkJoin(apiCalls).subscribe({
-      next: (responses: any[]) => {
-        console.log('--- RAW API RESPONSES RECEIVED ---', responses);
+      next: (results: InterviewMeeting[][]) => {
         
-        const allMeetingsForGrid: any[] = [];
+        // Use .flat() to combine the array of arrays into a single list of all meetings.
+        const allMeetings: InterviewMeeting[] = results.flat();
         
-        responses.forEach(response => {
-          // --- THIS IS THE CRITICAL FIX ---
-          // The real data is nested inside response.data
-          const actualData = response.data; 
-
-          if (actualData && actualData.interviews && actualData.interviews.length > 0) {
-            console.log(`Found ${actualData.interviews.length} meeting(s) for ${actualData.searchParameters.panelMemberEmail}`);
-            
-            const transformedMeetings = this.transformApiData(
-              actualData.interviews, 
-              actualData.searchParameters.panelMemberEmail
-            );
-            
-            allMeetingsForGrid.push(...transformedMeetings);
-          }
-        });
-
-        console.log('--- FINAL TRANSFORMED DATA FOR GRID ---', allMeetingsForGrid);
-        this.scheduledInterviews = allMeetingsForGrid;
-        this.updateScheduledEventsForCurrentDate(); // This will refresh the grid's visual display
+        // The service now returns the data in the exact format needed by transformApiData.
+        this.scheduledInterviews = this.transformApiData(allMeetings);
+        
+        this.updateScheduledEventsForCurrentDate();
         this.checkForConflicts();
         this.isGridLoading = false;
       },
       error: (err) => {
-        console.error('--- ERROR FETCHING MEETINGS ---', err);
-        this.gridError = 'Could not load meeting schedules.';
+        this.gridError = 'Could not load schedules.';
         this.isGridLoading = false;
-        this.scheduledInterviews = [];
-        this.updateScheduledEventsForCurrentDate();
       }
     });
   }
 
+
  /**
    * Transforms the data from the API into the format used by the component's grid UI.
    */
-  transformApiData(meetings: InterviewMeetingDetails[], interviewerEmail: string): any[] {
+  transformApiData(meetings: InterviewMeeting[]): any[] {
     return meetings.map(meeting => {
-      // 1. A UTC string like "2025-06-09T04:30:00" is received.
-      const startDate = new Date(meeting.startTime); // 2. Creates a local Date object, e.g., 10:00 AM IST.
-      const endDate = new Date(meeting.endTime);
-
+      // We no longer need to parse the time, as the backend sends 'HH:mm'
+      // And we no longer need to parse the date, as the backend DTO doesn't have it.
+      // We will rely on the date filter in updateScheduledEventsForCurrentDate.
+      
       return {
         id: meeting.id,
         candidateName: meeting.candidateName,
-        date: startDate,
-        // 3. formatTimeForGrid(startDate) now correctly calls .getHours() and returns "10:00".
-        startTime: this.formatTimeForGrid(startDate),
-        endTime: this.formatTimeForGrid(endDate),
-        interviewers: [interviewerEmail],
-        interviewerNames: [this.getInterviewerName(interviewerEmail)],
-        duration: (endDate.getTime() - startDate.getTime()) / (1000 * 60)
+        // We create a date object for the filter to work. This is a bit of a hack.
+        // A better long-term solution is to have the backend return the full date-time string.
+        date: this.selectedDate, 
+        startTime: meeting.startTime,
+        endTime: meeting.endTime,
+        interviewers: meeting.interviewerEmails,
+        interviewerNames: meeting.interviewerEmails.map(email => this.getInterviewerName(email)),
       };
     });
   }
@@ -274,21 +192,11 @@ constructor(private router: Router,private messageService: MessageService,     p
   /**
    * Helper function to format a Date object into 'HH:mm' string.
    */
- formatTimeForGrid(date: Date): string {
-  // Clone the date to avoid modifying the original
-  const updatedDate = new Date(date.getTime());
-
-  // Add 5 hours and 30 minutes
-  updatedDate.setHours(updatedDate.getHours() + 5);
-  updatedDate.setMinutes(updatedDate.getMinutes() + 30);
-
-  // Get hours and minutes after the adjustment
-  const hours = ('0' + updatedDate.getHours()).slice(-2);
-  const minutes = ('0' + updatedDate.getMinutes()).slice(-2);
-  console.log(hours,minutes,987)
-
-  return `${hours}:${minutes}`;
-}
+formatTimeForGrid(date: Date): string {
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    return `${hours}:${minutes}`;
+  }
 
   
 
@@ -334,28 +242,33 @@ selectedInterviewer: string = '';
     }
     this.loadMeetingDataForGrid();
   }
-printMeetingTimes(email: string, date: string): void {
-  this.interviewPanelService.getPanelMemberMeetings(email, date)
-    .subscribe({
-      next: (res) => {
-        const interviews = res?.data?.interviews ?? [];
+ printMeetingTimes(email: string, date: string): void {
+    this.interviewPanelService.getPanelMemberMeetings(email, date)
+      .subscribe({
+        next: (interviews: InterviewMeeting[]) => { // 'res' is now correctly typed as an array
+          
+          // No need to access .data.interviews. 'interviews' is already the array.
+          if (!interviews || interviews.length === 0) {
+            console.log(`No meetings found for ${email} on ${date}.`);
+            return;
+          }
 
-        if (interviews.length === 0) {
-          console.log(`No meetings found for ${email} on ${date}.`);
-          return;
+          interviews.forEach(interview => {
+            console.log(`Meeting for ${email}:`);
+            console.log('  Start Time:', new Date(interview.startTime).toLocaleString());
+            console.log('  End Time:', new Date(interview.endTime).toLocaleString());
+          });
+        },
+        error: (err) => {
+          console.error('Failed to load meetings:', err);
         }
+      });
+  }
 
-        interviews.forEach((interview: { startTime: string | number | Date; endTime: string | number | Date; }) => {
-          console.log(`Meeting for ${email}:`);
-          console.log('  Start Time:', new Date(interview.startTime).toLocaleString());
-          console.log('  End Time:', new Date(interview.endTime).toLocaleString());
-        });
-      },
-      error: (err) => {
-        console.error('Failed to load meetings:', err);
-      }
-    });
-}
+  // --- DATA TRANSFORMATION & HELPERS ---
+
+  // This method now takes a single flat array of all meetings
+  
 
 getFormattedDate(date: Date): string {
   const day = String(date.getDate()).padStart(2, '0');
@@ -364,8 +277,6 @@ getFormattedDate(date: Date): string {
   return `${day}-${month}-${year}`;
 }
 
-
-interviewers: { id: string, name: string }[] = [];
 
   
   
@@ -523,9 +434,9 @@ const start2Minutes = this.timeToMinutes(start2);
 const end2Minutes = this.timeToMinutes(end2);
 return (start1Minutes < end2Minutes && end1Minutes > start2Minutes);
 }
-   getInterviewerName(interviewerEmail: string): string {
+    getInterviewerName(interviewerEmail: string): string {
     const interviewer = this.interviewers.find(i => i.id === interviewerEmail);
-    return interviewer ? interviewer.name : 'Unknown';
+    return interviewer ? interviewer.name : interviewerEmail;
   }
 
   timeToMinutes(time: string): number {
@@ -584,11 +495,11 @@ scheduleInterview() {
       next: (response) => {
         // This is inside the onAccept callback of your existing scheduleAlert
         // We will just show the success message directly here.
-        this.messageService.add({ 
-          severity: 'success', 
-          summary: 'Interview Scheduled', 
-          detail: `Interview for ${request.candidateName} has been scheduled!` 
-        });
+        // this.messageService.add({ 
+        //   severity: 'success', 
+        //   summary: 'Interview Scheduled', 
+        //   detail: `Interview has been scheduled!` 
+        // });
         
         // 5. Refresh the grid to show the new meeting
         this.loadMeetingDataForGrid();
@@ -650,30 +561,21 @@ scheduleInterview() {
   //     this.allScheduledEventsForCurrentDate = [];
   //   }
   // }
- updateScheduledEventsForCurrentDate() {
+updateScheduledEventsForCurrentDate() {
+    console.log(`--- Updating grid for selected date: ${this.selectedDate?.toDateString()} ---`);
+
     if (this.selectedDate) {
-      // 1. Get the selected date but treat it as a local date (e.g., June 8th).
-      const localDate = new Date(this.selectedDate);
+      const selectedDateStr = this.selectedDate.toISOString().split('T')[0];
       
-      // 2. Create the start of the selected day in UTC.
-      // E.g., if you select June 8th, this becomes '2025-06-08T00:00:00.000Z'
-      const startOfDayUtc = new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()));
-
-      // 3. Create the end of the selected day in UTC (which is the start of the next day).
-      // E.g., '2025-06-09T00:00:00.000Z'
-      const endOfDayUtc = new Date(startOfDayUtc);
-      endOfDayUtc.setDate(startOfDayUtc.getDate() + 1);
-
-      // 4. Filter by checking if the interview's date falls within this 24-hour UTC window.
       this.allScheduledEventsForCurrentDate = this.scheduledInterviews.filter(
         interview => {
-          // 'interview.date' is the full Date object we stored earlier.
-          const interviewDate = interview.date; 
-          
-          // The comparison is now between three Date objects, which is reliable.
-          return interviewDate >= startOfDayUtc && interviewDate < endOfDayUtc;
+          const interviewDateStr = (interview.date as Date).toISOString().split('T')[0];
+          return interviewDateStr === selectedDateStr;
         }
       );
+
+      console.log(`Found ${this.allScheduledEventsForCurrentDate.length} meetings for this date.`);
+      console.log('Final data being sent to grid (this.allScheduledEventsForCurrentDate):', JSON.parse(JSON.stringify(this.allScheduledEventsForCurrentDate)));
     } else {
       this.allScheduledEventsForCurrentDate = [];
     }
