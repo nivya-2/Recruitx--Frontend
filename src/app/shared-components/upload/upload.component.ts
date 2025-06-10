@@ -21,13 +21,11 @@ export class UploadComponent {
   visible = true;
   uploadedFiles: File[] = [];
   showFileTable = false;
-  hideUploadBox = false;
   @Input() acceptTypes: string = '.docx'; // default
 
   closeModal(): void {
     this.uploadedFiles = [];
     this.showFileTable = false;
-    this.hideUploadBox = false;
 
     this.onClose.emit();
   }
@@ -46,7 +44,6 @@ export class UploadComponent {
   
   showFilesTable(): void {
     this.showFileTable = true;
-    this.hideUploadBox = true;
 
   }
   
