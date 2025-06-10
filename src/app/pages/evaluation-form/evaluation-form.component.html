@@ -1,297 +1,192 @@
-<!-- technical-evaluation-sheet.component.html -->
- <app-common-layout 
- [breadcrumbItems]="items"
- >
- <div class="side">
+<!-- evaluation-form.component.html -->
 
-  <app-cards class="custom-padding">
-    <div class="data-content" #content>
-      <div class="head">
-    <app-header-text context="table-header" [nopad]="true">Technical Evaluation Sheet (CAR Model) </app-header-text>
-       
+<app-common-layout [breadcrumbItems]="items">
+  <div class="side">
+    <app-cards class="custom-padding">
+      
+      <!-- This wrapper handles the loading/error/ready states -->
+      <div [ngSwitch]="viewState">
+
+        <!-- ===== LOADING STATE ===== -->
+        <div *ngSwitchCase="'loading'" class="status-box">
+          <h3>Loading Evaluation Data...</h3>
+        </div>
+
+        <!-- ===== ERROR STATE ===== -->
+        <div *ngSwitchCase="'error'" class="status-box error">
+          <h2>Could not load evaluation</h2>
+          <p>{{ errorMessage }}</p>
+        </div>
+
+        <!-- ===== READY STATE (Your Form) ===== -->
+        <div *ngSwitchCase="'ready'" class="data-content" #content>
+          <div class="head">
+            <app-header-text context="table-header" [nopad]="true">Technical Evaluation Sheet (CAR Model)</app-header-text>
+          </div>
+          <div class="container">
+            
+            <!-- Bind the form to the FormGroup from the component -->
+            <form [formGroup]="evaluationForm">
+              
+              <!-- Candidate Information Section -->
+              <div class="form-section" formGroupName="summary">
+                <table class="candidate-info">
+                  <tr>
+                    <td>Candidate Name:</td>
+                    <td><input type="text" formControlName="candidateName"></td>
+                    <td>Technology:</td>
+                    <td><input type="text" formControlName="technology"></td>
+                  </tr>
+                  <tr>
+                    <td>Interview Level:</td>
+                    <td><input type="text" formControlName="interviewLevel"></td>
+                    <td>Notice Period:</td>
+                    <td><input type="text" formControlName="noticePeriod"></td>
+                  </tr>
+                  <tr>
+                    <td>Total Experience:</td>
+                    <td><input type="text" formControlName="totalExperience"></td>
+                    <td>Relevant Experience:</td>
+                    <td><input type="text" formControlName="relevantExperience"></td>
+                  </tr>
+                  <tr>
+                    <td>Current Location:</td>
+                    <td><input type="text" formControlName="currentLocation"></td>
+                    <td>Preferred Location:</td>
+                    <td><input type="text" formControlName="preferredLocation"></td>
+                  </tr>
+                </table>
+              </div>
+  
+              <!-- Technical Evaluation Section -->
+              <div class="form-section" formArrayName="skills">
+                <div class="section-title">Technical Evaluation</div>
+                <!-- ... Rubric scale table is static and can remain ... -->
+
+                <div *ngFor="let skillGroup of skills.controls; let i = index" [formGroupName]="i" class="skill-block">
+                  <table class="skills-table">
+                    <thead>
+                      <tr>
+                        <th colspan="6" class="highlight">{{ skillGroup.get('category')?.value }}</th>
+                      </tr>
+                      <tr>
+                        <th>Technical Skills</th>
+                        <th>Candidate Self Rating</th>
+                        <th>Knowledge (Rating)</th>
+                        <th>Skills (Rating)</th>
+                        <th>Implementation (Rating)</th>
+                        <th>Average Rating</th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="competencies">
+                      <tr *ngFor="let competencyGroup of getFormArrayControls(skillGroup, 'competencies'); let j = index" [formGroupName]="j">
+                        <td>{{ competencyGroup.get('title')?.value }}</td>
+                        <td><input type="number" class="rating-input" formControlName="selfRating"></td>
+                        <td><input type="number" class="rating-input" formControlName="knowledgeRating"></td>
+                        <td><input type="number" class="rating-input" formControlName="skillsRating"></td>
+                        <td><input type="number" class="rating-input" formControlName="implementationRating"></td>
+                        <td><input type="number" class="rating-input" formControlName="averageRating"></td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td>Comments</td>
+                        <td colspan="5"><textarea formControlName="comments" rows="3"></textarea></td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+  
+              <!-- CAR Behavioral Interview Section -->
+              <div class="form-section" formArrayName="capabilities">
+                <div class="section-title">CAR (Context-Action-Results) Behavioral-Based Interview</div>
+                <table class="car-table">
+                  <thead>
+                    <tr>
+                      <th>Question addressing Capability</th>
+                      <th>Context</th>
+                      <th>Action</th>
+                      <th>Results</th>
+                      <th>Rating</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let capabilityGroup of capabilities.controls; let i = index" [formGroupName]="i">
+                      <td>*{{ capabilityGroup.get('question')?.value }}</td>
+                      <ng-container *ngIf="!capabilityGroup.get('fullComment')">
+                        <td><textarea formControlName="context" rows="4"></textarea></td>
+                        <td><textarea formControlName="action" rows="4"></textarea></td>
+                        <td><textarea formControlName="result" rows="4"></textarea></td>
+                        <td><input type="number" class="rating-input" formControlName="rating"></td>
+                      </ng-container>
+                      <td *ngIf="capabilityGroup.get('fullComment')" colspan="4">
+                        <textarea formControlName="fullComment" rows="5"></textarea>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+  
+              <!-- Overall Assessment Section -->
+              <div class="form-section" formGroupName="feedback">
+                <div class="section-title acls">Overall Assessment</div>
+                <table>
+                  <tr><td>Describe the candidate's strengths:</td></tr>
+                  <tr><td><textarea formControlName="strengths" rows="4"></textarea></td></tr>
+                  <tr><td>Describe the candidate's willingness to learn and adapt new technologies (Learnability):</td></tr>
+                  <tr><td><textarea formControlName="learnability" rows="4"></textarea></td></tr>
+                  <tr><td>Describe the candidate's development needs or areas for improvement:</td></tr>
+                  <tr><td><textarea formControlName="improvementAreas" rows="4"></textarea></td></tr>
+                  <tr><td>Do you feel this candidate has the capabilities needed to be successful in this role?</td></tr>
+                  <tr><td><textarea formControlName="hasCapabilities" rows="4"></textarea></td></tr>
+                  <tr><td>If Yes: (Provide justification):</td></tr>
+                  <tr><td><textarea formControlName="justificationIfYes" rows="4"></textarea></td></tr>
+                  <tr><td>If No: (Provide Feedback):</td></tr>
+                  <tr><td><textarea formControlName="feedbackIfNo" rows="4"></textarea></td></tr>
+                  <tr><td>Please share any additional observations/thoughts regarding the candidate's ability to perform this role:</td></tr>
+                  <tr><td><textarea formControlName="additionalObservations" rows="4"></textarea></td></tr>
+                  <tr><td>Interview Notes:</td></tr>
+                  <tr><td><textarea formControlName="interviewNotes" rows="4"></textarea></td></tr>
+                </table>
+              </div>
+  
+              <!-- Footer Section -->
+              <div class="form-section" formGroupName="finalSubmission">
+                <table>
+                  <tr>
+                    <td><strong>Hiring Decision:</strong></td>
+                    <td><input type="text" class="dec-class" formControlName="hiringDecision"></td>
+                    <td><strong>Proposed Role:</strong></td>
+                    <td><input type="text" formControlName="proposedRole"></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Interviewer Name:</strong></td>
+                    <td><input type="text" formControlName="interviewerName"></td>
+                    <td><strong>Interviewer Emp ID:</strong></td>
+                    <td><input type="text" formControlName="interviewerEmpId"></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Interview Date:</strong></td>
+                    <td><input type="text" formControlName="interviewDate"></td>
+                    <td><strong>Interview Mode: </strong></td>
+                    <td><input type="text" formControlName="interviewMode"></td>
+                  </tr>
+                </table>
+              </div>
+        
+              <!-- Submit Button Section (for read-only view) -->
+              <div class="form-actions">
+                <app-button (functionemit)="onSubmit()">Add Rounds</app-button>
+                <app-button (functionemit)="rejectApplicant()">Reject</app-button>
+                <app-button (functionemit)="selectApplicant()">Select</app-button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </app-cards>
+    <app-button class="pagedown" (functionemit)="scrollDown()"><span class="pi pi-arrow-down data"></span></app-button> 
   </div>
-    <div class="container">
-    <form >
-      <!-- Candidate Information Section -->
-      <div class="form-section">
-        <table class="candidate-info">
-          <tr>
-            <td>Candidate Name:</td>
-            <td><input type="text" [value]="summary.candidateName" disabled></td>
-            <td>Technology:</td>
-            <td><input type="text" [value]="summary.technology" disabled></td>
-          </tr>
-          <tr>
-            <td>Interview Level:</td>
-            <td><input type="text" [value]="summary.interviewLevel" disabled></td>
-            <td>Notice Period:</td>
-            <td><input type="text" [value]="summary.noticePeriod" disabled></td>
-          </tr>
-          <tr>
-            <td>Total Experience:</td>
-            <td><input type="text" [value]="summary.totalExperience" disabled></td>
-            <td>Relevant Experience:</td>
-            <td><input type="text" [value]="summary.relevantExperience" disabled></td>
-          </tr>
-          <tr>
-            <td>Current Location:</td>
-            <td><input type="text" [value]="summary.currentLocation" disabled></td>
-            <td>Preferred Location:</td>
-            <td><input type="text" [value]="summary.preferredLocation" disabled></td>
-          </tr>
-        </table>
-      </div>
-  
-      <!-- Technical Evaluation Section -->
-      <div class="form-section">
-        <div class="section-title">Technical Evaluation</div>
-        <div><p>Rubric scale Indicators - 1(low)--5(high)</p></div>
-        
-        <table class="rating-table">
-          <tr>
-            <th>1: No experience</th>
-            <th>2: Limited experience</th>
-            <th>3: Basic experience</th>
-            <th>4: Solid experience</th>
-            <th>5: In depth experience</th>
-          </tr>
-          <tr>
-            <td>No experience or example, skills for position not evident.</td>
-            <td>Limited experience and example. Will require additional training.</td>
-            <td>Basic experience and example. Not all actions ended in desired results.</td>
-            <td>Solid experience and example. Able to deliver desired results.</td>
-            <td>In depth experience and example. Able to deliver and manage/guide others.</td>
-          </tr>
-        </table>
-        
-        <!-- <p><em>*Primary/Secondary skillsets & Competencies are suggested by the Delivery, Interviewers are requested to fill the columns with the additional skillset if required.</em></p> -->
-        
-        <table class="skills-table">
-          <tr>
-            <th>Technical Skills</th>
-            <th>Candidate Self Rating</th>
-            <th>Knowledge (Rating)</th>
-            <th>Skills (Rating)</th>
-            <th>Implementation (Rating)</th>
-            <th>Average Rating (Refer the rating scale)</th>
-          </tr>
-          <tr>
-            <td colspan="6" class="highlight">{{this.skills[0].category}}</td>
-          </tr>
-          <tr>
-            <td colspan="6" class="highlight">Competencies -</td>
-          </tr>
-          <tr >
-            <td>{{skills[0].competencies[0].title}}</td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[0].selfRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[0].knowledgeRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[0].skillsRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[0].implementationRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[0].averageRating" disabled></td>
-          </tr>
-          <tr >
-            <td>{{skills[0].competencies[1].title}}</td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[1].selfRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[1].knowledgeRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[1].skillsRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[1].implementationRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[1].averageRating" disabled></td>
-          
-          </tr>
-          <tr >
-            <td>{{skills[0].competencies[2].title}}</td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[2].selfRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[2].knowledgeRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[2].skillsRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[2].implementationRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[2].averageRating" disabled></td>
-          
-          </tr>
-          <tr>
-            <td>Comments</td>
-            <td colspan="5" >{{skills[0].comments}}</td>
-
-            <!-- <td colspan="5"><textarea formControlName="primarySkillsComments" [disabled]="true"></textarea></td> -->
-            <!-- <td colspan="5"><textarea name="" id="" formControlName="primarySkillsComments"></textarea></td> -->
-
-          </tr>
-          <!-- Secondary Skills -->
-          <tr>
-            <td colspan="6" class="highlight">{{this.skills[0].category}}</td>
-          </tr>
-          <tr>
-            <td colspan="6" class="highlight">Competencies -</td>
-          </tr>
-          <tr >
-            <td>{{skills[1].competencies[0].title}}</td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[0].selfRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[0].knowledgeRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[0].skillsRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[0].implementationRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[0].averageRating" disabled></td>
-          </tr>
-          <tr >
-            <td>{{skills[1].competencies[1].title}}</td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[1].selfRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[1].knowledgeRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[1].skillsRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[1].implementationRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[1].averageRating" disabled></td>
-          
-          </tr>
-          <tr >
-            <td>{{skills[1].competencies[2].title}}</td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[2].selfRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[2].knowledgeRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[2].skillsRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[2].implementationRating" disabled></td>
-            <td><input type="number" class="rating-input" min="1" max="5" [value]="skills[0].competencies[2].averageRating" disabled></td>
-          
-          </tr>
-          <tr>
-            <td>Comments</td>
-            <td colspan="5" >{{skills[1].comments}}</td>
-        </table>
-      </div>
-  
-      <!-- CAR Behavioral Interview Section -->
-      <div class="form-section">
-        <!-- <div class="section-title">CAR (Context-Action-Results) Behavioral-Based Interview</div>
-        <p><em>Use CAR behavioral-based interview questions to help you assess specific behaviors as research shows that past behavior is a good predictor of future performance.</em></p>
-        <p><em>*Behavioral based attributes should be pre-defined by the Delivery, against the role and as per the Band (A or B or C)</em></p>
-        <p><em>**The Interviewers need to identify the scenarios by bringing candidate's story forward (Professional/Project specific) and extract the capabilities of the candidate with respect to CAR model.</em></p>
-         -->
-        <table class="car-table">
-          <tr>
-            <th>Question addressing Capability</th>
-            <th>Context (Take relevant notes)</th>
-            <th>Action (Take relevant notes)</th>
-            <th>Results (Take relevant notes)</th>
-            <th>Rating (Refer the rating scale)</th>
-          </tr>
-          <tr >
-            <td>*Accountability</td>
-            <td><textarea [value]="capabilities[0].context" disabled></textarea></td>
-            <td><textarea [value]="capabilities[0].action" disabled></textarea></td>
-            <td><textarea [value]="capabilities[0].result" disabled></textarea></td>
-            <td>
-            <input type="number" class="rating-input" min="1" max="5" [value]="capabilities[0].rating" disabled>
-            </td>
-          </tr>
-          <tr>
-            <td>*Problem Solving</td>
-            <td><textarea [value]="capabilities[1].context" disabled></textarea></td>
-            <td><textarea [value]="capabilities[1].action" disabled></textarea></td>
-            <td><textarea [value]="capabilities[1].result" disabled></textarea></td>
-            <td>
-            <input type="number" class="rating-input" min="1" max="5" [value]="capabilities[1].rating" disabled>
-            </td>
-          </tr>
-          <tr >
-            <td>*Stakeholder Management</td>
-            <td><textarea [value]="capabilities[2].context" disabled></textarea></td>
-            <td><textarea [value]="capabilities[2].action" disabled></textarea></td>
-            <td><textarea [value]="capabilities[2].result" disabled></textarea></td>
-            <td>
-            <input type="number" class="rating-input" min="1" max="5" [value]="capabilities[2].rating" disabled>
-            </td>
-          </tr>
-          <tr>
-            <td>Comments<br><span class="highlight">(Behavior, Attitude and Leadership capability)</span></td>
-            <td colspan="5"><textarea disabled [value]="capabilities[3].question"></textarea></td>
-          </tr>
-        </table>
-      </div>
-  
-      <!-- Overall Assessment Section -->
-      <div >
-        <div class="section-title acls">Overall Assessment</div>
-        <table>
-          <tr>
-            <td>Describe the candidate's strengths:</td>
-          </tr>
-          <tr>
-            <td><textarea [value]="feedback.strengths" disabled></textarea></td>
-          </tr>
-          <tr>
-            <td>Describe the candidate's willingness to explore newer technologies, ability to learn and adapt new technologies (Learnability):</td>
-          </tr>
-          <tr>
-            <td><textarea [value]="feedback.learnability" disabled></textarea></td>
-          </tr>
-          <tr>
-            <td>Describe the candidate's development needs or areas for improvement:</td>
-          </tr>
-          <tr>
-            <td><textarea [value]="feedback.improvementAreas" disabled></textarea></td>
-          </tr>
-          <tr>
-            <td>Do you feel this candidate has the capabilities needed to be successful in this role?</td>
-          </tr>
-          <tr>
-            <td><textarea [value]="feedback.hasCapabilities" disabled></textarea></td>
-          </tr>
-          <tr>
-            <td>If Yes: (Provide justification):</td>
-          </tr>
-          <tr>
-            <td><textarea [value]="feedback.justificationIfYes" disabled></textarea></td>
-          </tr>
-          <tr>
-            <td>If No: (Provide Feedback):</td>
-          </tr>
-          <tr>
-            <td><textarea [value]="feedback.feedbackIfNo" disabled></textarea></td>
-          </tr>
-          <tr>
-            <td>Please share any additional observations/thoughts regarding the candidate's ability to perform this role:</td>
-          </tr>
-          <tr>
-            <td><textarea [value]="feedback.additionalObservations" disabled></textarea></td>
-          </tr>
-          <tr>
-            <td>Interview Notes:</td>
-          </tr>
-          <tr>
-            <td><textarea [value]="feedback.interviewNotes" disabled></textarea></td>
-          </tr>
-        </table>
-      </div>
-  
-      <!-- Footer Section -->
-        <table>
-          <tr>
-            <td><strong>Hiring Decision:</strong></td>
-            <td><input type="text" class="dec-class" [value]="decisionLabel" disabled></td>
-          <td><strong>Proposed Role:</strong></td>
-            <td><input type="text" [value]="interviewInfo.proposedRole" disabled></td>
-          </tr>
-          <tr>
-            <td><strong>Interviewer Name:</strong></td>
-            <td> <input type="text" [value]="interviewInfo.interviewerName" disabled></td>
-            <td><strong>Interviewer Emp ID:</strong></td>
-            <td><input type="text" [value]="interviewInfo.interviewerEmpId" disabled></td>
-          </tr>
-          <tr>
-            <td><strong>Interview Date:</strong></td>
-            <td> <input type="text" [value]="interviewInfo.interviewDate" disabled></td>
-            <td><strong>Interview Mode: </strong></td>
-            <td> <input type="text" [value]="interviewInfo.interviewMode" disabled></td>
-          </tr>
-        </table>
-  
-      <!-- Submit Button -->
-      <div class="form-actions">
-        <app-button (functionemit)="onSubmit()">Add Rounds</app-button>
-        <app-button (functionemit)="rejectApplicant()">Reject</app-button>
-        <app-button (functionemit)="selectApplicant()">Select</app-button>
-      </div>
-    </form>
-  </div>
-</div>
-</app-cards>
-<app-button class="pagedown" (functionemit)="scrollDown()"><span class="pi pi-arrow-down data"></span>
-</app-button> 
-</div>
 </app-common-layout>
 <app-alerts #alerts></app-alerts>

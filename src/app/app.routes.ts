@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { PanelFormComponent } from './pages/evaluation-form/panel-form/panel-form.component';
 
 export const routes: Routes = [
   {
@@ -109,6 +110,7 @@ export const routes: Routes = [
                 canActivate: [AuthGuard],
                 data: { breadcrumb: 'Applicants', roles: ['Recruiter'] }
               }
+              
             ]
           },
         ]
@@ -500,5 +502,8 @@ export const routes: Routes = [
       import('./pages/schedule-page/schedule-page.component').then((m) => m.SchedulePageComponent),
     canActivate: [AuthGuard], 
     data: { roles: ['Recruiter']  },
-  }
+  },{
+        path: 'eval-form', // This matches the URL we generate in the backend
+        component: PanelFormComponent 
+    },
 ];
