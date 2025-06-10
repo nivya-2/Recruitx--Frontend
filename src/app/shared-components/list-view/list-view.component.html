@@ -6,7 +6,7 @@
       <div class="job-title">{{ job.title }}</div>
       <div class="job-meta">{{ job.date }} | {{ job.location }}</div>
     </div>
-    <div class="job-positions"><span style="color: black;"> |&nbsp;&nbsp; </span>{{ job.positions }} Open Positions</div>
+    <div class="job-positions"><span style="color: black;"> &nbsp;&nbsp;|&nbsp;&nbsp; </span>{{ job.positions }} Open Positions</div>
     <div class="assign-button-wrapper">
 <app-button (functionemit)="assignClick(job.id)">Assign</app-button>
             </div>
@@ -22,12 +22,8 @@
       [headerBgColor]="'#ffffff'"
       [style]="{ width: '50rem', height: '40rem' }"
      >
-     <div *ngIf="isLoading" class="loading-container">
-    <p-progressSpinner></p-progressSpinner>
-  </div>
-  <div *ngIf="!isLoading" class="loading-container">
+
   
      <app-jr-card (assignCompleted)="handleAssignCompleted($event)"
      [jobDetails]="selectedJobDetails"></app-jr-card>
-</div>
      </app-modal>

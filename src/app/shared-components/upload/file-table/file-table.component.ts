@@ -41,8 +41,6 @@ export class FileTableComponent {
   tableColumns = [
     { key: 'fileName', label: 'File Name', filterable: false },
     { key: 'fileSize', label: 'Size', filterable: false },
-    { key: 'fileType', label: 'Type', filterable: false },
-    { key: 'fstatus', label: 'Status', filterable: false },
     { key: 'actions', label: 'Actions', filterable: false }
   ];
   

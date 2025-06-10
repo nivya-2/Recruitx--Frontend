@@ -15,7 +15,6 @@ import { ProgressSpinner } from 'primeng/progressspinner';
   styleUrl: './list-view.component.scss'
 })
 export class ListViewComponent {
-   isLoading = false;
 
   constructor(private jrApi: JrApiService) {}
   selectedJob: any | null = null;
@@ -30,11 +29,9 @@ selectedJobId: number | null = null;
 assignClick(jobId: number) {
   this.selectedJobId = jobId;
   this.visible = true;
-     this.isLoading = true;
 
   // Replace this with actual API call
   this.fetchJobDetails(jobId);
-  this.isLoading = false;
 
 }
 selectedJobDetails: any = {
@@ -62,6 +59,8 @@ fetchJobDetails(jobId: number): void {
         }),
         hiringManager: data.hiringManager,
         recruiter: 'Not Assigned',
+        raisedBy: data.raisedBy,
+        raisedByRole: data.raisedByRole,
         qualifications: [data.qualification]
       };
 

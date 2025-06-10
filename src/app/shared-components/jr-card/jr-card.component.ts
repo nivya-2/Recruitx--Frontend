@@ -48,8 +48,8 @@ loadTeamList(): void {
     }
   });
 }
-  @Input() name: string = 'Arthur Pendragon';
-  @Input() role: string = 'Tech Lead';
+ name: string = 'Arthur Pendragon';
+ role: string = 'Tech Lead';
   @Input() jobDetails: any = null; // This will hold the job details object
 
   selectedMemberFromChild: any = null;
