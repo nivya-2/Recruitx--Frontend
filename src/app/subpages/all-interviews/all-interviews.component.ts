@@ -47,7 +47,8 @@ export class AllInterviewsComponent implements OnInit {
 
         const formatted = data.map(d => ({
         ...d,
-        jobDescription: `EXP_${d.jobDescription.toString().padStart(3, '0')}`
+        jobDescription: `EXP_${d.jobDescription.toString().padStart(3, '0')}`,
+        date: new Date(d.date).toLocaleDateString('en-GB')
       }));
 
         this.upcomingInterviewsDataSource = formatted.filter(d => d.status === 'Upcoming');
