@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 export interface InterviewDTO {
+  interviewId:string;
   candidateName: string;
   jobRole: string;
   date: string;
@@ -26,6 +27,7 @@ export interface ToScheduleDto {
 }
 
 export interface ToShortlistDto {
+  interviewId:string;
   id: string;
   jdId: string;
   name: string;
