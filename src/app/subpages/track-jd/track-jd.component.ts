@@ -92,10 +92,10 @@ jobColumns: Array<{ key: string, label: string, filterable: boolean ,type?:strin
   { key: 'roleTitle', label: 'Role Title', filterable: true },
   { key: 'businessUnit', label: 'Delivery Unit', filterable: true },
   { key: 'createdDate', label: 'Created Date', filterable: true , type: 'date' },
-  {key: 'jrProgress', label: 'Progress', filterable: false},
+  {key: 'jrProgress', label: 'Progress', filterable: false,type:'progress'},
   // { key: 'associatedJr', label: 'Associated JR', filterable: false },
   { key: 'jobStatus', label: 'Status', filterable: true },
-  { key: 'actions', label: 'Actions', filterable: false }
+  { key: 'actions', label: 'Actions', filterable: false,type:'actions' }
 ];
 
    routes = (row: any): void => {
