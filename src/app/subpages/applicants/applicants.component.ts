@@ -84,7 +84,7 @@ loadCandidates(jobId: number): void {
       next: (response) => {
         this.dataSource = response.data.map(candidate => ({
           ...candidate,
-          candidateId: `CAN${candidate.candidateId.toString().padStart(3, '0')}`, 
+          candidateId: `CAN_${candidate.candidateId.toString().padStart(3, '0')}`, 
           // Format as CAN0001
 
         }));
