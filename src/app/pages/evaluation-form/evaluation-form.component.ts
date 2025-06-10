@@ -13,7 +13,7 @@ import { Button } from 'primeng/button';
 import { IconComponent } from '../../ui/icon/icon.component';
 import { CommonModule, NgFor } from '@angular/common';
 import { MenuItem } from 'primeng/api';
-import { EvaluationService,SubmittedEvaluation } from '../../core/services/api/evaluation.service';
+import { EvaluationService, SubmittedEvaluation } from '../../core/services/api/evaluation.service';
 
 
 
@@ -25,7 +25,23 @@ interface Competency {
   implementationRating: number;
   averageRating: number;
 }
+interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  statusCode: number;
+  data: T;
+}
 
+// Define the interface for the actual payload inside 'data'
+// This should match the `SubmittedEvaluation` interface from your service
+interface SubmittedEvaluationPayload {
+  candidateName: string;
+  feedbackJson: string;
+  interviewLevel: string;
+  jobRole: string;
+  submittedAt: string;
+  submittedByEmail: string;
+}
 interface SkillBlock {
   category: string; 
   competencies: Competency[];
@@ -79,11 +95,10 @@ export class EvaluationFormComponent implements OnInit {
   errorMessage: string = '';
   
   currentUrl:any;
-  fb: any;
   constructor(private router: Router,    private route: ActivatedRoute,
-private evaluationService: EvaluationService,fb: FormBuilder) {
+private evaluationService: EvaluationService, private fb: FormBuilder) {
     this.currentUrl = this.router.url;
-        this.evaluationForm = this.fb.group({}); 
+  this.evaluationForm = this.fb.group({}); 
 
   }
   @ViewChild('content') contentRef!: ElementRef;
@@ -243,34 +258,52 @@ if (this.hiringDecision.select) {
 }
 
   ngOnInit(): void {
-    // 1. Get the interview ID from the route's URL parameters.
     const interviewIdParam = this.route.snapshot.paramMap.get('interviewId');
     
-    // 2. Add a "guard clause" to safely handle cases where the ID is missing.
     if (!interviewIdParam) {
       this.viewState = 'error';
       this.errorMessage = 'Interview ID was not provided in the URL.';
-      return; // Stop execution if no ID is found.
+      return;
     }
 
-    // 3. Convert the ID from a string to a number.
-    const interviewId = +interviewIdParam;
+    // FIX 1: Pass the ID as a string. Do not convert to a number with '+'.
+    const interviewId = interviewIdParam;
 
-    // 4. Call the service to fetch the submitted data.
+    // The service call now expects the wrapped ApiResponse type
     this.evaluationService.getSubmittedEvaluation(interviewId).subscribe({
-      next: (data: SubmittedEvaluation) => {
-        try {
-          // Parse the JSON string from the backend into a full JavaScript object.
-          const feedbackData = JSON.parse(data.feedbackJson);
+      // FIX 2: Handle the wrapped response structure.
+      // 'response' is the object { success: true, data: {...} }
+      next: (response: ApiResponse<SubmittedEvaluationPayload>) => {
+        console.log("--- Full API Response Received ---", response);
+
+        // First, check if the overall call was successful and the data object exists
+        if (response && response.success && response.data) {
           
-          // Build the form structure and populate it with the parsed data.
-          this.buildAndPatchForm(feedbackData);
+          const evaluationData = response.data; // This is the inner object with feedbackJson
           
-          this.viewState = 'ready'; // Set state to 'ready' to show the form in the HTML.
-        } catch (e) {
-          console.error("Error parsing feedback JSON:", e);
+          // Now, perform the check on the inner object
+          if (evaluationData.feedbackJson && evaluationData.feedbackJson.trim() !== '') {
+            try {
+              const feedbackData = JSON.parse(evaluationData.feedbackJson);
+              console.log("--- Successfully Parsed feedbackJson ---", feedbackData);
+
+              this.buildAndPatchForm(feedbackData);
+              this.viewState = 'ready';
+            } catch (e) {
+              console.error("Error parsing feedback JSON:", e);
+              this.viewState = 'error';
+              this.errorMessage = 'The saved evaluation data is corrupt and could not be displayed.';
+            }
+          } else {
+            console.error("Evaluation data loaded, but the feedback content (feedbackJson) is empty or missing.");
+            this.viewState = 'error';
+            this.errorMessage = 'The evaluation was found, but the submitted feedback is empty.';
+          }
+        } else {
+          // This handles cases where the API returns success: false or an empty data object
+          console.error("API call was not successful or returned no data.", response);
           this.viewState = 'error';
-          this.errorMessage = 'The saved evaluation data could not be displayed.';
+          this.errorMessage = response.message || 'An unexpected API error occurred.';
         }
       },
       error: (err) => {

@@ -475,14 +475,14 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'recruiter-lead/interviews/shortlist/eval-form',
+    path: 'recruiter-lead/interviews/shortlist/eval-form/:interviewId',
     loadComponent: () =>
       import('./pages/evaluation-form/evaluation-form.component').then((m) => m.EvaluationFormComponent),
     canActivate: [AuthGuard],
     data: {roles: ['Recruiter Lead']  },
   },
   {
-    path: 'recruiter/interviews/shortlist/eval-form',
+    path: 'recruiter/interviews/shortlist/eval-form/:interviewId',
     loadComponent: () =>
       import('./pages/evaluation-form/evaluation-form.component').then((m) => m.EvaluationFormComponent),
     canActivate: [AuthGuard], 

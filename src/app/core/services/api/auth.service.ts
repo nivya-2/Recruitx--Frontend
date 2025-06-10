@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 export interface ApiResponse<T> {
+  // success: ApiResponse<import("d:/ILP_01_2024-25/Specilisation/Angular/New folder/Recruitx--Frontend/src/app/core/services/api/evaluation.service").SubmittedEvaluation>;
   statusCode: number;
   message: string;
   meta?: any;
