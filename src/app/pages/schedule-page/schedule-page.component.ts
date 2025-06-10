@@ -16,28 +16,29 @@ import { CommonLayoutComponent } from "../../layouts/common-layout/common-layout
 import { CardsComponent } from "../../ui/cards/cards.component";
 import { HeaderTextComponent } from "../../ui/header-text/header-text.component";
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JdCandidateService } from '../../core/services/api/jd-candidate.service';
 
 @Component({
   selector: 'app-schedule-page',
   imports: [Calendar, MultiSelect, Tag, Button, Toast, Message, DropdownModule, FormsModule, CommonModule, ButtonComponent, IconComponent, ButtonIconComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, AlertsComponent],
-  templateUrl:'./schedule-page.component.html',
+  templateUrl: './schedule-page.component.html',
   styleUrl: './schedule-page.component.scss',
   providers: [MessageService]
 })
 export class SchedulePageComponent implements OnInit {
   // Sample data
   candidates: any[] = [
-    { id: 'CND-101', name: 'Emma Johnson', mobNumber: '7012345678', email: 'emma.johnson@example.com', stage: 'Technical Level 1', totalExp: 3, relevantExp: 2, currentEmployer: 'Google' },
-    { id: 'CND-102', name: 'Liam Smith', mobNumber: '7123456789', email: 'liam.smith@example.com', stage: 'Technical Level 2', totalExp: 5, relevantExp: 4, currentEmployer: 'Amazon' },
-    { id: 'CND-103', name: 'Olivia Brown', mobNumber: '7234567890', email: 'olivia.brown@example.com', stage: 'Technical Level 3', totalExp: 7, relevantExp: 6, currentEmployer: 'Microsoft' },
-    { id: 'CND-104', name: 'Noah Davis', mobNumber: '7345678901', email: 'noah.davis@example.com', stage: 'Management Level 1', totalExp: 8, relevantExp: 7, currentEmployer: 'Facebook' },
-    { id: 'CND-105', name: 'Ava Wilson', mobNumber: '7456789012', email: 'ava.wilson@example.com', stage: 'Management Level 2', totalExp: 10, relevantExp: 9, currentEmployer: 'Apple' },
-    { id: 'CND-106', name: 'William Miller', mobNumber: '7567890123', email: 'william.miller@example.com', stage: 'Technical Level 1', totalExp: 2, relevantExp: 1, currentEmployer: 'Netflix' },
-    { id: 'CND-107', name: 'Sophia Moore', mobNumber: '7678901234', email: 'sophia.moore@example.com', stage: 'Technical Level 2', totalExp: 4, relevantExp: 3, currentEmployer: 'Tesla' },
-    { id: 'CND-108', name: 'James Taylor', mobNumber: '7789012345', email: 'james.taylor@example.com', stage: 'Technical Level 3', totalExp: 6, relevantExp: 5, currentEmployer: 'Spotify' },
-    { id: 'CND-109', name: 'Isabella Anderson', mobNumber: '7890123456', email: 'isabella.anderson@example.com', stage: 'Management Level 1', totalExp: 9, relevantExp: 8, currentEmployer: 'Adobe' },
-    { id: 'CND-110', name: 'Benjamin Thomas', mobNumber: '7901234567', email: 'benjamin.thomas@example.com', stage: 'Management Level 2', totalExp: 11, relevantExp: 10, currentEmployer: 'Salesforce' }
+    // { id: 'CND-101', name: 'Emma Johnson', mobNumber: '7012345678', email: 'emma.johnson@example.com', stage: 'Technical Level 1', totalExp: 3, relevantExp: 2, currentEmployer: 'Google' },
+    // { id: 'CND-102', name: 'Liam Smith', mobNumber: '7123456789', email: 'liam.smith@example.com', stage: 'Technical Level 2', totalExp: 5, relevantExp: 4, currentEmployer: 'Amazon' },
+    // { id: 'CND-103', name: 'Olivia Brown', mobNumber: '7234567890', email: 'olivia.brown@example.com', stage: 'Technical Level 3', totalExp: 7, relevantExp: 6, currentEmployer: 'Microsoft' },
+    // { id: 'CND-104', name: 'Noah Davis', mobNumber: '7345678901', email: 'noah.davis@example.com', stage: 'Management Level 1', totalExp: 8, relevantExp: 7, currentEmployer: 'Facebook' },
+    // { id: 'CND-105', name: 'Ava Wilson', mobNumber: '7456789012', email: 'ava.wilson@example.com', stage: 'Management Level 2', totalExp: 10, relevantExp: 9, currentEmployer: 'Apple' },
+    // { id: 'CND-106', name: 'William Miller', mobNumber: '7567890123', email: 'william.miller@example.com', stage: 'Technical Level 1', totalExp: 2, relevantExp: 1, currentEmployer: 'Netflix' },
+    // { id: 'CND-107', name: 'Sophia Moore', mobNumber: '7678901234', email: 'sophia.moore@example.com', stage: 'Technical Level 2', totalExp: 4, relevantExp: 3, currentEmployer: 'Tesla' },
+    // { id: 'CND-108', name: 'James Taylor', mobNumber: '7789012345', email: 'james.taylor@example.com', stage: 'Technical Level 3', totalExp: 6, relevantExp: 5, currentEmployer: 'Spotify' },
+    // { id: 'CND-109', name: 'Isabella Anderson', mobNumber: '7890123456', email: 'isabella.anderson@example.com', stage: 'Management Level 1', totalExp: 9, relevantExp: 8, currentEmployer: 'Adobe' },
+    // { id: 'CND-110', name: 'Benjamin Thomas', mobNumber: '7901234567', email: 'benjamin.thomas@example.com', stage: 'Management Level 2', totalExp: 11, relevantExp: 10, currentEmployer: 'Salesforce' }
   ];
 
   interviewers: any[] = [
@@ -51,7 +52,7 @@ export class SchedulePageComponent implements OnInit {
 
   // Time slots for the FORM dropdowns
   timeSlots = [
-    
+
     { label: '9:00 AM', value: '09:00' }, { label: '9:30 AM', value: '09:30' },
     { label: '10:00 AM', value: '10:00' }, { label: '10:30 AM', value: '10:30' },
     { label: '11:00 AM', value: '11:00' }, { label: '11:30 AM', value: '11:30' },
@@ -87,26 +88,37 @@ export class SchedulePageComponent implements OnInit {
   workingHoursStart = 9; // 9 AM (inclusive)
   workingHoursEnd = 16;  // 5 PM (exclusive, so up to 16:xx)
   allScheduledEventsForCurrentDate: any[] = [];
-myInterview: any;
+  myInterview: any;
 
-constructor(private router: Router,private messageService: MessageService) {
-  this.currentUrl = this.router.url;
-}
-
+  constructor(private router: Router, private route: ActivatedRoute, private messageService: MessageService, private candidateService: JdCandidateService) {
+    this.currentUrl = this.router.url;
+  }
+  jdId: number = 0;
   ngOnInit() {
+    this.jdId = Number(this.route.snapshot.paramMap.get('id'));
+    // this.candidateService.getCandidatesByJdId(this.jdId).subscribe(data => {
+    //   this.candidates = data;
+    //   console.log(this.candidates);
+    // });
+    this.candidateService.getCandidatesByJdId(this.jdId).subscribe((response: any) => {
+  this.candidates = response.data || [];
+});
+
+
+
     this.initializeSampleData();
     this.updateScheduledEventsForCurrentDate();
     this.calculateCurrentMeetingDuration(); // Calculate initial duration (likely 0)
     // Load events for the initial date
-      this.currentUrl = this.router.url;
-      if (this.currentUrl.startsWith('/recruiter-lead')) {
-        this.items=[{ label: 'Interview', routerLink: '/recruiter-lead/interviews' }, {label: 'Schedule', routerLink: '/recruiter-lead/interviews/Schedule'}, {label: 'Scheduling Page', routerLink: '/recruiter-lead/interviews/Schedule/schedule-page'}]
-        this.router.navigate(['/recruiter-lead/interviews/shortlist/schedule-page']);
-      } else if (this.currentUrl.startsWith('/recruiter')) {
-        this.items=[{ label: 'Interview', routerLink: '/recruiter/interviews' }, {label: 'Schedule', routerLink: '/recruiter/interviews/Schedule'}, {label: 'Scheduling Page', routerLink: '/recruiter/interviews/Schedule/schedule-page'}]
-  
-      }
-    
+    this.currentUrl = this.router.url;
+    if (this.currentUrl.startsWith('/recruiter-lead')) {
+      this.items = [{ label: 'Interview', routerLink: '/recruiter-lead/interviews' }, { label: 'Schedule', routerLink: '/recruiter-lead/interviews/Schedule' }, { label: 'Scheduling Page', routerLink: '/recruiter-lead/interviews/Schedule/schedule-page' }]
+      // this.router.navigate(['/recruiter-lead/interviews/shortlist/schedule-page']);
+    } else if (this.currentUrl.startsWith('/recruiter')) {
+      this.items = [{ label: 'Interview', routerLink: '/recruiter/interviews' }, { label: 'Schedule', routerLink: '/recruiter/interviews/Schedule' }, { label: 'Scheduling Page', routerLink: '/recruiter/interviews/Schedule/schedule-page' }]
+
+    }
+
   }
 
   initializeSampleData() {
@@ -174,7 +186,7 @@ constructor(private router: Router,private messageService: MessageService) {
       }
     ];
   }
-  
+
 
   onCandidateChange(event: any) {
     if (this.selectedCandidate) {
@@ -196,7 +208,7 @@ constructor(private router: Router,private messageService: MessageService) {
   onTimeChange() {
     this.updateEndTimeSlots();
     if (!this.selectedStartTime) {
-        this.selectedEndTime = '';
+      this.selectedEndTime = '';
     }
     this.checkForConflicts();
   }
@@ -224,33 +236,33 @@ constructor(private router: Router,private messageService: MessageService) {
     }
   }
 
-  items:any = [];
-  currentUrl:any;
- 
+  items: any = [];
+  currentUrl: any;
+
   @ViewChild('alerts') alertsComponent!: AlertsComponent;
- 
-  scheduleAlert(row: any){
-      const message = `Are you sure you want to schedule a interview with ${this.selectedCandidate.name}?`;
-      
-      this.alertsComponent.showConfirmDialog({
-        message: message,
-        header: `Add ${this.selectedCandidate.stage}`,
-        icon: 'pi pi-add',
-        acceptLabel: 'Schedule',
-        rejectLabel: 'Cancel',
-        acceptSeverity: 'success',
-        rejectSeverity: 'warn',
-        acceptSummary: 'Interview Scheduled',
-        rejectSummary: 'Cancelled',
-        acceptDetail: `Interview for ${this.selectedCandidate!.name} on ${new Date(this.selectedDate).toLocaleDateString()} from ${this.selectedStartTime} to ${this.selectedEndTime} has been scheduled!`,
-        rejectDetail: 'No changes were made.',
-        onAccept: () => {
-          this.scheduleInterview();
-        },
-        onReject: () => {
-        }
-      });
-    
+
+  scheduleAlert(row: any) {
+    const message = `Are you sure you want to schedule a interview with ${this.selectedCandidate.name}?`;
+
+    this.alertsComponent.showConfirmDialog({
+      message: message,
+      header: `Add ${this.selectedCandidate.stage}`,
+      icon: 'pi pi-add',
+      acceptLabel: 'Schedule',
+      rejectLabel: 'Cancel',
+      acceptSeverity: 'success',
+      rejectSeverity: 'warn',
+      acceptSummary: 'Interview Scheduled',
+      rejectSummary: 'Cancelled',
+      acceptDetail: `Interview for ${this.selectedCandidate!.name} on ${new Date(this.selectedDate).toLocaleDateString()} from ${this.selectedStartTime} to ${this.selectedEndTime} has been scheduled!`,
+      rejectDetail: 'No changes were made.',
+      onAccept: () => {
+        this.scheduleInterview();
+      },
+      onReject: () => {
+      }
+    });
+
   }
   formatDurationDisplay(totalMinutes: number): string {
     if (totalMinutes <= 0) {
@@ -271,52 +283,52 @@ constructor(private router: Router,private messageService: MessageService) {
     }
   }
   isTentativePreviewVisibleInCell(cellHour: string): boolean {
-     // Guard conditions: no preview if essential data is missing or duration is invalid/zero
-  if (!this.selectedDate || !this.selectedStartTime || !this.selectedEndTime || this.currentMeetingDuration <= 0) {
-    return false;
-  }
+    // Guard conditions: no preview if essential data is missing or duration is invalid/zero
+    if (!this.selectedDate || !this.selectedStartTime || !this.selectedEndTime || this.currentMeetingDuration <= 0) {
+      return false;
+    }
 
-  const cellStartMinutes = this.timeToMinutes(cellHour);
-  const cellEndMinutes = cellStartMinutes + 60; // Assuming 1-hour grid cells
+    const cellStartMinutes = this.timeToMinutes(cellHour);
+    const cellEndMinutes = cellStartMinutes + 60; // Assuming 1-hour grid cells
 
-  const tentativeStartMinutes = this.timeToMinutes(this.selectedStartTime);
-  const tentativeEndMinutes = this.timeToMinutes(this.selectedEndTime);
+    const tentativeStartMinutes = this.timeToMinutes(this.selectedStartTime);
+    const tentativeEndMinutes = this.timeToMinutes(this.selectedEndTime);
 
-  // Check for overlap: (StartA < EndB) and (EndA > StartB)
-  // True if the cell (A) overlaps with the tentative schedule (B)
-  return cellStartMinutes < tentativeEndMinutes && cellEndMinutes > tentativeStartMinutes;
+    // Check for overlap: (StartA < EndB) and (EndA > StartB)
+    // True if the cell (A) overlaps with the tentative schedule (B)
+    return cellStartMinutes < tentativeEndMinutes && cellEndMinutes > tentativeStartMinutes;
   }
 
   calculateTentativePreviewTopPosition(cellHour: string): string {
     if (!this.selectedStartTime) return '0%';
-  
+
     const cellHourStartMinutes = this.timeToMinutes(cellHour);
     const tentativeStartMinutes = this.timeToMinutes(this.selectedStartTime);
-  
+
     // Calculate offset from the start of the cellHour
     const offsetMinutes = Math.max(0, tentativeStartMinutes - cellHourStartMinutes);
-  
+
     // Convert offset to percentage of cell height (assuming 60 minutes per cell)
     const topPercentage = (offsetMinutes / 60) * 100;
     return `${topPercentage}%`;
   }
-  
+
   calculateTentativePreviewHeight(cellHour: string): string {
     if (!this.selectedStartTime || !this.selectedEndTime || this.currentMeetingDuration <= 0) return '0%';
-  
+
     const cellHourStartMinutes = this.timeToMinutes(cellHour);
     const cellHourEndMinutes = cellHourStartMinutes + 60; // Cell duration is 60 minutes
-  
+
     const tentativeStartMinutes = this.timeToMinutes(this.selectedStartTime);
     const tentativeEndMinutes = this.timeToMinutes(this.selectedEndTime);
-  
+
     // Determine the portion of the tentative slot that falls within this specific cellHour
     const effectiveStartInCell = Math.max(tentativeStartMinutes, cellHourStartMinutes);
     const effectiveEndInCell = Math.min(tentativeEndMinutes, cellHourEndMinutes);
-  
+
     // Calculate the duration of the preview block within this cell
     const durationInCellMinutes = Math.max(0, effectiveEndInCell - effectiveStartInCell);
-  
+
     // Convert duration to percentage of cell height (assuming 60 minutes per cell)
     const heightPercentage = (durationInCellMinutes / 60) * 100;
     return `${heightPercentage}%`;
@@ -331,7 +343,7 @@ constructor(private router: Router,private messageService: MessageService) {
     const startIndex = this.timeSlots.findIndex(slot => slot.value === this.selectedStartTime);
     this.filteredEndTimeSlots = this.timeSlots.slice(startIndex + 1);
     if (this.selectedEndTime && !this.filteredEndTimeSlots.find(slot => slot.value === this.selectedEndTime)) {
-        this.selectedEndTime = '';
+      this.selectedEndTime = '';
     }
   }
 

@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ScheduleComponent {
 dataSource: any[] = [ 
-    { id: 'JD001', 
+    { id: 4, 
       roleTitle: 'Software Engineer',
       deliveryUnit: 'DU1',
       location: 'Bangalore', 
@@ -117,8 +117,9 @@ actions:['Schedule'],
   
     }
     onSchedule = (row: any) => {
+      const jdId = row.id;
       if (this.currentUrl.startsWith('/recruiter-lead')) {
-        this.router.navigate(['recruiter-lead/interviews/schedule/schedule-page']);
+        this.router.navigate(['recruiter-lead/interviews/schedule/schedule-page',jdId]);
     
       } else if (this.currentUrl.startsWith('/recruiter')) {
       this.router.navigate(['/recruiter/interviews/schedule/schedule-page']);

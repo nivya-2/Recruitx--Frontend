@@ -488,7 +488,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'recruiter-lead/interviews/schedule/schedule-page',
+    path: 'recruiter-lead/interviews/schedule/schedule-page/:id',
     loadComponent: () =>
       import('./pages/schedule-page/schedule-page.component').then((m) => m.SchedulePageComponent),
      canActivate: [AuthGuard],
