@@ -73,11 +73,11 @@ handleRemove = (row: any) => {
     { memberName: "Vivek Menon", jobTitle: "Team Lead", jrAssigned: 1,  actions: ['View assigned JR','Remove'] }
   ];
 
-  teamsColumns: Array<{ key: string, label: string, filterable: boolean }> = [
+  teamsColumns: Array<{ key: string, label: string, filterable: boolean,type?:string }> = [
     { key: 'memberName', label: 'Name', filterable: false },
     { key: 'jobTitle', label: 'Job Title', filterable: true },
     { key: 'jrAssigned', label: 'JR Assigned', filterable: false },
-    { key: 'actions', label: 'Actions', filterable: false },
+    { key: 'actions', label: 'Actions', filterable: false ,type:'actions'},
 
     
 

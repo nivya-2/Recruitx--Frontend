@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { HeaderTextComponent } from '../../ui/header-text/header-text.component';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { InputTextComponent } from "../../ui/input-text/input-text.component";
@@ -31,6 +31,8 @@ export class DetailsComponent implements OnInit {
   formData:any =[];
   isLoading: boolean = true;
   isDraftSaved: boolean = false;
+   @Output() actionCompleted = new EventEmitter<void>();
+
 
   constructor(private jobDescService: JobDescriptionService, private route: ActivatedRoute) {}
   ngOnInit(): void {
@@ -191,19 +193,183 @@ export class DetailsComponent implements OnInit {
 //     additionalInfo: `Looking for candidates who can join within 30 days. Hybrid work option available.`
 //   };
 exportAsPDF() {
-  const jdForm = document.getElementById('jd-form');
-  if (jdForm) {
-    html2canvas(jdForm).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+   const pdf = new jsPDF('p', 'mm', 'a4');
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const margin = 20;
+  const maxWidth = pageWidth - (margin * 2);
+  let yPosition = margin;
 
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save('JobDescription.pdf');
-    });
+  // Helper function to add text with word wrapping
+ const addTextWithWrapping = (
+  text: string | undefined,
+  x: number,
+  y: number,
+  maxWidth: number,
+  fontSize: number = 10
+): number => {
+  if (!text) return y;
+
+  pdf.setFontSize(fontSize);
+  const lines = pdf.splitTextToSize(text, maxWidth);
+  const lineHeight = fontSize * 0.35;
+
+  for (const line of lines) {
+    if (y + lineHeight > pageHeight - margin) {
+      pdf.addPage();
+      y = margin;
+    }
+    pdf.text(line, x, y);
+    y += lineHeight;
   }
+
+  return y;
+};
+
+  // Helper function to check if new page is needed
+  const checkNewPage = (currentY: number, requiredHeight: number = 20) => {
+    if (currentY + requiredHeight > pageHeight - margin) {
+      pdf.addPage();
+      return margin;
+    }
+    return currentY;
+  };
+
+  // Title
+  pdf.setFontSize(16);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Job Description', margin, yPosition);
+  yPosition += 15;
+
+  // Job Role
+  yPosition = checkNewPage(yPosition);
+  pdf.setFontSize(12);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Role:', margin, yPosition);
+  pdf.setFont('helvetica', 'normal');
+  yPosition = addTextWithWrapping(this.formData.role, margin + 25, yPosition, maxWidth - 25, 12);
+  yPosition += 10;
+
+  // Work Location
+  yPosition = checkNewPage(yPosition);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Work Location:', margin, yPosition);
+  pdf.setFont('helvetica', 'normal');
+  yPosition = addTextWithWrapping(this.formData.workLocation, margin + 35, yPosition, maxWidth - 35, 12);
+  yPosition += 10;
+
+  // Experience
+  yPosition = checkNewPage(yPosition);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Total Experience:', margin, yPosition);
+  pdf.setFont('helvetica', 'normal');
+  const totalExp = `${this.formData.totalExpYears} Years ${this.formData.totalExpMonths} Months`;
+  yPosition = addTextWithWrapping(totalExp, margin + 40, yPosition, maxWidth - 40, 12);
+  yPosition += 5;
+
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Relevant Experience:', margin, yPosition);
+  pdf.setFont('helvetica', 'normal');
+  const relevantExp = `${this.formData.relevantExpYears} Years ${this.formData.relevantExpMonths} Months`;
+  yPosition = addTextWithWrapping(relevantExp, margin + 45, yPosition, maxWidth - 45, 12);
+  yPosition += 10;
+
+  // Qualification
+  yPosition = checkNewPage(yPosition);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Qualification:', margin, yPosition);
+  pdf.setFont('helvetica', 'normal');
+  yPosition = addTextWithWrapping(this.formData.qualification, margin + 30, yPosition, maxWidth - 30, 12);
+  yPosition += 10;
+
+  // Onboarding Date
+  yPosition = checkNewPage(yPosition);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Expected Onboarding:', margin, yPosition);
+  pdf.setFont('helvetica', 'normal');
+  yPosition = addTextWithWrapping(this.formData.onboardingDate, margin + 45, yPosition, maxWidth - 45, 12);
+  yPosition += 15;
+
+  // Skills Section
+  yPosition = checkNewPage(yPosition, 30);
+  pdf.setFontSize(14);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Skills & Requirements', margin, yPosition);
+  yPosition += 10;
+
+  // Mandatory Skills
+  yPosition = checkNewPage(yPosition);
+  pdf.setFontSize(12);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Mandatory Skills:', margin, yPosition);
+  pdf.setFont('helvetica', 'normal');
+  yPosition = addTextWithWrapping(this.formData.skillsMandatory, margin + 35, yPosition, maxWidth - 35, 12);
+  yPosition += 8;
+
+  // Primary Skills
+  yPosition = checkNewPage(yPosition);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Primary Skills:', margin, yPosition);
+  pdf.setFont('helvetica', 'normal');
+  yPosition = addTextWithWrapping(this.formData.skillsPrimary, margin + 30, yPosition, maxWidth - 30, 12);
+  yPosition += 8;
+
+  // Good to Have Skills
+  if (this.formData.skillsGood) {
+    yPosition = checkNewPage(yPosition);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Good to Have:', margin, yPosition);
+    pdf.setFont('helvetica', 'normal');
+    yPosition = addTextWithWrapping(this.formData.skillsGood, margin + 30, yPosition, maxWidth - 30, 12);
+    yPosition += 15;
+  }
+
+  // Job Purpose
+  yPosition = checkNewPage(yPosition, 30);
+  pdf.setFontSize(14);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Job Purpose', margin, yPosition);
+  yPosition += 8;
+  pdf.setFontSize(12);
+  pdf.setFont('helvetica', 'normal');
+  yPosition = addTextWithWrapping(this.formData.jobPurpose, margin, yPosition, maxWidth, 12);
+  yPosition += 15;
+
+  // Job Description
+  yPosition = checkNewPage(yPosition, 30);
+  pdf.setFontSize(14);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Job Description / Duties & Responsibilities', margin, yPosition);
+  yPosition += 8;
+  pdf.setFontSize(12);
+  pdf.setFont('helvetica', 'normal');
+  yPosition = addTextWithWrapping(this.formData.jobDescription, margin, yPosition, maxWidth, 12);
+  yPosition += 15;
+
+  // Job Specification
+  yPosition = checkNewPage(yPosition, 30);
+  pdf.setFontSize(14);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text('Job Specification / Skills and Competencies', margin, yPosition);
+  yPosition += 8;
+  pdf.setFontSize(12);
+  pdf.setFont('helvetica', 'normal');
+  yPosition = addTextWithWrapping(this.formData.jobSpecification, margin, yPosition, maxWidth, 12);
+  yPosition += 15;
+
+  // Additional Information
+  if (this.formData.additionalInfo) {
+    yPosition = checkNewPage(yPosition, 30);
+    pdf.setFontSize(14);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Additional Information', margin, yPosition);
+    yPosition += 8;
+    pdf.setFontSize(12);
+    pdf.setFont('helvetica', 'normal');
+    yPosition = addTextWithWrapping(this.formData.additionalInfo, margin, yPosition, maxWidth, 12);
+  }
+
+  pdf.save('JobDescription.pdf');
 }
 
 
@@ -317,6 +483,8 @@ exportAsExcel(): void {
         this.isDraftSaved = true;
         this.isEditMode = false;
         this.label = 'Edit';
+        this.actionCompleted.emit(); 
+
       },
     });
   }
@@ -377,6 +545,8 @@ exportAsExcel(): void {
       next: (submitResponse) => {
         console.log("Submit successful:", submitResponse);
         this.isEditMode = false;
+        this.actionCompleted.emit(); 
+
         // Disable all buttons as the process is complete
       },
     });

@@ -40,3 +40,6 @@ table{
   min-height: 600px;
   min-width: 600px;
 }
+::ng-deep th, td{
+    max-width: 130px;
+}

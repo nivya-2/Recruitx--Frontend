@@ -4,3 +4,9 @@
     right:80px;
     z-index: 100;
 }
+::ng-deep .p-treetable {
+    overflow: visible !important;
+}
+::ng-deep th, td{
+    max-width: 130px;
+}

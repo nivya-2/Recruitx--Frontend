@@ -84,7 +84,9 @@ export class BulkUploadCandidatesService {
       ExpectedCTC: p.expectedCTC,
       PreferedLocation: p.preferedLocation,
     }));
+        
 
+    console.log(payload);
     return this.http.post<BulkAddResultDTO>(url, payload, { withCredentials: true });
   }
  
