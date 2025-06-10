@@ -29,12 +29,12 @@ export class AllInterviewsComponent implements OnInit {
   upcomingColumns = [
     { key: 'candidateName', label: 'Candidate Name', filterable: true },
     { key: 'jobRole', label: 'Job Role', filterable: true },
+    { key: 'jobDescription', label: 'Job Description ID', filterable: true },
     { key: 'date', label: 'Scheduled Date', filterable: false },
     { key: 'time', label: 'Time', filterable: false },
     { key: 'interviewRound', label: 'Interview Round', filterable: false },
     { key: 'interviewerName', label: 'Interviewer', filterable: true },
-    { key: 'interviewerDeliveryUnit', label: 'Delivery Unit', filterable: true },
-    { key: 'createdDate', label: 'Created Date', filterable: false }
+    // { key: 'createdDate', label: 'Created Date', filterable: false }
   ];
 
   completedColumns = [...this.upcomingColumns]; // same structure
@@ -44,8 +44,14 @@ export class AllInterviewsComponent implements OnInit {
   ngOnInit() {
     this.interviewService.getAllInterviews().subscribe({
       next: data => {
-        this.upcomingInterviewsDataSource = data.filter(d => d.status === 'Upcoming');
-        this.completedInterviewsDataSource = data.filter(d => d.status === 'Completed');
+
+        const formatted = data.map(d => ({
+        ...d,
+        jobDescription: `EXP_${d.jobDescription.toString().padStart(3, '0')}`
+      }));
+
+        this.upcomingInterviewsDataSource = formatted.filter(d => d.status === 'Upcoming');
+        this.completedInterviewsDataSource = formatted.filter(d => d.status === 'Completed');
         this.updateTableData();
       },
       error: err => console.error('Failed to load interviews', err)

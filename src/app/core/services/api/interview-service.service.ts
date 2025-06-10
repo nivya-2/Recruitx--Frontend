@@ -9,7 +9,7 @@ export interface InterviewDTO {
   time: string;
   interviewRound: string;
   interviewerName: string;
-  interviewerDeliveryUnit: string;
+  jobDescription: string;
   createdDate: string;
   status: string;
 }
@@ -27,7 +27,7 @@ export interface ToScheduleDto {
 
 export interface ToShortlistDto {
   id: string;
-  jdId: number;
+  jdId: string;
   name: string;
   interviewDate: string;
   interviewType: string;
@@ -44,7 +44,7 @@ export class InterviewServiceService {
 
   getAllInterviews(): Observable<InterviewDTO[]> {
     return this.http.get<{ data: InterviewDTO[] }>(this.baseUrl).pipe(
-      map((response) => response.data) // ✅ unwrap the data array
+      map((response) => response.data) // unwrap the data array
     );
   }
 

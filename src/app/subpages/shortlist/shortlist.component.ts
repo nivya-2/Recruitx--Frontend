@@ -23,7 +23,12 @@ export class ShortlistComponent implements OnInit {
     this.currentUrl = this.router.url;
     this.interviewService.getToShortlistInterviews().subscribe({
     next: data => {
-      this.awaitingShortlistingDataSource = Array.isArray(data) ? data : [];
+      this.awaitingShortlistingDataSource = Array.isArray(data)
+  ? data.map(d => ({
+      ...d,
+      jdId: `EXP_${d.jdId.toString().padStart(3, '0')}`
+    }))
+  : [];
     },
     error: err => console.error('Failed to load shortlist data', err)
   });
@@ -51,8 +56,8 @@ export class ShortlistComponent implements OnInit {
 awaitingShortlistingDataSource: any[] = [];
   awaitingColumns: Array<{ key: string, label: string, filterable: boolean,type?:string }> = [
   { key: 'id', label: 'Candidate ID', filterable: false },
-  { key: 'jdId', label: 'Job Description ID', filterable: false },
   { key: 'name', label: 'Name', filterable: true },
+  { key: 'jdId', label: 'Job Description ID', filterable: false },
   { key: 'interviewDate', label: 'Interview Date', filterable: true , type: 'date' },
   { key: 'interviewType', label: 'Interview Type', filterable: true },
   { key: 'actions', label: 'Shortlist', filterable: false }  // placeholder for button
