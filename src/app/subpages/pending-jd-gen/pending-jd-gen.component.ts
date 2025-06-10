@@ -158,7 +158,7 @@ export class PendingJdGenComponent implements OnInit {
     { key: 'openPositions', label: 'No. of Open Positions', filterable: false },
     { key: 'createdDate', label: 'Created Date', filterable: true ,type: 'date'},
     { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
-    { key: 'actions', label: 'Actions', filterable: false }
+    { key: 'actions', label: 'Actions', filterable: false ,type:"actions"}
   ];
 
   globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');

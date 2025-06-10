@@ -6,8 +6,6 @@ import { TableComponent } from "../../table/table.component";
 interface FileData {
   fileName: string;
   fileSize: string;
-  fileType: string;
-  fstatus: string;
   actions: string[];
   originalFile: File;
 }
@@ -39,12 +37,12 @@ export class FileTableComponent {
   
   fileTableData: FileData[] = [];
   tableColumns = [
-    { key: 'fileName', label: 'File Name', filterable: false },
+    { key: 'fileName', label: 'File Name', filterable: false , type:'fileName'},
     { key: 'fileSize', label: 'Size', filterable: false },
-    { key: 'actions', label: 'Actions', filterable: false }
+    { key: 'actions', label: 'Actions', filterable: false, type:'actions' }
   ];
   
-  globalFilterFields = ['fileName', 'fileSize', 'fileType', 'fstatus'];
+  globalFilterFields = ['fileName', 'fileSize'];
   
   actionMethods = {
     'Remove': (rowData: FileData) => this.removeFile(rowData.originalFile)
@@ -62,8 +60,6 @@ export class FileTableComponent {
     this.fileTableData = this.uploadedFiles.map(file => ({
       fileName: this.getFileNameWithIcon(file.name),
       fileSize: this.formatFileSize(file.size),
-      fileType: file.type || 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      fstatus: 'Ready to upload',
       actions: ['Remove'],
       originalFile: file
     }));

@@ -192,7 +192,7 @@ export class AdminUsersComponent implements OnInit {
     { key: 'deliveryUnit', label: 'Delivery Unit', filterable: false },
     { key: 'email', label: 'Email', filterable: false },
     { key: 'status1', label: 'Status', filterable: true },
-    { key: 'actions', label: 'Actions', filterable: false },
+    { key: 'actions', label: 'Actions', filterable: false ,type:'actions'},
   ];
 
   globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');

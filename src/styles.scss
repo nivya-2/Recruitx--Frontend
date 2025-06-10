@@ -32,3 +32,14 @@ table{
   padding-right: 2.5rem;
   padding-bottom: 2.5rem;
 }
+.loading-container {
+  display: flex;
+  justify-content: center;
+  color: #8f4bf3;
+  align-items: center;
+  min-height: 600px;
+  min-width: 600px;
+}
+::ng-deep th, td{
+    max-width: 130px;
+}

@@ -364,7 +364,7 @@ export class AdminJrUploadComponent implements OnInit {
     { key: 'location', label: 'Location', filterable: true },
     { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
     { key: 'assignedOn', label: 'Uploaded On', filterable: true, type: 'date' },
-    { key: 'actions', label: 'Actions', filterable: false },
+    { key: 'actions', label: 'Actions', filterable: false,type:'actions' },
   ];
 
   globalFilterFields = this.columns

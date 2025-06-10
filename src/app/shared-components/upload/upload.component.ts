@@ -16,11 +16,14 @@ export class UploadComponent {
   @Output() onClose = new EventEmitter<void>();
   @Output() onFileUploaded = new EventEmitter<File[]>();
   @Output() onUploadComplete = new EventEmitter<File[]>();
+  
 
   visible = true;
   uploadedFiles: File[] = [];
   showFileTable = false;
   hideUploadBox = false;
+  @Input() acceptTypes: string = '.docx'; // default
+
   closeModal(): void {
     this.uploadedFiles = [];
     this.showFileTable = false;

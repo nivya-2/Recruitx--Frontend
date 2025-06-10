@@ -40,6 +40,7 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() columns:any=[];
   @Input() globalFilterFields: string[]=[];
   @Input() loading: boolean = false;
+  @Input() isDisabled: boolean = false;
   @Input() hover:boolean= false;
   @Input() rows:number = 5;
   @Input() showFilter: boolean = true;

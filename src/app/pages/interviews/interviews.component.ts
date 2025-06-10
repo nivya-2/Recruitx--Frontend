@@ -39,7 +39,7 @@ const currentRoute = this.router.url.split('/').pop();
       deliveryUnit: 'DU1',
       location: 'Bangalore', 
       experience: 5, 
-      createdDate: '05-05-2025', 
+      createdDate: new Date( '05-05-2025'), 
       // assoJr: 'JR2025-112',
       actions:'Schedule',
       },
@@ -48,7 +48,7 @@ const currentRoute = this.router.url.split('/').pop();
         deliveryUnit: 'DU2',
         location: 'Bangalore', 
         experience: 7, 
-        createdDate: '05-05-2025', 
+        createdDate: new Date('05-05-2025'), 
         assoJr: 'JR2025-113',
         actions:'Schedule',
 
@@ -58,7 +58,7 @@ const currentRoute = this.router.url.split('/').pop();
           deliveryUnit: 'DU4',
           location: 'Trivandrum', 
           experience: 9, 
-          createdDate: '09-05-2025', 
+          createdDate: ('09-05-2025'), 
           assoJr: 'JR2025-114',
           actions:'Schedule',
 
@@ -68,7 +68,7 @@ const currentRoute = this.router.url.split('/').pop();
             deliveryUnit: 'DU7',
             location: 'Bangalore', 
             experience: 9, 
-            createdDate: '09-05-2025', 
+            createdDate:new Date( '09-05-2025'), 
             assoJr: 'JR2025-115',
             actions:'Schedule',
 
@@ -78,7 +78,7 @@ const currentRoute = this.router.url.split('/').pop();
               deliveryUnit: 'DU2',
               location: 'Bangalore', 
               experience: 7, 
-              createdDate: '05-07-2025', 
+              createdDate: new Date('05-07-2025'), 
               assoJr: 'JR2025-116',
               actions:'Schedule',
 
@@ -88,7 +88,7 @@ const currentRoute = this.router.url.split('/').pop();
                 deliveryUnit: 'DU2',
                 location: 'Bangalore', 
                 experience: 7, 
-                createdDate: '05-08-2025', 
+                createdDate: new Date('05-08-2025'), 
                 assoJr: 'JR2025-117',
                 actions:'Schedule',
 
@@ -98,7 +98,7 @@ const currentRoute = this.router.url.split('/').pop();
               deliveryUnit: 'DU2',
               location: 'Bangalore', 
               experience: 7, 
-              createdDate: '15-05-2025', 
+              createdDate: new Date('15-05-2025'), 
               assoJr: 'JR2025-118',
               actions:'Schedule',
 
@@ -108,7 +108,7 @@ const currentRoute = this.router.url.split('/').pop();
           deliveryUnit: 'DU6',
           location: 'Kochi', 
           experience: 11, 
-          createdDate: '25-06-2025', 
+          createdDate: new Date('25-06-2025'), 
           assoJr: 'JR2025-119',
           actions:'Schedule',
 
@@ -129,7 +129,7 @@ const currentRoute = this.router.url.split('/').pop();
       { key: 'experience', label: 'Experience',filterable: false },
       { key: 'createdDate', label: 'Created Date',filterable: false ,type: 'date'},
       { key: 'assoJr', label: 'Associated JR',filterable: false },
-      { key: 'actions', label: 'Actions',filterable: false }
+      { key: 'actions', label: 'Actions',filterable: false,type:'actions' }
     ];
 
     globalFilterFields = this.columns.map(c => c.key).filter(key => key !== 'actions');  
