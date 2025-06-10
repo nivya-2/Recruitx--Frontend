@@ -66,14 +66,14 @@ export class AllInterviewsComponent {
   ];
 
   upcomingColumns = [
-    { key: 'candidateName', label: 'Candidate Name', filterable: true },
+    { key: 'candidateName', label: 'Candidate Name', filterable: false },
     { key: 'jobRole', label: 'Job Role', filterable: true },
-    { key: 'date', label: 'Scheduled Date', filterable: false, type:'date' },
+    { key: 'date', label: 'Scheduled Date', filterable: true, type:'date' },
     { key: 'time', label: 'Time', filterable: false },
     { key: 'interviewRound', label: 'Interview Round', filterable: false },
-    { key: 'interviewerName', label: 'Interviewer', filterable: true },
+    { key: 'interviewerName', label: 'Interviewer', filterable: false },
     { key: 'interviewerDeliveryUnit', label: 'Delivery Unit', filterable: true },
-    { key: 'createdDate', label: 'Created Date', filterable: false, type: 'date' }
+    { key: 'createdDate', label: 'Created Date', filterable: true, type: 'date' }
   ];
 
   completedInterviewsDataSource: any[] = [
