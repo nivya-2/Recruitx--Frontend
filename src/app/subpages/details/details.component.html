@@ -122,6 +122,15 @@
         [isTextarea]="true">
       </app-input-text>
 
+       <app-input-text
+      label="Job Specification / Skills and Competencies"
+      [disabled]="true"
+      [fontWeight]="'600'"
+     [ngModel]="formData.jobSpecification"
+      name="jobSpecification"
+      [isTextarea]="true">
+    </app-input-text>
+
       <app-input-text
         label="Job Description / Duties & Responsibilities"
         [disabled]="!isEditMode"
@@ -131,15 +140,6 @@
         [isTextarea]="true">
       </app-input-text>
     
-
-    <app-input-text
-      label="Job Specification / Skills and Competencies"
-      [disabled]="!isEditMode"
-      [fontWeight]="'600'"
-     [ngModel]="formData.jobSpecification"
-      name="jobSpecification"
-      [isTextarea]="true">
-    </app-input-text>
 
     <app-input-text
       label="Any Additional Information/Specifics "
