@@ -6,35 +6,27 @@ import { ButtonComponent } from "../../ui/button/button.component";
 import { TextAreaComponent } from "../../ui/text-area/text-area.component";
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { NgIf } from '@angular/common';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
 import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
 import { ApiResponse } from '../../core/services/api/auth.service';
 import { JobDescriptionService, JobDescriptionDTO } from '../../core/services/api/job-description.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner'; 
-import { 
-  Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType,
-  TabStopPosition, TabStopType, BorderStyle, Table, TableRow, TableCell,
-  WidthType, ShadingType, UnderlineType, PageOrientation, convertInchesToTwip
-} from 'docx';
 import { DocExportService } from '../../core/services/other/doc-export.service';
+import { FormsModule } from '@angular/forms'; // <--- IMPORT THIS
 
 @Component({
   standalone: true,
   selector: 'app-details',
-  imports: [NgIf, ProgressSpinnerModule,HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent, AlertsComponent],
+  imports: [NgIf,FormsModule, ProgressSpinnerModule,HeaderTextComponent, CardsComponent, InputTextComponent, ButtonComponent, TextAreaComponent, ModalComponent, AlertsComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent implements OnInit {
 
-  @Input() jdId?: number | null;
+  @Input()  jdId!: number;
   @Input() actionType?: 'GenerateJD' | 'Draft' | null;
-  formData:any =[];
+  formData:any ={};
   isLoading: boolean = true;
   isDraftSaved: boolean = false;
    @Output() actionCompleted = new EventEmitter<void>();
@@ -115,7 +107,7 @@ export class DetailsComponent implements OnInit {
       jobDescription: data.jobDescription,
       jobPurpose: data.jobPurpose,
       jobSpecification: data.jobSpecification,
-      additionalInfo: ''
+      additionalInfo: data.additionalInfo
     };
   }
 
@@ -259,7 +251,6 @@ export class DetailsComponent implements OnInit {
         this.isDraftSaved = true;
         this.isEditMode = false;
         this.label = 'Edit';
-        this.actionCompleted.emit(); 
 
       },
     });
@@ -274,6 +265,7 @@ export class DetailsComponent implements OnInit {
   onCancel() {
     this.isEditMode = false;
     this.label = 'Edit';
+    this.loadJobData(this.jdId,null);
   }
   onSubmit() {
     
