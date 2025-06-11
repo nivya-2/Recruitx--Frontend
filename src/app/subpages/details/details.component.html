@@ -38,34 +38,45 @@
 
       <app-input-text
         label="Work Location"
-        [value]="formData.workLocation"
-        [fontWeight]="'600'">
+        [ngModel]="formData.workLocation"
+        name="workLocation" 
+        [fontWeight]="'600'"
+        [disabled]="true">
+        
       </app-input-text>
     
       <app-input-text
         label="Relevant Experience"
-        [value]="`${formData.relevantExpYears} Years ${formData.relevantExpMonths} Months`"
+        [ngModel]="`${formData.relevantExpYears} Years ${formData.relevantExpMonths} Months`"
+        name="relevantExp" 
+        [disabled]="true"
         [fontWeight]="'600'">
       </app-input-text>
     
       <app-input-text
         label="Total Experience"
-        [value]="`${formData.totalExpYears} Years ${formData.totalExpMonths} Months`"
+        [ngModel]="`${formData.totalExpYears} Years ${formData.totalExpMonths} Months`"
+        name="totalExp"     
+        [disabled]="true"  
         [fontWeight]="'600'">
       </app-input-text>
     </div>
     <div class="three-column">
       <app-input-text
         label="Qualification"
-        [value]="formData.qualification"
+        [disabled]="true"
+        [ngModel]="formData.qualification"
+        name="qualification"  
         [fontWeight]="'600'"
         class="qualification">
       </app-input-text>
 
       <app-input-text
         label="Expected Onboarding Date"
-        [value]="formData.onboardingDate"
-        [fontWeight]="'600'">
+        [disabled]="true"
+        [ngModel]="formData.onboardingDate"
+ name="onboardingDate"
+         [fontWeight]="'600'">
       </app-input-text>
     </div>
   </section>
@@ -75,20 +86,26 @@
     <div class="three-column">
       <app-input-text
         label="Skills - Mandatory"
-        [value]="formData.skillsMandatory"
+        [disabled]="true"
+       name="skillsMandatory" 
+        [ngModel]="formData.skillsMandatory"
         [fontWeight]="'600'">
       </app-input-text>
 
       <app-input-text
         label="Skills - Primary"
-        [value]="formData.skillsPrimary"
+         name="skillsPrimary"
+         [disabled]="true"
+        [ngModel]="formData.skillsPrimary"
         [fontWeight]="'600'">
       </app-input-text>
 
       <app-input-text
         label="Skills - Good To Have"
-        [value]="formData.skillsGood"
-        [fontWeight]="'600'">
+        [disabled]="true"
+        [ngModel]="formData.skillsGood"
+        [fontWeight]="'600'"
+         name="skillsGood">
       </app-input-text>
     </div>
   </section>
@@ -98,33 +115,37 @@
     <div class="jdfields">
       <app-input-text
         label="Job Purpose "
-        [value]="formData.jobPurpose"
-        [disabled]="!isEditMode"
+        [disabled]="true"
+        name="jobPurpose" 
+        [ngModel]="formData.jobPurpose"
         [fontWeight]="'600'"
         [isTextarea]="true">
       </app-input-text>
 
+       <app-input-text
+      label="Job Specification / Skills and Competencies"
+      [disabled]="true"
+      [fontWeight]="'600'"
+     [ngModel]="formData.jobSpecification"
+      name="jobSpecification"
+      [isTextarea]="true">
+    </app-input-text>
+
       <app-input-text
         label="Job Description / Duties & Responsibilities"
-        [value]="formData.jobDescription"
         [disabled]="!isEditMode"
+        [(ngModel)]="formData.jobDescription"
+         name="jobDescription" 
         [fontWeight]="'600'"
         [isTextarea]="true">
       </app-input-text>
     
 
     <app-input-text
-      label="Job Specification / Skills and Competencies"
-      [value]="formData.jobSpecification"
-      [disabled]="!isEditMode"
-      [fontWeight]="'600'"
-      [isTextarea]="true">
-    </app-input-text>
-
-    <app-input-text
       label="Any Additional Information/Specifics "
-      [value]="formData.additionalInfo"
+      [(ngModel)]="formData.additionalInfo"
       [disabled]="!isEditMode"
+       name="additionalInfo"
       [fontWeight]="'600'"
       [isTextarea]="true">
     </app-input-text>
