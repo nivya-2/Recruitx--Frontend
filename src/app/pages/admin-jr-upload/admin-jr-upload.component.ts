@@ -11,6 +11,7 @@ import { UploadComponent } from '../../shared-components/upload/upload.component
 import { SchedulePageComponent } from '../schedule-page/schedule-page.component';
 import { DocxParserService, JobRequisitionData } from '../../core/services/other/docxparser.service';
 import { JrApiService } from '../../core/services/api/jr-api.service';
+import { InterviewPanelService } from '../../core/services/api/interview-panel.service';
 import { ApiResponse } from '../../core/services/api/CommonAPIResponse';
 import { NgIf } from '@angular/common';
 import { ProgressSpinner } from 'primeng/progressspinner';
@@ -76,6 +77,16 @@ export class AdminJrUploadComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loadJobRequisitions();
+    console.log(123);
+   this.inter.getPanelMemberMeetingss().subscribe({
+  next: (data) => {
+    console.log('Meeting data:', data);
+  },
+  error: (err) => {
+    console.error('Error fetching meeting data:', err);
+  }
+});
+
   }
   @ViewChild('alerts') alertsComponent!: AlertsComponent;
 
@@ -137,7 +148,8 @@ export class AdminJrUploadComponent implements OnInit {
 
   constructor(
     private docxParser: DocxParserService,
-    private jrApiService: JrApiService
+    private jrApiService: JrApiService,
+    private inter: InterviewPanelService,
   ) {}
 
   openModal(): void {
