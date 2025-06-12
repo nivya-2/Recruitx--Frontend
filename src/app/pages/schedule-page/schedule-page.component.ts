@@ -31,13 +31,11 @@ styleUrl: './schedule-page.component.scss',
 providers: [MessageService]
 })
 export class SchedulePageComponent implements OnInit {
-nextDay() {
-throw new Error('Method not implemented.');
-}
+// nextDay() {
+// throw new Error('Method not implemented.');
+// }
 // Sample data
 candidates: any[] = [
-{ id: 'CND-101', name: 'Emma Johnson', mobNumber: '7012345678', email: 'emma.johnson@example.com', stage: 'Technical Level 1', totalExp: 3, relevantExp: 2, currentEmployer: 'Google' },
-{ id: 'CND-110', name: 'Benjamin Thomas', mobNumber: '7901234567', email: 'benjamin.thomas@example.com', stage: 'Management Level 2', totalExp: 11, relevantExp: 10, currentEmployer: 'Salesforce' }
 ];
 isLoadingInterviewers = true; // To show a loading state in the UI
 interviewerError: string | null = null; // To show an error message
@@ -434,70 +432,97 @@ this.selectedInterviewers.length > 0 &&
 this.conflicts.length === 0
 );
 }
+//
+// ... other component code is unchanged ...
+//
+
 scheduleInterview() {
-// 1. Guard Clause: Double-check if we can schedule
-if (!this.canSchedule()) {
-this.messageService.add({
-severity: 'error', summary: 'Cannot Schedule',
-detail: 'Please fill all required fields and resolve conflicts.'
-});
-return;
-}
-// 2. Find the selected start and end time labels (e.g., "2:30 PM")
-const startTimeLabel = this.timeSlots.find(slot => slot.value === this.selectedStartTime)?.label;
-const endTimeLabel = this.timeSlots.find(slot => slot.value === this.selectedEndTime)?.label;
+    // 1. Guard Clause: Still important to check if scheduling is possible.
+    if (!this.canSchedule()) {
+        this.messageService.add({
+            severity: 'error', summary: 'Cannot Schedule',
+            detail: 'Please fill all required fields and resolve conflicts.'
+        });
+        return;
+    }
 
-if (!startTimeLabel || !endTimeLabel) {
-  this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid time selected.' });
-  return;
-}
+    // 2. Find the selected start and end time labels.
+    const startTimeLabel = this.timeSlots.find(slot => slot.value === this.selectedStartTime)?.label;
+    const endTimeLabel = this.timeSlots.find(slot => slot.value === this.selectedEndTime)?.label;
 
-// 3. Construct the request object for the API
-const request: ScheduleInterviewRequest = {
-  panelMemberEmails: this.selectedInterviewers,
-  date: this.formatDateForApi(this.selectedDate), // "dd-MM-yyyy"
-  startTime: startTimeLabel, // "h:mm AM/PM" format
-  endTime: endTimeLabel,
-  candidateName: this.selectedCandidate!.name,
-  interviewLevel: this.selectedCandidate!.stage,
-  jobRole: "Senior Software Engineer" // TODO: Get this from a real property if available
-};
+    if (!startTimeLabel || !endTimeLabel) {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid time selected.' });
+        return;
+    }
 
-console.log('--- Scheduling Interview with Request ---', request);
+    // 3. Construct the request object for the API.
+    const request: ScheduleInterviewRequest = {
+        panelMemberEmails: this.selectedInterviewers,
+        date: this.formatDateForApi(this.selectedDate),
+        startTime: startTimeLabel,
+        endTime: endTimeLabel,
+        candidateName: this.selectedCandidate!.name,
+        interviewLevel: this.selectedCandidate!.stage,
+        jobRole: "Senior Software Engineer"
+    };
 
-// 4. Call the service
-this.interviewPanelService.scheduleInterview(request).subscribe({
-  next: (response) => {
-    // This is inside the onAccept callback of your existing scheduleAlert
-    // We will just show the success message directly here.
-    this.messageService.add({ 
-      severity: 'success', 
-      summary: 'Interview Scheduled', 
-      detail: `Interview for  has been scheduled!` 
+    console.log('--- Scheduling Interview with Request ---', request);
+
+    // 4. Call the service to schedule the interview.
+    this.interviewPanelService.scheduleInterview(request).subscribe({
+        next: (response) => {
+            // --- START OF THE NEW LOGIC ---
+
+            // A. Show the success message.
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Interview Scheduled',
+                detail: `Interview for ${this.selectedCandidate!.name} has been scheduled!`
+            });
+
+            // B. Create a new meeting object locally that matches the structure of your grid data.
+            //    We use the form data because we know what we just scheduled.
+            const newMeeting = {
+                id: `temp-${Date.now()}`, // Use a temporary ID
+                candidateName: this.selectedCandidate!.name,
+                date: new Date(this.selectedDate), // Use the actual Date object
+                startTime: this.selectedStartTime, // e.g., "14:00"
+                endTime: this.selectedEndTime,   // e.g., "15:30"
+                interviewers: this.selectedInterviewers,
+                interviewerNames: this.selectedInterviewers.map(email => this.getInterviewerName(email)),
+            };
+
+            // C. Add the new meeting to your main data array.
+            //    Use the spread operator (...) to create a new array, which reliably triggers Angular's change detection.
+            this.scheduledInterviews = [...this.scheduledInterviews, newMeeting];
+
+            // D. Refresh the grid's data source by re-running the filter.
+            //    This is the crucial step that updates the UI.
+            this.updateScheduledEventsForCurrentDate();
+
+            // E. Reset form fields for the next scheduling action.
+            this.resetFormFieldsAfterScheduling();
+
+            // --- END OF THE NEW LOGIC ---
+
+            // NOTE: We no longer need to call this.loadMeetingDataForGrid() here.
+            // The UI is already updated. The grid will be fully refreshed from the
+            // server the next time the user changes the date or interviewers anyway.
+        },
+        error: (err) => {
+            console.error('Failed to schedule interview', err);
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Scheduling Failed',
+                detail: 'Could not schedule the interview. Please try again.'
+            });
+        }
     });
-    
-    // 5. Refresh the grid to show the new meeting
-    this.loadMeetingDataForGrid();
-    this.resetFormFieldsAfterScheduling();
-  },
-  error: (err) => {
-    console.error('Failed to schedule interview', err);
-    this.messageService.add({ 
-      severity: 'error', 
-      summary: 'Scheduling Failed', 
-      detail: 'Could not schedule the interview. Please try again.' 
-    });
-  }
-});
-//  localStorage.setItem('selectedCandidate', JSON.stringify(this.selectedCandidate));
-//   localStorage.setItem('selectedDate', this.selectedDate.toISOString()); // store ISO string
-//   localStorage.setItem('selectedInterviewers', JSON.stringify(this.selectedInterviewers));
-
-//   window.location.reload();
-// this.loadMeetingDataForGrid();
-
-
 }
+
+//
+// ... other component code is unchanged ...
+//
 resetFormForNewCandidate() {
 this.selectedStartTime = '';
 this.selectedEndTime = '';
@@ -514,13 +539,13 @@ this.conflicts = [];
 this.filteredEndTimeSlots = [];
 this.calculateCurrentMeetingDuration(); // Recalculate/reset duration
 }
-previousDay() { /* ... unchanged (though it should call onDateChange) ... /
+previousDay() { /* ... unchanged (though it should call onDateChange) ... */
 const prevDay = new Date(this.selectedDate);
 prevDay.setDate(prevDay.getDate() - 1);
 this.selectedDate = prevDay;
 this.onDateChange(); // Trigger data reload
 }
-nextDay() { / ... unchanged (though it should call onDateChange) ... */
+nextDay() { 
 const nextDay = new Date(this.selectedDate);
 nextDay.setDate(nextDay.getDate() + 1);
 this.selectedDate = nextDay;
@@ -556,12 +581,22 @@ this.onDateChange(); // Trigger data reload
       this.allScheduledEventsForCurrentDate = [];
     }
   }
+// The corrected function
 formatHourForDisplay(time: string): string { // e.g., "08:00" -> "8am"
-const hour = parseInt(time.split(':')[0], 10);
-if (hour === 0) return '12am';
-if (hour === 12) return '12pm';
-if (hour < 12) `return ${hour}am`;
-return `${hour - 12}pm`;
+    const hour = parseInt(time.split(':')[0], 10);
+    
+    if (hour === 0) {
+        return '12am'; // Midnight case
+    }
+    if (hour === 12) {
+        return '12pm'; // Noon case
+    }
+    if (hour < 12) {
+        // FIXED: Added the 'return' keyword
+        return `${hour}am`; 
+    }
+    // This line is now only reached for hours > 12
+    return `${hour - 12}pm`; 
 }
 isWorkingHour(hourString: string): boolean { // e.g., "08:00"
 const hour = parseInt(hourString.split(':')[0], 10);
