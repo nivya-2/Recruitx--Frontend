@@ -8,12 +8,13 @@ import { EditorModule } from 'primeng/editor';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
-import { EmailTemplate } from '../email-templates.model';
+// import { EmailTemplate } from '../email-templates.model';
 import { AlertsComponent } from '../../../ui/alerts/alerts.component';
+import { EmailTemplate } from '../../../core/services/api/email-template-service.service';
 
 @Component({
   selector: 'app-email',
-  imports: [ CommonModule,
+  imports: [CommonModule,
     AlertsComponent,
     FormsModule,
     ReactiveFormsModule,
@@ -26,12 +27,14 @@ import { AlertsComponent } from '../../../ui/alerts/alerts.component';
 })
 export class EmailComponent {
 
+  @Input() availableVariables: string[] = [];
+
   private _template: EmailTemplate | null = null;
 
   invitationForm!: FormGroup;
 
   @Input() set template(value: EmailTemplate | null) {
-     this._template = value;
+    this._template = value;
     if (value) {
       this.updateFormWithTemplate(value);
     }
@@ -39,6 +42,7 @@ export class EmailComponent {
   get template(): EmailTemplate | null {
     return this._template;
   }
+
   defaultEmailContent: string = `Dear {{employee_name}},<br><br>
 
 Welcome to RecruitX! We are excited to have you onboard as a {{role}}.<br>
@@ -55,14 +59,14 @@ Best regards,<br>
 RecruitX Team`;
 
 
-  availableVariables = [
-    { key: '{{candidate_name}}' },
-    { key: '{{job_title}}' },
-    { key: '{{company_name}}' },
-    { key: '{{application_date}}' },
-    { key: '{{recruiter_name}}' },
-    { key: '{{recruiter_email}}' }
-  ];
+  // availableVariables = [
+  //   { key: '{{candidate_name}}' },
+  //   { key: '{{job_title}}' },
+  //   { key: '{{company_name}}' },
+  //   { key: '{{application_date}}' },
+  //   { key: '{{recruiter_name}}' },
+  //   { key: '{{recruiter_email}}' }
+  // ];
 
   showPreview = false;
   previewData = {
@@ -70,41 +74,45 @@ RecruitX Team`;
     content: ''
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-        this.initForm();
+    this.initForm();
+
+    if (this.template) {
+      this.updateFormWithTemplate(this.template);
+    }
   }
-  private initForm():void{
+  private initForm(): void {
     this.invitationForm = this.fb.group({
-  emailSubject: ['Welcome to RecruitX - Confirm Your Role', Validators.required],
-  emailContent: [this.defaultEmailContent, Validators.required]
-});
+      emailSubject: ['Welcome to RecruitX - Confirm Your Role', Validators.required],
+      emailContent: [this.defaultEmailContent, Validators.required]
+    });
   }
 
 
- private updateFormWithTemplate(template: EmailTemplate): void {
+  private updateFormWithTemplate(template: EmailTemplate): void {
     // Update the form with the selected template values
-  const content = template.content || this.defaultEmailContent;
-  const contentWithBreaks = content.replace(/\n/g, '<br>');
+    const content = template.body || this.defaultEmailContent;
+    const contentWithBreaks = content.replace(/\n/g, '<br>');
     this.invitationForm.patchValue({
       emailSubject: template.subject || 'Email Subject',
       emailContent: contentWithBreaks || this.defaultEmailContent
     });
   }
 
-   private stripHtml(html: string): string {
+  private stripHtml(html: string): string {
     // Create a temporary div element
     const tempDiv = document.createElement('div');
     // Set the HTML content
     tempDiv.innerHTML = html;
-    
+
     // Replace <br> tags with newlines before getting text content
     const brElements = tempDiv.getElementsByTagName('br');
     for (let i = brElements.length - 1; i >= 0; i--) {
       brElements[i].parentNode?.replaceChild(document.createTextNode('\n'), brElements[i]);
     }
-    
+
     // Replace <p> tags with double newlines (for paragraph breaks)
     const pElements = tempDiv.getElementsByTagName('p');
     for (let i = 0; i < pElements.length; i++) {
@@ -113,41 +121,41 @@ RecruitX Team`;
         p.appendChild(document.createTextNode('\n\n'));
       }
     }
-    
+
     // Get the text content (this strips all HTML tags)
     let plainText = tempDiv.textContent || tempDiv.innerText || '';
-    
+
     // Clean up extra whitespace
     plainText = plainText.replace(/\s+/g, ' ').trim();
-    
+
     // Replace common HTML entities
     plainText = plainText.replace(/&nbsp;/g, ' ')
-                         .replace(/&amp;/g, '&')
-                         .replace(/&lt;/g, '<')
-                         .replace(/&gt;/g, '>')
-                         .replace(/&quot;/g, '"')
-                         .replace(/&#39;/g, "'");
-    
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'");
+
     return plainText;
   }
 
 
   insertVariable(variable: string): void {
-  const current = this.invitationForm.get('emailContent')?.value || '';
-  this.invitationForm.get('emailContent')?.setValue(current + ' ' + variable);
-}
+    const current = this.invitationForm.get('emailContent')?.value || '';
+    this.invitationForm.get('emailContent')?.setValue(current + ' ' + variable);
+  }
 
   preview(): void {
-  const rawContent = this.invitationForm.get('emailContent')?.value || '';
-  const plainTextContent = this.stripHtml(rawContent);
-    
+    const rawContent = this.invitationForm.get('emailContent')?.value || '';
+    const plainTextContent = this.stripHtml(rawContent);
+
     this.previewData = {
       subject: this.invitationForm.get('emailSubject')?.value,
       content: plainTextContent
 
       // content: this.invitationForm.get('emailContent')?.value
     };
-    
+
     this.showPreview = true;
     console.log('Preview email:', this.previewData);
   }
@@ -161,8 +169,8 @@ RecruitX Team`;
   // }
   @ViewChild('alerts') alertsComponent!: AlertsComponent;
 
-  saveTemplate(mail:any){
-    
+  saveTemplate(mail: any) {
+
     const message = `Are you sure you want to save all changes in ${this.template?.name}?`;
     this.alertsComponent.showConfirmDialog({
       message: message,

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { DialogModule } from 'primeng/dialog';
@@ -7,7 +7,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms'; // For ngModel
 import { AccordionModule } from 'primeng/accordion';
 import { CommonModule } from '@angular/common';
-import { EMAIL_TEMPLATES, EmailTemplate } from '../email-templates.model';
+// import { EMAIL_TEMPLATES, EmailTemplate } from '../email-templates.model';
+import { EmailTemplate, EmailTemplateServiceService } from '../../../core/services/api/email-template-service.service';
 
 @Component({
   selector: 'app-accordion',
@@ -17,17 +18,25 @@ import { EMAIL_TEMPLATES, EmailTemplate } from '../email-templates.model';
 })
 export class AccordionComponent implements OnInit {
 
-  categories: string[] = [];
-  templates: Record<string, EmailTemplate[]> = {};
+  constructor(private emailTemplateService: EmailTemplateServiceService) {}
+
+  // categories: string[] = [];
+  @Input() templates: Record<string, EmailTemplate[]> = {};
   selectedTemplate: EmailTemplate | null = null;
   
   @Output() templateSelected = new EventEmitter<EmailTemplate>();
 
   // Lifecycle hooks
   ngOnInit() {
-    // Initialize templates from constant
-    this.templates = { ...EMAIL_TEMPLATES };
-    this.categories = Object.keys(this.templates);
+  // this.emailTemplateService.getGroupedEmailTemplates().subscribe(grouped => {
+    // this.templates = grouped;
+    // this.categories = Object.keys(this.templates);
+    
+
+}
+
+get categories(): string[] {
+    return Object.keys(this.templates);
   }
   
   // Methods

@@ -1,3 +1,6 @@
+<app-toast #toast></app-toast>
+
+
 <app-common-layout [breadcrumbItems]="items">
    <div *ngIf="isLoading" class="loading-container">
     <p-progressSpinner></p-progressSpinner>
@@ -33,8 +36,8 @@
       </div>
 
       <div class="right-align">
-        <app-button class="scaled" (click)="selectCandidate()" [disabled]="finished || isJobClosed">Next Stage</app-button>
-        <app-button class="scaled" (click)="rejectCandidate()"[disabled]="finished || isJobClosed">Reject</app-button>
+        <app-button class="scaled" (click)="selectCandidate()" [disabled]="finished || isJobClosed || isDisabled">Next Stage</app-button>
+        <app-button class="scaled" (click)="rejectCandidate()"[disabled]="finished || isJobClosed || isDisabled">Reject</app-button>
       </div>
     </app-cards>
   </div>

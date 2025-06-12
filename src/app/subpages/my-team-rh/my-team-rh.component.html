@@ -11,7 +11,7 @@
   [teamsDataSource]="teamsDataSource"
   [columns]="teamsColumns"
   [globalFilterFields]="teamsGlobalFilterFields"
-  (openModal)="visible = $event"
+  (openModal)="assignedjr($event)"
   (removeAction)="removeSelectedMember($event)" 
   (changeLeadAction)="handleChangeLeadAction($event)"
   >
@@ -24,7 +24,7 @@
  [maximizable]="true"
  [style]="{ width: '72rem', height: '30rem' }"
 >
-<app-viewassignedjr-card></app-viewassignedjr-card>
+<app-viewassignedjr-card [dataSource]="selectedMemberFromChild"></app-viewassignedjr-card>
 </app-modal>
 </app-cards>
 

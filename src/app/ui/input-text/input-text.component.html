@@ -8,6 +8,7 @@
     [disabled]="disabled"
     [(ngModel)]="value"
     (input)="onValueChange($event)"
+    (blur)="onTouched()"
     rows="3"></textarea>
 
   <textarea
@@ -18,5 +19,6 @@
     [disabled]="disabled"
     [(ngModel)]="value"
     (input)="onValueChange($event)"
+    (blur)="onTouched()"
     rows="1"></textarea>
 </div>

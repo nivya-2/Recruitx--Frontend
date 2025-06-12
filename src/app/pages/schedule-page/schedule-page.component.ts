@@ -21,7 +21,8 @@ import { Router } from '@angular/router';
 import { forkJoin, of } from 'rxjs'; // IMPORT forkJoin and of for handling multiple API calls
 import { log } from 'console';
 import { InterviewPanelService, InterviewMeeting, PanelMember, ScheduleInterviewRequest } from '../../core/services/api/interview-panel.service';
-InterviewPanelService
+import { ActivatedRoute } from '@angular/router';
+import { JdCandidateService } from '../../core/services/api/jd-candidate.service';
 @Component({
 selector: 'app-schedule-page',
 imports: [Calendar, MultiSelect, Tag, Button, Toast, Message, DropdownModule, FormsModule, CommonModule, ButtonComponent, IconComponent, ButtonIconComponent, CommonLayoutComponent, CardsComponent, HeaderTextComponent, AlertsComponent],
@@ -77,12 +78,20 @@ isGridLoading = false;
 @ViewChild('candidateDropdown') candidateDropdown: Dropdown | undefined;
 // NEW Properties for Grid UI
 myInterview: any;
-constructor(private router: Router,private messageService: MessageService,     private interviewPanelService: InterviewPanelService
+constructor(private router: Router,private messageService: MessageService,     private interviewPanelService: InterviewPanelService, private route: ActivatedRoute, private candidateService: JdCandidateService
 ) {
 this.currentUrl = this.router.url;
 }
+  jrId: number = 0;
+
 // this.loadMeetingsForGrid();
 ngOnInit() {
+      this.jrId = Number(this.route.snapshot.paramMap.get('id'));
+       this.candidateService.getCandidatesByJdId(this.jrId).subscribe((response: any) => {
+      this.candidates = response.data || [];
+      console.log(this.candidates);
+    });
+
   // this.loadMeetingDataForGrid();
 
   //   const storedCandidate = localStorage.getItem('selectedCandidate');
@@ -284,6 +293,7 @@ this.currentMeetingDuration = 0;
 this.currentMeetingDuration = 0;
 }
 }
+
 @ViewChild('alerts') alertsComponent!: AlertsComponent;
 scheduleAlert(row: any){
 const message = `Are you sure you want to schedule a interview with ${this.selectedCandidate.name}?`;
@@ -424,97 +434,70 @@ this.selectedInterviewers.length > 0 &&
 this.conflicts.length === 0
 );
 }
-//
-// ... other component code is unchanged ...
-//
-
 scheduleInterview() {
-    // 1. Guard Clause: Still important to check if scheduling is possible.
-    if (!this.canSchedule()) {
-        this.messageService.add({
-            severity: 'error', summary: 'Cannot Schedule',
-            detail: 'Please fill all required fields and resolve conflicts.'
-        });
-        return;
-    }
+// 1. Guard Clause: Double-check if we can schedule
+if (!this.canSchedule()) {
+this.messageService.add({
+severity: 'error', summary: 'Cannot Schedule',
+detail: 'Please fill all required fields and resolve conflicts.'
+});
+return;
+}
+// 2. Find the selected start and end time labels (e.g., "2:30 PM")
+const startTimeLabel = this.timeSlots.find(slot => slot.value === this.selectedStartTime)?.label;
+const endTimeLabel = this.timeSlots.find(slot => slot.value === this.selectedEndTime)?.label;
 
-    // 2. Find the selected start and end time labels.
-    const startTimeLabel = this.timeSlots.find(slot => slot.value === this.selectedStartTime)?.label;
-    const endTimeLabel = this.timeSlots.find(slot => slot.value === this.selectedEndTime)?.label;
-
-    if (!startTimeLabel || !endTimeLabel) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid time selected.' });
-        return;
-    }
-
-    // 3. Construct the request object for the API.
-    const request: ScheduleInterviewRequest = {
-        panelMemberEmails: this.selectedInterviewers,
-        date: this.formatDateForApi(this.selectedDate),
-        startTime: startTimeLabel,
-        endTime: endTimeLabel,
-        candidateName: this.selectedCandidate!.name,
-        interviewLevel: this.selectedCandidate!.stage,
-        jobRole: "Senior Software Engineer"
-    };
-
-    console.log('--- Scheduling Interview with Request ---', request);
-
-    // 4. Call the service to schedule the interview.
-    this.interviewPanelService.scheduleInterview(request).subscribe({
-        next: (response) => {
-            // --- START OF THE NEW LOGIC ---
-
-            // A. Show the success message.
-            this.messageService.add({
-                severity: 'success',
-                summary: 'Interview Scheduled',
-                detail: `Interview for ${this.selectedCandidate!.name} has been scheduled!`
-            });
-
-            // B. Create a new meeting object locally that matches the structure of your grid data.
-            //    We use the form data because we know what we just scheduled.
-            const newMeeting = {
-                id: `temp-${Date.now()}`, // Use a temporary ID
-                candidateName: this.selectedCandidate!.name,
-                date: new Date(this.selectedDate), // Use the actual Date object
-                startTime: this.selectedStartTime, // e.g., "14:00"
-                endTime: this.selectedEndTime,   // e.g., "15:30"
-                interviewers: this.selectedInterviewers,
-                interviewerNames: this.selectedInterviewers.map(email => this.getInterviewerName(email)),
-            };
-
-            // C. Add the new meeting to your main data array.
-            //    Use the spread operator (...) to create a new array, which reliably triggers Angular's change detection.
-            this.scheduledInterviews = [...this.scheduledInterviews, newMeeting];
-
-            // D. Refresh the grid's data source by re-running the filter.
-            //    This is the crucial step that updates the UI.
-            this.updateScheduledEventsForCurrentDate();
-
-            // E. Reset form fields for the next scheduling action.
-            this.resetFormFieldsAfterScheduling();
-
-            // --- END OF THE NEW LOGIC ---
-
-            // NOTE: We no longer need to call this.loadMeetingDataForGrid() here.
-            // The UI is already updated. The grid will be fully refreshed from the
-            // server the next time the user changes the date or interviewers anyway.
-        },
-        error: (err) => {
-            console.error('Failed to schedule interview', err);
-            this.messageService.add({
-                severity: 'error',
-                summary: 'Scheduling Failed',
-                detail: 'Could not schedule the interview. Please try again.'
-            });
-        }
-    });
+if (!startTimeLabel || !endTimeLabel) {
+  this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid time selected.' });
+  return;
 }
 
-//
-// ... other component code is unchanged ...
-//
+// 3. Construct the request object for the API
+const request: ScheduleInterviewRequest = {
+  panelMemberEmails: this.selectedInterviewers,
+  date: this.formatDateForApi(this.selectedDate), // "dd-MM-yyyy"
+  startTime: startTimeLabel, // "h:mm AM/PM" format
+  endTime: endTimeLabel,
+  candidateName: this.selectedCandidate!.name,
+  interviewLevel: this.selectedCandidate!.stage,
+  jobRole: "Senior Software Engineer" // TODO: Get this from a real property if available
+};
+
+console.log('--- Scheduling Interview with Request ---', request);
+
+// 4. Call the service
+this.interviewPanelService.scheduleInterview(request).subscribe({
+  next: (response) => {
+    // This is inside the onAccept callback of your existing scheduleAlert
+    // We will just show the success message directly here.
+    this.messageService.add({ 
+      severity: 'success', 
+      summary: 'Interview Scheduled', 
+      detail: `Interview for  has been scheduled!` 
+    });
+    
+    // 5. Refresh the grid to show the new meeting
+    this.loadMeetingDataForGrid();
+    this.resetFormFieldsAfterScheduling();
+  },
+  error: (err) => {
+    console.error('Failed to schedule interview', err);
+    this.messageService.add({ 
+      severity: 'error', 
+      summary: 'Scheduling Failed', 
+      detail: 'Could not schedule the interview. Please try again.' 
+    });
+  }
+});
+//  localStorage.setItem('selectedCandidate', JSON.stringify(this.selectedCandidate));
+//   localStorage.setItem('selectedDate', this.selectedDate.toISOString()); // store ISO string
+//   localStorage.setItem('selectedInterviewers', JSON.stringify(this.selectedInterviewers));
+
+//   window.location.reload();
+// this.loadMeetingDataForGrid();
+
+
+}
 resetFormForNewCandidate() {
 this.selectedStartTime = '';
 this.selectedEndTime = '';
