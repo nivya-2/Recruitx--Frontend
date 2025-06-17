@@ -14,6 +14,7 @@ import { IconComponent } from '../../ui/icon/icon.component';
 import { CommonModule, NgFor } from '@angular/common';
 import { MenuItem } from 'primeng/api';
 import { EvaluationService, SubmittedEvaluation } from '../../core/services/api/evaluation.service';
+import { AuthService } from '../../core/services/api/auth.service';
 
 
 
@@ -96,7 +97,8 @@ export class EvaluationFormComponent implements OnInit {
   
   currentUrl:any;
   constructor(private router: Router,    private route: ActivatedRoute,
-private evaluationService: EvaluationService, private fb: FormBuilder) {
+private evaluationService: EvaluationService, private fb: FormBuilder,
+ private authService: AuthService ) {
     this.currentUrl = this.router.url;
   this.evaluationForm = this.fb.group({}); 
 
@@ -123,100 +125,7 @@ private evaluationService: EvaluationService, private fb: FormBuilder) {
   preferredLocation: "Kochi"
 };
 
-// skills: SkillBlock[] = [
-//   {
-//     category: 'Primary Skill/s - Java, AWSss',
-//     competencies: [
-//       {
-//         title: 'Excellent programming skills in Java Spring Boot',
-//         selfRating: 4,
-//         knowledgeRating: 4,
-//         skillsRating: 4,
-//         implementationRating: 4,
-//         averageRating: 4
-//       },
-//       {
-//         title: 'Experience in developing Restful & GraphQL APIs',
-//         selfRating: 3,
-//         knowledgeRating: 3,
-//         skillsRating: 3,
-//         implementationRating: 3,
-//         averageRating: 3
-//       },
-//       {
-//         title: 'Additional skillsets & its Competencies',
-//         selfRating: 5,
-//         knowledgeRating: 4,
-//         skillsRating: 3,
-//         implementationRating: 3,
-//         averageRating: 4
-//       }
-//     ],
-//     comments: 'Good understanding of core concepts, needs improvement in advanced topics'
-//   },
-//   {
-//     category: 'Secondary Skill/s: Python',
-//     competencies: [
-//       {
-//         title: 'Excellent programming skills in Python',
-//         selfRating: 4,
-//         knowledgeRating: 4,
-//         skillsRating: 4,
-//         implementationRating: 4,
-//         averageRating: 4
-//       },
-//       {
-//         title: 'Experience with building or maintaining cloud-native applications',
-//         selfRating: 3,
-//         knowledgeRating: 3,
-//         skillsRating: 3,
-//         implementationRating: 3,
-//         averageRating: 3
-//       },
-//       {
-//         title: 'Additional skillsets & Competencies',
-//         selfRating: 2,
-//         knowledgeRating: 4,
-//         skillsRating: 4,
-//         implementationRating: 4,
-//         averageRating: 3
-//       }
-//     ],
-//     comments: 'Shows good potential but limited hands-on with cloud-native tools'
-//   }
-// ];
 
-//  capabilities: QuestionCapability[] = [
-//   {
-//     question: "Accountability",
-//     context: "Managed a critical release with tight deadlines",
-//     action: "Prioritized tasks, coordinated with cross-functional teams",
-//     result: "Delivered on time with zero critical defects",
-//     rating: 3
-//   },
-//   {
-//     question: "Problem Solving",
-//     context: "Faced performance issues in microservices",
-//     action: "Analyzed logs, optimized database queries",
-//     result: "Improved response time by 40%",
-//     rating: 5
-//   },
-//   {
-//     question: "Stakeholder Management",
-//     context: "Client demanded last-minute feature changes",
-//     action: "Negotiated timeline adjustments, aligned internal teams",
-//     result: "Delivered updated feature with client satisfaction",
-//     rating: 4
-//   },
-//   {
-//     question: "Candidate will be benifit for the organisation",
-//     context: "Client demanded last-minute feature changes",
-//     action: "Negotiated timeline adjustments, aligned internal teams",
-//     result: "Delivered updated feature with client satisfaction",
-//     rating: 4
-//   },
-  
-// ];
  feedback: CandidateFeedback = {
   strengths: "Strong technical foundation, quick learner, good communicator",
   learnability: "Demonstrates high adaptability to new tools and frameworks",
@@ -258,60 +167,95 @@ if (this.hiringDecision.select) {
 }
 
   ngOnInit(): void {
-    const interviewIdParam = this.route.snapshot.paramMap.get('interviewId');
+
+  if (this.authService.isAuthenticated()) {
     
+    // --- PATH 1: USER IS AUTHENTICATED (Internal Read-Only View) ---
+    // This is the code you already wrote, with the 'string-to-number' fix applied.
+    
+    console.log("Mode: Authenticated User - loading read-only view by Interview ID.");
+    this.viewState = 'loading';
+    const interviewIdParam = this.route.snapshot.paramMap.get('interviewId');
+
     if (!interviewIdParam) {
       this.viewState = 'error';
       this.errorMessage = 'Interview ID was not provided in the URL.';
       return;
     }
 
-    // FIX 1: Pass the ID as a string. Do not convert to a number with '+'.
-    const interviewId = interviewIdParam;
+    // FIX THE TYPE ERROR HERE
+    const interviewId = +interviewIdParam; 
+    if (isNaN(interviewId)) {
+      this.viewState = 'error';
+      this.errorMessage = 'The Interview ID in the URL is invalid.';
+      return;
+    }
 
-    // The service call now expects the wrapped ApiResponse type
+    // Call the service with the correctly typed number
     this.evaluationService.getSubmittedEvaluation(interviewId).subscribe({
-      // FIX 2: Handle the wrapped response structure.
-      // 'response' is the object { success: true, data: {...} }
-      next: (response: ApiResponse<SubmittedEvaluationPayload>) => {
+      next: (response) => { // Assuming your service returns the wrapped ApiResponse
         console.log("--- Full API Response Received ---", response);
-
-        // First, check if the overall call was successful and the data object exists
-        if (response && response.success && response.data) {
-          
-          const evaluationData = response.data; // This is the inner object with feedbackJson
-          
-          // Now, perform the check on the inner object
-          if (evaluationData.feedbackJson && evaluationData.feedbackJson.trim() !== '') {
-            try {
-              const feedbackData = JSON.parse(evaluationData.feedbackJson);
-              console.log("--- Successfully Parsed feedbackJson ---", feedbackData);
-
-              this.buildAndPatchForm(feedbackData);
-              this.viewState = 'ready';
-            } catch (e) {
-              console.error("Error parsing feedback JSON:", e);
-              this.viewState = 'error';
-              this.errorMessage = 'The saved evaluation data is corrupt and could not be displayed.';
-            }
-          } else {
-            console.error("Evaluation data loaded, but the feedback content (feedbackJson) is empty or missing.");
+        if (response && response.data?.feedbackJson) {
+          try {
+            const feedbackData = JSON.parse(response.data.feedbackJson);
+            this.buildAndPatchForm(feedbackData); // Your existing method
+            this.viewState = 'ready';
+          } catch (e) {
             this.viewState = 'error';
-            this.errorMessage = 'The evaluation was found, but the submitted feedback is empty.';
+            this.errorMessage = 'The saved evaluation data is corrupt.';
           }
         } else {
-          // This handles cases where the API returns success: false or an empty data object
-          console.error("API call was not successful or returned no data.", response);
           this.viewState = 'error';
-          this.errorMessage = response.message || 'An unexpected API error occurred.';
+          this.errorMessage = response.message || 'The evaluation was found, but the feedback is empty.';
         }
       },
       error: (err) => {
         this.viewState = 'error';
         this.errorMessage = err.error?.message || 'An error occurred while loading the evaluation.';
-        console.error('Failed to load evaluation data:', err);
       }
     });
+
+  } else {
+
+    // --- PATH 2: USER IS ANONYMOUS (Public Fill-In Form) ---
+    // This is the new logic for handling the public token.
+    
+    console.log("Mode: Anonymous User - loading fillable form by Token.");
+    this.viewState = 'loading';
+    const token = this.route.snapshot.queryParamMap.get('token');
+    console.log("Attempting to load form with Token:", token);
+
+    if (!token) {
+      this.viewState = 'error';
+      this.errorMessage = 'Evaluation token is missing. This link is invalid.';
+      return;
+    }
+
+    // Call the service to get the form header details
+    this.evaluationService.getFormDetails(token).subscribe({
+      next: (response) => {
+        const details = response.data; // Assuming the response structure is ApiResponse<EvaluationFormDetails>
+        // Here you will build the *blank* form for the interviewer to fill out.
+        // For now, let's use your existing build method with some default data.
+        // NOTE: A real implementation would have a separate "buildBlankForm" method.
+        this.buildAndPatchForm({}); // Build an empty form
+        
+        // Now, pre-fill the parts we got from the backend.
+        this.evaluationForm.get('summary.candidateName')?.patchValue(details.candidateName);
+        this.evaluationForm.get('summary.interviewLevel')?.patchValue(details.interviewLevel);
+        
+        // IMPORTANT: Make sure the form is ENABLED for the interviewer.
+        this.evaluationForm.enable(); 
+        
+        this.viewState = 'ready';
+      },
+      error: (err) => {
+        this.viewState = 'error';
+        this.errorMessage = err.error?.message || 'This evaluation link is invalid, has expired, or has already been submitted.';
+      }
+    });
+  }
+
   }
     /**
    * A helper method to correctly cast a control to a FormArray

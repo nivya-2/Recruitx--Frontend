@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { PanelFormComponent } from './pages/evaluation-form/panel-form/panel-form.component';
+import { EvaluationFormComponent } from './pages/evaluation-form/evaluation-form.component';
 
 export const routes: Routes = [
   {
@@ -474,6 +475,36 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+  path: 'eval-form',
+  // Use 'loadComponent' for consistency with the rest of your app.
+  loadComponent: () =>
+    import('./pages/evaluation-form//panel-form/panel-form.component').then((m) => m.PanelFormComponent),
+  // NO canActivate guard. This is crucial.
+},
+{
+  path: 'recruiter-lead/interviews/shortlist/:interviewId', // Cleaner, more descriptive path
+  loadComponent: () =>
+    import('./pages/evaluation-form/evaluation-form.component').then((m) => m.EvaluationFormComponent),
+  canActivate: [AuthGuard],
+  data: {
+    roles: ['Recruiter Lead']
+  },
+},
+
+
+// --- Route 3: The INTERNAL link for Recruiter to VIEW a submitted form ---
+// Same pattern, different role.
+{
+  path: 'recruiter/interviews/shortlist/:interviewId', // Cleaner, more descriptive path
+  loadComponent: () =>
+    import('./pages/evaluation-form/evaluation-form.component').then((m) => m.EvaluationFormComponent),
+  canActivate: [AuthGuard],
+  data: {
+    roles: ['Recruiter']
+  },
+},
+
   {
     path: 'recruiter-lead/interviews/shortlist/eval-form/:interviewId',
     loadComponent: () =>

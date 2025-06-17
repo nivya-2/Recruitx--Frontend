@@ -75,7 +75,9 @@
                   </tr>
                 </thead>
                 <tbody formArrayName="competencies">
-<tr *ngFor="let competencyGroup of $any(skillGroup.get('competencies')).controls; let j = index" [formGroupName]="j">                    <td><input type="number" class="rating-input" formControlName="selfRating"></td>
+<tr *ngFor="let competencyGroup of $any(skillGroup.get('competencies')).controls; let j = index" [formGroupName]="j">   
+                <td><input type="text" formControlName="title"></td>   
+                <td><input type="number" class="rating-input" formControlName="selfRating"></td>
                     <td><input type="number" class="rating-input" formControlName="knowledgeRating"></td>
                     <td><input type="number" class="rating-input" formControlName="skillsRating"></td>
                     <td><input type="number" class="rating-input" formControlName="implementationRating"></td>
@@ -183,7 +185,7 @@
           </div>
 
           <div class="form-actions">
-            <app-button type="submit" [disabled]="evaluationForm.invalid">Submit Evaluation</app-button>
+            <app-button type="submit">Submit Evaluation</app-button>
           </div>
         </form>
       </div>

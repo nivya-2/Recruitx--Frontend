@@ -109,3 +109,10 @@ button {
 .acls{
   font-size: 18px !important;
 }
+:host ::ng-deep { // Use :host ::ng-deep if styles are not applying due to encapsulation
+  input.ng-invalid.ng-touched,
+  select.ng-invalid.ng-touched,
+  textarea.ng-invalid.ng-touched {
+    border-color: #dc3545; // A standard red color for errors
+  }
+}

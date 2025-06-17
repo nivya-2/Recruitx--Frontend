@@ -4,14 +4,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; // <-- Import the map operator
+import { ApiResponse } from './auth.service';
 
 export interface EvaluationFormDetails {
-  skills(skills: any): unknown;
   candidateName: string;
   jobRole: string;
   interviewLevel: string;
   interviewerPrompt: string;
+  summary: any; // Add summary, or expand with specific properties
+  skills: any[]; // This is the crucial part - the backend sends the skills structur
+   proposedRole: string;
 }
+
 export interface SubmittedEvaluation {
   candidateName: string;
   jobRole: string;
@@ -27,23 +31,10 @@ export interface EvaluationSubmission {
   feedbackJson: string; // The entire form state as a JSON string
 }
 
-
 export interface SubmissionResponse {
     message: string;
 }
-export interface ApiResponse<T> {
-  success: boolean;
-  message: string;
-  statusCode: number;
-  data: T;
   
-}
-
-// Your existing SubmittedEvaluation interface
-export interface SubmittedEvaluation {
-  candidateName: string;
-  feedbackJson: string;}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -58,9 +49,9 @@ export class EvaluationService {
    * @param token The unique token from the URL.
    * @returns An Observable with the form details.
    */
-  getFormDetails(token: string): Observable<EvaluationFormDetails> {
+  getFormDetails(token: string): Observable<ApiResponse<EvaluationFormDetails>> {
     // This calls GET https://localhost:7144/api/evaluation/{token}
-    return this.http.get<EvaluationFormDetails>(`${this.baseUrl}/${token}`);
+    return this.http.get<ApiResponse<EvaluationFormDetails>>(`${this.baseUrl}/${token}`);
   }
 
   /**
@@ -78,8 +69,11 @@ export class EvaluationService {
    * The HttpInterceptor should automatically add the token.
    * @param interviewId The ID of the interview.
    */
-getSubmittedEvaluation(interviewId: string): Observable<ApiResponse<SubmittedEvaluation>> {
-    // Tell the HttpClient to expect the wrapper type
+ getSubmittedEvaluation(interviewId: number): Observable<ApiResponse<SubmittedEvaluation>> {
+    // The backend returns the raw DTO, which matches our interface.
+    // No mapping needed if the backend doesn't use a wrapper.
+    // If the backend *did* use a wrapper like { data: ..., message: ... },
+    // you would use map() here to extract the data.
     return this.http.get<ApiResponse<SubmittedEvaluation>>(`${this.baseUrl}/view/${interviewId}`);
   }
 }
