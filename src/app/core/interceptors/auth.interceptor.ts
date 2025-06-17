@@ -5,18 +5,18 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const router = inject(Router);
+  const router = inject(Router); 
 
   const modifiedRequest = req.clone({
-    withCredentials: true
-    });
+    withCredentials: true 
+  });
 
   return next(modifiedRequest).pipe(
     catchError((error) => {
       if (error.status === 401 || error.status === 403) {
-        router.navigate(['/unauthorized']);
+        router.navigate(['/unauthorized']); 
       }
-      return throwError(() => error);
+      return throwError(() => error); 
     })
   );
 };
