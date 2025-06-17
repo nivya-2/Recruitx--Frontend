@@ -1,7 +1,7 @@
 // src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+
 export interface ApiResponse<T> {
   statusCode: number;
   message: string;
@@ -25,11 +25,11 @@ export class AuthService {
   public name: string | null = null;
   public email: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   fetchProfile(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.http.get<ApiResponse<UserProfile>>(this.profileUrl, { withCredentials: true }).subscribe({
+      this.http.get<ApiResponse<UserProfile>>(this.profileUrl).subscribe({
         next: (response) => {
           const data=response.data;
           this.name = data.name;
@@ -38,7 +38,6 @@ export class AuthService {
           resolve(true);
         },
         error: () => {
-          this.router.navigate(['/unauthorized']);
           reject(false);
         }
       });
