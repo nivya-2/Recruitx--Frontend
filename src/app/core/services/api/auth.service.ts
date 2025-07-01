@@ -20,7 +20,7 @@ export interface UserProfile {
 
 
 export class AuthService {
-  private profileUrl = 'https://localhost:7144/api/auth/profile';
+  private profileUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/auth/profile';
   public role: string | null = null;
   public name: string | null = null;
   public email: string | null = null;

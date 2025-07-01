@@ -29,7 +29,7 @@ export interface JobDescriptionDTO {
 })
 export class JobDescriptionService {
 
-  private apiUrl = 'https://localhost:7144/api/JobDescription'; // replace with your real API endpoint
+  private apiUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/JobDescription'; // replace with your real API endpoint
 
   constructor(private http: HttpClient) { }
 
@@ -58,12 +58,12 @@ export class JobDescriptionService {
   updateJobDescription(jobRequisitionId: number, jdData: JobDescriptionDTO): Observable<ApiResponse<JobDescriptionDTO>> {
     // Uses HTTP PUT to send the updated data to the server.
     // The server would then persist these changes to the database.
-    return this.http.post<ApiResponse<JobDescriptionDTO>>(`${this.apiUrl}/save-draft`, jdData, { withCredentials: true , responseType: 'text' as 'json'});
+    return this.http.post<ApiResponse<JobDescriptionDTO>>(`${this.apiUrl}/save-draft`, jdData, { withCredentials: true });
   }
 
    submitJobDescription(jobRequisitionId: number, jdData: JobDescriptionDTO): Observable<ApiResponse<JobDescriptionDTO>>{
     // Uses HTTP PUT to send the updated data to the server.
     // The server would then persist these changes to the database.
-    return this.http.put<ApiResponse<JobDescriptionDTO>>(`${this.apiUrl}/generateJD`, jdData, { withCredentials: true ,responseType: 'text' as 'json'});
+    return this.http.put<ApiResponse<JobDescriptionDTO>>(`${this.apiUrl}/generateJD`, jdData, { withCredentials: true });
   }
 }

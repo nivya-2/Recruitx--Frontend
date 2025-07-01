@@ -54,7 +54,7 @@ export interface BulkAddResultDTO {
 
 export class BulkUploadCandidatesService {
 
- private baseUrl = 'https://localhost:7144/api/JobDescription/my-job-descriptions'; // Adjust base URL as needed
+ private baseUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/JobDescription/my-job-descriptions'; // Adjust base URL as needed
 
   constructor(private http: HttpClient) {}
     public bulkAddCandidates(

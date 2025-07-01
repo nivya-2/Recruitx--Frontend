@@ -19,7 +19,7 @@ export interface EmailTemplate {
 })
 export class EmailTemplateServiceService {
 
-  private apiUrl = 'https://localhost:7144/api/EmailTemplates';
+  private apiUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/EmailTemplates';
 
   constructor(private http: HttpClient) { }
 

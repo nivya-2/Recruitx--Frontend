@@ -35,7 +35,7 @@ export interface AssignedJr {
 })
 export class MyTeamService {
 
-  private apiUrl = 'https://localhost:7144/api/Users';
+  private apiUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/Users';
 
   constructor(private http: HttpClient) { }
 

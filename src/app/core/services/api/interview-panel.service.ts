@@ -73,7 +73,7 @@ export interface ScheduleInterviewResponse {
 })
 export class InterviewPanelService {
 
-  private baseUrl = 'https://localhost:7144/api/interviewpanel';
+  private baseUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/interviewpanel';
 
   constructor(private http: HttpClient) { }
 
@@ -105,7 +105,7 @@ export class InterviewPanelService {
   getPanelMemberMeetingss(): Observable<InterviewMeeting[]> {
    
     // 1. Tell HttpClient to expect the ApiResponse that wraps our array.
-    return this.http.get<ApiResponse<InterviewMeeting[]>>(`https://localhost:7144/api/InterviewPanel/panel-meetings?email=jessicabrown%40RecruitXexp.onmicrosoft.com&date=10-06-2025`).pipe(
+    return this.http.get<ApiResponse<InterviewMeeting[]>>(`https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/InterviewPanel/panel-meetings?email=jessicabrown%40RecruitXexp.onmicrosoft.com&date=10-06-2025`).pipe(
       // 2. Use the map operator to extract and return only the 'data' property (the array).
       map(response => response.data)
     );
