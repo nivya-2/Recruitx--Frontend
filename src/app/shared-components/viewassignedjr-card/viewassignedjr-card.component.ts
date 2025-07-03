@@ -89,7 +89,7 @@ export class ViewassignedjrCardComponent {
     { key: 'du', label: 'Delivery Unit', filterable: true },
     { key: 'location', label: 'Location', filterable: true },
     { key: 'status', label: 'Status', filterable: true },
-    { key: 'jrProgress', label: 'Progress', filterable: false },
+    { key: 'jrProgress', label: 'Progress', filterable: false, type:'progress' },
     { key: 'hiringManager', label: 'Hiring Manager', filterable: true },
     // { key: 'assignedTo', label: 'Assigned To', filterable: true },
     { key: 'assignedOn', label: 'Assigned On', filterable: true, type: 'date' },

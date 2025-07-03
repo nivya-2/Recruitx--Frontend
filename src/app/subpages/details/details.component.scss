@@ -72,3 +72,6 @@
   min-height: 600px;
   min-width: 600px; // Adjust as needed
 }
+::ng-deep th, td{
+    max-width: 130px;
+}

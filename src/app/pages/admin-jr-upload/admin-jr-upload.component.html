@@ -5,6 +5,11 @@
       <app-button-icon label="Upload JRs" icon="upload" (click)="openModal()"></app-button-icon>
     </div>
     <app-alerts #alerts></app-alerts>
+    
+    <div *ngIf="isLoading" class="loading-container" style="text-align: center;">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  <div *ngIf="!isLoading">
     <app-table 
       [dataSource]="dataSource" 
       [columns]="columns" 
@@ -16,7 +21,7 @@
       [actionMethods]="actionMethods">
       
     </app-table>
-
+</div>
     <app-modal 
       [(visible)]="visible" 
       header="Add Job Requisitions"

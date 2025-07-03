@@ -39,6 +39,10 @@ export class MyTeamService {
 
   constructor(private http: HttpClient) { }
 
+   getMyRecruiters(): Observable<ApiResponse<Team[]>> {
+    return this.http.get<ApiResponse<Team[]>>(`${this.apiUrl}/my-team`, { withCredentials: true });
+  }
+
   getTeamMembers(): Observable<ApiResponse<Team[]>> {
     return this.http.get<ApiResponse<Team[]>>(`${this.apiUrl}/all-team`);
   }
@@ -46,4 +50,5 @@ export class MyTeamService {
   getAssignedJrs(userId: number): Observable<ApiResponse<AssignedJr[]>> {
     return this.http.get<ApiResponse<AssignedJr[]>>(`${this.apiUrl}/${userId}/job-requisitions`);
   }
+
 }

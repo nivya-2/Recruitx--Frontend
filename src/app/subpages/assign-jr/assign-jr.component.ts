@@ -7,6 +7,8 @@ import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import {  OnInit } from '@angular/core';
 import { JrApiService, JobRequisitionSummaryDto } from '../../core/services/api/jr-api.service'; // Adjust import path
+import { ProgressSpinner } from 'primeng/progressspinner';
+import { NgIf } from '@angular/common';
 interface JobUIModel {
   title: string;
   date: string;      // formatted date string
@@ -17,11 +19,12 @@ interface JobUIModel {
 
 @Component({
   selector: 'app-assign-jr',
-  imports: [FormsModule, SelectModule, StatCardComponent, ListViewComponent, HeaderTextComponent, ChartModule],
+  imports: [NgIf,ProgressSpinner,FormsModule, SelectModule, StatCardComponent, ListViewComponent, HeaderTextComponent, ChartModule],
   templateUrl: './assign-jr.component.html',
   styleUrl: './assign-jr.component.scss'
 })
 export class AssignJrComponent implements OnInit {
+  isLoading = false;
   selectedView = 'asc';
   viewOptions = [
     { name: 'Date Ascending', code: 'asc' },
@@ -68,6 +71,7 @@ jobs: JobUIModel[] = [];
   }
 
   loadJobSummaries() {
+    this.isLoading = true;
   this.jrApi.getOpenJobSummaries().subscribe({
     next: (response) => {
       this.jobs = response.data.map(j => ({
@@ -80,6 +84,8 @@ jobs: JobUIModel[] = [];
         positions: j.openPositions ?? 0
       }));
       this.sortJobs();
+      this.isLoading = false;
+
     },
     error: (err) => {
       console.error('Error loading job summaries', err);

@@ -16,6 +16,7 @@
       [rows]="8"
       [showFilter]="true"
       [actionMethods]="actionMethods"
+      [loading]="isLoading"
     ></app-table>
   
     <app-modal
@@ -24,6 +25,6 @@
    [maximizable]="true"
    [style]="{ width: '72rem', height: '30rem' }"
   >
-  <app-viewassignedjr-card></app-viewassignedjr-card>
+  <app-viewassignedjr-card [dataSource]="selectedMemberJrs" ></app-viewassignedjr-card>
   </app-modal>
   </app-cards>

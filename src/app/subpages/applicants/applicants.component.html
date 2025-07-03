@@ -21,7 +21,7 @@
 header="Add Applicants"
 [maximizable]="true" 
 [style]="{ width: '50rem', height: '35rem' }">
-  <app-upload
+  <app-upload *ngIf="!isUploading"
   [acceptTypes]="accept"   
    (onUploadComplete)="handleUploadComplete($event)" >
 
@@ -31,4 +31,4 @@ header="Add Applicants"
 </div>
 </app-modal>
 </div>
-
+   <app-toast #toast></app-toast>

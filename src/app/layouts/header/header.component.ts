@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
     this.name = profile.name
   .split('.')
   .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-  .join(' ');;
+  .join(' ');
     this.role = profile.role;
   },
   error: (err) => console.error(err.message)

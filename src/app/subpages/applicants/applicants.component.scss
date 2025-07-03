@@ -9,3 +9,6 @@
     right:80px;
     z-index: 100;
 }
+::ng-deep th, td{
+    max-width: 130px;
+}

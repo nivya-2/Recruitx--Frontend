@@ -94,8 +94,44 @@
       <td *ngFor="let column of columns" [ngClass]="{'text-center':
         (typeof rowData[column.key] === 'string' && rowData[column.key].length <= 2) ||
         (typeof rowData[column.key] === 'number' && rowData[column.key].toString().length <= 2)}">
+
+        <div [ngSwitch]="column.type">
+          <ng-container *ngSwitchCase="'progress'">
+            <app-progressbar
+            [current]="rowData[column.key].current"
+            [total]="rowData[column.key].total">
+           </app-progressbar>
+          </ng-container>
+
+        <ng-container *ngSwitchCase="'date'">
+          <!-- The date pipe is now ONLY applied if column.type === 'date' -->
+          {{ rowData[column.key] | date: 'dd/MM/yyyy' }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase='"actions"'>
+              <div class="action-buttons" [ngClass]="{ 'center-label': rowData[column.key].length > 1 }">
+                <ng-container *ngFor="let action of rowData[column.key] ">
+                  <app-button color="#7B61FF" [disabled]="isDisabled" (functionemit)="handleActionClick(action, rowData)">{{ action.trim() }}</app-button>
+                </ng-container>
+                </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'fileName'">
+          <div class="file-name-display">
+            <i class="pi pi-file-excel file-icon"></i>
+            <span>{{ rowData[column.key] }}</span>
+         </div>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          {{ rowData[column.key] }}
+        </ng-container>
         
-        <ng-container *ngIf="column.key !== 'actions'; else actionTpl">
+        
+
+        </div>
+        
+        <!-- <ng-container *ngIf="column.key !== 'actions'; else actionTpl">
 
           <ng-container *ngIf="column.key === 'jrProgress'; else checkDate">
           <app-progressbar
@@ -104,7 +140,6 @@
           </app-progressbar>
         </ng-container>
         
-        <!-- Check for Date -->
         <ng-template #checkDate>
           <ng-container *ngIf="isDate(rowData[column.key]); else regularValue">
           {{ convertToDate(rowData[column.key]) | date: 'dd/MM/yyyy' }}   
@@ -119,7 +154,6 @@
     </div>
   </ng-container>
   
-  <!-- Special handling for status in file tables -->
   <ng-template #normalValue>
     <ng-container *ngIf="column.key === 'fstatus' && isFileStatus(rowData[column.key]); else defaultValue">
       <span class="file-status" [ngClass]="getStatusClass(rowData[column.key])">
@@ -135,14 +169,14 @@
 
       </ng-container>
         <ng-template #actionTpl>
-            <div class="action-buttons" [ngClass]="{ 'center-label': rowData[column.key].length > 1 }">
-              <ng-container *ngFor="let action of rowData[column.key] ">
-                <app-button color="#7B61FF"  (functionemit)="handleActionClick(action, rowData)">{{ action.trim() }}</app-button>
-              </ng-container>
-              </div>
+              <div class="action-buttons" [ngClass]="{ 'center-label': rowData[column.key].length > 1 }">
+                <ng-container *ngFor="let action of rowData[column.key] ">
+                  <app-button color="#7B61FF" [disabled]="isDisabled" (functionemit)="handleActionClick(action, rowData)">{{ action.trim() }}</app-button>
+                </ng-container>
+                </div>
         </ng-template>
       </td>
-    </tr>
-  </ng-template>
+    </tr>-->
+  </ng-template> 
 
 </p-table>

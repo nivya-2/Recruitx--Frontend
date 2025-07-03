@@ -10,6 +10,7 @@ import { AlertsComponent } from '../../ui/alerts/alerts.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner'; 
 import { finalize } from 'rxjs';
 import { ApplicationDetailsPageDTO, CandidateDetailsDTO, CandidateService1, TimelineStep } from '../../core/services/api/applicant-details.service';
+import { ToastComponent } from "../../ui/toast/toast.component";
 
 // interface Candidate {
 //   id: string;
@@ -44,7 +45,8 @@ interface StatusItem {
     NgIf,
     ButtonComponent,
     AlertsComponent,
-    ProgressSpinnerModule 
+    ProgressSpinnerModule,
+    ToastComponent
 ],
   templateUrl: './applicant-details.component.html',
   styleUrls: ['./applicant-details.component.scss'], // corrected from styleUrl
@@ -91,7 +93,10 @@ export class ApplicantDetailsComponent {
   'currentEmployer',
   ];
   isJobClosed: boolean = false;
+  isDisabled: boolean = false;
   
+  @ViewChild('toast') toastComponent!: any;
+
   ngOnInit(): void {
     const urlSegments = this.router.url.split('/');
     const prefix = urlSegments[1] === 'recruiter-lead' ? 'recruiter-lead' : 'recruiter';
@@ -128,7 +133,10 @@ else {
         this.statusList = this.rawData.statusTimeline;
         this.finished = this.rawData.isProcessFinished;
         this.isJobClosed = this.rawData.candidateInfo.jrStatus === 'Closed';
-
+        console.log(this.rawData.candidateInfo.status);
+this.isDisabled = 
+  this.rawData.candidateInfo.status === 'TechnicalInterview' || 
+  this.rawData.candidateInfo.status === 'ManagementInterview';
         this.isRejected = this.rawData.candidateInfo.status === 'Rejected';        // Apply formatting for display, just like your original code
         const info = this.rawData.candidateInfo;
         this.candidate = {
@@ -137,8 +145,8 @@ else {
           totalExperience: `${info.totalExperience} years`,
           relavantExperience: `${info.relavantExperience} years`,
           noticePeriod: info.noticePeriod ? `${info.noticePeriod} days` : 'N/A',
-          currentCTC: `${info.currentCTC / 100000} LPA`,
-          expectedCTC: info.expectedCTC ? `${info.expectedCTC / 100000} LPA` : 'Not specified',
+          currentCTC: `${info.currentCTC } LPA`,
+          expectedCTC: info.expectedCTC ? `${info.expectedCTC} LPA` : 'Not specified',
         };
       },
       error: (err) => console.error('Error fetching application details:', err)
@@ -206,19 +214,35 @@ else {
 //     }
 //   });
 // }
+
 private performStatusUpdate(action: 'progress' | 'reject'): void {
     this.isLoading=true;
     this.candidateService.updateApplicationStatus(this.applicationId, action).subscribe({
-      next: () => this.loadApplicationDetails(), // Reload all data from server on success
-      error: (err) =>{
+      next: () => {
+        const actionMessage = action === 'progress' ? 'moved to the next stage successfully!' : 'has been rejected.';
+        this.triggerToast(actionMessage);
+        this.loadApplicationDetails();
+         // Reload all data from server on success
+      },
+        error: (err) =>{
       this.isLoading=false;
-      console.error(`Failed to ${action} candidate`, err)},
+      console.error(`Failed to ${action} candidate`, err)
+      this.triggerToast(`Failed to ${action} candidate`)},
 
       complete: () => {
         this.loadApplicationDetails(); }
     });
   }
 
+  triggerToast(successMessage: string) {
+  const candidateName = this.candidate?.candidateName || 'Candidate';
+  this.toastComponent.toastData = {
+    severity: 'success',
+    summary: 'Success',
+    detail: `${candidateName} ${successMessage}`,
+  };
+  this.toastComponent.showToast();
+}
   @ViewChild('alerts') alertsComponent!: AlertsComponent;
   
   selectCandidate(): void {

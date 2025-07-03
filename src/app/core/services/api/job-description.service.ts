@@ -21,6 +21,7 @@ export interface JobDescriptionDTO {
   jobPurpose: string;
   jobSpecification: string;
   onboardingDate: string; // e.g. "15-08-2025"
+  additionalInfo:string;
 }
 
 @Injectable({
