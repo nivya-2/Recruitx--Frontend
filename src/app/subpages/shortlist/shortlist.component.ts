@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CardsComponent } from '../../ui/cards/cards.component';
 import { TableComponent } from '../../shared-components/table/table.component';
 import { ModalComponent } from '../../ui/modal/modal.component';
-import { NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { ShortlistInfoComponent } from './shortlist-info/shortlist-info.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { InterviewServiceService,InterviewDTO } from '../../core/services/api/in
 
 @Component({
   selector: 'app-shortlist',
-  imports: [ShortlistInfoComponent,ButtonComponent,ModalComponent,TableComponent,NgFor],
+  imports: [ShortlistInfoComponent, ModalComponent, TableComponent, CommonModule],
   templateUrl: './shortlist.component.html',
   styleUrl: './shortlist.component.scss'
 })
