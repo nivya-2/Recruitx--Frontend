@@ -29,7 +29,7 @@ export interface JobDescriptionDTO {
 })
 export class JobDescriptionService {
 
-  private apiUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/JobDescription'; // replace with your real API endpoint
+  private apiUrl = 'https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/JobDescription'; // replace with your real API endpoint
 
   constructor(private http: HttpClient) { }
 

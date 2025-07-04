@@ -26,7 +26,7 @@ export interface UserProfile {
 })
 export class UserApiService {
 
-  private readonly baseUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/user'; // Adjust this base path as needed
+  private readonly baseUrl = 'https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/user'; // Adjust this base path as needed
 
   constructor(private http: HttpClient) {}
 
@@ -69,7 +69,7 @@ export class UserApiService {
   return this.http.put<void>(`${this.baseUrl}/set-recruiter-head/${userId}`, {});
 }
 getLoggedInUserProfile(): Observable<UserProfile> {
-  return this.http.get<ApiResponse<UserProfile>>('https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/Auth/profile',{withCredentials: true})
+  return this.http.get<ApiResponse<UserProfile>>('https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/Auth/profile',{withCredentials: true})
     .pipe(
       map(response => {
         if (response.success && response.statusCode === 200) {

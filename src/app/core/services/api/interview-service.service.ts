@@ -40,7 +40,7 @@ export interface ToShortlistDto {
   providedIn: 'root',
 })
 export class InterviewServiceService {
-  private baseUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/Interviews';
+  private baseUrl = 'https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/Interviews';
 
   constructor(private http: HttpClient) {}
 

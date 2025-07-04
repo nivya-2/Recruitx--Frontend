@@ -19,7 +19,7 @@ export interface PendingJd {
   providedIn: 'root'
 })
 export class PendingJdService {
-  private apiUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/JobDescription/pending';  // Adjust URL to your API
+  private apiUrl = 'https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/JobDescription/pending';  // Adjust URL to your API
 
   constructor(private http: HttpClient) {}
 

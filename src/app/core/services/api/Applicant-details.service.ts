@@ -36,7 +36,7 @@ export interface ApplicationDetailsPageDTO {
   providedIn: 'root',
 })
 export class CandidateService1 {
-  private baseUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/JobDescription/my-job-descriptions/applicant-details'; // Adjust base URL as needed
+  private baseUrl = 'https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/JobDescription/my-job-descriptions/applicant-details'; // Adjust base URL as needed
 
   constructor(private http: HttpClient) {}
 

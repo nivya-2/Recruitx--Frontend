@@ -19,7 +19,7 @@ export interface TrackJdDTO {
   providedIn: 'root'
 })
 export class TrackJdService {
-  private apiUrl = `https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/JobDescription/my-job-descriptions`;
+  private apiUrl = `https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/JobDescription/my-job-descriptions`;
 
   constructor(private http: HttpClient) { }
 

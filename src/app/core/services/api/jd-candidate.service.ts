@@ -19,7 +19,7 @@ export interface Candidate {
 })
 export class JdCandidateService {
 
-  private baseUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/Interviews/schedule'; 
+  private baseUrl = 'https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/Interviews/schedule'; 
 
   constructor(private http: HttpClient) {}
 

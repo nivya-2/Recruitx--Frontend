@@ -22,7 +22,7 @@ export class LogoutApiService {
   // });
     localStorage.clear();
     sessionStorage.clear();
-    window.location.href = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/Auth/logout';
+    window.location.href = 'https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/Auth/logout';
 
   }
 }

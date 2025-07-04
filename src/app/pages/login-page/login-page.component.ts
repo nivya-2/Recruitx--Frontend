@@ -13,7 +13,7 @@ export class LoginPageComponent {
 
   login() {
     // Trigger backend redirect to Azure AD login
-    window.location.href = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/auth/login'; // adjust to your backend
+    window.location.href = 'https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/auth/login'; // adjust to your backend
   }
 
 }

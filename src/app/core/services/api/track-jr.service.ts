@@ -21,7 +21,7 @@ export interface TrackJobRequisitionDTO {
 
 export class TrackJrService {
 
- private apiUrl = 'https://recruitx20250626095338-ehfefhdxfbb5eshf.canadacentral-01.azurewebsites.net/api/JobRequisition/assigned-by-me';
+ private apiUrl = 'https://recruitx20250704121717-fdb4cqaze6bsgcfr.canadacentral-01.azurewebsites.net/api/JobRequisition/assigned-by-me';
 
   constructor(private http: HttpClient) { }
 
