@@ -58,12 +58,11 @@ export class JobDescriptionService {
   updateJobDescription(jobRequisitionId: number, jdData: JobDescriptionDTO): Observable<ApiResponse<JobDescriptionDTO>> {
     // Uses HTTP PUT to send the updated data to the server.
     // The server would then persist these changes to the database.
-    return this.http.post<ApiResponse<JobDescriptionDTO>>(`${this.apiUrl}/save-draft`, jdData, { withCredentials: true });
-  }
+  return this.http.post<ApiResponse<JobDescriptionDTO>>(`${this.apiUrl}/save-draft`, jdData, { withCredentials: true , responseType: 'text' as 'json'});  }
 
    submitJobDescription(jobRequisitionId: number, jdData: JobDescriptionDTO): Observable<ApiResponse<JobDescriptionDTO>>{
     // Uses HTTP PUT to send the updated data to the server.
     // The server would then persist these changes to the database.
-    return this.http.put<ApiResponse<JobDescriptionDTO>>(`${this.apiUrl}/generateJD`, jdData, { withCredentials: true });
+    return this.http.put<ApiResponse<JobDescriptionDTO>>(`${this.apiUrl}/generateJD`, jdData, { withCredentials: true ,responseType: 'text' as 'json'});
   }
 }
